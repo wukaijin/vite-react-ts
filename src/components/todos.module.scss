@@ -1,0 +1,26 @@
+.todos {
+  background-color: rgba(246, 112, 112, 0.102);
+  padding: 48px 24px;
+  .title {
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+  .content {
+    .todoItem{
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      
+      input[type=checkbox] {
+        margin-right: 12px;
+      }
+      span {
+        flex: 1;
+        vertical-align: middle;
+      }
+    }
+  }
+}
