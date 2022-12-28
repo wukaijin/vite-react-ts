@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2022-12-28 00:18:44
- * @FilePath: /vite-react-swc/src/redux/todos.ts
+ * @LastEditTime: 2022-12-28 15:53:29
+ * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export type Todo = {
@@ -14,7 +14,29 @@ export type Todo = {
   completed: boolean
 }
 type ActionPayload = Partial<Todo>
-const initialState: Todo[] = []
+const initialState: Todo[] = [{
+  id: 'asdas',
+  text: 'asdas',
+  completed: false,
+}]
+
+export const asyncFetchData = createAsyncThunk<Todo[]>(
+  'todos/asyncFetchData',
+  async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+    return response.json().then(data => {
+      return (
+        data
+          // .slice(1, 6)
+          .map((t: any) => ({
+            id: t.id.toString(),
+            text: t.title,
+            completed: false
+          }))
+      )
+    })
+  }
+)
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -33,7 +55,16 @@ const todosSlice = createSlice({
     },
     todoRemoved(state, action: PayloadAction<number>) {
       state.splice(action.payload)
+      asyncFetchData.fulfilled
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(asyncFetchData.fulfilled, (state, action) => {
+      console.log(this, state, action.payload)
+      state.length = 0
+      state.push(...action.payload)
+      state[0].text = 'ssssss'
+    })
   }
 })
 
