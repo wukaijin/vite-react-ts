@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2022-12-28 15:53:29
+ * @LastEditTime: 2022-12-28 21:31:11
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -14,11 +14,7 @@ export type Todo = {
   completed: boolean
 }
 type ActionPayload = Partial<Todo>
-const initialState: Todo[] = [{
-  id: 'asdas',
-  text: 'asdas',
-  completed: false,
-}]
+const initialState: Todo[] = []
 
 export const asyncFetchData = createAsyncThunk<Todo[]>(
   'todos/asyncFetchData',
@@ -54,16 +50,14 @@ const todosSlice = createSlice({
       todo!.completed = !todo!.completed
     },
     todoRemoved(state, action: PayloadAction<number>) {
-      state.splice(action.payload)
+      state.splice(action.payload, 1)
       asyncFetchData.fulfilled
     }
   },
   extraReducers: builder => {
     builder.addCase(asyncFetchData.fulfilled, (state, action) => {
       console.log(this, state, action.payload)
-      state.length = 0
       state.push(...action.payload)
-      state[0].text = 'ssssss'
     })
   }
 })

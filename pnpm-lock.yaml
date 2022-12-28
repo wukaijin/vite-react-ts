@@ -8,6 +8,7 @@ specifiers:
   '@types/react-redux': ^7.1.24
   '@vitejs/plugin-react-swc': ^3.0.0
   autoprefixer: ^10.4.13
+  classnames: ^2.3.2
   postcss: ^8.4.20
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -21,6 +22,7 @@ specifiers:
 
 dependencies:
   '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
+  classnames: 2.3.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.5_gm3gubmwja4o7q6fr6adx3fpz4
@@ -542,6 +544,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: false
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}

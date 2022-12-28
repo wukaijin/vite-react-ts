@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  color: #213547;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+.required {
+  @apply after:content-['*'] after:ml-0.5 after:text-red-500;
+}
