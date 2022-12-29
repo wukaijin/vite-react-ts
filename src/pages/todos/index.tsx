@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-28 22:23:41
+ * @LastEditTime: 2022-12-29 22:39:09
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -19,26 +19,20 @@ import type { RootState } from '@/store'
 import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
 import { useAppDispatch } from '@/hooks'
-const a = () => (
-  <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
-    <div className="shrink-0">
-      <img className="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo" />
-    </div>
-    <div>
-      <div className="text-xl font-medium text-black">ChitChat</div>
-      <p className="text-slate-500">You have a new message!</p>
-    </div>
-  </div>
-)
+import Button from '@/components/base/Button'
+import Loading from '@/components/base/Loading'
+import Checkbox from '@/components/base/Checkbox'
+
 const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
 
   return (
     <div className={styles.todos}>
+      
       <div className={styles.title}>
         <span>Todos</span>
         <span>
-          <button
+          <Button
             className={styles.gapRight}
             onClick={() => {
               var name = prompt('请输入TODO：')
@@ -50,9 +44,13 @@ const Todos: React.FC<PropsFromRedux> = props => {
             }}
           >
             Add
-          </button>
-          <button onClick={() => dispatch(asyncFetchData())}>MOCK</button>
+          </Button>
+          <Button onClick={() => dispatch(asyncFetchData())}>MOCK</Button>
         </span>
+      </div>
+      <div>
+      <Loading.Circle size={90}/>
+      <Loading.Dot />
       </div>
       <div className={clx(styles.content)}>
         {props.todos.map((todo, index) => (
@@ -63,8 +61,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
             )}
             key={todo.id}
           >
-            <input
-              type="checkbox"
+            <Checkbox 
               checked={todo.completed}
               onChange={e => {
                 props.todoToggled(todo.id)
@@ -83,12 +80,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
                 {todo.text}
               </span>
             </blockquote>
-            <button
-              className="px-2 py-1 shrink-0 bg-sky-500 hover:bg-sky-700 text-white focus:outline-none focus:ring focus:ring-sky-300 rounded-md"
-              onClick={() => props.todoRemoved(index)}
-            >
-              Remove
-            </button>
+            <Button onClick={() => props.todoRemoved(index)}>Remove</Button>
           </div>
         ))}
       </div>
