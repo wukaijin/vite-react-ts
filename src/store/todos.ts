@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2022-12-28 21:31:11
+ * @LastEditTime: 2022-12-29 23:38:49
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -23,11 +23,11 @@ export const asyncFetchData = createAsyncThunk<Todo[]>(
     return response.json().then(data => {
       return (
         data
-          // .slice(1, 6)
+          .slice(1, 10)
           .map((t: any) => ({
             id: t.id.toString(),
             text: t.title,
-            completed: false
+            completed: t.completed
           }))
       )
     })
@@ -57,6 +57,8 @@ const todosSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(asyncFetchData.fulfilled, (state, action) => {
       console.log(this, state, action.payload)
+      state.length = 0
+      // state = state.concat(action.payload)
       state.push(...action.payload)
     })
   }

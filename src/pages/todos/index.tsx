@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-29 22:39:09
+ * @LastEditTime: 2022-12-29 23:40:34
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -27,7 +27,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
 
   return (
-    <div className={styles.todos}>
+    <div className={clx(styles.todos, 'bg-g-blue min-h-screen')}>
       
       <div className={styles.title}>
         <span>Todos</span>
