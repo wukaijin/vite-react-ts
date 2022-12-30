@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
- * @LastEditTime: 2022-12-30 17:13:57
+ * @LastEditTime: 2022-12-30 23:53:59
  * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
  * @Description:
  */
@@ -15,6 +15,7 @@ const NavigateList = () => (
   <ul className='py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px]'>
     <li>
       <Link to="/todos">TODOs</Link>
+      <label htmlFor="my-modal-4" className="btn">open modal</label>
     </li>
   </ul>
 )

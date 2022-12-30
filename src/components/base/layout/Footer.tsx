@@ -5,14 +5,14 @@
  * @FilePath: /vite-react-swc/src/components/base/layout/Footer.tsx
  * @Description: 
  */
-import clx from 'classnames'
+import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
 type Props = HTMLAttributes<HTMLDivElement>
 
 const Footer = (props: Props) => {
   const { children, className, ...resProps } = props
   return (
-    <div className={clx('flex', className)} {...resProps}>
+    <div className={clsx('flex', className)} {...resProps}>
       {children}
     </div>
   )

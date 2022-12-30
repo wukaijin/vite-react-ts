@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
- * @LastEditTime: 2022-12-30 12:08:04
+ * @LastEditTime: 2022-12-30 23:17:49
  * @FilePath: /vite-react-swc/tailwind.config.cjs
  * @Description: 
  */
@@ -19,6 +19,5 @@ module.exports = {
       }
     },
   },
-  // plugins: [require('@tailwindcss/forms')],
-  plugins: [],
+  plugins: [require("daisyui")],
 }

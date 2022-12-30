@@ -1,14 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-29 23:40:34
+ * @LastEditTime: 2022-12-31 01:42:24
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
  */
 import { connect } from 'react-redux'
 import type { ConnectedProps } from 'react-redux'
-import clx from 'classnames'
+import clsx from 'clsx'
 import {
   todoToggled,
   todoAdded,
@@ -22,25 +22,22 @@ import { useAppDispatch } from '@/hooks'
 import Button from '@/components/base/Button'
 import Loading from '@/components/base/Loading'
 import Checkbox from '@/components/base/Checkbox'
+import { useState } from 'react'
+import AddActionModel from './AddActionModel'
 
 const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
-
+  //  const { show, close, open } = useModal()
+  const [show, setShow] = useState(false)
   return (
-    <div className={clx(styles.todos, 'bg-g-blue min-h-screen')}>
-      
+    <div className={clsx(styles.todos, 'bg-g-blue min-h-screen')}>
       <div className={styles.title}>
         <span>Todos</span>
         <span>
           <Button
             className={styles.gapRight}
             onClick={() => {
-              var name = prompt('请输入TODO：')
-              props.todoAdded({
-                id: getUniqueId(),
-                text: name || '',
-                completed: true
-              })
+              setShow(true)
             }}
           >
             Add
@@ -49,19 +46,19 @@ const Todos: React.FC<PropsFromRedux> = props => {
         </span>
       </div>
       <div>
-      <Loading.Circle size={90}/>
-      <Loading.Dot />
+        <Loading.Circle size={90} />
+        <Loading.Dot />
       </div>
-      <div className={clx(styles.content)}>
+      <div className={clsx(styles.content)}>
         {props.todos.map((todo, index) => (
           <div
-            className={clx(
+            className={clsx(
               styles.todoItem,
               'p-6 max-w-[500px] mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 mt-2 hover:bg-blue-50'
             )}
             key={todo.id}
           >
-            <Checkbox 
+            <Checkbox
               checked={todo.completed}
               onChange={e => {
                 props.todoToggled(todo.id)
@@ -69,7 +66,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
             />
             <blockquote>
               <span
-                className={clx(
+                className={clsx(
                   {
                     'text-gray-400': todo.completed
                   },
@@ -84,7 +81,18 @@ const Todos: React.FC<PropsFromRedux> = props => {
           </div>
         ))}
       </div>
-      <div></div>
+      <AddActionModel
+        show={show}
+        onConfirm={(text: string) => {
+          console.log('add-todo-action-modal')
+          setShow(false)
+          props.todoAdded({
+            id: getUniqueId(),
+            text: text || '',
+            completed: false
+          })
+        }}
+      ></AddActionModel>
     </div>
   )
 }

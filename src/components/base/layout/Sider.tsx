@@ -5,14 +5,14 @@
  * @FilePath: /vite-react-swc/src/components/base/layout/Sider.tsx
  * @Description: 
  */
-import clx from 'classnames'
+import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
 type Props = HTMLAttributes<HTMLDivElement>
 
 const Sider = (props: Props) => {
   const { children, className, ...resProps } = props
   return (
-    <div className={clx('', className)} {...resProps}>
+    <div className={clsx('', className)} {...resProps}>
       {children}
     </div>
   )

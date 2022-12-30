@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/components/base/layout/Content.tsx
  * @Description:
  */
-import clx from 'classnames'
+import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -13,7 +13,7 @@ const Content = (props: Props) => {
   const { children, className, ...resProps } = props
   console.log(resProps)
   return (
-    <div className={clx('flex-1', className)} {...resProps}>
+    <div className={clsx('flex-1', className)} {...resProps}>
       {children}
     </div>
   )
