@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-31 13:17:02
+ * @LastEditTime: 2022-12-31 14:35:16
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -55,7 +55,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
           >
             <Checkbox
               checked={todo.completed}
-              onChange={e => {
+              onChange={() => {
                 props.todoToggled(todo.id)
               }}
             />

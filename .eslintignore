@@ -12,4 +12,4 @@ node_modules
 settings.json
 package.json
 .eslintrc.cjs
-commitlint.config.cjs
+*.config.cjs

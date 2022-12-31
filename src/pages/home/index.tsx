@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 14:08:00
- * @LastEditTime: 2022-12-30 17:10:24
+ * @LastEditTime: 2022-12-31 14:24:38
  * @FilePath: /vite-react-swc/src/pages/home/index.tsx
  * @Description:
  */
@@ -9,9 +9,9 @@ import Layout from '@/components/base/layout'
 import Header from './header'
 import Content from './content'
 
-type Props = {}
+type Props = unknown
 
-const Home: React.FC<Props> = props => {
+const Home: React.FC<Props> = () => {
   return (
     <Layout className="w-screen relative">
       <div className="absolute top-0 -z-10 h-screen w-full bg-gradient-to-t from-cyan-600 to-transparent"></div>
