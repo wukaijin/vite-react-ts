@@ -1,12 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-31 16:59:49
+ * @LastEditTime: 2023-01-01 02:37:35
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
  */
 import { connect } from 'react-redux'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import type { ConnectedProps } from 'react-redux'
 import clsx from 'clsx'
 import {
@@ -20,67 +21,69 @@ import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
 import { useAppDispatch } from '@/hooks'
 import Button from '@/components/base/Button'
-import Checkbox from '@/components/base/Checkbox'
 import { useState } from 'react'
 import AddActionModel from './AddActionModel'
+import TodoCard from './TodoCard'
+import FilterTabs from './FilterTabs'
+
+export const STATE_MAPPING = ['All', 'Done', 'Pending'] as const
 
 const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
-  //  const { show, close, open } = useModal()
   const [show, setShow] = useState(false)
+  const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
   return (
-    <div className={clsx(styles.todos, 'bg-g-blue min-h-screen')}>
+    <div
+      className={clsx(
+        styles.todos,
+        'px-6 py-4 sm:pt-12  bg-g-blue bg-gradient-to-tr min-h-screen'
+      )}
+    >
       <div className={styles.title}>
-        <span>Todo List</span>
-        <span>
+        <div className="text-4xl font-bold text-white">Todo List</div>
+        <div className="flex items-center">
           {/* <button className='btn-info'>ss</button> */}
+
           <Button
-            color="primary"
-            className={styles.gapRight}
+            shape="circle"
+            className="glass mr-3"
             onClick={() => {
               setShow(true)
             }}
           >
-            Add
+            <PlusIcon className="w-6 h-6" />
           </Button>
-          <Button color="info" onClick={() => dispatch(asyncFetchData())}>
+          <Button
+            className="glass font-normal"
+            onClick={() => dispatch(asyncFetchData())}
+          >
             MOCK
           </Button>
-        </span>
+        </div>
       </div>
       <div className={clsx(styles.content)}>
-        {props.todos.map((todo, index) => (
-          <div
-            className={clsx(
-              styles.todoItem,
-              'p-6 max-w-[500px] mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 mt-2 hover:bg-blue-50'
-            )}
-            key={todo.id}
-          >
-            <Checkbox
-              checked={todo.completed}
-              onChange={() => {
-                props.todoToggled(todo.id)
-              }}
-            />
-            <blockquote>
-              <span
-                className={clsx(
-                  {
-                    'text-gray-400': todo.completed
-                  },
-                  'cursor-pointer text-sm'
-                )}
-                onClick={() => props.todoToggled(todo.id)}
-              >
-                {todo.text}
-              </span>
-            </blockquote>
-            <Button color="warning" onClick={() => props.todoRemoved(index)}>
-              Remove
-            </Button>
+        {/* <div className="sticky flex text-center justify-center">
+          <div className="btn-group btn-group-horizontal">
+            <button className="btn btn-active">All</button>
+            <button className="btn">Done</button>
+            <button className="btn">Pending</button>
           </div>
-        ))}
+        </div> */}
+        
+        <FilterTabs active={active} onChange={setActive} />
+        <div>
+          {props.todos.map((todo, index) => (
+            <TodoCard
+              key={todo.id}
+              todo={todo}
+              onRemove={() => {
+                console.log('Removed  ')
+                props.todoRemoved(index)
+              }}
+              onChange={() => props.todoToggled(todo.id)}
+            />
+          ))}
+        </div>
       </div>
       <AddActionModel
         show={show}

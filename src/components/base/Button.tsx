@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-29 17:31:26
- * @LastEditTime: 2022-12-31 16:57:22
+ * @LastEditTime: 2022-12-31 22:02:27
  * @FilePath: /vite-react-swc/src/components/base/Button.tsx
  * @Description:
  */
@@ -56,19 +56,18 @@ const Button: React.FC<ButtonProps> = props => {
     'btn',
     className,
     clsx(((startIcon && !loading) || endIcon) && 'gap-2', {
+      [`btn-${size}`]: size,
+      [`btn-${shape}`]: shape,
+      [`btn-${variant}`]: variant,
+      [`btn-${color}`]: color,
       'btn-block': fullWidth,
       'btn-xs md:btn-sm lg:btn-md xl:btn-lg': responsive,
       'no-animation': !animation,
       'btn-active': active,
       'btn-disabled': disabled,
       loading: loading
-    // },  size ? `btn-${size}`: '', size ? `btn-${shape}`: '', variant ? `btn-${variant}`: '', color ? `btn-${color}`: ''
-    },  size ? "btn-" + size: '', shape ? "btn-" + shape: '', variant ? "btn-" + variant: '', color ? "btn-" + color: ''
-    // btn-error
-    // [`btn-${shape}`]: shape,
-    // [`btn-${variant}`]: variant,
-    // [`btn-${color}`]: color,)
-  ))
+    })
+  )
 
   if (href) {
     return (

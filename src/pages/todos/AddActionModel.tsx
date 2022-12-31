@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 23:05:59
- * @LastEditTime: 2022-12-31 16:46:18
+ * @LastEditTime: 2022-12-31 23:58:59
  * @FilePath: /vite-react-swc/src/pages/todos/AddActionModel.tsx
  * @Description:
  */
@@ -34,7 +34,7 @@ const AddActionModel: FC<Props> = props => {
         />
       </div>
       <div className="flex justify-end">
-        <Button  color='info' onClick={() => props.onClose()}>
+        <Button color="ghost" className='mr-2' onClick={() => props.onClose()}>
           Cannel
         </Button>
         <Button

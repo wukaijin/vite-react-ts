@@ -43,4 +43,10 @@
   .bg-g-rose {
     @apply bg-gradient-to-r from-sky-400 to-indigo-500;
   }
+  g-normal {
+    background-color: linear-gradient( 141deg, rgba(191, 102, 255, 1) 0%, rgba(98, 72, 255, 1) 50%, rgba(0, 221, 235, 1) 100% )
+  }
+  g-light {
+    background-color: linear-gradient( 141deg, rgb(200, 124, 255) 0%, rgb(116, 92, 252) 50%, rgb(63, 241, 253) 100% )
+  }
 }

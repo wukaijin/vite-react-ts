@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2022-12-31 13:17:57
+ * @LastEditTime: 2023-01-01 02:00:09
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -21,7 +21,7 @@ export const asyncFetchData = createAsyncThunk<Todo[]>(
   async () => {
     const response = await fetch('https://jsonplaceholder.typicode.com/todos')
     return response.json().then(data => {
-      return data.slice(1, 10).map((t: any) => ({
+      return data.slice(1, 100).map((t: any) => ({
         id: t.id.toString(),
         text: t.title,
         completed: t.completed
