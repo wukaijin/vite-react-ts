@@ -10,16 +10,19 @@ import { twMerge } from 'tailwind-merge'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 
-type Props = PropsWithChildren<HTMLAttributes<HTMLDivElement> & {
-  dataTheme?: string
-  show: boolean
-  onClickBackdrop?: () => void
-}>
+type Props = PropsWithChildren<
+  HTMLAttributes<HTMLDivElement> & {
+    dataTheme?: string
+    show: boolean
+    onClickBackdrop?: () => void
+  }
+>
 
 const MODAL_DOM: Element = document.querySelector('#modal')!
 
 const Modal = (props: Props) => {
-  const { show, children, onClickBackdrop, dataTheme, className, ...res } = props
+  const { show, children, onClickBackdrop, dataTheme, className, ...res } =
+    props
   const el = useRef<HTMLDivElement>()
   useEffect(() => {
     el.current = document.createElement('div')
@@ -43,9 +46,9 @@ const Modal = (props: Props) => {
     }
   }, [show])
   if (!el.current) return null
-  
+
   const containerClasses = clsx('modal', {
-    'modal-open': show,
+    'modal-open': show
   })
   return createPortal(
     <>
@@ -54,7 +57,7 @@ const Modal = (props: Props) => {
         aria-hidden={!open}
         data-theme={dataTheme}
         className={containerClasses}
-        onClick={(e) => {
+        onClick={e => {
           e.stopPropagation()
           if (e.target === e.currentTarget) {
             e.stopPropagation()
@@ -67,7 +70,7 @@ const Modal = (props: Props) => {
         <div
           {...res}
           data-theme={dataTheme}
-          className={twMerge("modal-box", className)}
+          className={twMerge('modal-box', className)}
           // ref={ref}
         >
           {children}

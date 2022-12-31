@@ -21,15 +21,11 @@ export const asyncFetchData = createAsyncThunk<Todo[]>(
   async () => {
     const response = await fetch('https://jsonplaceholder.typicode.com/todos')
     return response.json().then(data => {
-      return (
-        data
-          .slice(1, 10)
-          .map((t: any) => ({
-            id: t.id.toString(),
-            text: t.title,
-            completed: t.completed
-          }))
-      )
+      return data.slice(1, 10).map((t: any) => ({
+        id: t.id.toString(),
+        text: t.title,
+        completed: t.completed
+      }))
     })
   }
 )

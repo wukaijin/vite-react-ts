@@ -1,0 +1,15 @@
+# 忽略目录
+build/
+tests/
+demo/
+mock/
+node_modules
+
+# 忽略文件
+**/*-min.js
+**/*.min.js
+!.*.js
+settings.json
+package.json
+.eslintrc.cjs
+commitlint.config.cjs

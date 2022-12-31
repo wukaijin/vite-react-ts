@@ -1,9 +1,9 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2022-12-28 15:33:29
+ * @LastEditTime: 2022-12-31 14:00:36
  * @FilePath: /vite-react-swc/src/App.tsx
- * @Description: 
+ * @Description:
  */
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'

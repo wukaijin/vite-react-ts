@@ -11,21 +11,19 @@ import Modal from '@/components/enhance/Modal'
 
 type Props = {
   show: boolean
-  onConfirm:  (text: string) => void
+  onConfirm: (text: string) => void
   onClose?: () => void
 }
 
 const AddActionModel: FC<Props> = props => {
   const [text, setText] = useState<string>('')
   useEffect(() => {
-    setText("")
+    setText('')
   }, [props.show])
   return (
     <Modal show={props.show}>
-      <div className='text-xl mb-4'>
-        Todo
-      </div>
-      <div className='mb-4'>
+      <div className="text-xl mb-4">Todo</div>
+      <div className="mb-4">
         <input
           type="text"
           className="input input-bordered input-primary w-full"
@@ -35,10 +33,14 @@ const AddActionModel: FC<Props> = props => {
           }
         />
       </div>
-      <div className='flex justify-end'>
-        <Button onClick={() => {
-          props.onConfirm(text)
-        }}>Submit</Button>
+      <div className="flex justify-end">
+        <Button
+          onClick={() => {
+            props.onConfirm(text)
+          }}
+        >
+          Submit
+        </Button>
       </div>
     </Modal>
   )

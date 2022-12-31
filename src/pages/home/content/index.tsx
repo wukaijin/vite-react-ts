@@ -12,10 +12,12 @@ import { Link } from 'react-router-dom'
 
 type Props = {}
 const NavigateList = () => (
-  <ul className='py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px]'>
+  <ul className="py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px]">
     <li>
       <Link to="/todos">TODOs</Link>
-      <label htmlFor="my-modal-4" className="btn">open modal</label>
+      <label htmlFor="my-modal-4" className="btn">
+        open modal
+      </label>
     </li>
   </ul>
 )
@@ -32,7 +34,9 @@ const HomeContent = (props: Props) => {
     >
       <div className="flex">
         <div className="pt-[200px] pl-[140px]">
-          <Panel><NavigateList /></Panel>
+          <Panel>
+            <NavigateList />
+          </Panel>
         </div>
       </div>
       <div></div>

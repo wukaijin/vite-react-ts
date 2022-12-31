@@ -3,7 +3,7 @@
  * @Date: 2022-12-29 23:56:23
  * @LastEditTime: 2022-12-30 00:59:25
  * @FilePath: /vite-react-swc/src/components/base/layout/Footer.tsx
- * @Description: 
+ * @Description:
  */
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
