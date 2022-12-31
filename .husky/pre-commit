@@ -1,0 +1,11 @@
+###
+ # @Author: Carlos
+ # @Date: 2022-12-31 14:41:24
+ # @LastEditTime: 2022-12-31 14:41:53
+ # @FilePath: /vite-react-swc/.husky/pre-commit
+ # @Description: 
+### 
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run eslint
