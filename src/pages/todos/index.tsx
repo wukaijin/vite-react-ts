@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-31 01:42:24
+ * @LastEditTime: 2022-12-31 13:17:02
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -20,7 +20,6 @@ import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
 import { useAppDispatch } from '@/hooks'
 import Button from '@/components/base/Button'
-import Loading from '@/components/base/Loading'
 import Checkbox from '@/components/base/Checkbox'
 import { useState } from 'react'
 import AddActionModel from './AddActionModel'
@@ -44,10 +43,6 @@ const Todos: React.FC<PropsFromRedux> = props => {
           </Button>
           <Button onClick={() => dispatch(asyncFetchData())}>MOCK</Button>
         </span>
-      </div>
-      <div>
-        <Loading.Circle size={90} />
-        <Loading.Dot />
       </div>
       <div className={clsx(styles.content)}>
         {props.todos.map((todo, index) => (
@@ -84,7 +79,6 @@ const Todos: React.FC<PropsFromRedux> = props => {
       <AddActionModel
         show={show}
         onConfirm={(text: string) => {
-          console.log('add-todo-action-modal')
           setShow(false)
           props.todoAdded({
             id: getUniqueId(),

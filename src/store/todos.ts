@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2022-12-29 23:38:49
+ * @LastEditTime: 2022-12-31 13:17:57
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -56,9 +56,7 @@ const todosSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(asyncFetchData.fulfilled, (state, action) => {
-      console.log(this, state, action.payload)
       state.length = 0
-      // state = state.concat(action.payload)
       state.push(...action.payload)
     })
   }
