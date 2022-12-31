@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 23:05:59
- * @LastEditTime: 2022-12-31 01:43:20
+ * @LastEditTime: 2022-12-31 16:46:18
  * @FilePath: /vite-react-swc/src/pages/todos/AddActionModel.tsx
  * @Description:
  */
@@ -12,7 +12,7 @@ import Modal from '@/components/enhance/Modal'
 type Props = {
   show: boolean
   onConfirm: (text: string) => void
-  onClose?: () => void
+  onClose: () => void
 }
 
 const AddActionModel: FC<Props> = props => {
@@ -26,7 +26,7 @@ const AddActionModel: FC<Props> = props => {
       <div className="mb-4">
         <input
           type="text"
-          className="input input-bordered input-primary w-full"
+          className="input input-bordered  w-full"
           value={text}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setText(e.target.value)
@@ -34,7 +34,12 @@ const AddActionModel: FC<Props> = props => {
         />
       </div>
       <div className="flex justify-end">
+        <Button  color='info' onClick={() => props.onClose()}>
+          Cannel
+        </Button>
         <Button
+          color="primary"
+          // variant="outline"
           onClick={() => {
             props.onConfirm(text)
           }}

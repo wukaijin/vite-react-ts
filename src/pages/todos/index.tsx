@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2022-12-31 14:35:16
+ * @LastEditTime: 2022-12-31 16:59:49
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -31,9 +31,11 @@ const Todos: React.FC<PropsFromRedux> = props => {
   return (
     <div className={clsx(styles.todos, 'bg-g-blue min-h-screen')}>
       <div className={styles.title}>
-        <span>Todos</span>
+        <span>Todo List</span>
         <span>
+          {/* <button className='btn-info'>ss</button> */}
           <Button
+            color="primary"
             className={styles.gapRight}
             onClick={() => {
               setShow(true)
@@ -41,7 +43,9 @@ const Todos: React.FC<PropsFromRedux> = props => {
           >
             Add
           </Button>
-          <Button onClick={() => dispatch(asyncFetchData())}>MOCK</Button>
+          <Button color="info" onClick={() => dispatch(asyncFetchData())}>
+            MOCK
+          </Button>
         </span>
       </div>
       <div className={clsx(styles.content)}>
@@ -72,12 +76,15 @@ const Todos: React.FC<PropsFromRedux> = props => {
                 {todo.text}
               </span>
             </blockquote>
-            <Button onClick={() => props.todoRemoved(index)}>Remove</Button>
+            <Button color="warning" onClick={() => props.todoRemoved(index)}>
+              Remove
+            </Button>
           </div>
         ))}
       </div>
       <AddActionModel
         show={show}
+        onClose={() => setShow(false)}
         onConfirm={(text: string) => {
           setShow(false)
           props.todoAdded({
