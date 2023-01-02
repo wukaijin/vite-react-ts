@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2023-01-01 02:00:09
+ * @LastEditTime: 2023-01-01 13:46:39
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -45,9 +45,11 @@ const todosSlice = createSlice({
       const todo = state.find(todo => todo.id === action.payload)
       todo!.completed = !todo!.completed
     },
-    todoRemoved(state, action: PayloadAction<number>) {
-      state.splice(action.payload, 1)
-      asyncFetchData.fulfilled
+    todoRemoved(state, action: PayloadAction<Todo>) {
+      const index = state.findIndex(e => e.id === action.payload.id)
+      if (index !== -1) {
+        state.splice(index, 1)
+      }
     }
   },
   extraReducers: builder => {

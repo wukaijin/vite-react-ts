@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
- * @LastEditTime: 2022-12-31 14:42:31
+ * @LastEditTime: 2023-01-01 15:34:22
  * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
  * @Description:
  */
@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom'
 
 type Props = unknown
 const NavigateList = () => (
-  <ul className="py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px]">
+  <ul className="py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px] marker:text-sky-400 list-disc pl-5 space-y-3 text-slate-800">
     <li>
       <Link to="/todos">TODOs</Link>
-      <label htmlFor="my-modal-4" className="btn">
-        open modal
-      </label>
+    </li>
+    <li>
+      <Link to="/introduction">Introduction</Link>
     </li>
   </ul>
 )

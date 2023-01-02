@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.13",
+    "@icon-park/react": "^1.4.2",
     "@reduxjs/toolkit": "^1.9.1",
     "daisyui": "^2.46.0",
     "react": "^18.2.0",

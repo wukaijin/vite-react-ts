@@ -1,9 +1,9 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 00:54:13
- * @LastEditTime: 2023-01-01 01:02:47
+ * @LastEditTime: 2023-01-01 13:49:10
  * @FilePath: /vite-react-swc/src/pages/todos/TodoCard.tsx
- * @Description: 
+ * @Description:
  */
 import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
@@ -12,7 +12,7 @@ import Button from '@/components/base/Button'
 import Checkbox from '@/components/base/Checkbox'
 import { Todo } from '@/store/todos'
 type Props = {
-  todo: Todo,
+  todo: Todo
   onChange: () => void
   onRemove: React.MouseEventHandler<HTMLSpanElement>
 }
@@ -27,19 +27,15 @@ export default function TodoCard(props: Props) {
       )}
       key={todo.id}
     >
-      <Checkbox
-        checked={todo.completed}
-        onChange={onChange}
-      />
+      <Checkbox checked={todo.completed} onChange={onChange} />
       <blockquote>
         <span
           className={clsx(
             {
               'text-gray-400': todo.completed
             },
-            'cursor-pointer text-sm'
+            'text-sm'
           )}
-          onClick={onChange}
         >
           {todo.text}
         </span>
@@ -49,8 +45,9 @@ export default function TodoCard(props: Props) {
         shape="circle"
         size="sm"
         onClick={onRemove}
+        className="opacity-80 hover:opacity-100 hover:scale-110"
       >
-        <ArchiveBoxXMarkIcon className="h-4 w-4 " />
+        <ArchiveBoxXMarkIcon className="h-4 w-4" />
       </Button>
     </div>
   )

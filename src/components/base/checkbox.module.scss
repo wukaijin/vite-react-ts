@@ -39,6 +39,12 @@
   transform: rotate(45deg);
 }
 
+.wk-checkbox:hover input::after {
+  border: solid #15e38a;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
 .wk-checkbox input:checked {
   box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
   10px 10px 15px rgba(70,70,70,0.12),

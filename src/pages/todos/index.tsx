@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2023-01-01 02:37:35
+ * @LastEditTime: 2023-01-01 22:30:46
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -21,31 +21,48 @@ import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
 import { useAppDispatch } from '@/hooks'
 import Button from '@/components/base/Button'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import AddActionModel from './AddActionModel'
 import TodoCard from './TodoCard'
 import FilterTabs from './FilterTabs'
+import { useNavigate } from 'react-router-dom'
 
-export const STATE_MAPPING = ['All', 'Done', 'Pending'] as const
+export const STATE_MAPPING = ['All', 'Pending', 'Done'] as const
 
 const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
+  const filteredTodos = useMemo(() => {
+    return props.todos.filter(todo => {
+      if (active === 'All') return true
+      if (active === 'Done') {
+        return todo.completed
+      }
+      if (active === 'Pending') {
+        return !todo.completed
+      }
+    })
+  }, [active, props.todos])
   return (
     <div
-      className={clsx(
-        styles.todos,
-        'px-6 py-4 sm:pt-12  bg-g-blue bg-gradient-to-tr min-h-screen'
-      )}
+      className={clsx(styles.todos, 'bg-g-blue bg-gradient-to-tr min-h-screen')}
     >
       <div className={styles.title}>
-        <div className="text-4xl font-bold text-white">Todo List</div>
+        <div className="text-4xl font-bold text-white ">
+          <span className="" onClick={() => navigate('/')}>
+            <span className="text-amber-400">To</span>
+            <span className="text-teal-100 relative animate-pulse before:bg-pink-500/70 before:block before:absolute before:-inset-1 before:-skew-y-3">
+              <span className="relative">Do</span>
+            </span>
+            <span className="text-amber-400 ml-1">List</span>
+          </span>
+        </div>
         <div className="flex items-center">
-          {/* <button className='btn-info'>ss</button> */}
-
           <Button
             shape="circle"
+            size="sm"
             className="glass mr-3"
             onClick={() => {
               setShow(true)
@@ -54,6 +71,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
             <PlusIcon className="w-6 h-6" />
           </Button>
           <Button
+            size="sm"
             className="glass font-normal"
             onClick={() => dispatch(asyncFetchData())}
           >
@@ -62,23 +80,14 @@ const Todos: React.FC<PropsFromRedux> = props => {
         </div>
       </div>
       <div className={clsx(styles.content)}>
-        {/* <div className="sticky flex text-center justify-center">
-          <div className="btn-group btn-group-horizontal">
-            <button className="btn btn-active">All</button>
-            <button className="btn">Done</button>
-            <button className="btn">Pending</button>
-          </div>
-        </div> */}
-        
         <FilterTabs active={active} onChange={setActive} />
         <div>
-          {props.todos.map((todo, index) => (
+          {filteredTodos.map((todo, index) => (
             <TodoCard
               key={todo.id}
               todo={todo}
               onRemove={() => {
-                console.log('Removed  ')
-                props.todoRemoved(index)
+                props.todoRemoved(todo)
               }}
               onChange={() => props.todoToggled(todo.id)}
             />
