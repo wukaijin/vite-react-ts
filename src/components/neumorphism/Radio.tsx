@@ -7,6 +7,7 @@
  */
 import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
+
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
 const SizeMapping: Record<Size, [string]> = {
@@ -20,8 +21,10 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onChange: (checked: boolean) => void
 }
 
-const Radio = (props: Props) => {
-  const { size = 'md', checked, onChange, className } = props
+function Radio(props: Props) {
+  const {
+    size = 'md', checked, onChange, className
+  } = props
   const [labelSize] = SizeMapping[size]
   return (
     <div className={clsx('neu-radio', className)}>
@@ -32,7 +35,7 @@ const Radio = (props: Props) => {
         value="1"
         onChange={() => {}}
       />
-      <label className={labelSize} onClick={() => onChange(!checked)}></label>
+      <label className={labelSize} onClick={() => onChange(!checked)} />
     </div>
   )
 }

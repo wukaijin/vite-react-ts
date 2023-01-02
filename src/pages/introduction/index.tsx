@@ -1,10 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
- * @LastEditTime: 2023-01-02 17:26:59
+ * @LastEditTime: 2023-01-02 21:54:58
  * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
  * @Description:
  */
+import { MusicOne, Videocamera, ConfusedFace } from '@icon-park/react'
+import clsx from 'clsx'
+import { ChangeEvent, useCallback, useState } from 'react'
 import {
   NeuPanel,
   NeuSwitch,
@@ -14,9 +17,6 @@ import {
   NeuInput,
   NeuTabs
 } from '@/components/neumorphism'
-import { MusicOne, Videocamera, ConfusedFace } from '@icon-park/react'
-import clsx from 'clsx'
-import { ChangeEvent, useCallback, useState } from 'react'
 import PersonCard from './PersonCard'
 
 type Props = unknown
@@ -55,7 +55,7 @@ export default function Introduction(props: Props) {
     [inputValue]
   )
   return (
-    <div className={clsx('bg-[#E4EBF5] min-h-screen ')}>
+    <div className={clsx('bg-[#E4EBF5] min-h-screen flex py-6')}>
       <div className="">
         <PersonCard />
       </div>
@@ -67,17 +67,17 @@ export default function Introduction(props: Props) {
               checked={switchChecked}
               onChange={changeSwitch}
             />
-            <span className="mr-6"></span>
+            <span className="mr-6" />
             position: relative;
-            <span className="mr-6"></span>
+            <span className="mr-6" />
             <NeuCheckbox
               size={size}
               checked={checkboxChecked}
               onChange={changeCheckbox}
             />
-            <span className="mr-6"></span>
+            <span className="mr-6" />
             justify-content: center;
-            <span className="mr-6"></span>
+            <span className="mr-6" />
             <NeuRadio
               size={size}
               checked={radioChecked}
@@ -91,32 +91,45 @@ export default function Introduction(props: Props) {
 
             <div className="mt-4">
               <NeuButton size={size}>BUTTon</NeuButton>
-              <span className="mr-6"></span>
+              <span className="mr-6" />
               <NeuButton shape="circle" size={size}>
                 Xx
               </NeuButton>
-              <span className="mr-6"></span>
+              <span className="mr-6" />
               <NeuButton shape="circle" color="primary" size={size}>
                 <MusicOne theme="filled" size="28" />
               </NeuButton>
-              <span className="mr-6"></span>
+              <span className="mr-6" />
               <NeuButton shape="circle" size={size}>
                 <Videocamera theme="filled" size="28" />
               </NeuButton>
-              <span className="mr-6"></span>
-              <NeuButton size={'sm'}>
+              <span className="mr-6" />
+              <NeuButton size="sm">
                 <ConfusedFace theme="outline" size="20" />
                 <span className="ml-2">sm size React TS Next</span>
               </NeuButton>
             </div>
           </div>
           <div className="mt-4">
-            <NeuInput block value={inputValue} onChange={changeInput} placeholder="Mongo is delicious." />
+            <NeuInput
+              block
+              value={inputValue}
+              onChange={changeInput}
+              placeholder="Mongo is delicious."
+            />
           </div>
           <div className="mt-4">
-            <NeuInput size='md' icon={<ConfusedFace theme="outline" size="26" />} value={inputValue} onChange={changeInput} placeholder="Mongo is delicious." />
-            <span className="mr-6"></span>
-            <NeuTabs />
+            <NeuInput
+              size="md"
+              icon={<ConfusedFace theme="outline" size="26" />}
+              value={inputValue}
+              onChange={changeInput}
+              placeholder="Mongo is delicious."
+            />
+          </div>
+          <div className="mt-4">
+            <NeuTabs size={size} />
+            <span className="mr-6" />
           </div>
         </NeuPanel>
       </div>

@@ -5,11 +5,11 @@
  * @FilePath: /vite-react-swc/src/pages/Wait.tsx
  * @Description:
  */
-import Loading from '@/components/base/Loading'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Loading from '@/components/base/Loading'
 
-const Wait = () => {
+function Wait() {
   const navigate = useNavigate()
   useEffect(() => {
     setTimeout(() => {

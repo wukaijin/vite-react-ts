@@ -15,7 +15,7 @@ type Props = {
   onClose: () => void
 }
 
-const AddActionModel: FC<Props> = props => {
+const AddActionModel: FC<Props> = (props) => {
   const [text, setText] = useState<string>('')
   useEffect(() => {
     setText('')
@@ -28,13 +28,11 @@ const AddActionModel: FC<Props> = props => {
           type="text"
           className="input input-bordered  w-full"
           value={text}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setText(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
         />
       </div>
       <div className="flex justify-end">
-        <Button color="ghost" className='mr-2' onClick={() => props.onClose()}>
+        <Button color="ghost" className="mr-2" onClick={() => props.onClose()}>
           Cannel
         </Button>
         <Button

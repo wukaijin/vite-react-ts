@@ -23,8 +23,10 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onChange: (checked: boolean) => void
 }
 
-const Checkbox = (props: Props) => {
-  const { size = 'md', checked, onChange, className } = props
+function Checkbox(props: Props) {
+  const {
+    size = 'md', checked, onChange, className
+  } = props
   const [iconSize, iconWidth, labelRadius] = SizeMapping[size]
   return (
     <div className={clsx('neu-checkbox', className)}>

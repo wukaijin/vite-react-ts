@@ -7,16 +7,15 @@
  */
 import { Header } from '@/components/base/layout'
 import logo from '@/assets/logo.png'
+
 type Props = unknown
-const HomeHeader: React.FC<Props> = () => {
-  return (
-    <Header className="h-14 leading-14 box-border border-slate-900/10">
-      <div className="flex px-6">
-        <div className="flex items-center justify-center">
-          <img width={36} height={36} src={logo} alt="" />
-        </div>
+const HomeHeader: React.FC<Props> = () => (
+  <Header className="h-14 leading-14 box-border border-slate-900/10">
+    <div className="flex px-6">
+      <div className="flex items-center justify-center">
+        <img width={36} height={36} src={logo} alt="" />
       </div>
-    </Header>
-  )
-}
+    </div>
+  </Header>
+)
 export default HomeHeader

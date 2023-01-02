@@ -7,6 +7,7 @@
  */
 import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
+
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
 const SizeMapping: Record<
@@ -26,7 +27,7 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input = (props: Props) => {
+function Input(props: Props) {
   const {
     size = 'md',
     value,

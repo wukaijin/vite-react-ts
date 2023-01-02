@@ -7,9 +7,10 @@
  */
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
+
 type Props = HTMLAttributes<HTMLDivElement>
 
-const Footer = (props: Props) => {
+function Footer(props: Props) {
   const { children, className, ...resProps } = props
   return (
     <div className={clsx('flex', className)} {...resProps}>

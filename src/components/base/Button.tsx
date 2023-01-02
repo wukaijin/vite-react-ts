@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-29 17:31:26
- * @LastEditTime: 2022-12-31 22:02:27
+ * @LastEditTime: 2023-01-02 22:34:25
  * @FilePath: /vite-react-swc/src/components/base/Button.tsx
  * @Description:
  */
@@ -31,7 +31,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     endIcon?: React.ReactNode
   }
 
-const Button: React.FC<ButtonProps> = props => {
+const Button: React.FC<ButtonProps> = (props) => {
   const {
     children,
     href,
@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> = props => {
       'no-animation': !animation,
       'btn-active': active,
       'btn-disabled': disabled,
-      loading: loading
+      loading
     })
   )
 
@@ -77,22 +77,21 @@ const Button: React.FC<ButtonProps> = props => {
         {endIcon && endIcon}
       </a>
     )
-  } else {
-    return (
-      <button
-        // ref={ref}
-        data-theme={dataTheme}
-        className={classes}
-        style={style}
-        disabled={disabled}
-        {...resProps}
-      >
-        {startIcon && !loading && startIcon}
-        {children}
-        {endIcon && endIcon}
-      </button>
-    )
   }
+  return (
+    <button
+      type="button"
+      data-theme={dataTheme}
+      className={classes}
+      style={style}
+      disabled={disabled}
+      {...resProps}
+    >
+      {startIcon && !loading && startIcon}
+      {children}
+      {endIcon && endIcon}
+    </button>
+  )
 }
 
 export default Button

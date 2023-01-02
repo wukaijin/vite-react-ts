@@ -7,24 +7,24 @@
  */
 import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
+
 type Color = 'primary' | 'secondary'
 type Shape = 'square' | 'circle'
 
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
-const SizeMapping: Record<Size, [string, string, string, string | undefined]> =
-  {
-    sm: ['h-10', 'rounded-lg', 'px-4', 'font-normal text-sm'],
-    md: ['h-12', 'rounded-xl', 'px-6', ' font-medium text-base'],
-    lg: ['h-14', 'rounded-2xl', 'px-8', 'font-semibold text-lg']
-  }
+const SizeMapping: Record<Size, [string, string, string, string | undefined]> = {
+  sm: ['h-10', 'rounded-lg', 'px-4', 'font-normal text-sm'],
+  md: ['h-12', 'rounded-xl', 'px-6', ' font-medium text-base'],
+  lg: ['h-14', 'rounded-2xl', 'px-8', 'font-semibold text-lg']
+}
 type Props = Omit<HTMLAttributes<HTMLDivElement>, 'color'> & {
   color?: Color
   shape?: Shape
   size?: Size
   block?: boolean
 }
-const Button = (props: Props) => {
+function Button(props: Props) {
   const {
     size = 'sm',
     shape = 'square',

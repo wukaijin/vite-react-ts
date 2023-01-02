@@ -7,6 +7,7 @@
  */
 import React, { CSSProperties, PropsWithChildren } from 'react'
 import clsx from 'clsx'
+
 export { default as Content } from './Content'
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
@@ -32,8 +33,10 @@ type Props = PropsWithChildren<{
   direction?: 'vertical' | 'horizontal'
 }>
 
-const Layout = (props: Props) => {
-  const { children, direction, className, style } = props
+function Layout(props: Props) {
+  const {
+    children, direction, className, style
+  } = props
   const direct = direction === 'vertical' ? 'flex-row' : 'flex-col'
   return (
     <div style={style} className={clsx('flex', direct, className)}>

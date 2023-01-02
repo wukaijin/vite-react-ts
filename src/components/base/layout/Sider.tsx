@@ -7,9 +7,10 @@
  */
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
+
 type Props = HTMLAttributes<HTMLDivElement>
 
-const Sider = (props: Props) => {
+function Sider(props: Props) {
   const { children, className, ...resProps } = props
   return (
     <div className={clsx('', className)} {...resProps}>

@@ -15,6 +15,7 @@ import {
   bgColors,
   DEFAULT_THEMES
 } from './const'
+
 export type SetStateType<T> = Dispatch<SetStateAction<T>>
 export type FC = FC
 

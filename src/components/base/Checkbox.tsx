@@ -7,13 +7,14 @@
  */
 import { InputHTMLAttributes } from 'react'
 import styles from './checkbox.module.scss'
+
 type Props = InputHTMLAttributes<HTMLElement>
 
-const Checkbox = (props: Props) => {
+function Checkbox(props: Props) {
   return (
     <label className={styles['wk-checkbox']}>
       <input {...props} type="checkbox" />
-      <div className={styles.checkmark}></div>
+      <div className={styles.checkmark} />
     </label>
   )
 }

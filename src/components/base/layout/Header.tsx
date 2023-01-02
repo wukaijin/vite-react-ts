@@ -7,9 +7,10 @@
  */
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
+
 type Props = HTMLAttributes<HTMLDivElement>
 
-const Header = (props: Props) => {
+function Header(props: Props) {
   const { children, className, ...resProps } = props
   return (
     <div className={clsx('flex', className)} {...resProps}>

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:49:01
- * @LastEditTime: 2023-01-01 23:01:09
+ * @LastEditTime: 2023-01-02 22:21:29
  * @FilePath: /vite-react-swc/src/pages/introduction/PersonCard.tsx
  * @Description:
  */
@@ -23,6 +23,7 @@ export default function PersonCard(props: Props) {
           style={{
             boxShadow: '-5px -5px 8px #ffffff7a, 5px 5px 8px #a9a9aa7a'
           }}
+          alt=""
           src="https://i.ibb.co/kKrFWfS/Wechat-IMG28.jpg"
         />
         <div className={clsx(styles.info, 'info text-center mt-2')}>
@@ -30,6 +31,7 @@ export default function PersonCard(props: Props) {
           <p>Web Dev</p>
         </div>
         <button
+          type="button"
           className={clsx(
             styles.button,
             'mt-3 color-white px-4 py-1 rounded-xl'

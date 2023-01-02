@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2023-01-01 22:30:46
+ * @LastEditTime: 2023-01-02 22:23:47
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -10,6 +10,8 @@ import { connect } from 'react-redux'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import type { ConnectedProps } from 'react-redux'
 import clsx from 'clsx'
+import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   todoToggled,
   todoAdded,
@@ -21,37 +23,34 @@ import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
 import { useAppDispatch } from '@/hooks'
 import Button from '@/components/base/Button'
-import { useMemo, useState } from 'react'
 import AddActionModel from './AddActionModel'
 import TodoCard from './TodoCard'
 import FilterTabs from './FilterTabs'
-import { useNavigate } from 'react-router-dom'
 
 export const STATE_MAPPING = ['All', 'Pending', 'Done'] as const
 
-const Todos: React.FC<PropsFromRedux> = props => {
+const Todos: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
-  const filteredTodos = useMemo(() => {
-    return props.todos.filter(todo => {
-      if (active === 'All') return true
-      if (active === 'Done') {
-        return todo.completed
-      }
-      if (active === 'Pending') {
-        return !todo.completed
-      }
-    })
-  }, [active, props.todos])
+  const filteredTodos = useMemo(() => props.todos.filter((todo) => {
+    if (active === 'All') return true
+    if (active === 'Done') {
+      return todo.completed
+    }
+    if (active === 'Pending') {
+      return !todo.completed
+    }
+    return true
+  }), [active, props.todos])
   return (
     <div
       className={clsx(styles.todos, 'bg-g-blue bg-gradient-to-tr min-h-screen')}
     >
       <div className={styles.title}>
         <div className="text-4xl font-bold text-white ">
-          <span className="" onClick={() => navigate('/')}>
+          <span onClick={() => navigate('/')} onKeyUp={() => navigate('/')}>
             <span className="text-amber-400">To</span>
             <span className="text-teal-100 relative animate-pulse before:bg-pink-500/70 before:block before:absolute before:-inset-1 before:-skew-y-3">
               <span className="relative">Do</span>
@@ -105,7 +104,7 @@ const Todos: React.FC<PropsFromRedux> = props => {
             completed: false
           })
         }}
-      ></AddActionModel>
+      />
     </div>
   )
 }

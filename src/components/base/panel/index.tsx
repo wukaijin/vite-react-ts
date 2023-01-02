@@ -9,7 +9,7 @@
 import { CSSProperties, HTMLAttributes } from 'react'
 
 type Props = HTMLAttributes<HTMLDivElement>
-const Panel = (props: Props) => {
+function Panel(props: Props) {
   return (
     <div className="rounded-[12px] shadow-lg order border-cyan-800  border-opacity-10 ">
       {props.children}

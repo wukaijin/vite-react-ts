@@ -21,7 +21,7 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onChange: (checked: boolean) => void
 }
 
-const Switch = (props: Props) => {
+function Switch(props: Props) {
   const { checked, onChange } = props
   const { className, size = 'md' } = props
   const [wrapperWidth, labelHeight] = SizeMapping[size]
@@ -31,7 +31,7 @@ const Switch = (props: Props) => {
       onClick={() => onChange(!checked)}
     >
       <input type="checkbox" checked={checked} onChange={() => {}} />
-      <label className={labelHeight}></label>
+      <label className={labelHeight} />
     </div>
   )
 }

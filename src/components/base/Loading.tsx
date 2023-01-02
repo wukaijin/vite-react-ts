@@ -33,6 +33,7 @@
 }
 */
 import styles from './loading.module.scss'
+
 interface IProps {
   size?: number
   height?: number
@@ -57,21 +58,23 @@ const Circle: React.FC<IProps> = ({ size = 100 }) => {
       <div
         style={style}
         className="bg-gray-800 bg-opacity-90 rounded-full blur-[10px]"
-      ></div>
+      />
     </div>
   )
 }
 
-const Dot = () => (
-  <div className={styles.wrapper}>
-    <div className={styles.circle}></div>
-    <div className={styles.circle}></div>
-    <div className={styles.circle}></div>
-    <div className={styles.shadow}></div>
-    <div className={styles.shadow}></div>
-    <div className={styles.shadow}></div>
-  </div>
-)
+function Dot() {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.circle} />
+      <div className={styles.circle} />
+      <div className={styles.circle} />
+      <div className={styles.shadow} />
+      <div className={styles.shadow} />
+      <div className={styles.shadow} />
+    </div>
+  )
+}
 
 export default {
   Circle,

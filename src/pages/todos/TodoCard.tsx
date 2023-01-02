@@ -11,6 +11,7 @@ import styles from './todos.module.scss'
 import Button from '@/components/base/Button'
 import Checkbox from '@/components/base/Checkbox'
 import { Todo } from '@/store/todos'
+
 type Props = {
   todo: Todo
   onChange: () => void

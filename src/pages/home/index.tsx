@@ -11,16 +11,14 @@ import Content from './content'
 
 type Props = unknown
 
-const Home: React.FC<Props> = () => {
-  return (
-    <Layout className="w-screen relative">
-      <div className="absolute top-0 -z-10 h-screen w-full bg-gradient-to-t from-cyan-600 to-transparent"></div>
-      <div className="absolute top-0 -z-20 w-full h-screen bg-gradient-to-tl from-cyan-700  to-transparent"></div>
-      <Header />
-      <Content />
-      {/* <Footer className={`h-[${HOME_FOOTER_HEIGHT}px]`}>footer</Footer> */}
-    </Layout>
-  )
-}
+const Home: React.FC<Props> = () => (
+  <Layout className="w-screen relative">
+    <div className="absolute top-0 -z-10 h-screen w-full bg-gradient-to-t from-cyan-600 to-transparent" />
+    <div className="absolute top-0 -z-20 w-full h-screen bg-gradient-to-tl from-cyan-700  to-transparent" />
+    <Header />
+    <Content />
+    {/* <Footer className={`h-[${HOME_FOOTER_HEIGHT}px]`}>footer</Footer> */}
+  </Layout>
+)
 
 export default Home
