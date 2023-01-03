@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 16:55:31
- * @LastEditTime: 2023-01-03 02:13:48
+ * @LastEditTime: 2023-01-03 14:10:07
  * @FilePath: /vite-react-swc/src/components/neumorphism/Tabs.tsx
  * @Description:
  */
@@ -77,7 +77,7 @@ function Tabs(props: Props) {
     if (currentActiveTab !== -1) {
       setTimeout(() => {
         resizeShadow(currentActiveTab)
-      }, 430)
+      }, 500)
     }
   }, [size])
   useLayoutEffect(() => {

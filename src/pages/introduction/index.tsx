@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
- * @LastEditTime: 2023-01-03 04:19:09
+ * @LastEditTime: 2023-01-03 15:30:03
  * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
  * @Description:
  */
@@ -45,20 +45,20 @@ const tabsMapping = [
     value: 1,
     render: (
       <div className="flex justify-center items-center">
-        <span className="mr-1">Do you like Kungfu?</span>
+        <span className="mr-1">Kungfu?</span>
         <Kungfu theme="filled" size="24" />
       </div>
     )
   },
   {
     value: 2,
-    render: 'ok'
+    render: 'OK'
   },
   {
     value: 3,
     render: (
       <div className="flex justify-center items-center">
-        <span className="text-green-500">I prefer soccer!</span>
+        <span className="text-green-500">Soccer</span>
       </div>
     )
   }
@@ -80,24 +80,30 @@ export default function Introduction(props: Props) {
     [inputValue]
   )
   return (
-    <div className={clsx('bg-[#E4EBF5] min-h-screen flex py-6')}>
+    <div
+      className={clsx(
+        'bg-[#E4EBF5] min-h-screen py-6 grid grid-flow-row auto-rows-max'
+      )}
+    >
       <div className="">
         <PersonCard />
       </div>
-      <div>
-        <NeuPanel className="w-[600px] mx-auto px-4 py-6 text-gray-500">
-          <div className="mb-4">
-            <NeuTabs
-              size="md"
-              block
-              value={size}
-              items={sizeMapping}
-              onChange={siz => {
-                // todo reasoned type out
-                setSize(siz as Size)
-              }}
-            />
-          </div>
+      <NeuPanel className="px-4 w-[375px] mx-auto py-6 text-gray-500 mb-6">
+        <div className="">
+          <NeuTabs
+            size="md"
+            block
+            value={size}
+            items={sizeMapping}
+            onChange={siz => {
+              // todo reasoned type out
+              setSize(siz as Size)
+            }}
+          />
+        </div>
+      </NeuPanel>
+      <div className="max-w-[100vw] sm:w-[600px] px-2 sm:mx-auto">
+        <NeuPanel className="px-4 py-6 text-gray-500">
           <div className="mb-4">
             <NeuTabs
               size={size}
@@ -108,66 +114,77 @@ export default function Introduction(props: Props) {
               }}
             />
           </div>
-          <div className="flex justify-center items-center">
-            <NeuSwitch
-              size={size}
-              checked={switchChecked}
-              onChange={setSwitchChecked}
-            />
-            <span className="mr-3" />
-            <NeuSwitch
-              size={size}
-              checked={!switchChecked}
-              onChange={setSwitchChecked}
-            />
-            <span className="mr-12" />
-            <NeuCheckbox
-              size={size}
-              checked={checkboxChecked}
-              onChange={setCheckboxChecked}
-            />
-            <span className="mr-3" />
-            <NeuCheckbox
-              size={size}
-              checked={!checkboxChecked}
-              onChange={setCheckboxChecked}
-            />
-            <span className="mr-12" />
-            <NeuRadio
-              size={size}
-              checked={radioChecked}
-              onChange={setRadioChecked}
-            />
-            <span className="mr-3" />
-            <NeuRadio
-              size={size}
-              checked={!radioChecked}
-              onChange={setRadioChecked}
-            />
+          <div className="flex flex-row py-4">
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <div className="m-auto">
+                <div className="text-center">
+                  <NeuSwitch
+                    size={size}
+                    checked={switchChecked}
+                    onChange={setSwitchChecked}
+                  />
+                  <span className="mr-3" />
+                  <NeuSwitch
+                    size={size}
+                    checked={!switchChecked}
+                    onChange={setSwitchChecked}
+                  />
+                </div>
+                <div className="py-6 text-center">
+                  <NeuCheckbox
+                    size={size}
+                    checked={checkboxChecked}
+                    onChange={setCheckboxChecked}
+                  />
+                  <span className="mr-8" />
+                  <NeuCheckbox
+                    size={size}
+                    checked={!checkboxChecked}
+                    onChange={setCheckboxChecked}
+                  />
+                </div>
+                <div className="text-center">
+                  <NeuRadio
+                    size={size}
+                    checked={radioChecked}
+                    onChange={setRadioChecked}
+                  />
+                  <span className="mr-8" />
+                  <NeuRadio
+                    size={size}
+                    checked={!radioChecked}
+                    onChange={setRadioChecked}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <div className="m-auto">
+                <div className="text-center">
+                  <NeuButton shape="circle" color="primary" size={size}>
+                    <MusicOne theme="filled" />
+                  </NeuButton>
+                  <span className="mr-4" />
+                  <NeuButton shape="circle" size={size}>
+                    <Videocamera theme="filled" />
+                  </NeuButton>
+                </div>
+                <div className="text-center pt-6 pb-3">
+                  <NeuButton size={size}>BUTTon</NeuButton>
+                </div>
+                <div className="text-center">
+                  <NeuButton color="primary" size={size}>
+                    BUTTon
+                  </NeuButton>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-3">
+
+          <div className="mt-4">
             <NeuButton color="primary" block size={size}>
               BUTTon
             </NeuButton>
-            <div className="mt-4 flex">
-              <NeuButton size={size}>BUTTon</NeuButton>
-              <span className="mr-6" />
-              <NeuButton color="primary" size={size}>
-                BUTTon
-              </NeuButton>
-              <span className="mr-6" />
-              <NeuButton shape="circle" size={size}>
-                Xx
-              </NeuButton>
-              <span className="mr-6" />
-              <NeuButton shape="circle" color="primary" size={size}>
-                <MusicOne theme="filled" />
-              </NeuButton>
-              <span className="mr-6" />
-              <NeuButton shape="circle" size={size}>
-                <Videocamera theme="filled" />
-              </NeuButton>
-            </div>
           </div>
           <div className="mt-4">
             <NeuInput
@@ -186,12 +203,14 @@ export default function Introduction(props: Props) {
               onChange={changeInput}
               placeholder="Mongo is delicious."
             />
-            <span className="mr-6" />
+          </div>
+          <div className="mt-4">
             <NeuButton size={size}>
               <ConfusedFace theme="outline" />
               <span className="ml-2">sm size React TS Next</span>
             </NeuButton>
           </div>
+
           <div className="mt-8">
             <NeuSlider size="sm" value={slider1} onChange={setSlider1} />
           </div>

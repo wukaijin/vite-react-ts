@@ -1,17 +1,16 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 01:17:01
- * @LastEditTime: 2023-01-03 04:34:24
- * @FilePath: /vite-react-swc/src/components/neumorphism/Slider.tsx
+ * @LastEditTime: 2023-01-03 21:15:09
+ * @FilePath: /vite-react-swc/src/components/neumorphism/Slider_2.tsx
  * @Description:
  */
 import clsx from 'clsx'
 import {
   HTMLAttributes,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
+  Component,
+  createRef,
+  RefObject
 } from 'react'
 import { throttle } from '@/utils'
 
@@ -29,106 +28,147 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onChange?: (value: number) => void
 }
 // const distance = 0
-function calc(e: MouseEvent, box: HTMLDivElement) {
-  e.preventDefault()
-  // if (!box) return null
-  const targetRect = box.getBoundingClientRect()
-  const btn = box.querySelector<HTMLDivElement>('.neu-slider-btn')
-  const btnWidth = btn?.offsetWidth || 0
-  let x = e.pageX - targetRect.left
-  if (x > targetRect.width) {
-    x = targetRect.width
-  }
-  if (x < 0) {
-    x = 0
-  }
-  // const percentPosition = ((x + distance - btnWidth) / (targetRect.width - btnWidth)) * 100
-  const percentPosition = (x / targetRect.width) * 100
-  // console.log(percentPosition, x)
-  return {
-    percentPosition,
-    x
-  }
+
+type State = {
+  active: boolean
+  btnLeft: number
+  percent: number
+  restWidth: number
 }
 
-function Slider(props: Props) {
-  // const { checked, onChange } = props
-  const { className, size = 'md', value, onChange } = props
-  const [btnSize, boxHeight, tooltipStyle] = SizeMapping[size]
-  const boxRef = useRef<HTMLDivElement | null>()
-  const [active, setActive] = useState(false)
-  const [percent, setPercent] = useState(value || 0)
-  const [btnLeft, setBtnLeft] = useState(value || 0)
-
-  const func = throttle((e: MouseEvent) => {
-    if (!boxRef.current) return
-    const { percentPosition, x } = calc(e, boxRef.current)
-    // setPercent(percentPosition)
-    if (onChange) {
-      onChange(percentPosition)
-      // setBtnLeft(x)
-    } else {
-      setPercent(percentPosition)
-      setBtnLeft(x)
+class Slider extends Component<Props, State> {
+  boxRef: RefObject<HTMLDivElement>
+  btnRef: RefObject<HTMLDivElement>
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      active: false,
+      btnLeft: 0,
+      percent: 0,
+      restWidth: 0
     }
-  }, 20)
-  useEffect(
-    () => {
-      setPercent(value)
-      setBtnLeft((value / 100) * (boxRef.current?.offsetWidth || 0) || 0)
-    },
-    [value]
-  )
-
-  return (
-    <div className={clsx('neu-slider', className)}>
-      <div
-        ref={ref => (boxRef.current = ref)}
-        className={clsx('neu-slider-box', boxHeight)}
-        onMouseDown={e => {
-          setActive(true)
-          document.onmousemove = func
-          document.onmouseup = () => {
-            document.onmousemove = null
-            setActive(false)
-          }
-        }}
-        onMouseUp={e => {
-          setActive(false)
-          document.onmousemove = null
-        }}
-        // onMouseMove={e => {
-        //   if (active) {
-
-        //   }
-        // }}
-      >
-        <span
-          className={clsx('neu-slider-btn', btnSize)}
-          style={{
-            left: `${Math.max(0, btnLeft - 10)}px`
+    this.boxRef = createRef()
+    this.btnRef = createRef()
+  }
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
+    if (props.value !== state.percent) {
+      return {
+        percent: props.value
+      }
+    }
+    return null
+  }
+  componentDidMount(): void {
+    const box = this.boxRef.current
+    const btn = this.btnRef.current
+    if (!box || !btn) return
+    this.setState({ restWidth: box.offsetWidth - btn.offsetWidth })
+  }
+  onBoxMouseDown(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    // console.log(this.updateProperty)
+    this.calcMouse(e)
+    const fn = this.calcMouse.bind(this)
+    document.addEventListener('mousemove', fn)
+    document.addEventListener('mouseup', () => {
+      document.removeEventListener('mousemove', fn)
+    })
+  }
+  onBoxTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+    // console.log(this.updateProperty)
+    this.calcTouch(e)
+    const fn = this.calcTouch.bind(this)
+    document.addEventListener('touchmove', fn)
+    document.addEventListener('touchend', () => {
+      document.removeEventListener('touchmove', fn)
+    })
+  }
+  calcMouse(e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent) {
+    // e.preventDefault()
+    const box = this.boxRef.current
+    const btn = this.btnRef.current
+    if (!box || !btn) return false
+    // const restWidth = box.offsetWidth - btn.offsetWidth
+    const eX = e.clientX
+    let x = eX - box.offsetLeft
+    if (x > box.offsetWidth) {
+      x = box.offsetWidth
+    }
+    if (x < 0) {
+      x = 0
+    }
+    const percent = (x / box.offsetWidth) * 100
+    if (this.props.onChange) {
+      this.props.onChange(percent)
+    }
+    this.setState({ btnLeft: x })
+    return false
+  }
+  calcTouch(e: React.TouchEvent<HTMLDivElement> | TouchEvent) {
+    const box = this.boxRef.current
+    const btn = this.btnRef.current
+    if (!box || !btn) return false
+    const eX =
+      (e.targetTouches && e.targetTouches[0] && e.targetTouches[0].clientX) || 0
+    let x = eX - box.offsetLeft
+    if (x > box.offsetWidth) {
+      x = box.offsetWidth
+    }
+    if (x < 0) {
+      x = 0
+    }
+    const percent = (x / box.offsetWidth) * 100
+    if (this.props.onChange) {
+      this.props.onChange(percent)
+    }
+    this.setState({ btnLeft: x })
+    return false
+  }
+  render() {
+    const { className, size = 'md', value } = this.props
+    const [btnSize, boxHeight, tooltipStyle] = SizeMapping[size]
+    const { active, btnLeft, restWidth } = this.state
+    return (
+      <div className={clsx('neu-slider', className)}>
+        <div
+          ref={this.boxRef}
+          className={clsx('neu-slider-box', boxHeight)}
+          onMouseDown={e => {
+            this.onBoxMouseDown(e)
           }}
+          onTouchStart={e => {
+            this.onBoxTouchStart(e)
+          }}
+          onMouseUp={() => {}}
         >
           <span
-            className={clsx('neu-slider-tooltip', tooltipStyle, {
-              // 'opacity-100': true
-            })}
+            className={clsx('neu-slider-btn', btnSize)}
+            ref={this.btnRef}
             style={{
-              opacity: active ? 1 : ''
-              // left: `${btnLeft}px`
+              left: `${Math.max(0, btnLeft)}px`
             }}
           >
-            {`${Math.round(Math.max(0, percent) || 0)}%`}
+            <span
+              className={clsx('neu-slider-tooltip', tooltipStyle, {})}
+              style={{
+                opacity: active ? 1 : ''
+              }}
+            >
+              {`${Math.round(Math.max(0, value) || 0)}%`}
+            </span>
           </span>
-        </span>
-        <span
-          className="neu-slider-color"
-          style={{
-            width: `${Math.round(Math.max(0, percent - 3) || 0)}%`
-          }}
-        />
+          <span
+            className="neu-slider-color"
+            style={{
+              width: `${Math.round(Math.max(0, value - 0) || 0)}%`
+            }}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
+
 export default Slider
