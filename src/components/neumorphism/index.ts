@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 23:09:10
- * @LastEditTime: 2023-01-02 16:56:49
+ * @LastEditTime: 2023-01-03 01:17:57
  * @FilePath: /vite-react-swc/src/components/neumorphism/index.ts
  * @Description:
  */
@@ -14,5 +14,6 @@ export { default as NeuRadio } from './Radio'
 export { default as NeuButton } from './Button'
 export { default as NeuInput } from './Input'
 export { default as NeuTabs } from './Tabs'
+export { default as NeuSlider } from './Slider'
 
 export default {}

@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
- * @LastEditTime: 2023-01-02 21:54:58
+ * @LastEditTime: 2023-01-03 04:19:09
  * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
  * @Description:
  */
-import { MusicOne, Videocamera, ConfusedFace } from '@icon-park/react'
+import { MusicOne, Videocamera, ConfusedFace, Kungfu } from '@icon-park/react'
 import clsx from 'clsx'
 import { ChangeEvent, useCallback, useState } from 'react'
 import {
@@ -15,39 +15,64 @@ import {
   NeuRadio,
   NeuButton,
   NeuInput,
-  NeuTabs
+  NeuTabs,
+  NeuSlider
 } from '@/components/neumorphism'
 import PersonCard from './PersonCard'
 
 type Props = unknown
 
 // todo: Radio.Group
+const SIZES = ['sm', 'md', 'lg'] as const
+type Size = typeof SIZES[number]
 
+const sizeMapping = [
+  {
+    value: 'sm',
+    render: 'sm'
+  },
+  {
+    value: 'md',
+    render: 'md'
+  },
+  {
+    value: 'lg',
+    render: 'lg'
+  }
+]
+const tabsMapping = [
+  {
+    value: 1,
+    render: (
+      <div className="flex justify-center items-center">
+        <span className="mr-1">Do you like Kungfu?</span>
+        <Kungfu theme="filled" size="24" />
+      </div>
+    )
+  },
+  {
+    value: 2,
+    render: 'ok'
+  },
+  {
+    value: 3,
+    render: (
+      <div className="flex justify-center items-center">
+        <span className="text-green-500">I prefer soccer!</span>
+      </div>
+    )
+  }
+]
 export default function Introduction(props: Props) {
-  const size = 'md'
   const [switchChecked, setSwitchChecked] = useState(true)
   const [checkboxChecked, setCheckboxChecked] = useState(true)
   const [radioChecked, setRadioChecked] = useState(true)
   const [inputValue, setInputValue] = useState('')
-
-  const changeSwitch = useCallback(
-    (value: boolean) => {
-      setSwitchChecked(value)
-    },
-    [switchChecked]
-  )
-  const changeCheckbox = useCallback(
-    (value: boolean) => {
-      setCheckboxChecked(value)
-    },
-    [checkboxChecked]
-  )
-  const changeRadioChecked = useCallback(
-    (value: boolean) => {
-      setRadioChecked(value)
-    },
-    [radioChecked]
-  )
+  const [size, setSize] = useState<Size>('md')
+  const [tab, setTab] = useState(2)
+  const [slider1, setSlider1] = useState(0)
+  const [slider2, setSlider2] = useState(50)
+  const [slider3, setSlider3] = useState(100)
   const changeInput = useCallback(
     (s: ChangeEvent<HTMLInputElement>) => {
       setInputValue(s.target.value)
@@ -61,58 +86,93 @@ export default function Introduction(props: Props) {
       </div>
       <div>
         <NeuPanel className="w-[600px] mx-auto px-4 py-6 text-gray-500">
+          <div className="mb-4">
+            <NeuTabs
+              size="md"
+              block
+              value={size}
+              items={sizeMapping}
+              onChange={siz => {
+                // todo reasoned type out
+                setSize(siz as Size)
+              }}
+            />
+          </div>
+          <div className="mb-4">
+            <NeuTabs
+              size={size}
+              value={tab}
+              items={tabsMapping}
+              onChange={siz => {
+                setTab(siz as number)
+              }}
+            />
+          </div>
           <div className="flex justify-center items-center">
             <NeuSwitch
               size={size}
               checked={switchChecked}
-              onChange={changeSwitch}
+              onChange={setSwitchChecked}
             />
-            <span className="mr-6" />
-            position: relative;
-            <span className="mr-6" />
+            <span className="mr-3" />
+            <NeuSwitch
+              size={size}
+              checked={!switchChecked}
+              onChange={setSwitchChecked}
+            />
+            <span className="mr-12" />
             <NeuCheckbox
               size={size}
               checked={checkboxChecked}
-              onChange={changeCheckbox}
+              onChange={setCheckboxChecked}
             />
-            <span className="mr-6" />
-            justify-content: center;
-            <span className="mr-6" />
+            <span className="mr-3" />
+            <NeuCheckbox
+              size={size}
+              checked={!checkboxChecked}
+              onChange={setCheckboxChecked}
+            />
+            <span className="mr-12" />
             <NeuRadio
               size={size}
               checked={radioChecked}
-              onChange={changeRadioChecked}
+              onChange={setRadioChecked}
+            />
+            <span className="mr-3" />
+            <NeuRadio
+              size={size}
+              checked={!radioChecked}
+              onChange={setRadioChecked}
             />
           </div>
           <div className="mt-3">
             <NeuButton color="primary" block size={size}>
               BUTTon
             </NeuButton>
-
-            <div className="mt-4">
+            <div className="mt-4 flex">
               <NeuButton size={size}>BUTTon</NeuButton>
+              <span className="mr-6" />
+              <NeuButton color="primary" size={size}>
+                BUTTon
+              </NeuButton>
               <span className="mr-6" />
               <NeuButton shape="circle" size={size}>
                 Xx
               </NeuButton>
               <span className="mr-6" />
               <NeuButton shape="circle" color="primary" size={size}>
-                <MusicOne theme="filled" size="28" />
+                <MusicOne theme="filled" />
               </NeuButton>
               <span className="mr-6" />
               <NeuButton shape="circle" size={size}>
-                <Videocamera theme="filled" size="28" />
-              </NeuButton>
-              <span className="mr-6" />
-              <NeuButton size="sm">
-                <ConfusedFace theme="outline" size="20" />
-                <span className="ml-2">sm size React TS Next</span>
+                <Videocamera theme="filled" />
               </NeuButton>
             </div>
           </div>
           <div className="mt-4">
             <NeuInput
               block
+              size={size}
               value={inputValue}
               onChange={changeInput}
               placeholder="Mongo is delicious."
@@ -120,16 +180,26 @@ export default function Introduction(props: Props) {
           </div>
           <div className="mt-4">
             <NeuInput
-              size="md"
-              icon={<ConfusedFace theme="outline" size="26" />}
+              size={size}
+              icon={<ConfusedFace theme="outline" />}
               value={inputValue}
               onChange={changeInput}
               placeholder="Mongo is delicious."
             />
-          </div>
-          <div className="mt-4">
-            <NeuTabs size={size} />
             <span className="mr-6" />
+            <NeuButton size={size}>
+              <ConfusedFace theme="outline" />
+              <span className="ml-2">sm size React TS Next</span>
+            </NeuButton>
+          </div>
+          <div className="mt-8">
+            <NeuSlider size="sm" value={slider1} onChange={setSlider1} />
+          </div>
+          <div className="mt-8 mr-32">
+            <NeuSlider size="md" value={slider2} onChange={setSlider2} />
+          </div>
+          <div className="mt-8  ml-20">
+            <NeuSlider size="lg" value={slider3} onChange={setSlider3} />
           </div>
         </NeuPanel>
       </div>

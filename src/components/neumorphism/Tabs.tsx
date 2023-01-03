@@ -1,34 +1,42 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 16:55:31
- * @LastEditTime: 2023-01-02 22:35:48
+ * @LastEditTime: 2023-01-03 02:13:48
  * @FilePath: /vite-react-swc/src/components/neumorphism/Tabs.tsx
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes, useRef, useState } from 'react'
+import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
 
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
-const SizeMapping: Record<Size, [string, string, string]> = {
-  sm: ['h-6', 'text-sm', 'rounded-lg'],
-  md: ['h-8', 'text-base', 'rounded-xl'],
-  lg: ['h-10', 'text-lg', 'rounded-2xl']
+const SizeMapping: Record<
+  Size,
+  [string, string, string, string, [number, string]]
+> = {
+  sm: ['h-10', 'px-4', 'text-sm', 'rounded-lg', [10, 'rounded-md']],
+  md: ['h-12', 'px-6', 'text-base', 'rounded-xl', [10, 'rounded-md']],
+  lg: ['h-14', 'px-8', 'text-lg', 'rounded-2xl', [12, 'rounded-lg']]
 }
 type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   size?: Size
-  // checked: boolean
-  // onChange: (checked: boolean) => void
+  block?: boolean
+  value: string | number
+  items: TabsItem[]
+  onChange: (value: string | number) => void
 }
 type ShadowStyle = {
   offsetLeft: number
   offsetWidth: number
   offsetHeight: number
 }
-
-const tabs = ['Apple', 'Banana', 'Watermelon']
+export type TabsItem = {
+  value: string | number
+  label?: string | number
+  render?: React.ReactNode
+}
+// const tabs = ['Apple', 'Banana', 'Watermelon']
 function Tabs(props: Props) {
-  const [active, setActive] = useState('Tab1')
   const [shadowStyle, setShadowStyle] = useState<ShadowStyle>({
     offsetLeft: 0,
     offsetWidth: 0,
@@ -36,8 +44,21 @@ function Tabs(props: Props) {
   })
 
   const tabsRef = useRef<(HTMLDivElement | null)[]>([])
-  const { size = 'md', className } = props
-  const [height, fontSize, borderRadius] = SizeMapping[size]
+  const {
+    size = 'md',
+    block = false,
+    value,
+    items = [],
+    onChange,
+    className
+  } = props
+  const [
+    height,
+    itemPaddingX,
+    fontSize,
+    borderRadius,
+    [distance, shadowRadius]
+  ] = SizeMapping[size]
   const resizeShadow = (index: number) => {
     const {
       offsetLeft = 0,
@@ -50,35 +71,54 @@ function Tabs(props: Props) {
       offsetHeight
     })
   }
+  // ! for dynamic size changing
+  useLayoutEffect(() => {
+    const currentActiveTab = items.findIndex(e => e.value === value)
+    if (currentActiveTab !== -1) {
+      setTimeout(() => {
+        resizeShadow(currentActiveTab)
+      }, 430)
+    }
+  }, [size])
+  useLayoutEffect(() => {
+    const currentActiveTab = items.findIndex(e => e.value === value)
+    if (currentActiveTab !== -1) {
+      resizeShadow(currentActiveTab)
+    }
+  }, [value])
   return (
     <div
-      className={clsx('neu-tabs', height, fontSize, borderRadius, className)}
+      className={clsx(
+        'neu-tabs',
+        { flex: block },
+        height,
+        fontSize,
+        borderRadius,
+        className
+      )}
     >
-      {tabs.map((tab, index) => (
+      {items.map((tab, index) => (
         <div
-          ref={(ref) => (tabsRef.current[index] = ref)}
-          key={tab}
-          className={clsx('neu-tab', {
-            active: active === tab
+          ref={ref => (tabsRef.current[index] = ref)}
+          key={tab.value}
+          className={clsx('neu-tab', height, itemPaddingX, {
+            'flex-1': block,
+            active: value === tab.value
           })}
           onClick={() => {
             resizeShadow(index)
-            setActive(tab)
-          }}
-          onKeyUp={() => {
-            resizeShadow(index)
-            setActive(tab)
+            onChange(tab.value)
           }}
         >
-          <p>{tab}</p>
+          {tab.render ? tab.render : tab.label || tab.value}
         </div>
       ))}
       <div
-        className="control"
+        className={clsx('control', shadowRadius)}
         style={{
           transform: `translateX(${shadowStyle.offsetLeft}px)`,
-          width: shadowStyle.offsetHeight - 10,
-          height: shadowStyle.offsetHeight - 4
+          width: shadowStyle.offsetWidth - (distance + 2),
+          height: shadowStyle.offsetHeight - distance
         }}
       />
     </div>

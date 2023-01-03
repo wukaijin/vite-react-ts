@@ -31,7 +31,6 @@ export default function PersonCard(props: Props) {
           <p>Web Dev</p>
         </div>
         <button
-          type="button"
           className={clsx(
             styles.button,
             'mt-3 color-white px-4 py-1 rounded-xl'

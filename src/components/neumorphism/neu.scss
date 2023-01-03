@@ -164,6 +164,7 @@
   // width: 15rem;
   // height: 4rem;
   // border-radius: 1rem;
+  user-select: none;
   box-shadow: 0.3rem 0.3rem 0.6rem var(--neu-greyLight-2),
     -0.2rem -0.2rem 0.5rem var(--neu-white);
   justify-self: center;
@@ -177,6 +178,10 @@
   // p {
   //   font-size: 1.6rem;
   // }
+  svg,
+  i {
+    font-size: 1.5em;
+  }
 }
 .neu-button-primary {
   background: var(--neu-primary);
@@ -217,6 +222,7 @@
     left: 0;
     align-items: center;
     justify-content: center;
+    font-size: 1.5em;
     // padding: 0 1rem;
     display: flex;
     color: var(--neu-greyDark);
@@ -252,6 +258,7 @@
 .neu-tabs {
   display: inline-flex;
   height: 4rem;
+  user-select: none;
   box-shadow: 0.3rem 0.3rem 0.6rem var(--neu-greyLight-2),
     -0.2rem -0.2rem 0.5rem var(--neu-white);
   border-radius: 1rem;
@@ -259,13 +266,13 @@
   align-items: center;
   position: relative;
   .neu-tab {
-    // width: 6.8rem;
-    padding: 0 2rem;
-    height: 3.6rem;
-    font-size: 1.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 5.2rem;
+    // height: 3.6rem;
+    // font-size: 1.4rem;
+    // padding: 0 1rem;
     cursor: pointer;
     color: var(--neu-greyDark);
     transition: all 0.5s ease;
@@ -282,11 +289,96 @@
     // height: 3.4rem;
     // width: 6.2rem;
     margin-left: 0.3rem;
-    border-radius: 0.8rem;
+    // border-radius: 0.8rem;
     box-shadow: inset 0.2rem 0.2rem 0.5rem var(--neu-greyLight-2),
       inset -0.2rem -0.2rem 0.5rem var(--neu-white);
     pointer-events: none;
     // transform: translateX(13.6rem);
-  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+/*  RANGE-SLIDER  */
+.neu-slider {
+  user-select: none;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  .neu-slider-box {
+    user-select: none;
+    width: 100%;
+    // height: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--neu-greyLight-2),
+      inset -0.2rem -0.2rem 0.5rem var(--neu-white);
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .neu-slider-btn {
+    // width: 2rem;
+    // height: 2rem;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    user-select: none;
+    background: var(--neu-white);
+    position: absolute;
+    box-shadow: 0px 0.1rem 0.3rem 0px var(--neu-greyLight-3);
+    z-index: 110;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: relative;
+    &:hover {
+      .neu-slider-tooltip {
+        opacity: 1;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+      box-shadow: inset 0.2rem 0.2rem 0.5rem var(--neu-greyLight-2),
+        inset -0.2rem -0.2rem 0.5rem var(--neu-white);
+    }
+  }
+  .neu-slider-color {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    border-radius: inherit;
+    background: var(--neu-primary);
+    background: linear-gradient(
+      -1deg,
+      var(--neu-primary-dark) 0%,
+      var(--neu-primary) 50%,
+      var(--neu-primary-light) 100%
+    );
+  }
+  .neu-slider-tooltip {
+    position: absolute;
+    z-index: 120;
+    // height: 2.5rem;
+    // width: 3rem;
+    // border-radius: 0.6rem;
+    // font-size: 1.2rem;
+    // top: 2.6rem;
+    padding: 0 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--neu-primary);
+    background: var(--neu-greyLight-1);
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--neu-greyLight-2),
+      -0.2rem -0.2rem 0.5rem var(--neu-white);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-02 22:33:04
+ * @LastEditTime: 2023-01-03 03:17:34
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -35,27 +35,30 @@ module.exports = {
     'arrow-parens': 0,
     'operator-linebreak': 0,
     'no-explicit-any': 0,
-    'react/prop-types': 0,
-    'react/react-in-jsx-scope': 'off',
+    'no-param-reassign': 0,
+    'no-unused-vars': 0,
+    'no-use-before-define': 0,
+    'func-names': 0,
+    'object-curly-newline': 0,
+    'no-return-assign': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/ban-types': 0,
     'import/no-unresolved': 0,
     'import/extensions': 0,
+    'react/prop-types': 0,
+    'react/button-has-type': 0,
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 0,
     'react/function-component-definition': 0,
-    'no-param-reassign': 0,
-    'no-unused-vars': 0,
     'react/require-default-props': 0,
     'react/jsx-props-no-spreading': 0,
     'react/destructuring-assignment': 0,
     'jsx-a11y/click-events-have-key-events': 0,
-    'no-use-before-define': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/label-has-associated-control': 0,
-    'jsx-a11y/no-noninteractive-element-interactions': 0,
-    'func-names': 0,
-    'no-return-assign': 0
+    'jsx-a11y/no-noninteractive-element-interactions': 0
   }
 }
