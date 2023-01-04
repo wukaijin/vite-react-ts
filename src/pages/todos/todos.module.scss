@@ -1,18 +1,18 @@
 .todos {
-  padding: 0 12px;
+  padding: 0 1rem;
   .title {
-    padding:12px 12px;
+    padding: 1rem;
     padding-bottom: 0;
-    font-size: 18px;
+    font-size: 1.25rem;
     font-weight: 500;
     display: flex;
     justify-content: space-between;
   }
   .content {
-    padding-bottom: 24px;
+    padding-bottom: 1.5rem;
     .todoItem{
       input[type=checkbox] {
-        margin-right: 12px;
+        margin-right: 1rem;
       }
       blockquote {
         flex: 1;
@@ -22,5 +22,5 @@
   }
 }
 .gapRight {
-  margin-right: 12px;
+  margin-right: 1rem;
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-01 15:06:07
+ * @LastEditTime: 2023-01-03 21:55:58
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -11,6 +11,7 @@ import Home from '@/pages/home'
 import Todos from '@/pages/todos'
 import Wait from '@/pages/Wait'
 import Introduction from '@/pages/introduction'
+import Test from '@/pages/test'
 
 const config: RouteObject[] = [
   {
@@ -28,6 +29,10 @@ const config: RouteObject[] = [
   {
     path: '/todos',
     element: <Todos />
+  },
+  {
+    path: '/test',
+    element: <Test />
   }
 ]
 export default createBrowserRouter(config)

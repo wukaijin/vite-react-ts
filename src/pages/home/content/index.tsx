@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
- * @LastEditTime: 2023-01-01 15:34:22
+ * @LastEditTime: 2023-01-04 16:03:35
  * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
  * @Description:
  */
@@ -35,7 +35,7 @@ function HomeContent(props: Props) {
       className="z-1"
     >
       <div className="flex">
-        <div className="pt-[200px] pl-[140px]">
+        <div className="m-auto">
           <Panel>
             <NavigateList />
           </Panel>

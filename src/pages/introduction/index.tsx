@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
- * @LastEditTime: 2023-01-03 15:30:03
+ * @LastEditTime: 2023-01-04 16:05:49
  * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
  * @Description:
  */
@@ -16,7 +16,8 @@ import {
   NeuButton,
   NeuInput,
   NeuTabs,
-  NeuSlider
+  NeuSlider,
+  NeuPlayButton
 } from '@/components/neumorphism'
 import PersonCard from './PersonCard'
 
@@ -73,6 +74,7 @@ export default function Introduction(props: Props) {
   const [slider1, setSlider1] = useState(0)
   const [slider2, setSlider2] = useState(50)
   const [slider3, setSlider3] = useState(100)
+  const [playing, setPlaying] = useState(true)
   const changeInput = useCallback(
     (s: ChangeEvent<HTMLInputElement>) => {
       setInputValue(s.target.value)
@@ -82,27 +84,25 @@ export default function Introduction(props: Props) {
   return (
     <div
       className={clsx(
-        'bg-[#E4EBF5] min-h-screen py-6 grid grid-flow-row auto-rows-max'
+        'bg-[#E4EBF5] min-h-screen pb-8'
       )}
     >
       <div className="">
         <PersonCard />
       </div>
-      <NeuPanel className="px-4 w-[375px] mx-auto py-6 text-gray-500 mb-6">
-        <div className="">
-          <NeuTabs
-            size="md"
-            block
-            value={size}
-            items={sizeMapping}
-            onChange={siz => {
-              // todo reasoned type out
-              setSize(siz as Size)
-            }}
-          />
-        </div>
-      </NeuPanel>
-      <div className="max-w-[100vw] sm:w-[600px] px-2 sm:mx-auto">
+      <div className="px-4 max-w-[100vw] sm:w-[375px] mx-auto py-2 text-gray-500 mb-2">
+        <NeuTabs
+          size="md"
+          block
+          value={size}
+          items={sizeMapping}
+          onChange={siz => {
+            // todo reasoned type out
+            setSize(siz as Size)
+          }}
+        />
+      </div>
+      <div className="max-w-[100vw] sm:w-[600px] px-4 sm:mx-auto">
         <NeuPanel className="px-4 py-6 text-gray-500">
           <div className="mb-4">
             <NeuTabs
@@ -219,6 +219,12 @@ export default function Introduction(props: Props) {
           </div>
           <div className="mt-8  ml-20">
             <NeuSlider size="lg" value={slider3} onChange={setSlider3} />
+          </div>
+          <div className="pt-12 pb-8 pl-8">
+            <NeuPlayButton
+              playing={playing}
+              onChange={() => setPlaying(!playing)}
+            />
           </div>
         </NeuPanel>
       </div>

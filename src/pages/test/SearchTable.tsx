@@ -1,0 +1,58 @@
+/*
+ * @Author: Carlos
+ * @Date: 2023-01-03 22:45:57
+ * @LastEditTime: 2023-01-04 00:33:24
+ * @FilePath: /vite-react-swc/src/pages/test/SearchTable.tsx
+ * @Description:
+ */
+import { HTMLAttributes } from 'react'
+import Table from '@/components/enhance/table'
+
+const { Head, Body, Row } = Table
+export type QueryData = {
+  id: number
+  name: string
+  artists: { name: string }[]
+  mvid: number
+  album: { name: string }
+  duration: number
+}
+type Props = Omit<HTMLAttributes<HTMLTableElement>, 'onClick'> & {
+  data: QueryData[]
+  onClick: (id: number) => void
+}
+const SearchTable = (props: Props) => {
+  const { data, onClick } = props
+  return (
+    <Table>
+      <Head>
+        <span>Id</span>
+        <span>Name</span>
+        <span>Artists</span>
+        <span>mvId</span>
+        <span>album</span>
+        <span>duration</span>
+      </Head>
+      <Body>
+        {data.map(item => {
+          return (
+            <Row key={item.id}>
+              <span className="cursor-pointer" onClick={() => onClick(item.id)}>{item.id}</span>
+              <span>{item.name}</span>
+              <span>{item.artists[0].name}</span>
+              <span>{item.mvid}</span>
+              <span>{item.album.name}</span>
+              <span>
+                {`${Math.floor(item.duration / 36600)}:${Math.round(
+                  (item.duration - Math.floor(item.duration / 36600) * 36600) /
+                    1000
+                )}`}
+              </span>
+            </Row>
+          )
+        })}
+      </Body>
+    </Table>
+  )
+}
+export default SearchTable
