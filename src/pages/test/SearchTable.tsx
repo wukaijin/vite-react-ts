@@ -1,25 +1,19 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 22:45:57
- * @LastEditTime: 2023-01-04 16:12:55
+ * @LastEditTime: 2023-01-06 00:42:30
  * @FilePath: /vite-react-swc/src/pages/test/SearchTable.tsx
  * @Description:
  */
 import { HTMLAttributes } from 'react'
 import Table from '@/components/enhance/table'
+import { QueryListData } from '@/api/music'
 
 const { Head, Body, Row } = Table
-export type QueryData = {
-  id: number
-  name: string
-  artists: { name: string }[]
-  mvid: number
-  album: { name: string }
-  duration: number
-}
+
 type Props = Omit<HTMLAttributes<HTMLTableElement>, 'onClick'> & {
-  data: QueryData[]
-  onClick: (id: number) => void
+  data: QueryListData[]
+  onClick: (id: QueryListData) => void
 }
 const SearchTable = (props: Props) => {
   const { data, onClick, className } = props
@@ -37,7 +31,7 @@ const SearchTable = (props: Props) => {
         {data.map(item => {
           return (
             <Row key={item.id}>
-              <span className="cursor-pointer" onClick={() => onClick(item.id)}>
+              <span className="cursor-pointer" onClick={() => onClick(item)}>
                 {item.id}
               </span>
               <span>{item.name}</span>

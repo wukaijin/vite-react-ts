@@ -1,12 +1,20 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 00:41:32
- * @LastEditTime: 2022-12-31 16:11:15
+ * @LastEditTime: 2023-01-06 02:18:07
  * @FilePath: /vite-react-swc/src/const.ts
  * @Description:
  */
 export const HOME_HEADER_HEIGHT = 56
 export const HOME_FOOTER_HEIGHT = 100
+
+export const STORE_KEYS = {
+  MUSIC_CURRENT: 'current-music'
+} as const
+
+export const EVENT_KEYS = {
+  MUSIC_PLAYER_STATE_CHANGE: 'MUSIC_PLAYER_STATE_CHANGE'
+} as const
 
 export const componentPositions = ['top', 'bottom', 'left', 'right'] as const
 export const componentShapes = ['circle', 'square'] as const

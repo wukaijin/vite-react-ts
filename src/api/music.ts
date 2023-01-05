@@ -1,12 +1,20 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-05 02:10:09
+ * @LastEditTime: 2023-01-06 02:07:11
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
 import request from '@/utils/request'
 
+export type QueryListData = {
+  id: number
+  name: string
+  artists: { name: string }[]
+  mvid: number
+  album: { name: string }
+  duration: number
+}
 type CodeWrapping = { code: number }
 type WithCode<T> = T & CodeWrapping
 
@@ -25,7 +33,8 @@ export async function queryKeyWord<QueryData>(key: string) {
 
 export async function querySrc(id: string) {
   return request
-    .get<null, WithCode<{ data: { url: string }[] }>>(`music-api/song/url/v1?id=${id}&level=exhigh`)
+    // .get<null, WithCode<{ data: { url: string }[] }>>(`music-api/song/url/v1?id=${id}&level=exhigh`)
+    .get<null, WithCode<{ data: { url: string }[] }>>(`music-api/song/url/?id=${id}&level=exhigh`)
     .then(response => {
       const { data } = response
       return data[0].url

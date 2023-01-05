@@ -4,7 +4,7 @@ import Player from '.'
 /*
  * @Author: Carlos
  * @Date: 2023-01-05 00:50:47
- * @LastEditTime: 2023-01-06 00:04:54
+ * @LastEditTime: 2023-01-06 02:03:30
  * @FilePath: /vite-react-swc/src/components/enhance/player/MusicPlayer.ts
  * @Description:
  */
@@ -26,6 +26,15 @@ class MusicPlayer {
     })
     this._el.addEventListener('timeupdate', () => {
       this._node.updateCurrentLycIndex && this._node.updateCurrentLycIndex(this._el.currentTime)
+    })
+    this._el.addEventListener('abort', () => {
+      console.log('abort')
+      if (this._node.state.playing) {
+        this._node.play()
+        this._node.setState({ currentLycIndex: 0 })
+      }
+      // console.dir(this._el)
+      // debugger
     })
   }
   play() {

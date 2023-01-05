@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-06 00:04:49
+ * @LastEditTime: 2023-01-06 02:31:00
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -12,9 +12,13 @@ import { NeuPlayButton, NeuPanel, NeuButton, NeuSlider } from '@/components/neum
 import MusicPlayer from './MusicPlayer'
 import LyricPanel from './LyricPanel'
 import { musicDurationToString, parseLyric, parseMusicTime } from '@/utils'
+import { Song } from '@/store/music'
+import eventemitter from '@/utils/eventemitter'
+import { EVENT_KEYS } from '@/const'
 
-const PXDY = './pxdy.mp3'
+// const PXDY = './pxdy.mp3'
 type Props = {
+  current: Song
   from: 'bottom' | 'right'
   togglePlayer: () => void
 }
@@ -25,7 +29,8 @@ type State = {
   duration: number
   currentTime: number
   currentLycIndex: number
-  lyric: ReturnType<typeof parseLyric> | null
+  lyricObject: ReturnType<typeof parseLyric> | null
+  lyric: string
 }
 class Player extends Component<Props, State> {
   audioRef: RefObject<HTMLAudioElement>
@@ -38,21 +43,34 @@ class Player extends Component<Props, State> {
       duration: 0,
       currentTime: 0,
       currentLycIndex: 0,
-      lyric: parseLyric(window.localStorage.getItem('188376')!)
+      lyricObject: null,
+      lyric: ''
     }
     this.audioRef = createRef<HTMLAudioElement>()
   }
+  static getDerivedStateFromProps(props: Props, state: State) {
+    const { lyric, url } = props.current
+    if (lyric && props.current.lyric !== state.lyric) {
+      return {
+        lyric,
+        lyricObject: parseLyric(lyric),
+        musicSrc: url
+      }
+    }
+    return null
+  }
   componentDidMount(): void {
+    eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE, this.play, this)
     if (this.audioRef.current) {
       this.player = new MusicPlayer(this.audioRef.current, this)
     }
-    this.setState({
-      musicSrc: PXDY
-    })
+  }
+  componentWillUnmount(): void {
+    eventemitter.off(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE, this.play, this)
   }
   updateCurrentLycIndex(currentTime: number): void {
-    const { currentLycIndex, lyric } = this.state
-    const nextItem = lyric?.lrc[currentLycIndex + 1]
+    const { currentLycIndex, lyricObject } = this.state
+    const nextItem = lyricObject?.lrc[currentLycIndex + 1]
     if (nextItem) {
       if (currentTime > parseMusicTime(nextItem.time)) {
         startTransition(() => {
@@ -72,7 +90,6 @@ class Player extends Component<Props, State> {
     })
   }
   togglePlaying() {
-    console.log('togglePlaying')
     this.state.playing ? this.pause() : this.play()
   }
   changeCurrentTime(value: number) {
@@ -81,11 +98,9 @@ class Player extends Component<Props, State> {
     }
   }
   play() {
-    console.log('play invoked')
     this.audioRef
       .current!.play()
       .then(() => {
-        console.log('ok to play')
         this.setState({ playing: true })
       })
       .catch(err => {
@@ -93,7 +108,6 @@ class Player extends Component<Props, State> {
       })
   }
   pause() {
-    console.log('pause invoked')
     this.audioRef.current!.pause()
     this.setState({ playing: false })
   }
@@ -103,12 +117,13 @@ class Player extends Component<Props, State> {
   }
   relocateCurrentLyricIndex(percent: number) {
     const updatedTime = (percent / 100) * this.state.duration
-    const { lyric } = this.state
-    let result: number = (lyric?.lrc?.length || 0) - 1
-    if (lyric?.lrc) {
-      for (let index = 0; index < lyric.lrc.length; index++) {
-        const item = lyric.lrc[index]
-        const thirdItem = lyric.lrc[index + 2] // ! locate to next, but compare with the third one
+    const { lyricObject } = this.state
+    let result: number = (lyricObject?.lrc?.length || 0) - 1
+    if (lyricObject?.lrc) {
+      for (let index = 0; index < lyricObject.lrc.length; index++) {
+        const item = lyricObject.lrc[index]
+        // ! locate to next, but compare with the third one
+        const thirdItem = lyricObject.lrc[index + 2]
         const cur = parseMusicTime(item.time)
         const third = parseMusicTime(thirdItem?.time)
         if (thirdItem && third < updatedTime) {
@@ -123,9 +138,8 @@ class Player extends Component<Props, State> {
     this.setState({ currentLycIndex: result })
   }
   render() {
-    const { playing, musicSrc, duration, currentTime, currentLycIndex, lyric } = this.state
-    const { from, togglePlayer } = this.props
-    console.log('from', from)
+    const { playing, musicSrc, duration, currentTime, currentLycIndex, lyricObject } = this.state
+    const { from, togglePlayer, current } = this.props
     return (
       <div className="pt-4 w-[100vw] sm:w-[400px] text-gray-400">
         <NeuPanel className="p-6 sm:pr-2 rounded-r-none">
@@ -149,13 +163,13 @@ class Player extends Component<Props, State> {
               <span>
                 {/* <span style={{ color: 'var(--neu-primary)' }}> */}
                 <MusicOne theme="filled" size={16} className="text-lime-600" />
-                <span>披星戴月</span>
+                <span>{current.name}</span>
                 <span className="px-1"> - </span>
-                <span>张敬轩</span>
+                <span>{current.artiest}</span>
               </span>
             </NeuButton>
           </div>
-          <LyricPanel active={currentLycIndex} lyric={lyric} />
+          <LyricPanel active={currentLycIndex} lyric={lyricObject} />
           <NeuPanel className="mt-4">
             <div className="px-4 pt-4">
               <div className="flex justify-between text-xs">
