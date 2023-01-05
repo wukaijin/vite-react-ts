@@ -30,12 +30,7 @@ export default function PersonCard(props: Props) {
           <span className="font-bold text-xl">Carlos Woo</span>
           <p>Web Dev</p>
         </div>
-        <button
-          className={clsx(
-            styles.button,
-            'mt-3 color-white px-4 py-1 rounded-xl'
-          )}
-        >
+        <button className={clsx(styles.button, 'mt-3 color-white px-4 py-1 rounded-xl')}>
           Contact
         </button>
       </div>

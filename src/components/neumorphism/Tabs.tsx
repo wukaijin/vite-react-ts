@@ -10,10 +10,7 @@ import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
 
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
-const SizeMapping: Record<
-  Size,
-  [string, string, string, string, [number, string]]
-> = {
+const SizeMapping: Record<Size, [string, string, string, string, [number, string]]> = {
   sm: ['h-10', 'px-4', 'text-sm', 'rounded-lg', [10, 'rounded-md']],
   md: ['h-12', 'px-6', 'text-base', 'rounded-xl', [10, 'rounded-md']],
   lg: ['h-14', 'px-8', 'text-lg', 'rounded-2xl', [12, 'rounded-lg']]
@@ -44,27 +41,10 @@ function Tabs(props: Props) {
   })
 
   const tabsRef = useRef<(HTMLDivElement | null)[]>([])
-  const {
-    size = 'md',
-    block = false,
-    value,
-    items = [],
-    onChange,
-    className
-  } = props
-  const [
-    height,
-    itemPaddingX,
-    fontSize,
-    borderRadius,
-    [distance, shadowRadius]
-  ] = SizeMapping[size]
+  const { size = 'md', block = false, value, items = [], onChange, className } = props
+  const [height, itemPaddingX, fontSize, borderRadius, [distance, shadowRadius]] = SizeMapping[size]
   const resizeShadow = (index: number) => {
-    const {
-      offsetLeft = 0,
-      offsetWidth = 10,
-      offsetHeight = 4
-    } = tabsRef.current[index] || {}
+    const { offsetLeft = 0, offsetWidth = 10, offsetHeight = 4 } = tabsRef.current[index] || {}
     setShadowStyle({
       offsetLeft,
       offsetWidth,
@@ -87,16 +67,7 @@ function Tabs(props: Props) {
     }
   }, [value])
   return (
-    <div
-      className={clsx(
-        'neu-tabs',
-        { flex: block },
-        height,
-        fontSize,
-        borderRadius,
-        className
-      )}
-    >
+    <div className={clsx('neu-tabs', { flex: block }, height, fontSize, borderRadius, className)}>
       {items.map((tab, index) => (
         <div
           ref={ref => (tabsRef.current[index] = ref)}

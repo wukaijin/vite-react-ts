@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
- * @LastEditTime: 2023-01-04 16:03:35
+ * @LastEditTime: 2023-01-06 00:03:49
  * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
  * @Description:
  */
@@ -20,6 +20,9 @@ function NavigateList() {
       <li>
         <Link to="/introduction">Introduction</Link>
       </li>
+      <li>
+        <Link to="/test">Test</Link>
+      </li>
     </ul>
   )
 }
@@ -28,9 +31,7 @@ function HomeContent(props: Props) {
   return (
     <Content
       style={{
-        height: `calc(100vh - ${(
-          HOME_HEADER_HEIGHT + HOME_FOOTER_HEIGHT
-        ).toString()}px)`
+        height: `calc(100vh - ${(HOME_HEADER_HEIGHT + HOME_FOOTER_HEIGHT).toString()}px)`
       }}
       className="z-1"
     >

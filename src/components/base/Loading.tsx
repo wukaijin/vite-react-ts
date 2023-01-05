@@ -48,17 +48,12 @@ const Circle: React.FC<IProps> = ({ size = 100 }) => {
     <div
       className="inline-block animate-spin text-center rounded-full blur-[1px]"
       style={{
-        boxShadow:
-          '0px -5px 20px 0px rgb(186, 66, 255), 0px 5px 20px 0px rgb(0, 225, 255)',
-        backgroundImage:
-          'linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255))',
+        boxShadow: '0px -5px 20px 0px rgb(186, 66, 255), 0px 5px 20px 0px rgb(0, 225, 255)',
+        backgroundImage: 'linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255))',
         ...style
       }}
     >
-      <div
-        style={style}
-        className="bg-gray-800 bg-opacity-90 rounded-full blur-[10px]"
-      />
+      <div style={style} className="bg-gray-800 bg-opacity-90 rounded-full blur-[10px]" />
     </div>
   )
 }

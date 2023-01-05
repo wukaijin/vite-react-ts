@@ -8,12 +8,7 @@
 import { ButtonHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 import clsx from 'clsx'
-import {
-  IComponentBaseProps,
-  ComponentShape,
-  ComponentSize,
-  ComponentColor
-} from '@/declare'
+import { IComponentBaseProps, ComponentShape, ComponentSize, ComponentColor } from '@/declare'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   IComponentBaseProps & {
@@ -31,7 +26,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     endIcon?: React.ReactNode
   }
 
-const Button: React.FC<ButtonProps> = (props) => {
+const Button: React.FC<ButtonProps> = props => {
   const {
     children,
     href,

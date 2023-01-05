@@ -1,28 +1,38 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 12:48:59
- * @LastEditTime: 2023-01-04 16:07:45
+ * @LastEditTime: 2023-01-05 15:27:13
  * @FilePath: /vite-react-swc/src/components/neumorphism/PlayButton.tsx
  * @Description:
  */
 
-import { Play, Pause } from '@icon-park/react'
+import { PlayOne, Pause } from '@icon-park/react'
 import clsx from 'clsx'
+import { HTMLAttributes } from 'react'
 
-type Props = {
+const SIZES = ['sm', 'md', 'lg'] as const
+type Size = typeof SIZES[number]
+type Props = HTMLAttributes<HTMLDivElement> & {
+  size?: Size
   playing?: boolean
   onChange?: () => void
 }
+const SizeMapping: Record<Size, [string, string, string]> = {
+  sm: ['w-16 h-16', 'w-2/3 h-2/3', 'text-2xl'],
+  md: ['w-20 h-20', 'w-2/3 h-2/3', 'text-3xl'],
+  lg: ['w-24 h-24', 'w-2/3 h-2/3', 'text-4xl']
+}
 const PlayButton = (props: Props) => {
-  const { playing = false, onChange = () => {} } = props
+  const { size = 'lg', className, playing = false, onChange = () => {} } = props
+  const [btnSize, iconSize, TT] = SizeMapping[size]
   return (
-    <div className="neu-play-button">
-      <span className="neu-play-icon" onClick={onChange}>
-        <Pause className={clsx('pause', { show: playing })} theme="filled" />
-        <Play className={clsx('play', { show: !playing })} theme="filled" />
+    <div className={clsx('neu-play-button', btnSize, className)}>
+      <span className={clsx('neu-play-icon', iconSize, TT)}>
+        <Pause className={clsx('pause', { show: playing })} theme="filled" onClick={onChange} />
+        <PlayOne className={clsx('play', { show: !playing })} theme="filled" onClick={onChange} />
       </span>
-      <span className={clsx('neu-play-back-1', { paused: !playing })} />
-      <span className={clsx('neu-play-back-2', { paused: !playing })} />
+      <span className={clsx('neu-play-back-1', iconSize, { paused: !playing })} />
+      <span className={clsx('neu-play-back-2', iconSize, { paused: !playing })} />
     </div>
   )
 }

@@ -5,9 +5,7 @@
  * @FilePath: /vite-react-swc/src/components/enhance/Modal.tsx
  * @Description:
  */
-import {
-  HTMLAttributes, PropsWithChildren, useEffect, useRef
-} from 'react'
+import { HTMLAttributes, PropsWithChildren, useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
@@ -23,9 +21,7 @@ type Props = PropsWithChildren<
 const MODAL_DOM: Element = document.querySelector('#modal')!
 
 function Modal(props: Props) {
-  const {
-    show, children, onClickBackdrop, dataTheme, className, ...res
-  } = props
+  const { show, children, onClickBackdrop, dataTheme, className, ...res } = props
   const el = useRef<HTMLDivElement>()
   useEffect(() => {
     el.current = document.createElement('div')
@@ -59,7 +55,7 @@ function Modal(props: Props) {
       aria-hidden={!show}
       data-theme={dataTheme}
       className={containerClasses}
-      onClick={(e) => {
+      onClick={e => {
         e.stopPropagation()
         if (e.target === e.currentTarget) {
           e.stopPropagation()
@@ -69,11 +65,7 @@ function Modal(props: Props) {
         }
       }}
     >
-      <div
-        {...res}
-        data-theme={dataTheme}
-        className={twMerge('modal-box', className)}
-      >
+      <div {...res} data-theme={dataTheme} className={twMerge('modal-box', className)}>
         {children}
       </div>
     </div>,

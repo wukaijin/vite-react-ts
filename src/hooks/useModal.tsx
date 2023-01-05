@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 17:28:56
- * @LastEditTime: 2023-01-02 22:27:50
+ * @LastEditTime: 2023-01-04 22:16:51
  * @FilePath: /vite-react-swc/src/hooks/useModal.tsx
  * @Description:
  */
 import { useCallback, useState } from 'react'
-import Modal from '@/components/enhance/Modal'
+import Modal from '@/components/base/Modal'
 
 const useModal = () => {
   const [show, setShow] = useState<boolean>(false)

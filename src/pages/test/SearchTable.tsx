@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 22:45:57
- * @LastEditTime: 2023-01-04 00:33:24
+ * @LastEditTime: 2023-01-04 16:12:55
  * @FilePath: /vite-react-swc/src/pages/test/SearchTable.tsx
  * @Description:
  */
@@ -22,9 +22,9 @@ type Props = Omit<HTMLAttributes<HTMLTableElement>, 'onClick'> & {
   onClick: (id: number) => void
 }
 const SearchTable = (props: Props) => {
-  const { data, onClick } = props
+  const { data, onClick, className } = props
   return (
-    <Table>
+    <Table className={className}>
       <Head>
         <span>Id</span>
         <span>Name</span>
@@ -37,15 +37,16 @@ const SearchTable = (props: Props) => {
         {data.map(item => {
           return (
             <Row key={item.id}>
-              <span className="cursor-pointer" onClick={() => onClick(item.id)}>{item.id}</span>
+              <span className="cursor-pointer" onClick={() => onClick(item.id)}>
+                {item.id}
+              </span>
               <span>{item.name}</span>
               <span>{item.artists[0].name}</span>
               <span>{item.mvid}</span>
               <span>{item.album.name}</span>
               <span>
                 {`${Math.floor(item.duration / 36600)}:${Math.round(
-                  (item.duration - Math.floor(item.duration / 36600) * 36600) /
-                    1000
+                  (item.duration - Math.floor(item.duration / 36600) * 36600) / 1000
                 )}`}
               </span>
             </Row>

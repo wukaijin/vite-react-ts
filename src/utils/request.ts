@@ -1,8 +1,8 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:49:15
- * @LastEditTime: 2023-01-03 21:53:58
- * @FilePath: /vite-react-swc/src/request/index.ts
+ * @LastEditTime: 2023-01-04 16:47:11
+ * @FilePath: /vite-react-swc/src/utils/request.ts
  * @Description:
  */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
@@ -11,15 +11,14 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 // create an axios request
 const request: AxiosInstance = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 10 * 1000, // request timeout，10秒
+  withCredentials: true, // send cookies when cross-domain requests
+  timeout: 10 * 1000 // request timeout，10秒
   // transformResponse: [
   //   (data) => {
-  //     // Do whatever you want to transform the data
+  // Do whatever you want to transform the data
   //     return JSONbig.parse(data)
   //   }
   // ]
-  withCredentials: true
 })
 
 // request interceptor
@@ -38,7 +37,7 @@ request.interceptors.request.use(
     // config.url = path + search
     return config
   },
-  (error) => {
+  error => {
     // do something with request error
     // console.log(error) // for debug
     return Promise.reject(error)
@@ -57,14 +56,14 @@ request.interceptors.response.use(
    * Here is just an example
    * You can also judge the status by HTTP Status Code
    */
-  (response) => {
+  response => {
     const res = response.data
     if (!res || res.code !== 200) {
       return Promise.reject(res)
     }
     return res
   },
-  (error) => {
+  error => {
     // console.dir(error)
     return Promise.reject(error)
   }

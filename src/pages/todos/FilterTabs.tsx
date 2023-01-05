@@ -15,8 +15,7 @@ type Props = {
 
 const baseClassName =
   'transition-colors duration-300 w-full cursor-pointer rounded-lg py-2.5 text-sm font-medium leading-5 ring-white focus:outline-none ring-offset-2 focus:ring-2 ring-opacity-60'
-const btnClassName =
-  'ring-offset-blue-400 text-blue-100 hover:bg-white/[0.12] hover:text-white'
+const btnClassName = 'ring-offset-blue-400 text-blue-100 hover:bg-white/[0.12] hover:text-white'
 const activePlus = 'text-blue-700 ring-offset-blue-400 bg-white shadow'
 function FilterTabs(props: Props) {
   const { active, onChange } = props
@@ -27,10 +26,7 @@ function FilterTabs(props: Props) {
           <button
             type="button"
             key={item}
-            className={clsx(
-              baseClassName,
-              active === item ? activePlus : btnClassName
-            )}
+            className={clsx(baseClassName, active === item ? activePlus : btnClassName)}
             onClick={() => onChange(item)}
           >
             {item}

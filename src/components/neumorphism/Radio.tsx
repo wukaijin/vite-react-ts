@@ -22,19 +22,11 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
 }
 
 function Radio(props: Props) {
-  const {
-    size = 'md', checked, onChange, className
-  } = props
+  const { size = 'md', checked, onChange, className } = props
   const [labelSize] = SizeMapping[size]
   return (
     <div className={clsx('neu-radio', className)}>
-      <input
-        type="radio"
-        checked={checked}
-        name="radio"
-        value="1"
-        onChange={() => {}}
-      />
+      <input type="radio" checked={checked} name="radio" value="1" onChange={() => {}} />
       <label className={labelSize} onClick={() => onChange(!checked)} />
     </div>
   )

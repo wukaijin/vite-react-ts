@@ -1,43 +1,18 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-04 14:25:42
+ * @LastEditTime: 2023-01-06 00:05:18
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
 import { useState } from 'react'
-import request from '@/request'
+import { loginAnonymous, queryKeyWord, queryLyric, querySrc } from '@/api/music'
 import SearchTable, { QueryData } from './SearchTable'
+import Popup from '@/components/base/popup'
+import Player from '@/components/enhance/player'
+import { parseLyric } from '@/utils'
 
-async function queryKeyWord(key: string) {
-  return request
-    .get<null, { code: number; result: { songs: QueryData[] } }>(
-      `music-api/search?keywords=${key}`
-    )
-    .then(response => {
-      const { code, result } = response
-      if (code === 200) {
-        return result.songs
-      }
-      return null
-    })
-}
-async function querySrc(id: string) {
-  return request
-    .get<null, { code: number; data: { url: string }[] }>(
-      `music-api/song/url/v1?id=${id}&level=exhigh`
-    )
-    .then(response => {
-      const { code, data } = response
-      if (code === 200) {
-        return data[0].url
-      }
-      return null
-    })
-}
-async function loginAnonymous() {
-  return request.get('/music-api/register/anonimous')
-}
+const isMobile = document.documentElement.offsetWidth < 500
 type Props = {}
 // Input
 export default function Test({}: Props) {
@@ -45,14 +20,17 @@ export default function Test({}: Props) {
   const [id, setId] = useState<string>('')
   const [data, setData] = useState<QueryData[]>([])
   const [musicSrc, setMusicSrc] = useState<string>('')
-  // const
+  const [show, setShow] = useState(false)
   // const
   return (
-    <div className="px-4 py-8">
+    <div className="px-4 py-8 bg-[#E4EBF5] min-h-[100vh]">
       <div className="m-auto">
         <div className="mb-2">
           <button className="btn btn-primary" onClick={loginAnonymous}>
             匿名登录
+          </button>
+          <button className="btn btn-primary" onClick={() => setShow(!show)}>
+            toggle Popup
           </button>
         </div>
         <div className="mb-2">
@@ -65,7 +43,7 @@ export default function Test({}: Props) {
             onChange={e => setKeyWord(e.target.value)}
             onKeyUp={async e => {
               if (e.code === 'Enter') {
-                const result = await queryKeyWord(keyWord)
+                const result = await queryKeyWord<QueryData>(keyWord)
                 if (result) {
                   setData(result)
                 }
@@ -93,8 +71,11 @@ export default function Test({}: Props) {
             className="w-[100%]"
             data={data}
             onClick={async (_id: number) => {
-              const url = await querySrc(`${_id}`)
-              url && setMusicSrc(url)
+              // const url = await querySrc(`${_id}`)
+              const src = await queryLyric(`${_id}`)
+              const a = parseLyric(src)
+              window.localStorage.setItem(`${_id}`, src)
+              // url && setMusicSrc(url)
             }}
           />
         </div>
@@ -104,6 +85,13 @@ export default function Test({}: Props) {
           </audio>
         </div>
       </div>
+      <Popup
+        show={show}
+        from={isMobile ? 'bottom' : 'right'}
+        className={isMobile ? 'right-0' : '"top-1/2 -translate-y-1/2"'}
+      >
+        <Player from={isMobile ? 'bottom' : 'right'} togglePlayer={() => setShow(!show)} />
+      </Popup>
     </div>
   )
 }

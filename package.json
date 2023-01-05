@@ -37,6 +37,7 @@
     "@heroicons/react": "^2.0.13",
     "@icon-park/react": "^1.4.2",
     "@reduxjs/toolkit": "^1.9.1",
+    "ahooks": "^3.7.4",
     "axios": "^1.2.2",
     "clsx": "^1.2.1",
     "daisyui": "^2.46.0",

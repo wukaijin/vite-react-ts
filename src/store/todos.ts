@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2023-01-02 22:06:51
+ * @LastEditTime: 2023-01-06 00:06:35
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
@@ -16,17 +16,15 @@ export type Todo = {
 type ActionPayload = Partial<Todo>
 const initialState: Todo[] = []
 
-export const asyncFetchData = createAsyncThunk<Todo[]>(
-  'todos/asyncFetchData',
-  async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos')
-    return response.json().then((data) => data.slice(1, 100).map((t: any) => ({
+export const asyncFetchData = createAsyncThunk<Todo[]>('todos/asyncFetchData', async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  return response.json().then(data =>
+    data.slice(1, 100).map((t: any) => ({
       id: t.id.toString(),
       text: t.title,
       completed: t.completed
     })))
-  }
-)
+})
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -40,17 +38,17 @@ const todosSlice = createSlice({
       } as Todo)
     },
     todoToggled(state, action: PayloadAction<string>) {
-      const todo = state.find((_todo) => _todo.id === action.payload)
+      const todo = state.find(_todo => _todo.id === action.payload)
       todo!.completed = !todo!.completed
     },
     todoRemoved(state, action: PayloadAction<Todo>) {
-      const index = state.findIndex((e) => e.id === action.payload.id)
+      const index = state.findIndex(e => e.id === action.payload.id)
       if (index !== -1) {
         state.splice(index, 1)
       }
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(asyncFetchData.fulfilled, (state, action) => {
       state.length = 0
       state.push(...action.payload)

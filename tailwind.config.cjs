@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
- * @LastEditTime: 2023-01-01 00:45:04
+ * @LastEditTime: 2023-01-04 21:50:00
  * @FilePath: /vite-react-swc/tailwind.config.cjs
  * @Description:
  */
@@ -43,7 +43,7 @@ module.exports = {
           info: '#6DA3EE',
           success: '#2EE0C5',
           warning: '#FBB35B',
-          error: '#ff5858'  // #E55548
+          error: '#ff5858' // #E55548
         }
       }
     ]

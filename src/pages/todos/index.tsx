@@ -12,12 +12,7 @@ import type { ConnectedProps } from 'react-redux'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  todoToggled,
-  todoAdded,
-  todoRemoved,
-  asyncFetchData
-} from '@/store/todos'
+import { todoToggled, todoAdded, todoRemoved, asyncFetchData } from '@/store/todos'
 import type { RootState } from '@/store'
 import styles from './todos.module.scss'
 import { getUniqueId } from '@/utils'
@@ -29,25 +24,27 @@ import FilterTabs from './FilterTabs'
 
 export const STATE_MAPPING = ['All', 'Pending', 'Done'] as const
 
-const Todos: React.FC<PropsFromRedux> = (props) => {
+const Todos: React.FC<PropsFromRedux> = props => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
-  const filteredTodos = useMemo(() => props.todos.filter((todo) => {
-    if (active === 'All') return true
-    if (active === 'Done') {
-      return todo.completed
-    }
-    if (active === 'Pending') {
-      return !todo.completed
-    }
-    return true
-  }), [active, props.todos])
+  const filteredTodos = useMemo(
+    () =>
+      props.todos.filter(todo => {
+        if (active === 'All') return true
+        if (active === 'Done') {
+          return todo.completed
+        }
+        if (active === 'Pending') {
+          return !todo.completed
+        }
+        return true
+      }),
+    [active, props.todos]
+  )
   return (
-    <div
-      className={clsx(styles.todos, 'bg-g-blue bg-gradient-to-tr min-h-screen')}
-    >
+    <div className={clsx(styles.todos, 'bg-g-blue bg-gradient-to-tr min-h-screen')}>
       <div className={styles.title}>
         <div className="text-4xl font-bold text-white ">
           <span onClick={() => navigate('/')} onKeyUp={() => navigate('/')}>

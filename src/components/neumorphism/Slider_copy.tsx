@@ -1,18 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 01:17:01
- * @LastEditTime: 2023-01-03 04:34:24
- * @FilePath: /vite-react-swc/src/components/neumorphism/Slider.tsx
+ * @LastEditTime: 2023-01-06 00:04:59
+ * @FilePath: /vite-react-swc/src/components/neumorphism/Slider_copy.tsx
  * @Description:
  */
 import clsx from 'clsx'
-import {
-  HTMLAttributes,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
-} from 'react'
+import { HTMLAttributes, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { throttle } from '@/utils'
 
 const SIZES = ['sm', 'md', 'lg'] as const
@@ -42,9 +36,7 @@ function calc(e: MouseEvent, box: HTMLDivElement) {
   if (x < 0) {
     x = 0
   }
-  // const percentPosition = ((x + distance - btnWidth) / (targetRect.width - btnWidth)) * 100
   const percentPosition = (x / targetRect.width) * 100
-  // console.log(percentPosition, x)
   return {
     percentPosition,
     x
@@ -72,13 +64,10 @@ function Slider(props: Props) {
       setBtnLeft(x)
     }
   }, 20)
-  useEffect(
-    () => {
-      setPercent(value)
-      setBtnLeft((value / 100) * (boxRef.current?.offsetWidth || 0) || 0)
-    },
-    [value]
-  )
+  useEffect(() => {
+    setPercent(value)
+    setBtnLeft((value / 100) * (boxRef.current?.offsetWidth || 0) || 0)
+  }, [value])
 
   return (
     <div className={clsx('neu-slider', className)}>

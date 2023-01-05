@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-04 00:38:18
+ * @LastEditTime: 2023-01-05 21:30:23
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -34,13 +34,18 @@ module.exports = {
     'no-undef': 0,
     'arrow-parens': 0,
     'arrow-body-style': 0,
+    'no-continue': 0,
     'operator-linebreak': 0,
+    'implicit-arrow-linebreak': 0,
+    'no-console': 0,
     'no-explicit-any': 0,
     'no-param-reassign': 0,
     'no-unused-vars': 0,
+    'no-underscore-dangle': 0,
     'no-use-before-define': 0,
     'no-trailing-spaces': 0,
     'func-names': 0,
+    'no-plusplus': 0,
     'object-curly-newline': 0,
     'no-return-assign': 0,
     'no-unused-expressions': 0,
@@ -64,6 +69,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     'react/jsx-one-expression-per-line': 0,
     'react/destructuring-assignment': 0,
+    'react/no-unused-class-component-methods': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/label-has-associated-control': 0,

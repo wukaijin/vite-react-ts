@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
- * @LastEditTime: 2023-01-04 16:05:49
+ * @LastEditTime: 2023-01-04 23:26:32
  * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
  * @Description:
  */
@@ -82,11 +82,7 @@ export default function Introduction(props: Props) {
     [inputValue]
   )
   return (
-    <div
-      className={clsx(
-        'bg-[#E4EBF5] min-h-screen pb-8'
-      )}
-    >
+    <div className={clsx('bg-[#E4EBF5] min-h-screen pb-8')}>
       <div className="">
         <PersonCard />
       </div>
@@ -118,17 +114,9 @@ export default function Introduction(props: Props) {
             <div className="flex-1 flex flex-col justify-center items-center">
               <div className="m-auto">
                 <div className="text-center">
-                  <NeuSwitch
-                    size={size}
-                    checked={switchChecked}
-                    onChange={setSwitchChecked}
-                  />
+                  <NeuSwitch size={size} checked={switchChecked} onChange={setSwitchChecked} />
                   <span className="mr-3" />
-                  <NeuSwitch
-                    size={size}
-                    checked={!switchChecked}
-                    onChange={setSwitchChecked}
-                  />
+                  <NeuSwitch size={size} checked={!switchChecked} onChange={setSwitchChecked} />
                 </div>
                 <div className="py-6 text-center">
                   <NeuCheckbox
@@ -144,17 +132,9 @@ export default function Introduction(props: Props) {
                   />
                 </div>
                 <div className="text-center">
-                  <NeuRadio
-                    size={size}
-                    checked={radioChecked}
-                    onChange={setRadioChecked}
-                  />
+                  <NeuRadio size={size} checked={radioChecked} onChange={setRadioChecked} />
                   <span className="mr-8" />
-                  <NeuRadio
-                    size={size}
-                    checked={!radioChecked}
-                    onChange={setRadioChecked}
-                  />
+                  <NeuRadio size={size} checked={!radioChecked} onChange={setRadioChecked} />
                 </div>
               </div>
             </div>
@@ -221,10 +201,7 @@ export default function Introduction(props: Props) {
             <NeuSlider size="lg" value={slider3} onChange={setSlider3} />
           </div>
           <div className="pt-12 pb-8 pl-8">
-            <NeuPlayButton
-              playing={playing}
-              onChange={() => setPlaying(!playing)}
-            />
+            <NeuPlayButton size={size} playing={playing} onChange={() => setPlaying(!playing)} />
           </div>
         </NeuPanel>
       </div>

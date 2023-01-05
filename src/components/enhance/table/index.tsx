@@ -3,7 +3,7 @@
  * @Date: 2023-01-03 22:54:22
  * @LastEditTime: 2023-01-03 23:43:56
  * @FilePath: /vite-react-swc/src/components/enhance/table/index.tsx
- * @Description: 
+ * @Description:
  */
 import React from 'react'
 import clsx from 'clsx'
@@ -22,11 +22,10 @@ const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
     )
   }
 )
-export type TableFooterProps =
-  React.TableHTMLAttributes<HTMLTableSectionElement> &
-    IComponentBaseProps & {
-      children?: React.ReactElement[]
-    }
+export type TableFooterProps = React.TableHTMLAttributes<HTMLTableSectionElement> &
+  IComponentBaseProps & {
+    children?: React.ReactElement[]
+  }
 
 const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(
   ({ children, ...props }, ref): JSX.Element => {
@@ -42,10 +41,9 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(
   }
 )
 
-export type TableHeadProps =
-  React.TableHTMLAttributes<HTMLTableSectionElement> & {
-    children?: React.ReactNode[]
-  }
+export type TableHeadProps = React.TableHTMLAttributes<HTMLTableSectionElement> & {
+  children?: React.ReactNode[]
+}
 const TableHead = React.forwardRef<HTMLTableSectionElement, TableHeadProps>(
   ({ children, ...props }, ref): JSX.Element => {
     return (
@@ -67,10 +65,7 @@ export type TableProps = React.TableHTMLAttributes<HTMLTableElement> &
   }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
-  (
-    { children, compact, zebra, dataTheme, className, ...props },
-    ref
-  ): JSX.Element => {
+  ({ children, compact, zebra, dataTheme, className, ...props }, ref): JSX.Element => {
     const classes = twMerge(
       'table',
       className,

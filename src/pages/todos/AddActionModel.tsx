@@ -1,13 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 23:05:59
- * @LastEditTime: 2022-12-31 23:58:59
+ * @LastEditTime: 2023-01-04 22:16:52
  * @FilePath: /vite-react-swc/src/pages/todos/AddActionModel.tsx
  * @Description:
  */
 import { FC, useEffect, useState } from 'react'
 import Button from '@/components/base/Button'
-import Modal from '@/components/enhance/Modal'
+import Modal from '@/components/base/Modal'
 
 type Props = {
   show: boolean
@@ -15,7 +15,7 @@ type Props = {
   onClose: () => void
 }
 
-const AddActionModel: FC<Props> = (props) => {
+const AddActionModel: FC<Props> = props => {
   const [text, setText] = useState<string>('')
   useEffect(() => {
     setText('')

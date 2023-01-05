@@ -34,9 +34,7 @@ type Props = PropsWithChildren<{
 }>
 
 function Layout(props: Props) {
-  const {
-    children, direction, className, style
-  } = props
+  const { children, direction, className, style } = props
   const direct = direction === 'vertical' ? 'flex-row' : 'flex-col'
   return (
     <div style={style} className={clsx('flex', direct, className)}>

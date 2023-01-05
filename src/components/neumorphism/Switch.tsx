@@ -26,10 +26,7 @@ function Switch(props: Props) {
   const { className, size = 'md' } = props
   const [wrapperWidth, labelHeight] = SizeMapping[size]
   return (
-    <div
-      className={clsx('neu-switch', wrapperWidth, className)}
-      onClick={() => onChange(!checked)}
-    >
+    <div className={clsx('neu-switch', wrapperWidth, className)} onClick={() => onChange(!checked)}>
       <input type="checkbox" checked={checked} onChange={() => {}} />
       <label className={labelHeight} />
     </div>
