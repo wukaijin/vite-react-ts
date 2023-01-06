@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 14:18:23
- * @LastEditTime: 2023-01-05 14:49:24
+ * @LastEditTime: 2023-01-06 23:42:08
  * @FilePath: /vite-react-swc/src/components/neumorphism/Button.tsx
  * @Description:
  */
@@ -11,9 +11,10 @@ import { HTMLAttributes } from 'react'
 type Color = 'primary' | 'secondary'
 type Shape = 'square' | 'circle'
 
-const SIZES = ['sm', 'md', 'lg'] as const
+const SIZES = ['xs', 'sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
 const SizeMapping: Record<Size, [string, string, string, string, string]> = {
+  xs: ['h-8', 'rounded-lg', 'px-4', 'font-normal text-xs', 'text-xs'],
   sm: ['h-10', 'rounded-lg', 'px-4', 'font-normal text-sm', 'text-sm'],
   md: ['h-12', 'rounded-xl', 'px-6', ' font-medium text-base', 'text-lg'],
   lg: ['h-14', 'rounded-2xl', 'px-8', 'font-semibold text-lg', 'text-xl']
@@ -31,7 +32,8 @@ function Button(props: Props) {
     block = false,
     className,
     color = 'secondary',
-    children
+    children,
+    ...resProps
   } = props
   const [sizeHeight, borderRadius, paddingX, fontSize, iconSize] = SizeMapping[size]
   return (
@@ -50,6 +52,7 @@ function Button(props: Props) {
         shape === 'circle' ? 'rounded-full' : borderRadius,
         className
       )}
+      {...resProps}
     >
       {children}
     </div>

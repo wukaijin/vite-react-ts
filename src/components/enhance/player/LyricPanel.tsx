@@ -18,10 +18,10 @@ const LyricPanel = (props: Props) => {
   const { active, lyric } = props
   return (
     <NeuPanel className="p-4 inset">
-      <div className="h-40 overflow-hidden">
+      <div className="h-60 overflow-hidden">
         <div
           className="transition-transform duration-500"
-          style={{ transform: `translateY(-${2 * (active <= 2 ? 0 : active - 2)}rem)` }}
+          style={{ transform: `translateY(-${2 * (active <= 3 ? 0 : active - 3)}rem)` }}
         >
           {lyric &&
             lyric.lrc.map((item, index) => {

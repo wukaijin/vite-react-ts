@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 00:41:32
- * @LastEditTime: 2023-01-06 02:18:07
+ * @LastEditTime: 2023-01-06 13:46:33
  * @FilePath: /vite-react-swc/src/const.ts
  * @Description:
  */
-export const HOME_HEADER_HEIGHT = 56
-export const HOME_FOOTER_HEIGHT = 100
+export const HOME_HEADER_HEIGHT = `${56 / 16}rem`
+export const HOME_FOOTER_HEIGHT = `${100 / 16}rem`
 
 export const STORE_KEYS = {
   MUSIC_CURRENT: 'current-music'

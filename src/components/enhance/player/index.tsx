@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-06 02:31:00
+ * @LastEditTime: 2023-01-06 23:55:12
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -144,7 +144,7 @@ class Player extends Component<Props, State> {
       <div className="pt-4 w-[100vw] sm:w-[400px] text-gray-400">
         <NeuPanel className="p-6 sm:pr-2 rounded-r-none">
           <div className="h-12 flex justify-between">
-            <NeuButton size="sm">
+            <NeuButton size="xs" className="aspect-square">
               <FoldUpOne
                 theme="outline"
                 className={clsx('cursor-pointer scale-y-110 ', {
@@ -154,22 +154,26 @@ class Player extends Component<Props, State> {
                 onClick={togglePlayer}
               />
             </NeuButton>
-            <NeuButton size="sm">
-              <MusicList theme="outline" className="cursor-pointer scale-y-110" />
-            </NeuButton>
-          </div>
-          <div className="flex text-center items-center justify-center mb-3">
-            <NeuButton size="sm">
+            <NeuButton size="xs">
               <span>
                 {/* <span style={{ color: 'var(--neu-primary)' }}> */}
                 <MusicOne theme="filled" size={16} className="text-lime-600" />
-                <span>{current.name}</span>
-                <span className="px-1"> - </span>
                 <span>{current.artiest}</span>
               </span>
             </NeuButton>
+            <NeuButton size="xs" className="aspect-square">
+              <MusicList theme="outline" className="cursor-pointer scale-y-110" />
+            </NeuButton>
           </div>
           <LyricPanel active={currentLycIndex} lyric={lyricObject} />
+          <div className="text-center py-2">
+            <div className="text-lg leading-12 text-slate-500">
+              <span>{current.name}</span>
+            </div>
+            <div className="text-xs">
+              <span>{current.album}</span>
+            </div>
+          </div>
           <NeuPanel className="mt-4">
             <div className="px-4 pt-4">
               <div className="flex justify-between text-xs">

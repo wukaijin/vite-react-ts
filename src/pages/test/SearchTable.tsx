@@ -1,13 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 22:45:57
- * @LastEditTime: 2023-01-06 00:42:30
+ * @LastEditTime: 2023-01-06 13:24:17
  * @FilePath: /vite-react-swc/src/pages/test/SearchTable.tsx
  * @Description:
  */
 import { HTMLAttributes } from 'react'
 import Table from '@/components/enhance/table'
-import { QueryListData } from '@/api/music'
+import { QueryListData } from '@/interface/music'
 
 const { Head, Body, Row } = Table
 

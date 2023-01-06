@@ -1,14 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-06 02:33:13
+ * @LastEditTime: 2023-01-06 22:01:27
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
 import { startTransition, useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { useMount } from 'ahooks'
-import { loginAnonymous, queryKeyWord, QueryListData, queryLyric, querySrc } from '@/api/music'
+import { loginAnonymous, queryKeyWord, queryLyric, querySrc } from '@/api/music'
 import SearchTable from './SearchTable'
 import Popup from '@/components/base/popup'
 import Player from '@/components/enhance/player'
@@ -16,6 +16,7 @@ import { updateCurrentSong } from '@/store/music'
 import { RootState } from '@/store'
 import eventemitter from '@/utils/eventemitter'
 import { EVENT_KEYS } from '@/const'
+import { QueryListData } from '@/interface/music'
 
 const isMobile = document.documentElement.offsetWidth < 500
 type Props = PropsFromRedux
@@ -88,7 +89,8 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
                 lyric: lyricString,
                 artiest: item.artists[0].name,
                 url,
-                name: item.name
+                name: item.name,
+                album: item.album.name,
               })
               startTransition(() => {
                 eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)

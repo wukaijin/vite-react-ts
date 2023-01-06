@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:36:19
- * @LastEditTime: 2023-01-01 14:55:56
+ * @LastEditTime: 2023-01-06 13:44:57
  * @FilePath: /vite-react-swc/src/pages/home/header/index.tsx
  * @Description:
  */
@@ -13,7 +13,7 @@ const HomeHeader: React.FC<Props> = () => (
   <Header className="h-14 leading-14 box-border border-slate-900/10">
     <div className="flex px-6">
       <div className="flex items-center justify-center">
-        <img width={36} height={36} src={logo} alt="" />
+        <img className="h-8 w-8" src={logo} alt="" />
       </div>
     </div>
   </Header>

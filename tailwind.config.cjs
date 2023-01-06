@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
- * @LastEditTime: 2023-01-04 21:50:00
+ * @LastEditTime: 2023-01-06 15:25:08
  * @FilePath: /vite-react-swc/tailwind.config.cjs
  * @Description:
  */
@@ -33,9 +33,9 @@ module.exports = {
           accent: '#37cdbe',
           'accent-focus': '#2aa79b',
           'accent-content': '#ffffff',
-          neutral: '#3d4451',
-          'neutral-focus': '#2a2e37',
-          'neutral-content': '#ffffff',
+          neutral: '#ffffff',
+          'neutral-focus': '#ede9fe',
+          'neutral-content': '#475569',
           'base-100': '#ffffff',
           'base-200': '#f9fafb',
           'base-300': '#d1d5db',

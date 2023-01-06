@@ -35,10 +35,10 @@
   .bg-g-sky {
     @apply bg-gradient-to-r from-sky-400 to-indigo-500;
   }
-  .bg-g-orange {
+  .bg-g-amber {
     @apply bg-gradient-to-r from-amber-300 to-orange-500;
   }
-  .bg-g-pink {
+  .bg-g-orange {
     @apply bg-gradient-to-r from-orange-400 to-pink-600;
   }
   .bg-g-green {
@@ -48,9 +48,19 @@
     @apply bg-gradient-to-r from-teal-400 to-cyan-400;
   }
   .bg-g-rose {
-    @apply bg-gradient-to-r from-sky-400 to-indigo-500;
+    @apply bg-gradient-to-r from-pink-500 to-rose-500;
   }
-  g-normal {
+  .bg-spectrum-full {
+    background: linear-gradient(red, transparent), linear-gradient(to top left, lime, transparent),
+      linear-gradient(to top right, blue, transparent);
+    background-blend-mode: screen;
+  }
+  .bg-spectrum-light {
+    background: linear-gradient(#f87171, transparent), linear-gradient(to top left, #5eead4, transparent),
+      linear-gradient(to top right, #3b82f6, transparent);
+    background-blend-mode: screen;
+  }
+  .g-normal {
     background-color: linear-gradient(
       141deg,
       rgba(191, 102, 255, 1) 0%,
@@ -58,7 +68,7 @@
       rgba(0, 221, 235, 1) 100%
     );
   }
-  g-light {
+  .g-light {
     background-color: linear-gradient(
       141deg,
       rgb(200, 124, 255) 0%,

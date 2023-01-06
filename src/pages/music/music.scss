@@ -1,0 +1,12 @@
+.music-page {
+  @apply min-h-screen bg-[var(--neu-greyLight-1)];
+}
+.music-header {
+  @apply sticky top-0 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg rounded-2xl;
+}
+.music-dim {
+  @apply backdrop-blur-sm shadow-lg text-white;
+}
+.music-query-panel {
+  @apply my-4 music-dim bg-gray-600/10 rounded-2xl px-8 py-6;
+}
