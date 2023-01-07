@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 16:28:55
- * @LastEditTime: 2023-01-07 16:08:45
+ * @LastEditTime: 2023-01-08 00:15:59
  * @FilePath: /vite-react-swc/src/pages/music/List.tsx
  * @Description:
  */
@@ -90,7 +90,7 @@ type Props = {
 
 const List = ({ data }: Props) => {
   return (
-    <div className="w-96 m-auto text-gray-500 sm:grid sm:w-[48rem] sm:sm:grid-cols-2 sm:gap-x-3">
+    <div className="w-96 m-auto text-gray-500 sm:grid sm:w-[48rem] sm:sm:grid-cols-2 sm:gap-x-3 px-4 pt-6 rounded-xl bg-[var(--neu-greyLight-1)]">
       {data && data.map(item => <ListItem key={item.id} data={item} />)}
     </div>
   )

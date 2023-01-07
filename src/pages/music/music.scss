@@ -2,7 +2,7 @@
   @apply min-h-screen bg-[var(--neu-greyLight-1)];
 }
 .music-header {
-  @apply sticky top-0 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg rounded-2xl;
+  @apply sticky top-0 z-10 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg rounded-2xl;
 }
 .music-logo {
   @apply mx-2 inline-flex items-center justify-center aspect-square rounded-full h-8 w-8;
@@ -24,4 +24,29 @@
 
 .bg-wave {
   background-image: url('../../assets/muisc/wave-purple-b.svg');
+}
+
+.bound-scale {
+  transform: scale(1);
+  &:hover {
+    animation-duration: 300ms;
+    animation-name: bound;
+    transform: scale(1);
+  }
+}
+
+@keyframes bound {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+  // 100% { 
+  //   transform: scale(1.5);
+  //   opacity: 0;
+  // }
 }

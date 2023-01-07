@@ -1,11 +1,11 @@
 import { EVENT_KEYS } from '@/const'
 import eventemitter from '@/utils/eventemitter'
-import Player from '.'
+import { Player } from '.'
 
 /*
  * @Author: Carlos
  * @Date: 2023-01-05 00:50:47
- * @LastEditTime: 2023-01-07 15:50:01
+ * @LastEditTime: 2023-01-07 23:51:41
  * @FilePath: /vite-react-swc/src/components/enhance/player/MusicPlayer.ts
  * @Description:
  */

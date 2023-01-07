@@ -2,18 +2,15 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-07 15:22:26
+ * @LastEditTime: 2023-01-08 00:16:38
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
 
 import { useCallback, useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { Control, Search } from '@icon-park/react'
-import Button from '@/components/base/Button'
 import { updateCurrentSong, togglePlayer, togglePlaying } from '@/store/music'
-import { NeuButton, NeuInput } from '@/components/neumorphism'
-import logo from '@/assets/logo.png'
+
 import './music.scss'
 import Popup from '@/components/base/popup'
 import Player from '@/components/enhance/player'
@@ -21,6 +18,8 @@ import { RootState } from '@/store'
 import { queryKeyWord } from '@/api/music'
 import { QueryListData } from '@/interface/music'
 import List from './List'
+import MusicHeader from './MusicHeader'
+import NewSongs from './NewSongs'
 
 const isMobile = document.documentElement.offsetWidth < 500
 
@@ -32,7 +31,6 @@ const MusicPage = ({
   togglePlayer: toggleMusicPlayer
 }: Props) => {
   const [keyWord, setKeyWord] = useState<string>('')
-  // eslint-disable-next-line quote-props, key-spacing, quotes, object-curly-spacing
   const [data, setData] = useState<QueryListData[]>([])
   const query = useCallback(async () => {
     const result = await queryKeyWord<QueryListData>(keyWord)
@@ -41,53 +39,16 @@ const MusicPage = ({
     }
   }, [keyWord, setData])
   return (
-    <div className="music-page">
-      <div className="music-header flex">
-        <span className="music-logo">
-          <img className="" src={logo} alt="" />
-        </span>
-        <span className="flex-1 flex items-center justify-center">
-          <NeuInput
-            size="xs"
-            style={{ width: '100%', maxWidth: '24rem', marginRight: '0.5rem' }}
-            inputStyle={{ color: 'var(--neu-primary)' }}
-            icon={<Search />}
-            value={keyWord}
-            onChange={e => setKeyWord(e.target.value)}
-            onKeyUp={async e => {
-              if (e.code === 'Enter' || e.code === 'Search') {
-                query()
-              }
-            }}
-            placeholder="Search name/artist/album"
-          >
-            <NeuButton size="xs" onClick={() => query()}>
-              <Search
-                theme="outline"
-                className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
-              />
-            </NeuButton>
-          </NeuInput>
-        </span>
-        <span className="mx-2">
-          <NeuButton className="ml-2" size="xs" onClick={() => toggleMusicPlayer()}>
-            <Control
-              theme="outline"
-              className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
-            />
-          </NeuButton>
-        </span>
-      </div>
-      <div className="w-[100vw] sm:w-[800px] mx-auto">
-        <div className="music-query-panel">
-          <Button size="sm">OK</Button>
-          <Button size="sm" color="primary" onClick={() => toggleMusicPlayer()}>
-            toggle Popup
-          </Button>
-        </div>
-        <div className="my-4">
-          <List data={data} />
-        </div>
+    <div className="music-page bg-spectrum-light-reverse pb-12">
+      <MusicHeader
+        keyWord={keyWord}
+        setKeyWord={setKeyWord}
+        query={query}
+        toggleMusicPlayer={toggleMusicPlayer}
+      />
+      <div className="w-[100vw] sm:container xl:w-[1024px] mx-auto">
+        <NewSongs />
+        <List data={data} />
         <Popup
           show={showPlayer}
           from={isMobile ? 'bottom' : 'right'}
@@ -95,7 +56,6 @@ const MusicPage = ({
         >
           <Player
             from={isMobile ? 'bottom' : 'right'}
-            current={current}
             togglePlayer={() => toggleMusicPlayer()}
           />
         </Popup>

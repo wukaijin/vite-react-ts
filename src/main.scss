@@ -60,6 +60,11 @@
       linear-gradient(to top right, #3b82f6, transparent);
     background-blend-mode: screen;
   }
+  .bg-spectrum-light-reverse {
+    background: linear-gradient(#3b82f6, transparent), linear-gradient(to top left, #5eead4, transparent),
+      linear-gradient(to top right, #f87171, transparent);
+    background-blend-mode: screen;
+  }
   .g-normal {
     background-color: linear-gradient(
       141deg,

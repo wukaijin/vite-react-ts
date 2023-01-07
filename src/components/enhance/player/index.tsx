@@ -1,24 +1,25 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-07 13:02:21
+ * @LastEditTime: 2023-01-07 23:53:47
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
 import { createRef, RefObject, Component, startTransition } from 'react'
-import { FoldUpOne, GoEnd, GoStart, Like, MusicList, MusicOne } from '@icon-park/react'
+import { FoldUpOne, GoEnd, GoStart, MusicList, MusicOne } from '@icon-park/react'
+import { connect, ConnectedProps } from 'react-redux'
 import clsx from 'clsx'
 import { NeuPlayButton, NeuPanel, NeuButton, NeuSlider } from '@/components/neumorphism'
 import MusicPlayer from './MusicPlayer'
 import LyricPanel from './LyricPanel'
 import { musicDurationToString, parseLyric, parseMusicTime } from '@/utils'
-import { Song } from '@/store/music'
+import { Song, togglePlaying } from '@/store/music'
 import eventemitter from '@/utils/eventemitter'
 import { EVENT_KEYS } from '@/const'
+import { RootState } from '@/store'
 
 // const PXDY = './pxdy.mp3'
-type Props = {
-  current: Song
+type Props = WithReduxProps & {
   from: 'bottom' | 'right'
   togglePlayer: () => void
 }
@@ -32,7 +33,7 @@ type State = {
   lyricObject: ReturnType<typeof parseLyric> | null
   lyric: string
 }
-class Player extends Component<Props, State> {
+export class Player extends Component<Props, State> {
   audioRef: RefObject<HTMLAudioElement>
   player: MusicPlayer | null = null
   constructor(props: Props) {
@@ -49,15 +50,22 @@ class Player extends Component<Props, State> {
     this.audioRef = createRef<HTMLAudioElement>()
   }
   static getDerivedStateFromProps(props: Props, state: State) {
+    const { playing } = props
     const { lyric, url } = props.current
+    const newState = {
+      playing
+    }
+    if (playing && playing !== state.playing) {
+      eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)
+    }
     if (lyric && props.current.lyric !== state.lyric) {
-      return {
+      Object.assign(newState, {
         lyric,
         lyricObject: parseLyric(lyric),
         musicSrc: url
-      }
+      })
     }
-    return null
+    return newState
   }
   componentDidMount(): void {
     eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE, this.play, this)
@@ -101,7 +109,8 @@ class Player extends Component<Props, State> {
     this.audioRef
       .current!.play()
       .then(() => {
-        this.setState({ playing: true })
+        // this.setState({ playing: true })
+        this.props.togglePlaying(true)
       })
       .catch(err => {
         console.error('play error: ', err)
@@ -109,7 +118,8 @@ class Player extends Component<Props, State> {
   }
   pause() {
     this.audioRef.current!.pause()
-    this.setState({ playing: false })
+    // this.setState({ playing: false })
+    this.props.togglePlaying(false)
   }
   changeProgress(percent: number) {
     this.relocateCurrentLyricIndex(percent)
@@ -124,7 +134,7 @@ class Player extends Component<Props, State> {
         const item = lyricObject.lrc[index]
         // ! locate to next, but compare with the third one
         const thirdItem = lyricObject.lrc[index + 2]
-        const cur = parseMusicTime(item.time)
+        // const cur = parseMusicTime(item.time)
         const third = parseMusicTime(thirdItem?.time)
         if (thirdItem && third < updatedTime) {
           continue
@@ -142,7 +152,7 @@ class Player extends Component<Props, State> {
     const { from, togglePlayer, current } = this.props
     return (
       <div className="w-[100vw] h-[100vh] sm:h-auto sm:w-[400px] text-gray-400">
-        <NeuPanel className="p-6 h-[100%] sm:pr-2 sm:rounded-r-none flex flex-col">
+        <NeuPanel className="p-6 h-[100%] sm:pr-2 sm:rounded-r-none flex flex-col shadow-none">
           <div className="h-12 flex justify-between">
             <NeuButton size="xs" className="aspect-square">
               <FoldUpOne
@@ -211,4 +221,12 @@ class Player extends Component<Props, State> {
   }
 }
 
-export default Player
+const connector = connect(
+  (state: RootState) => ({
+    current: state.music.current,
+    playing: state.music.playing,
+  }),
+  { togglePlaying }
+)
+type WithReduxProps = ConnectedProps<typeof connector>
+export default connector(Player)
