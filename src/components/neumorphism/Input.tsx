@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 15:38:57
- * @LastEditTime: 2023-01-06 16:18:20
+ * @LastEditTime: 2023-01-07 15:31:59
  * @FilePath: /vite-react-swc/src/components/neumorphism/Input.tsx
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { CSSProperties, HTMLAttributes } from 'react'
 
 const SIZES = ['xs', 'sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
@@ -22,11 +22,25 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   block?: boolean
   icon?: React.ReactNode
   placeholder?: string
+  search?: false
+  inputStyle?: CSSProperties
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function Input(props: Props) {
-  const { size = 'md', value, block, onChange, placeholder, className, icon, ...resProps } = props
+  const {
+    size = 'md',
+    search,
+    value,
+    block,
+    onChange,
+    placeholder,
+    className,
+    inputStyle,
+    icon,
+    children,
+    ...resProps
+  } = props
   const [width, height, borderRadius, px, pxWidthIcon, iconWidth] = SizeMapping[size]
   return (
     <div
@@ -34,13 +48,15 @@ function Input(props: Props) {
       {...resProps}
     >
       <input
-        className={clsx(borderRadius, icon ? pxWidthIcon : px)}
-        type="text"
+        className={clsx(borderRadius, icon ? pxWidthIcon : px, children ? 'pr-16' : '')}
+        style={inputStyle}
+        type={search ? 'search' : 'text'}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
       />
       {icon && <div className={clsx('pre-i', iconWidth)}>{icon}</div>}
+      {children && <div className={clsx('next-b', iconWidth)}>{children}</div>}
     </div>
   )
 }

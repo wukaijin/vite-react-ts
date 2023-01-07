@@ -1,13 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 16:28:55
- * @LastEditTime: 2023-01-07 00:18:51
+ * @LastEditTime: 2023-01-07 16:08:45
  * @FilePath: /vite-react-swc/src/pages/music/List.tsx
  * @Description:
  */
 import { startTransition } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
 import { Like, PlayOne, Pause } from '@icon-park/react'
+import clsx from 'clsx'
 import { NeuButton, NeuPanel } from '@/components/neumorphism'
 import { QueryListData } from '@/interface/music'
 import { updateCurrentSong } from '@/store/music'
@@ -27,7 +28,9 @@ type ReduxPlus = ConnectedProps<typeof connector>
 const ListItem = connector(
   ({ data, updateCurrentSong: updateCS, current: currentPlayingSong }: ItemProps) => {
     return (
-      <NeuPanel className="mb-5 px-4 py-3">
+      <NeuPanel
+        className={clsx('mb-5 px-4 py-3', { 'bg-wave': currentPlayingSong.id === data.id })}
+      >
         <div className="flex ">
           <div className="flex items-center justify-center mr-2">
             <Like
@@ -47,11 +50,11 @@ const ListItem = connector(
               )}
             </div>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center ml-2">
             <NeuButton
               size="xs"
               shape="circle"
-              color={currentPlayingSong.id === data.id ? 'primary' : 'secondary'}
+              // color={currentPlayingSong.id === data.id ? 'primary' : 'secondary'}
               className=""
               onClick={async () => {
                 const url = await querySrc(`${data.id}`)

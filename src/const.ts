@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 00:41:32
- * @LastEditTime: 2023-01-06 13:46:33
+ * @LastEditTime: 2023-01-07 15:46:30
  * @FilePath: /vite-react-swc/src/const.ts
  * @Description:
  */
@@ -13,7 +13,8 @@ export const STORE_KEYS = {
 } as const
 
 export const EVENT_KEYS = {
-  MUSIC_PLAYER_STATE_CHANGE: 'MUSIC_PLAYER_STATE_CHANGE'
+  MUSIC_PLAYER_STATE_CHANGE: 'MUSIC_PLAYER_STATE_CHANGE',
+  MUSIC_PLAYER_CAN_PLAY: 'MUSIC_PLAYER_CAN_PLAY',
 } as const
 
 export const componentPositions = ['top', 'bottom', 'left', 'right'] as const

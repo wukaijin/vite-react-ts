@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 00:23:34
- * @LastEditTime: 2023-01-06 23:22:58
+ * @LastEditTime: 2023-01-07 15:04:08
  * @FilePath: /vite-react-swc/src/store/music.ts
  * @Description:
  */
@@ -41,8 +41,12 @@ const todosSlice = createSlice({
   name: 'music',
   initialState,
   reducers: {
-    togglePlaying(state) {
-      state.playing = !state.playing
+    togglePlaying(state, action: PayloadAction<boolean | undefined>) {
+      if (action.payload) {
+        state.playing = action.payload
+      } else {
+        state.playing = !state.playing
+      }
     },
     togglePlayer(state) {
       state.showPlayer = !state.showPlayer

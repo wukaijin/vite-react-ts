@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-06 23:55:12
+ * @LastEditTime: 2023-01-07 13:02:21
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -141,8 +141,8 @@ class Player extends Component<Props, State> {
     const { playing, musicSrc, duration, currentTime, currentLycIndex, lyricObject } = this.state
     const { from, togglePlayer, current } = this.props
     return (
-      <div className="pt-4 w-[100vw] sm:w-[400px] text-gray-400">
-        <NeuPanel className="p-6 sm:pr-2 rounded-r-none">
+      <div className="w-[100vw] h-[100vh] sm:h-auto sm:w-[400px] text-gray-400">
+        <NeuPanel className="p-6 h-[100%] sm:pr-2 sm:rounded-r-none flex flex-col">
           <div className="h-12 flex justify-between">
             <NeuButton size="xs" className="aspect-square">
               <FoldUpOne
@@ -165,7 +165,9 @@ class Player extends Component<Props, State> {
               <MusicList theme="outline" className="cursor-pointer scale-y-110" />
             </NeuButton>
           </div>
-          <LyricPanel active={currentLycIndex} lyric={lyricObject} />
+          <div className="flex-1">
+            <LyricPanel active={currentLycIndex} lyric={lyricObject} />
+          </div>
           <div className="text-center py-2">
             <div className="text-lg leading-12 text-slate-500">
               <span>{current.name}</span>

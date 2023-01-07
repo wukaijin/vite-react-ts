@@ -227,6 +227,20 @@
     color: var(--neu-greyDark);
     transition: 0.3s ease;
   }
+  .next-b {
+    // width: 1.4rem;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    // padding: 0 1rem;
+    display: flex;
+    color: var(--neu-greyDark);
+    transition: 0.3s ease;
+  }
   input {
     border: none;
     width: 100%;

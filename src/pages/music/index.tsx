@@ -2,12 +2,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-06 23:52:09
+ * @LastEditTime: 2023-01-07 15:22:26
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Control, Search } from '@icon-park/react'
 import Button from '@/components/base/Button'
@@ -34,39 +34,43 @@ const MusicPage = ({
   const [keyWord, setKeyWord] = useState<string>('')
   // eslint-disable-next-line quote-props, key-spacing, quotes, object-curly-spacing
   const [data, setData] = useState<QueryListData[]>([])
+  const query = useCallback(async () => {
+    const result = await queryKeyWord<QueryListData>(keyWord)
+    if (result) {
+      setData(result)
+    }
+  }, [keyWord, setData])
   return (
     <div className="music-page">
       <div className="music-header flex">
-        <span className="mx-2">
-          <img className="h-8 w-8" src={logo} alt="" />
+        <span className="music-logo">
+          <img className="" src={logo} alt="" />
         </span>
-        <NeuInput
-          size="xs"
-          style={{ maxWidth: '24rem' }}
-          className="flex-1"
-          icon={<Search />}
-          value={keyWord}
-          onChange={e => setKeyWord(e.target.value)}
-          onKeyUp={async e => {
-            if (e.code === 'Enter') {
-              const result = await queryKeyWord<QueryListData>(keyWord)
-              if (result) {
-                setData(result)
+        <span className="flex-1 flex items-center justify-center">
+          <NeuInput
+            size="xs"
+            style={{ width: '100%', maxWidth: '24rem', marginRight: '0.5rem' }}
+            inputStyle={{ color: 'var(--neu-primary)' }}
+            icon={<Search />}
+            value={keyWord}
+            onChange={e => setKeyWord(e.target.value)}
+            onKeyUp={async e => {
+              if (e.code === 'Enter' || e.code === 'Search') {
+                query()
               }
-            }
-          }}
-          placeholder="Query the keywords(name/artist/album)"
-        />
-        <span className="mx-2">
-          <NeuButton size="xs" onClick={() => toggleMusicPlayer()}>
-            <Search
-              theme="outline"
-              className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
-            />
-          </NeuButton>
+            }}
+            placeholder="Search name/artist/album"
+          >
+            <NeuButton size="xs" onClick={() => query()}>
+              <Search
+                theme="outline"
+                className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
+              />
+            </NeuButton>
+          </NeuInput>
         </span>
-        <span className="mr-2">
-          <NeuButton size="xs" onClick={() => toggleMusicPlayer()}>
+        <span className="mx-2">
+          <NeuButton className="ml-2" size="xs" onClick={() => toggleMusicPlayer()}>
             <Control
               theme="outline"
               className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"

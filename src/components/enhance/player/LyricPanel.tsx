@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-05 13:52:30
- * @LastEditTime: 2023-01-05 23:11:56
+ * @LastEditTime: 2023-01-07 14:53:31
  * @FilePath: /vite-react-swc/src/components/enhance/player/LyricPanel.tsx
  * @Description:
  */
-// import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { NeuPanel } from '@/components/neumorphism'
 import { parseLyric } from '@/utils'
@@ -16,12 +16,25 @@ type Props = {
 }
 const LyricPanel = (props: Props) => {
   const { active, lyric } = props
+  const dom = useRef<HTMLDivElement | null>()
+  const [offset, setOffset] = useState(0)
+
+  useEffect(() => {
+    if (dom.current) {
+      const halfItemNum = Math.round(dom.current.offsetHeight / 2 / 16 / 2) // px to rem
+      setOffset(2 * (active <= halfItemNum ? 0 : active - halfItemNum))
+    }
+  }, [active, setOffset, dom.current])
+
   return (
     <NeuPanel className="p-4 inset">
-      <div className="h-60 overflow-hidden">
+      <div
+        ref={ref => (dom.current = ref)}
+        className="h-[calc(100vh-23rem)]  sm:h-60 overflow-hidden"
+      >
         <div
           className="transition-transform duration-500"
-          style={{ transform: `translateY(-${2 * (active <= 3 ? 0 : active - 3)}rem)` }}
+          style={{ transform: `translateY(-${offset}rem)` }}
         >
           {lyric &&
             lyric.lrc.map((item, index) => {
@@ -29,13 +42,13 @@ const LyricPanel = (props: Props) => {
                 <div key={index} className="text-sm  leading-8 text-center">
                   <span
                     className={clsx('transition-color duration-500', {
-                      'text-base text-indigo-500': index === active,
+                      'text-lg text-indigo-500': index === active,
                       'pl-8': !item.lyric
                     })}
                   >
                     {item.lyric}
                   </span>
-                </div>  
+                </div>
               )
             })}
         </div>

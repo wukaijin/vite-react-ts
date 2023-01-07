@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 17:19:32
- * @LastEditTime: 2023-01-04 22:13:02
+ * @LastEditTime: 2023-01-07 13:34:13
  * @FilePath: /vite-react-swc/src/components/base/popup/index.tsx
  * @Description:
  */
@@ -47,6 +47,14 @@ const Popup = (props: Props) => {
         pop,
         className
       )}
+      // onTouchStart={e => {
+      //   e.stopPropagation()
+      //   e.preventDefault()
+      // }}
+      // onTouchMove={e => {
+      //   e.stopPropagation()
+      //   e.preventDefault()
+      // }}
       {...resProps}
     >
       {children}

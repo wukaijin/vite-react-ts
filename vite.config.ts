@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2023-01-06 17:10:17
+ * @LastEditTime: 2023-01-07 00:43:38
  * @FilePath: /vite-react-swc/vite.config.ts
  * @Description:
  */
@@ -20,7 +20,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/music-api': {
-        target: 'http://wukaijin.com',
+        target: 'http://mock.wukaijin.com',
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/music-api/, '')
       }

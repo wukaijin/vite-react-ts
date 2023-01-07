@@ -1,10 +1,11 @@
-import React from 'react'
+import { EVENT_KEYS } from '@/const'
+import eventemitter from '@/utils/eventemitter'
 import Player from '.'
 
 /*
  * @Author: Carlos
  * @Date: 2023-01-05 00:50:47
- * @LastEditTime: 2023-01-06 02:03:30
+ * @LastEditTime: 2023-01-07 15:50:01
  * @FilePath: /vite-react-swc/src/components/enhance/player/MusicPlayer.ts
  * @Description:
  */
@@ -20,6 +21,7 @@ class MusicPlayer {
     this._el.addEventListener('canplay', () => {
       console.log('canplay')
       this._node.updateDuration && this._node.updateDuration(this._el.duration)
+      eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_CAN_PLAY)
     })
     this._el.addEventListener('ended', () => {
       console.log('ended')
@@ -32,9 +34,8 @@ class MusicPlayer {
       if (this._node.state.playing) {
         this._node.play()
         this._node.setState({ currentLycIndex: 0 })
+        eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_CAN_PLAY, () => this._node.play())
       }
-      // console.dir(this._el)
-      // debugger
     })
   }
   play() {
