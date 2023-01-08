@@ -1,17 +1,19 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:03:47
- * @LastEditTime: 2023-01-06 00:06:35
+ * @LastEditTime: 2023-01-08 02:22:43
  * @FilePath: /vite-react-swc/src/store/todos.ts
  * @Description:
  */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { createRef, RefObject } from 'react'
 
 export type Todo = {
   id: string
   text: string
-  completed: boolean
+  completed: boolean,
+  ref: any
 }
 type ActionPayload = Partial<Todo>
 const initialState: Todo[] = []
@@ -22,7 +24,8 @@ export const asyncFetchData = createAsyncThunk<Todo[]>('todos/asyncFetchData', a
     data.slice(1, 100).map((t: any) => ({
       id: t.id.toString(),
       text: t.title,
-      completed: t.completed
+      completed: t.completed,
+      ref: createRef<HTMLDivElement>()
     })))
 })
 
@@ -32,10 +35,11 @@ const todosSlice = createSlice({
   reducers: {
     todoAdded(state, action: PayloadAction<ActionPayload>) {
       state.push({
-        id: action.payload.id,
-        text: action.payload.text,
-        completed: !!action.payload.completed
-      } as Todo)
+        id: action.payload.id!,
+        text: action.payload.text!,
+        completed: !!action.payload.completed,
+        ref: createRef<HTMLDivElement>()
+      })
     },
     todoToggled(state, action: PayloadAction<string>) {
       const todo = state.find(_todo => _todo.id === action.payload)

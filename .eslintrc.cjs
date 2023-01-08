@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-05 21:30:23
+ * @LastEditTime: 2023-01-08 13:21:23
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -34,6 +34,7 @@ module.exports = {
     'no-undef': 0,
     'arrow-parens': 0,
     'arrow-body-style': 0,
+    'function-paren-newline': 0,
     'no-continue': 0,
     'operator-linebreak': 0,
     'implicit-arrow-linebreak': 0,

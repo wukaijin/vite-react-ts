@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-06 22:01:27
+ * @LastEditTime: 2023-01-08 00:30:50
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
@@ -106,7 +106,6 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
       >
         <Player
           from={isMobile ? 'bottom' : 'right'}
-          current={current}
           togglePlayer={() => setShow(!show)}
         />
       </Popup>

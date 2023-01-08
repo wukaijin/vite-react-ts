@@ -30,6 +30,7 @@
   transform: scale(1);
   &:hover {
     animation-duration: 300ms;
+    animation-delay: 150ms;
     animation-name: bound;
     transform: scale(1);
   }

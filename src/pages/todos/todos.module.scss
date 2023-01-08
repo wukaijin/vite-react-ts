@@ -10,8 +10,8 @@
   }
   .content {
     padding-bottom: 1.5rem;
-    .todoItem{
-      input[type=checkbox] {
+    .todoItem {
+      input[type='checkbox'] {
         margin-right: 1rem;
       }
       blockquote {
@@ -23,4 +23,17 @@
 }
 .gapRight {
   margin-right: 1rem;
+}
+
+.enter {
+  @apply opacity-0 translate-x-full;
+}
+.enterActive {
+  @apply opacity-100 -translate-x-0 transition duration-1000;
+}
+.exit {
+  @apply opacity-100 translate-x-0;
+}
+.exitActive {
+  @apply opacity-0 -translate-x-full transition duration-1000;
 }

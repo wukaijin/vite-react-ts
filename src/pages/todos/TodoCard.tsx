@@ -1,10 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 00:54:13
- * @LastEditTime: 2023-01-04 16:02:05
+ * @LastEditTime: 2023-01-08 01:26:12
  * @FilePath: /vite-react-swc/src/pages/todos/TodoCard.tsx
  * @Description:
  */
+import { forwardRef, RefObject } from 'react'
 import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import styles from './todos.module.scss'
@@ -18,10 +19,11 @@ type Props = {
   onRemove: React.MouseEventHandler<HTMLSpanElement>
 }
 
-export default function TodoCard(props: Props) {
+const TodoCard = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
   const { todo, onChange, onRemove } = props
   return (
     <div
+      ref={ref}
       className={clsx(
         styles.todoItem,
         'px-6 py-4 max-w-[40rem] mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 mt-2 hover:bg-blue-50'
@@ -52,4 +54,6 @@ export default function TodoCard(props: Props) {
       </Button>
     </div>
   )
-}
+})
+
+export default TodoCard
