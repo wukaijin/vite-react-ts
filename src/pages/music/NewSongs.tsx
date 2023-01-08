@@ -1,13 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-07 23:59:43
+ * @LastEditTime: 2023-01-08 22:20:40
  * @FilePath: /vite-react-swc/src/pages/music/NewSongs.tsx
  * @Description:
  */
 import { startTransition, useCallback, useState } from 'react'
 import { useMount } from 'ahooks'
 import clsx from 'clsx'
+import { Play } from '@icon-park/react'
 import { connect, ConnectedProps } from 'react-redux'
 import { queryLyric, queryNewSongs, querySrc } from '@/api/music'
 import { QueryNewSongReturnData } from '@/interface/music'
@@ -55,7 +56,12 @@ const NewSongItem = connector(
         <div className="">
           <div className="relative cursor-pointer" onClick={play}>
             <img className="rounded-t-xl" src={song.picUrl} alt="" />
-            <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center backdrop-blur-sm opacity-0 hover:opacity-100" />
+            <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center bg-gray-700/20 backdrop-blur-sm opacity-0 hover:opacity-100">
+              <Play
+                theme="filled"
+                className="text-[5rem] sm:text-[3rem] lg:text-[4rem] rounded-full opacity-80 play-pulse"
+              />
+            </div>
           </div>
           <div className={clsx('p-2', { 'bg-wave': CurrentPS.id === song.id })}>
             <div className="text-sm text-gray-700 mb-1 truncate">{song.name}</div>
@@ -82,8 +88,8 @@ const NewSongs = (props: Props) => {
       })
   })
   return (
-    <div className="px-4 m-auto">
-      <div>123</div>
+    <div className="m-auto">
+      <div className="text-xl font-medium leading-14 ">New & trending songs</div>
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
         {data.map(song => {
           return <NewSongItem key={song.id} song={song} />
