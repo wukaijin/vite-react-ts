@@ -2,7 +2,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-08 22:39:17
+ * @LastEditTime: 2023-01-09 10:23:52
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
@@ -21,6 +21,7 @@ import List from './List'
 import MusicHeader from './MusicHeader'
 import NewSongs from './NewSongs'
 import RecommendPlayList from './recommendPlaylist'
+import HomeBanner from './homeBanner'
 
 const isMobile = document.documentElement.offsetWidth < 500
 
@@ -48,8 +49,9 @@ const MusicPage = ({
         toggleMusicPlayer={toggleMusicPlayer}
       />
       <div className="w-[100vw] sm:container xl:w-[1024px] mx-auto">
-        <RecommendPlayList />
         <NewSongs />
+        <HomeBanner />
+        <RecommendPlayList />
         <List data={data} />
         <Popup
           show={showPlayer}

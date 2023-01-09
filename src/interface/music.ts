@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:23:36
- * @LastEditTime: 2023-01-08 14:47:16
+ * @LastEditTime: 2023-01-09 00:50:41
  * @FilePath: /vite-react-swc/src/interface/music.ts
  * @Description:
  */
@@ -116,4 +116,58 @@ export interface PlaylistItem {
   tracks: null
   updateTime: number
   userId: number
+}
+
+export interface BannerInfo {
+  adDispatchJson: null
+  adLocation: null
+  adSource: null
+  adid: null
+  adurlV2: null
+  alg: string // 'alg-music-rec-banner-song-h-DF-1672399390985614'
+  bannerBizType: string // 'new_rcmd_banner'
+  bannerId: string // '1672399390985614'
+  dynamicVideoData: null
+  encodeId: string // '1908049566'
+  event: null
+  exclusive: boolean
+  extMonitor: null
+  extMonitorInfo: null
+  logContext: null
+  monitorBlackList: null
+  monitorClick: null
+  monitorClickList: null
+  monitorImpress: null
+  monitorImpressList: null
+  monitorType: null
+  pic: string // 'http://p1.music.126.net/gvtdUqTlWyCr-B3EJcjprw==/109951168193939793.jpg'
+  pid: null
+  program: null
+  requestId: ''
+  s_ctrp: string // 'syspf_resourceType_1-syspf_resourceId_1908049566'
+  scm: string // '1.music-homepage.homepage_banner_rcmd_new.banner.6509036.-1511540524.null'
+  showAdTag: true
+  showContext: null
+  song: {}
+  targetId: number
+  targetType: 1
+  titleColor: string // 'red'
+  typeTitle: string // '热歌推荐'
+  url: null
+  video: null
+}
+export interface BlockBanner {
+  blocks: {
+    blockCode: 'HOMEPAGE_BANNER'
+    blockDemote: boolean
+    blockStyle: number
+    canClose: boolean
+    canFeedback: boolean
+    dislikeShowType: number
+    extInfo: {
+      banners: BannerInfo[]
+    }
+    showType: 'BANNER'
+    sort: number
+  }[]
 }

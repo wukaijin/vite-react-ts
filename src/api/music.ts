@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-08 14:47:40
+ * @LastEditTime: 2023-01-09 00:51:32
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
-import { PlaylistItem, PlaylistTag, QueryNewSongReturnData } from '@/interface/music'
+import { BlockBanner, PlaylistItem, PlaylistTag, QueryNewSongReturnData } from '@/interface/music'
 import request from '@/utils/request'
 
 type CodeWrapping = { code: number }
@@ -80,5 +80,21 @@ export async function queryTopPlaylist(tagName?: string) {
     })
     .then(response => {
       return response.playlists
+    })
+}
+
+export async function findBall() {
+  return request
+    .get<null, WithCode<{ playlists: PlaylistItem[] }>>('music-api/homepage/dragon/ball')
+    .then(response => {
+      console.log(response)
+      return response
+    })
+}
+export async function queryBanner() {
+  return request
+    .get<null, WithCode<{ data: BlockBanner }>>('music-api/homepage/block/page')
+    .then(response => {
+      return response.data.blocks[0].extInfo.banners
     })
 }
