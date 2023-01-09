@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 17:19:32
- * @LastEditTime: 2023-01-07 13:34:13
+ * @LastEditTime: 2023-01-09 14:09:47
  * @FilePath: /vite-react-swc/src/components/base/popup/index.tsx
  * @Description:
  */
@@ -39,6 +39,7 @@ const CLASS_MAPPING: Record<From, { pop: string; visible: string; hidden: string
 const Popup = (props: Props) => {
   const { children, show, from = 'top', className, ...resProps } = props
   const { visible, hidden, pop } = CLASS_MAPPING[from]
+  console.log('popups', show)
   return (
     <div
       className={clsx(
@@ -47,14 +48,6 @@ const Popup = (props: Props) => {
         pop,
         className
       )}
-      // onTouchStart={e => {
-      //   e.stopPropagation()
-      //   e.preventDefault()
-      // }}
-      // onTouchMove={e => {
-      //   e.stopPropagation()
-      //   e.preventDefault()
-      // }}
       {...resProps}
     >
       {children}

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 00:23:34
- * @LastEditTime: 2023-01-07 15:04:08
+ * @LastEditTime: 2023-01-09 14:41:48
  * @FilePath: /vite-react-swc/src/store/music.ts
  * @Description:
  */
@@ -49,6 +49,7 @@ const todosSlice = createSlice({
       }
     },
     togglePlayer(state) {
+      console.log('store.showPlayer', state.showPlayer)
       state.showPlayer = !state.showPlayer
     },
     updateCurrentSong(state, action: PayloadAction<Partial<Song>>) {

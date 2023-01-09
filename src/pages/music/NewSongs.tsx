@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-08 22:20:40
+ * @LastEditTime: 2023-01-09 15:54:48
  * @FilePath: /vite-react-swc/src/pages/music/NewSongs.tsx
  * @Description:
  */
-import { startTransition, useCallback, useState } from 'react'
-import { useMount } from 'ahooks'
+import { memo, startTransition, useCallback, useState } from 'react'
+import { useMount, useRequest } from 'ahooks'
 import clsx from 'clsx'
 import { Play } from '@icon-park/react'
 import { connect, ConnectedProps } from 'react-redux'
@@ -16,6 +16,8 @@ import { togglePlaying, updateCurrentSong } from '@/store/music'
 import { RootState } from '@/store'
 import eventemitter from '@/utils/eventemitter'
 import { EVENT_KEYS } from '@/const'
+import ImageFallback from '@/components/enhance/ImageFallback'
+import Loading from '@/components/base/Loading'
 
 const connector = connect(
   (state: RootState) => ({
@@ -55,7 +57,11 @@ const NewSongItem = connector(
       <div className="rounded-xl overflow-hidden backdrop-blur relative bg-white bg-opacity-20 bound-scale">
         <div className="">
           <div className="relative cursor-pointer" onClick={play}>
-            <img className="rounded-t-xl" src={song.picUrl} alt="" />
+            <ImageFallback
+              src={song.picUrl}
+              placeholder={<div className="aspect-square bg-red" />}
+              imageProps={{ className: 'rounded-t-xl' }}
+            />
             <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center bg-gray-700/20 backdrop-blur-sm opacity-0 hover:opacity-100">
               <Play
                 theme="filled"
@@ -77,25 +83,25 @@ const NewSongItem = connector(
 )
 
 type Props = {}
-// const a = a;
-const NewSongs = (props: Props) => {
-  const [data, setData] = useState<QueryNewSongReturnData[]>([])
-  useMount(() => {
-    !data.length &&
-      queryNewSongs().then(res => {
-        console.log(res)
-        setData(res)
-      })
-  })
+
+const NewSongs = memo<Props>(props => {
+  const { run, data = [], loading } = useRequest(queryNewSongs)
   return (
-    <div className="m-auto">
+    <div className="px-4 xs:px-0 m-auto">
       <div className="text-xl font-medium leading-14 ">New & trending songs</div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-        {data.map(song => {
-          return <NewSongItem key={song.id} song={song} />
-        })}
-      </div>
+      {loading && (
+        <div className="flex justify-center text-center items-center  py-16">
+          <Loading.Circle />
+        </div>
+      )}
+      {!loading && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+          {data.map(song => {
+            return <NewSongItem key={song.id} song={song} />
+          })}
+        </div>
+      )}
     </div>
   )
-}
+})
 export default NewSongs

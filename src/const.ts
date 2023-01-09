@@ -1,10 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 00:41:32
- * @LastEditTime: 2023-01-07 15:46:30
+ * @LastEditTime: 2023-01-09 13:17:38
  * @FilePath: /vite-react-swc/src/const.ts
  * @Description:
  */
+
+export const isMobile = document.documentElement.offsetWidth < 500
+
 export const HOME_HEADER_HEIGHT = `${56 / 16}rem`
 export const HOME_FOOTER_HEIGHT = `${100 / 16}rem`
 

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-07 22:08:36
+ * @LastEditTime: 2023-01-09 15:58:09
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
@@ -10,7 +10,7 @@ import { NeuButton, NeuInput } from '@/components/neumorphism'
 import logo from '@/assets/logo.png'
 
 type Props = {
-  keyWord: string,
+  keyWord: string
   setKeyWord: (str: string) => void
   query: () => void
   toggleMusicPlayer: () => void

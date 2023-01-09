@@ -2,12 +2,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-09 10:23:52
+ * @LastEditTime: 2023-01-09 15:58:19
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { updateCurrentSong, togglePlayer, togglePlaying } from '@/store/music'
 
@@ -27,8 +27,8 @@ const isMobile = document.documentElement.offsetWidth < 500
 
 type Props = PropsFromRedux
 const MusicPage = ({
-  current,
-  updateCurrentSong: updateCS,
+  // current,
+  // updateCurrentSong: updateCS,
   showPlayer,
   togglePlayer: toggleMusicPlayer
 }: Props) => {
@@ -40,6 +40,7 @@ const MusicPage = ({
       setData(result)
     }
   }, [keyWord, setData])
+  const show = useMemo(() => showPlayer, [showPlayer])
   return (
     <div className="music-page bg-spectrum-light-reverse pb-12">
       <MusicHeader
@@ -54,7 +55,7 @@ const MusicPage = ({
         <RecommendPlayList />
         <List data={data} />
         <Popup
-          show={showPlayer}
+          show={show}
           from={isMobile ? 'bottom' : 'right'}
           className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
         >
@@ -65,11 +66,13 @@ const MusicPage = ({
   )
 }
 
-const mapStateToProps = (state: RootState) => ({
-  current: state.music.current,
-  playing: state.music.playing,
-  showPlayer: state.music.showPlayer
-})
+const mapStateToProps = (state: RootState) => {
+  return {
+    current: state.music.current,
+    playing: state.music.playing,
+    showPlayer: state.music.showPlayer
+  }
+}
 const mapDispatchToProps = {
   updateCurrentSong,
   togglePlayer,
