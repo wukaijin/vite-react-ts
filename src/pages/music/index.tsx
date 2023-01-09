@@ -2,26 +2,20 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-09 15:58:19
+ * @LastEditTime: 2023-01-09 17:12:32
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
 
 import { useCallback, useMemo, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
 import { updateCurrentSong, togglePlayer, togglePlaying } from '@/store/music'
-
 import './music.scss'
 import Popup from '@/components/base/popup'
 import Player from '@/components/enhance/player'
 import { RootState } from '@/store'
-import { queryKeyWord } from '@/api/music'
-import { QueryListData } from '@/interface/music'
-import List from './List'
 import MusicHeader from './MusicHeader'
-import NewSongs from './NewSongs'
-import RecommendPlayList from './recommendPlaylist'
-import HomeBanner from './homeBanner'
 
 const isMobile = document.documentElement.offsetWidth < 500
 
@@ -33,13 +27,10 @@ const MusicPage = ({
   togglePlayer: toggleMusicPlayer
 }: Props) => {
   const [keyWord, setKeyWord] = useState<string>('')
-  const [data, setData] = useState<QueryListData[]>([])
+  const navigate = useNavigate()
   const query = useCallback(async () => {
-    const result = await queryKeyWord<QueryListData>(keyWord)
-    if (result) {
-      setData(result)
-    }
-  }, [keyWord, setData])
+    navigate(`search?keyWord=${keyWord}`)
+  }, [keyWord])
   const show = useMemo(() => showPlayer, [showPlayer])
   return (
     <div className="music-page bg-spectrum-light-reverse pb-12">
@@ -49,19 +40,20 @@ const MusicPage = ({
         query={query}
         toggleMusicPlayer={toggleMusicPlayer}
       />
-      <div className="w-[100vw] sm:container xl:w-[1024px] mx-auto">
-        <NewSongs />
-        <HomeBanner />
-        <RecommendPlayList />
-        <List data={data} />
-        <Popup
-          show={show}
-          from={isMobile ? 'bottom' : 'right'}
-          className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
-        >
-          <Player from={isMobile ? 'bottom' : 'right'} togglePlayer={() => toggleMusicPlayer()} />
-        </Popup>
+      <div>
+        <button onClick={() => navigate('/music/home')}>To Search</button>
+        <button onClick={() => navigate('/music/search')}>To Search</button>
       </div>
+      <div className="w-[100vw] sm:container xl:w-[1024px] mx-auto">
+        <Outlet />
+      </div>
+      <Popup
+        show={show}
+        from={isMobile ? 'bottom' : 'right'}
+        className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
+      >
+        <Player from={isMobile ? 'bottom' : 'right'} togglePlayer={() => toggleMusicPlayer()} />
+      </Popup>
     </div>
   )
 }

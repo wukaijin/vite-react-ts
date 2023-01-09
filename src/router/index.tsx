@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-06 13:42:19
+ * @LastEditTime: 2023-01-09 16:50:50
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -13,6 +13,8 @@ import Wait from '@/pages/Wait'
 import Introduction from '@/pages/introduction'
 import Test from '@/pages/test'
 import MusicPage from '@/pages/music'
+import MusicHome from '@/pages/music/music-home'
+import MusicSearch from '@/pages/music/music-search'
 
 const config: RouteObject[] = [
   {
@@ -33,7 +35,17 @@ const config: RouteObject[] = [
   },
   {
     path: '/music',
-    element: <MusicPage />
+    element: <MusicPage />,
+    children: [
+      {
+        path: 'home',
+        element: <MusicHome />
+      },
+      {
+        path: 'search',
+        element: <MusicSearch />
+      },
+    ]
   },
   {
     path: '/test',

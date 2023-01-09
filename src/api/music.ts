@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-09 00:51:32
+ * @LastEditTime: 2023-01-09 16:39:53
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
@@ -17,7 +17,7 @@ export async function loginAnonymous() {
 
 export async function queryKeyWord<QueryData>(key: string) {
   return request
-    .get<null, WithCode<{ result: { songs: QueryData[] } }>>(`music-api/search?keywords=${key}`)
+    .get<null, WithCode<{ result: { songs: QueryData[] } }>>(`/music-api/search?keywords=${key}`)
     .then(response => {
       const { result } = response
       return result.songs
@@ -26,7 +26,7 @@ export async function queryKeyWord<QueryData>(key: string) {
 
 export async function querySrc(id: string) {
   return request
-    .get<null, WithCode<{ data: { url: string }[] }>>(`music-api/song/url/v1?id=${id}&level=exhigh`)
+    .get<null, WithCode<{ data: { url: string }[] }>>(`/music-api/song/url/v1?id=${id}&level=exhigh`)
     .then(response => {
       const { data } = response
       return data[0].url
@@ -35,7 +35,7 @@ export async function querySrc(id: string) {
 
 export async function queryLyric(id: string) {
   return request
-    .get<null, WithCode<{ lrc: { lyric: string } }>>(`music-api/lyric?id=${id}&level=exhigh`)
+    .get<null, WithCode<{ lrc: { lyric: string } }>>(`/music-api/lyric?id=${id}&level=exhigh`)
     .then(response => {
       const { lrc } = response
       return lrc.lyric
@@ -44,7 +44,7 @@ export async function queryLyric(id: string) {
 
 export async function queryNewSongs() {
   return request
-    .get<null, WithCode<{ result: QueryNewSongReturnData[] }>>('music-api/personalized/newsong')
+    .get<null, WithCode<{ result: QueryNewSongReturnData[] }>>('/music-api/personalized/newsong')
     .then(response => {
       // const {
       //   id,
@@ -65,7 +65,7 @@ export async function queryNewSongs() {
 
 export async function queryPlaylistTags() {
   return request
-    .get<null, WithCode<{ tags: PlaylistTag[] }>>('music-api/playlist/highquality/tags')
+    .get<null, WithCode<{ tags: PlaylistTag[] }>>('/music-api/playlist/highquality/tags')
     .then(response => {
       return response.tags
     })
@@ -73,7 +73,7 @@ export async function queryPlaylistTags() {
 
 export async function queryTopPlaylist(tagName?: string) {
   return request
-    .get<null, WithCode<{ playlists: PlaylistItem[] }>>('music-api/top/playlist/highquality', {
+    .get<null, WithCode<{ playlists: PlaylistItem[] }>>('/music-api/top/playlist/highquality', {
       params: {
         cat: tagName,
       }
@@ -85,7 +85,7 @@ export async function queryTopPlaylist(tagName?: string) {
 
 export async function findBall() {
   return request
-    .get<null, WithCode<{ playlists: PlaylistItem[] }>>('music-api/homepage/dragon/ball')
+    .get<null, WithCode<{ playlists: PlaylistItem[] }>>('/music-api/homepage/dragon/ball')
     .then(response => {
       console.log(response)
       return response
@@ -93,7 +93,7 @@ export async function findBall() {
 }
 export async function queryBanner() {
   return request
-    .get<null, WithCode<{ data: BlockBanner }>>('music-api/homepage/block/page')
+    .get<null, WithCode<{ data: BlockBanner }>>('/music-api/homepage/block/page')
     .then(response => {
       return response.data.blocks[0].extInfo.banners
     })

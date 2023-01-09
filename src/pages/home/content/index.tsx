@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
- * @LastEditTime: 2023-01-06 13:43:52
+ * @LastEditTime: 2023-01-09 17:06:27
  * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
  * @Description:
  */
@@ -24,7 +24,7 @@ function NavigateList() {
         <Link to="/test">Test</Link>
       </li>
       <li>
-        <Link to="/music">Music</Link>
+        <Link to="/music/home">Music</Link>
       </li>
     </ul>
   )

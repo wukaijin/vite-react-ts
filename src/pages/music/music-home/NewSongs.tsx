@@ -1,8 +1,8 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-09 15:54:48
- * @FilePath: /vite-react-swc/src/pages/music/NewSongs.tsx
+ * @LastEditTime: 2023-01-09 16:41:49
+ * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
 import { memo, startTransition, useCallback, useState } from 'react'
@@ -85,7 +85,7 @@ const NewSongItem = connector(
 type Props = {}
 
 const NewSongs = memo<Props>(props => {
-  const { run, data = [], loading } = useRequest(queryNewSongs)
+  const { data = [], loading } = useRequest(queryNewSongs)
   return (
     <div className="px-4 xs:px-0 m-auto">
       <div className="text-xl font-medium leading-14 ">New & trending songs</div>
