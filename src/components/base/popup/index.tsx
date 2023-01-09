@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 17:19:32
- * @LastEditTime: 2023-01-09 14:09:47
+ * @LastEditTime: 2023-01-09 21:37:06
  * @FilePath: /vite-react-swc/src/components/base/popup/index.tsx
  * @Description:
  */
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, memo } from 'react'
 import clsx from 'clsx'
 
 type From = 'top' | 'bottom' | 'left' | 'right'
@@ -36,14 +36,14 @@ const CLASS_MAPPING: Record<From, { pop: string; visible: string; hidden: string
     hidden: 'translate-x-full'
   }
 }
-const Popup = (props: Props) => {
+const Popup = memo((props: Props) => {
   const { children, show, from = 'top', className, ...resProps } = props
   const { visible, hidden, pop } = CLASS_MAPPING[from]
   console.log('popups', show)
   return (
     <div
       className={clsx(
-        'popup fixed transition-transform ease-in-out',
+        'popup fixed transition-transform ease-in-out z-50',
         show ? visible : hidden,
         pop,
         className
@@ -53,5 +53,5 @@ const Popup = (props: Props) => {
       {children}
     </div>
   )
-}
+})
 export default Popup

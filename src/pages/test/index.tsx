@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-08 00:30:50
+ * @LastEditTime: 2023-01-09 22:03:26
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
@@ -92,9 +92,9 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
                 name: item.name,
                 album: item.album.name,
               })
-              startTransition(() => {
-                eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)
-              })
+              // startTransition(() => {
+              //   eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
+              // })
             }}
           />
         </div>

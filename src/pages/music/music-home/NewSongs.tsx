@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-09 16:41:49
+ * @LastEditTime: 2023-01-09 21:52:02
  * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
@@ -40,6 +40,7 @@ const NewSongItem = connector(
       const url = await querySrc(`${song.id}`)
       updateCS({
         name: song.name,
+        alias: song.song.alias.length ? song.song.alias[0] : '',
         artiest: song.song.artists.map(a => a.name).join(', '),
         album: song.song.album.name,
         id: song.id,
@@ -50,7 +51,7 @@ const NewSongItem = connector(
         lyric
       })
       startTransition(() => {
-        eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)
+        eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
       })
     }, [])
     return (

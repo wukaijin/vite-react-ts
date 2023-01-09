@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-05 13:52:30
- * @LastEditTime: 2023-01-07 14:53:31
+ * @LastEditTime: 2023-01-09 22:25:26
  * @FilePath: /vite-react-swc/src/components/enhance/player/LyricPanel.tsx
  * @Description:
  */
@@ -41,7 +41,7 @@ const LyricPanel = (props: Props) => {
               return (
                 <div key={index} className="text-sm  leading-8 text-center">
                   <span
-                    className={clsx('transition-color duration-500', {
+                    className={clsx('transition-color duration-500 truncate', {
                       'text-lg text-indigo-500': index === active,
                       'pl-8': !item.lyric
                     })}

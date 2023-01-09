@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-09 16:50:50
+ * @LastEditTime: 2023-01-09 21:16:18
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import Home from '@/pages/home'
 import Todos from '@/pages/todos'

@@ -1,35 +1,63 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 16:28:55
- * @LastEditTime: 2023-01-08 00:34:18
+ * @LastEditTime: 2023-01-09 22:47:55
  * @FilePath: /vite-react-swc/src/pages/music/List.tsx
  * @Description:
  */
-import { startTransition } from 'react'
 import { ConnectedProps, connect } from 'react-redux'
 import { Like, PlayOne, Pause } from '@icon-park/react'
 import clsx from 'clsx'
 import { NeuButton, NeuPanel } from '@/components/neumorphism'
 import { QueryListData } from '@/interface/music'
-import { updateCurrentSong } from '@/store/music'
+import { updateCurrentSong, togglePlaying } from '@/store/music'
 import { queryLyric, querySrc } from '@/api/music'
-import { EVENT_KEYS } from '@/const'
-import eventemitter from '@/utils/eventemitter'
 import { RootState } from '@/store'
 
 type ItemProps = ReduxPlus & {
   data: QueryListData
 }
-const connector = connect((state: RootState) => ({ current: state.music.current }), {
-  updateCurrentSong
-})
+const connector = connect(
+  (state: RootState) => ({ current: state.music.current, playing: state.music.playing }),
+  {
+    updateCurrentSong,
+    togglePlaying
+  }
+)
 type ReduxPlus = ConnectedProps<typeof connector>
 
 const ListItem = connector(
-  ({ data, updateCurrentSong: updateCS, current: currentPlayingSong }: ItemProps) => {
+  ({
+    data,
+    updateCurrentSong: updateCS,
+    playing,
+    togglePlaying: toggleP,
+    current: currentPlayingSong
+  }: ItemProps) => {
+    const handlePlay = async () => {
+      if (playing && currentPlayingSong.id === data.id) {
+        toggleP(false)
+        return
+      }
+      const url = await querySrc(`${data.id}`)
+      const lyricString = await queryLyric(`${data.id}`)
+      updateCS({
+        id: data.id,
+        alias: data.alias.length ? data.alias[0] : '',
+        lyric: lyricString,
+        artiest: data.artists[0].name,
+        url,
+        name: data.name,
+        album: data.album.name
+      })
+      toggleP(true)
+    }
+
     return (
       <NeuPanel
-        className={clsx('mb-5 px-4 py-3', { 'bg-wave': currentPlayingSong.id === data.id })}
+        className={clsx('mb-5 px-4 py-3', {
+          'bg-wave': playing && currentPlayingSong.id === data.id
+        })}
       >
         <div className="flex ">
           <div className="flex items-center justify-center mr-2">
@@ -39,8 +67,11 @@ const ListItem = connector(
             />
           </div>
           <div className="flex-1">
-            <div className="text-base text-gray-500 overflow-hidden">{data.name}</div>
-            <div className="text-xs text-gray-400 overflow-hidden">
+            <div className="text-base text-gray-500 overflow-hidden">
+              <span>{data.name}</span>
+              {!!data.alias.length && <span className="text-gray-400">({data.alias[0]})</span>}
+            </div>
+            <div className="text-sm text-gray-400 overflow-hidden">
               <span>{data.artists.map(e => e.name).join(', ')}</span>
               {data.album?.name && (
                 <>
@@ -51,31 +82,8 @@ const ListItem = connector(
             </div>
           </div>
           <div className="flex items-center justify-center ml-2">
-            <NeuButton
-              size="xs"
-              shape="circle"
-              // color={currentPlayingSong.id === data.id ? 'primary' : 'secondary'}
-              className=""
-              onClick={async () => {
-                const url = await querySrc(`${data.id}`)
-                const lyricString = await queryLyric(`${data.id}`)
-                // url && setMusicSrc(url)
-                updateCS({
-                  id: data.id,
-                  lyric: lyricString,
-                  artiest: data.artists[0].name,
-                  url,
-                  name: data.name,
-                  album: data.album.name
-                })
-                startTransition(() => {
-                  setTimeout(() => {
-                    eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)
-                  }, 300)
-                })
-              }}
-            >
-              {currentPlayingSong.id === data.id ? <Pause /> : <PlayOne />}
+            <NeuButton size="xs" shape="circle" className="" onClick={handlePlay}>
+              {playing && currentPlayingSong.id === data.id ? <Pause /> : <PlayOne />}
             </NeuButton>
           </div>
         </div>

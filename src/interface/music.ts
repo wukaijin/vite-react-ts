@@ -1,13 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:23:36
- * @LastEditTime: 2023-01-09 00:50:41
+ * @LastEditTime: 2023-01-09 21:50:55
  * @FilePath: /vite-react-swc/src/interface/music.ts
  * @Description:
  */
 export interface QueryListData {
   id: number
-  name: string
+  name: string,
+  alias: string[]
   artists: { name: string; id: number }[]
   mvid: number
   album: { name: string }
@@ -25,7 +26,7 @@ export interface QueryNewSongReturnData {
     name: string
     id: number
     // position: 0
-    // alias: []
+    alias: string[]
     // status: 0
     // fee: 8
     // copyrightId: 7001

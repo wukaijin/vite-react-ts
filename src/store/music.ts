@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 00:23:34
- * @LastEditTime: 2023-01-09 14:41:48
+ * @LastEditTime: 2023-01-09 22:36:55
  * @FilePath: /vite-react-swc/src/store/music.ts
  * @Description:
  */
@@ -11,7 +11,8 @@ import { STORE_KEYS } from '@/const'
 
 export type Song = {
   artiest: string
-  name: string
+  name: string,
+  alias: string,
   album: string
   id: number
   url: string
@@ -26,6 +27,7 @@ const storedCurrent = window.localStorage.getItem(STORE_KEYS.MUSIC_CURRENT)
 const empty: Song = {
   artiest: '',
   name: '',
+  alias: '',
   album: '',
   id: 0,
   url: '',
@@ -42,7 +44,7 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     togglePlaying(state, action: PayloadAction<boolean | undefined>) {
-      if (action.payload) {
+      if (action.payload === true || action.payload === false) {
         state.playing = action.payload
       } else {
         state.playing = !state.playing

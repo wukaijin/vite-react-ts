@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-07 23:53:47
+ * @LastEditTime: 2023-01-09 22:34:20
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -55,8 +55,15 @@ export class Player extends Component<Props, State> {
     const newState = {
       playing
     }
-    if (playing && playing !== state.playing) {
-      eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE)
+    
+    if (playing !== state.playing) {
+      if (playing) {
+        eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
+      } else {
+        console.log('pause', playing, state.playing)
+        eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PAUSE)
+        eventemitter.off(EVENT_KEYS.MUSIC_PLAYER_CAN_PLAY)
+      }
     }
     if (lyric && props.current.lyric !== state.lyric) {
       Object.assign(newState, {
@@ -68,13 +75,14 @@ export class Player extends Component<Props, State> {
     return newState
   }
   componentDidMount(): void {
-    eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE, this.play, this)
+    eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY, this.play, this)
+    eventemitter.on(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PAUSE, this.pause, this)
     if (this.audioRef.current) {
       this.player = new MusicPlayer(this.audioRef.current, this)
     }
   }
   componentWillUnmount(): void {
-    eventemitter.off(EVENT_KEYS.MUSIC_PLAYER_STATE_CHANGE, this.play, this)
+    eventemitter.off(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
   }
   updateCurrentLycIndex(currentTime: number): void {
     const { currentLycIndex, lyricObject } = this.state
@@ -106,6 +114,7 @@ export class Player extends Component<Props, State> {
     }
   }
   play() {
+    console.log('play triggered')
     this.audioRef
       .current!.play()
       .then(() => {
@@ -117,6 +126,7 @@ export class Player extends Component<Props, State> {
       })
   }
   pause() {
+    console.log('trigger pause')
     this.audioRef.current!.pause()
     // this.setState({ playing: false })
     this.props.togglePlaying(false)
@@ -224,7 +234,7 @@ export class Player extends Component<Props, State> {
 const connector = connect(
   (state: RootState) => ({
     current: state.music.current,
-    playing: state.music.playing,
+    playing: state.music.playing
   }),
   { togglePlaying }
 )
