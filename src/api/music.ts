@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-09 16:39:53
+ * @LastEditTime: 2023-01-09 23:34:40
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
-import { BlockBanner, PlaylistItem, PlaylistTag, QueryNewSongReturnData } from '@/interface/music'
+import { BlockBanner, PlaylistDetailData, PlaylistItem, PlaylistTag, QueryNewSongReturnData } from '@/interface/music'
 import request from '@/utils/request'
 
 type CodeWrapping = { code: number }
@@ -96,5 +96,13 @@ export async function queryBanner() {
     .get<null, WithCode<{ data: BlockBanner }>>('/music-api/homepage/block/page')
     .then(response => {
       return response.data.blocks[0].extInfo.banners
+    })
+}
+
+export async function queryPlaylistDetail(id: number) {
+  return request
+    .get<null, WithCode<{ playlist: PlaylistDetailData }>>(`/music-api/playlist/detail?id=${id}`)
+    .then(response => {
+      return response.playlist
     })
 }

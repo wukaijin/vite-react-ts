@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-09 15:58:09
+ * @LastEditTime: 2023-01-10 22:20:01
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
 import { Control, Search } from '@icon-park/react'
-import { NeuButton, NeuInput } from '@/components/neumorphism'
+import { NeuButton } from '@/components/neumorphism'
 import logo from '@/assets/logo.png'
 
 type Props = {
@@ -22,11 +22,11 @@ const MusicHeader = (props: Props) => {
       <span className="music-logo">
         <img className="" src={logo} alt="" />
       </span>
-      <span className="flex-1 flex items-center justify-center">
-        <NeuInput
+      <span className="flex-1 flex text-center justify-center">
+        {/* <NeuInput
           size="xs"
           style={{ width: '100%', maxWidth: '24rem', marginRight: '0.5rem' }}
-          className="bg-[var(--neu-greyLight-1)] overflow-hidden"
+          className="active:bg-[var(--neu-greyLight-1)] overflow-hidden"
           inputStyle={{ color: 'var(--neu-primary)' }}
           icon={<Search />}
           value={keyWord}
@@ -44,7 +44,26 @@ const MusicHeader = (props: Props) => {
               className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
             />
           </NeuButton>
-        </NeuInput>
+        </NeuInput> */}
+        <div className="input-group" style={{ width: '100%', maxWidth: '24rem' }}>
+          <input
+            type="text"
+            className="input input-md w-full text-indigo-500 focus:outline-none"
+            placeholder="Search name/artist/album"
+            onChange={e => setKeyWord(e.target.value)}
+            onKeyUp={async e => {
+              if (e.code === 'Enter' || e.code === 'Search') {
+                query()
+              }
+            }}
+          />
+          <button className="btn btn-square" onClick={query}>
+            <Search
+              theme="outline"
+              className=" text-indigo-500 bg-transparent text-lg hover:scale-110"
+            />
+          </button>
+        </div>
       </span>
       <span className="mx-2">
         <NeuButton className="ml-2 " size="xs" onClick={() => toggleMusicPlayer()}>

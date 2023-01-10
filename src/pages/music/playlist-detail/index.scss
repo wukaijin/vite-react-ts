@@ -1,0 +1,17 @@
+.playlist-card {
+  @apply rounded-2xl bg-slate-100/50;
+}
+
+.playlist-table {
+  @apply w-full text-sm;
+  width: 100%;
+  th,
+  td,
+  tl {
+    @apply border-slate-400/40;
+    background-color: transparent;
+  }
+  // tr {
+    
+  // }
+}

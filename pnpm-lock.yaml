@@ -30,6 +30,7 @@ specifiers:
   eventemitter3: ^5.0.0
   husky: ^8.0.2
   lint-staged: ^13.1.0
+  overlayscrollbars: ^2.0.3
   postcss: ^8.4.20
   pre-commit: ^1.2.2
   prettier: ^2.8.1
@@ -54,6 +55,7 @@ dependencies:
   clsx: 1.2.1
   daisyui: 2.46.0_r4gnkvssmvyxmi2wmat5xbx36a
   eventemitter3: 5.0.0
+  overlayscrollbars: 2.0.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.5_gm3gubmwja4o7q6fr6adx3fpz4
@@ -3407,6 +3409,10 @@ packages:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /overlayscrollbars/2.0.3:
+    resolution: {integrity: sha512-boOkJFER1Tc21sxF4a7ghGl+ETV3WtP7YgsUyDPo1VTHUIPdQLfnTzMyOOdMkKkVcpJOYMKwwr4m+saCtgawCg==}
+    dev: false
 
   /p-limit/2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}

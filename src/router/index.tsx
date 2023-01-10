@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-09 21:16:18
+ * @LastEditTime: 2023-01-09 23:03:59
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -15,6 +15,7 @@ import Test from '@/pages/test'
 import MusicPage from '@/pages/music'
 import MusicHome from '@/pages/music/music-home'
 import MusicSearch from '@/pages/music/music-search'
+import PlaylistDetail from '@/pages/music/playlist-detail'
 
 const config: RouteObject[] = [
   {
@@ -44,6 +45,10 @@ const config: RouteObject[] = [
       {
         path: 'search',
         element: <MusicSearch />
+      },
+      {
+        path: 'playlist-detail',
+        element: <PlaylistDetail />
       },
     ]
   },

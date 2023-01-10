@@ -1,13 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:23:36
- * @LastEditTime: 2023-01-09 21:50:55
+ * @LastEditTime: 2023-01-09 23:58:29
  * @FilePath: /vite-react-swc/src/interface/music.ts
  * @Description:
  */
 export interface QueryListData {
   id: number
-  name: string,
+  name: string
   alias: string[]
   artists: { name: string; id: number }[]
   mvid: number
@@ -80,7 +80,7 @@ export interface PlaylistTag {
   type: number
 }
 
-export interface PlaylistItem {
+export type PlaylistItem = {
   adType: number
   anonimous: false
   cloudTrackCount: number
@@ -114,7 +114,6 @@ export interface PlaylistItem {
   trackCount: number
   trackNumberUpdateTime: number
   trackUpdateTime: number
-  tracks: null
   updateTime: number
   userId: number
 }
@@ -171,4 +170,51 @@ export interface BlockBanner {
     showType: 'BANNER'
     sort: number
   }[]
+}
+
+export interface PlaylistTrack {
+  a: null
+  al: {
+    // album
+    id: number
+    name: string // '叱吒新一代'
+    pic: number
+    picUrl: string // 'http://p3.music.126.net/i2P1ox4pWG9VLeoRFeUxfQ==/76965813961922.jpg'
+    tns: []
+  }
+  alia: []
+  ar: { // artiest
+    alias: []
+    id: number
+    name: string
+    tns: []
+  }[]
+  cd: string
+  cf: string
+  copyright: number
+  cp: number
+  crbt: null
+  djId: number
+  dt: number
+  entertainmentTags: null
+  fee: number
+  ftype: number
+  h: {}
+  hr: null
+  id: 5256469
+  l: {}
+  m: {}
+  mark: number
+  mst: number
+  mv: number
+  name: string
+  no: number
+  noCopyrightRcmd: null
+  originCoverType: number
+  originSongSimpleData: null
+  pop: number
+  pst: number
+}
+export type PlaylistDetailData = PlaylistItem & {
+  tracks: PlaylistTrack[]
 }

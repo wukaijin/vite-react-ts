@@ -2,12 +2,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-09 17:12:32
+ * @LastEditTime: 2023-01-10 16:55:26
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
 
-import { useCallback, useMemo, useState } from 'react'
+import { CSSProperties, useCallback, useMemo, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
 import { updateCurrentSong, togglePlayer, togglePlaying } from '@/store/music'
@@ -27,26 +27,25 @@ const MusicPage = ({
   togglePlayer: toggleMusicPlayer
 }: Props) => {
   const [keyWord, setKeyWord] = useState<string>('')
+  const [style, setStyle] = useState<CSSProperties>({})
   const navigate = useNavigate()
   const query = useCallback(async () => {
     navigate(`search?keyWord=${keyWord}`)
   }, [keyWord])
   const show = useMemo(() => showPlayer, [showPlayer])
   return (
-    <div className="music-page bg-spectrum-light-reverse pb-12">
+    <div className="music-page bg-spectrum-light-reverse" style={style}>
       <MusicHeader
         keyWord={keyWord}
         setKeyWord={setKeyWord}
         query={query}
         toggleMusicPlayer={toggleMusicPlayer}
       />
-      <div>
+      {/* <div>
         <button onClick={() => navigate('/music/home')}>To Search</button>
         <button onClick={() => navigate('/music/search')}>To Search</button>
-      </div>
-      <div className="w-[100vw] sm:container xl:w-[1024px] mx-auto">
-        <Outlet />
-      </div>
+      </div> */}
+      <Outlet context={{ setTopStyle: setStyle }} />
       <Popup
         show={show}
         from={isMobile ? 'bottom' : 'right'}

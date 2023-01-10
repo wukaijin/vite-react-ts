@@ -1,11 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-08 15:02:53
- * @LastEditTime: 2023-01-09 13:27:12
- * @FilePath: /vite-react-swc/src/pages/music/recommendPlaylist/PlaylistCard.tsx
+ * @LastEditTime: 2023-01-09 23:07:11
+ * @FilePath: /vite-react-swc/src/pages/music/music-home/recommend-playlist/PlaylistCard.tsx
  * @Description:
  */
 import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { isMobile } from '@/const'
 import { PlaylistItem } from '@/interface/music'
 import './index.scss'
@@ -15,6 +16,7 @@ type Props = {
 }
 const PlaylistCard = (props: Props) => {
   const { data } = props
+  const navigate = useNavigate()
   const desc = useMemo(() => {
     const limit = isMobile ? 80 : 100
     const d = data.description
@@ -28,7 +30,10 @@ const PlaylistCard = (props: Props) => {
             <img className="rounded-t-xl" src={data.coverImgUrl} alt="" />
           </div>
         </div>
-        <div className="back h-full bg-white/20 rounded-t-xl p-2 overflow-auto">
+        <div
+          className="back h-full bg-white/20 rounded-t-xl p-2 overflow-auto"
+          onClick={() => navigate(`/music/playlist-detail?id=${data.id}`)}
+        >
           <span className="text-xs text-ellipsis leading-none break-all">{desc}</span>
         </div>
       </div>
