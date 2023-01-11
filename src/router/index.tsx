@@ -1,22 +1,24 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-11 13:10:04
+ * @LastEditTime: 2023-01-12 00:18:45
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { lazy } from 'react'
+import { createBrowserRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import Home from '@/pages/home'
 import Todos from '@/pages/todos'
 import Wait from '@/pages/Wait'
 import Introduction from '@/pages/introduction'
-import Hero from '@/pages/hero'
 import Test from '@/pages/test'
-import MusicPage from '@/pages/music'
-import MusicHome from '@/pages/music/music-home'
-import MusicSearch from '@/pages/music/music-search'
-import PlaylistDetail from '@/pages/music/playlist-detail'
+
+const Hero = lazy(() => import('@/pages/hero'))
+const MusicPage = lazy(() => import('@/pages/music'))
+const MusicHome = lazy(() => import('@/pages/music/music-home'))
+const MusicSearch = lazy(() => import('@/pages/music/music-search'))
+const PlaylistDetail = lazy(() => import('@/pages/music/playlist-detail'))
 
 const config: RouteObject[] = [
   {

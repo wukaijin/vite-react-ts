@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 11:24:57
- * @LastEditTime: 2022-12-30 11:36:56
+ * @LastEditTime: 2023-01-12 00:19:19
  * @FilePath: /vite-react-swc/src/pages/Wait.tsx
  * @Description:
  */
@@ -13,7 +13,7 @@ function Wait() {
   const navigate = useNavigate()
   useEffect(() => {
     setTimeout(() => {
-      navigate('/home')
+      navigate('/hero')
     }, 4000)
   }, [])
   return (
