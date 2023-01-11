@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-08 13:21:23
+ * @LastEditTime: 2023-01-11 15:13:10
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -65,6 +65,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 0,
     'react/function-component-definition': 0,
+    'react/state-in-constructor': 0,
     'react/require-default-props': 0,
     'react/jsx-props-no-spreading': 0,
     'react/no-array-index-key': 0,

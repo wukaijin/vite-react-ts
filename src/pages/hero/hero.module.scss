@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+.hero-root {
+  --hero-primary: turquoise;
+  --gradient-bg: linear-gradient(45deg, #40e0d0, #9932cc, #ff1493, orange);
+}
+.hero-wrapper {
+  position: relative;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif monospace;
+  letter-spacing: 0.03em;
+  font-size: clamp(2.3rem, 5.4vw, 7rem);
+  background-color: rgba(9, 14, 23, 1);
+  color: #ffffff;
+  @apply flex justify-center items-center text-center;
+}
+.hero {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .heading {
+    font-weight: 600;
+    -webkit-text-stroke: 2px var(--hero-primary);
+    color: transparent;
+    filter: drop-shadow(0 0 0.35rem var(--hero-primary));
+  }
+}
+.hero-secondary {
+  --mask: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    black var(--mask-size-1, 0%),
+    transparent 0,
+    transparent var(--mask-size-2, 0%),
+    black var(--mask-size-2, 0%),
+    black var(--mask-size-3, 0%),
+    transparent 0
+  );
+  // -webkit-clip-path: var(--mask);
+  // clip-path: var(--mask);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-bg);
+  // background: radial-gradient(red, transparent), linear-gradient(to top left, 40e0d0, transparent),
+  //   linear-gradient(to top right, blue, transparent);
+  // background-blend-mode: screen;
+  color: rgb(9, 14, 23);
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  // transition: --x 300ms 20ms ease-out, --y 300ms 20ms ease-out;
+  .heading-secondary {
+    font-weight: 600;
+    background: radial-gradient(circle at center, white 0.11rem, transparent 0);
+    background-size: 0.4rem 0.4rem;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  pointer-events: all;
+  align-items: center;
+  background: var(--gradient-bg);
+  clip-path: circle(0% at calc(100% - 2rem) 2rem);
+  transition: clip-path 500ms;
+  // font-size: clamp(1rem, 2vw, 4rem);
+  &.is-open {
+    clip-path: circle(200% at calc(100% - 2rem) 2rem);
+  }
+}
+.menu-button {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  z-index: 2;
+  color: white !important;
+}

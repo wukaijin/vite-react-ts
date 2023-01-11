@@ -1,13 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:05:11
- * @LastEditTime: 2023-01-09 16:38:42
+ * @LastEditTime: 2023-01-11 23:19:31
  * @FilePath: /vite-react-swc/src/utils/index.ts
  * @Description:
  */
 export const getUniqueId: () => string = () => Math.random().toString(36).substring(2, 10)
 
-/**  eslint disable */
 export function throttle<T>(func: T, wait: number): T {
   let timer = 0
   let lastDate = 0

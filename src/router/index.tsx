@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-09 23:03:59
+ * @LastEditTime: 2023-01-11 13:10:04
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -11,6 +11,7 @@ import Home from '@/pages/home'
 import Todos from '@/pages/todos'
 import Wait from '@/pages/Wait'
 import Introduction from '@/pages/introduction'
+import Hero from '@/pages/hero'
 import Test from '@/pages/test'
 import MusicPage from '@/pages/music'
 import MusicHome from '@/pages/music/music-home'
@@ -33,6 +34,10 @@ const config: RouteObject[] = [
   {
     path: '/todos',
     element: <Todos />
+  },
+  {
+    path: '/hero',
+    element: <Hero />
   },
   {
     path: '/music',
