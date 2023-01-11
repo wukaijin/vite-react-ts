@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-10 23:49:27
+ * @LastEditTime: 2023-01-11 12:20:22
  * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
@@ -33,7 +33,7 @@ const NewSongItem = connector(
   ({
     song,
     updateCurrentSong: updateCS,
-    togglePlaying: toggleP,
+    // togglePlaying: toggleP,
     current: CurrentPS
   }: ItemProps) => {
     const play = useCallback(async () => {

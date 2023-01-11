@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useMount, useRequest } from 'ahooks'
+import { useRequest } from 'ahooks'
 import { queryKeyWord } from '@/api/music'
 import { QueryListData } from '@/interface/music'
 
@@ -9,7 +9,7 @@ import List from '../List'
 /*
  * @Author: Carlos
  * @Date: 2023-01-09 16:18:01
- * @LastEditTime: 2023-01-10 00:21:25
+ * @LastEditTime: 2023-01-11 11:52:32
  * @FilePath: /vite-react-swc/src/pages/music/music-search/index.tsx
  * @Description:
  */

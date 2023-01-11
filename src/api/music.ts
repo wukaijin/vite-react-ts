@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-09 23:34:40
+ * @LastEditTime: 2023-01-11 12:20:13
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
@@ -46,19 +46,6 @@ export async function queryNewSongs() {
   return request
     .get<null, WithCode<{ result: QueryNewSongReturnData[] }>>('/music-api/personalized/newsong')
     .then(response => {
-      // const {
-      //   id,
-      //   name,
-      //   picUrl,
-      //   song: { artists, album }
-      // } = response.result
-      // return {
-      //   id,
-      //   name,
-      //   picUrl,
-      //   artists: artists.map(a => a.name).join(', '),
-      //   album: album.name
-      // }
       return response.result
     })
 }
