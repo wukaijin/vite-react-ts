@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-11 13:00:34
- * @LastEditTime: 2023-01-12 00:08:51
+ * @LastEditTime: 2023-01-12 13:45:05
  * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
  * @Description:
  */
@@ -64,8 +64,6 @@ const HelloPage = (props: Props) => {
     })
     return () => window.removeEventListener('mousemove', listener)
   }, [])
-
-  useEffect(() => {}, [])
 
   return (
     <div className={styled['hero-root']}>
