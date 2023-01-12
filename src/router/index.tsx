@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-12 14:40:36
+ * @LastEditTime: 2023-01-12 16:47:13
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -20,14 +20,14 @@ const MusicHome = withSuspense(lazy(() => import('@/pages/music/music-home')))
 const MusicSearch = withSuspense(lazy(() => import('@/pages/music/music-search')))
 const PlaylistDetail = withSuspense(lazy(() => import('@/pages/music/playlist-detail')))
 
-function withSuspense(Comp: ReturnType<typeof lazy>) {
+function withSuspense(Comp: ReturnType<typeof lazy>, fallback?: JSX.Element) {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={fallback || null}>
       <Comp />
     </Suspense>
   )
 }
-Suspense
+
 const config: RouteObject[] = [
   {
     path: '/',

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-10 22:20:01
+ * @LastEditTime: 2023-01-12 15:23:17
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
@@ -10,13 +10,12 @@ import { NeuButton } from '@/components/neumorphism'
 import logo from '@/assets/logo.png'
 
 type Props = {
-  keyWord: string
   setKeyWord: (str: string) => void
   query: () => void
   toggleMusicPlayer: () => void
 }
 const MusicHeader = (props: Props) => {
-  const { keyWord, setKeyWord, query, toggleMusicPlayer } = props
+  const { setKeyWord, query, toggleMusicPlayer } = props
   return (
     <div className="music-header flex">
       <span className="music-logo">

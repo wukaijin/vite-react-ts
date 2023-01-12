@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:23:36
- * @LastEditTime: 2023-01-09 23:58:29
+ * @LastEditTime: 2023-01-12 21:32:47
  * @FilePath: /vite-react-swc/src/interface/music.ts
  * @Description:
  */
@@ -157,19 +157,20 @@ export interface BannerInfo {
   video: null
 }
 export interface BlockBanner {
-  blocks: {
-    blockCode: 'HOMEPAGE_BANNER'
-    blockDemote: boolean
-    blockStyle: number
-    canClose: boolean
-    canFeedback: boolean
-    dislikeShowType: number
-    extInfo: {
-      banners: BannerInfo[]
-    }
-    showType: 'BANNER'
-    sort: number
-  }[]
+  // blocks: {
+  //   blockCode: 'HOMEPAGE_BANNER'
+  //   blockDemote: boolean
+  //   blockStyle: number
+  //   canClose: boolean
+  //   canFeedback: boolean
+  //   dislikeShowType: number
+  //   extInfo: {
+      
+  //   }
+  //   showType: 'BANNER'
+  //   sort: number
+  // }[]
+  banners: BannerInfo[]
 }
 
 export interface PlaylistTrack {

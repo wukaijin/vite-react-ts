@@ -1,17 +1,19 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-11 13:00:34
- * @LastEditTime: 2023-01-12 13:45:05
+ * @LastEditTime: 2023-01-12 22:09:33
  * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
  * @Description:
  */
-import { CSSProperties, useEffect, useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { CSSProperties, useLayoutEffect } from 'react'
+import { Close, HamburgerButton } from '@icon-park/react'
 import { useToggle } from 'ahooks'
 import clsx from 'clsx'
 import { useSpring, useSprings, animated } from '@react-spring/web'
 import styled from './hero.module.scss'
 import { throttle } from '@/utils'
+import Menu from './Menu'
+import withLicense from '@/components/shared/withLicense'
 
 type Props = {}
 
@@ -86,30 +88,21 @@ const HelloPage = (props: Props) => {
           <div className={styled['heading-secondary']}>Welcome to my website!</div>
         </animated.div>
       </div>
-      <div
-        className={clsx(styled.menu, {
-          [styled['is-open']]: open
-        })}
+      <Menu open={open} />
+      <button
+        className={clsx(
+          'btn btn-ghost  transition-all',
+          styled['menu-button'],
+          {
+            'bg-black/60': open
+          }
+        )}
+        onClick={toggle}
       >
-        <ul className="menu bg-base-100 w-56 rounded-box">
-          <li>
-            <Link to="/todos">TodoList</Link>
-          </li>
-          <li>
-            <Link to="/music">Music</Link>
-          </li>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/introduction">???</Link>
-          </li>
-        </ul>
-      </div>
-      <button className={clsx('btn btn-ghost btn-xl', styled['menu-button'])} onClick={toggle}>
-        visit
+        {!open && <HamburgerButton theme="filled" className="font-base  text-2xl" />}
+        {open && <Close theme="filled" className="font-base  text-2xl" />}
       </button>
     </div>
   )
 }
-export default HelloPage
+export default withLicense(HelloPage)

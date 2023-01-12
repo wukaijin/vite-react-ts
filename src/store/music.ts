@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 00:23:34
- * @LastEditTime: 2023-01-09 22:36:55
+ * @LastEditTime: 2023-01-12 22:24:56
  * @FilePath: /vite-react-swc/src/store/music.ts
  * @Description:
  */
@@ -19,6 +19,7 @@ export type Song = {
   lyric: string
 }
 export type State = {
+  firstOpenPlayer: boolean,
   current: Song
   playing: boolean
   showPlayer: boolean
@@ -34,6 +35,7 @@ const empty: Song = {
   lyric: ''
 }
 const initialState: State = {
+  firstOpenPlayer: true,
   playing: false,
   showPlayer: false,
   current: storedCurrent ? JSON.parse(storedCurrent) : empty
@@ -48,6 +50,10 @@ const todosSlice = createSlice({
         state.playing = action.payload
       } else {
         state.playing = !state.playing
+      }
+      if (state.firstOpenPlayer) {
+        state.firstOpenPlayer = false
+        state.showPlayer = true
       }
     },
     togglePlayer(state) {

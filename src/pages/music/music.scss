@@ -1,5 +1,5 @@
 .music-page {
-  @apply min-h-screen bg-[var(--neu-greyLight-1)];
+  @apply min-h-screen;
 }
 .music-header {
   @apply sticky top-0 z-10 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg rounded-2xl;

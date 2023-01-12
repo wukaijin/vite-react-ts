@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-11 12:20:13
+ * @LastEditTime: 2023-01-12 21:32:38
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
@@ -80,9 +80,9 @@ export async function findBall() {
 }
 export async function queryBanner() {
   return request
-    .get<null, WithCode<{ data: BlockBanner }>>('/music-api/homepage/block/page')
+    .get<null, WithCode<BlockBanner>>('/music-api/banner?type=2')
     .then(response => {
-      return response.data.blocks[0].extInfo.banners
+      return response.banners
     })
 }
 

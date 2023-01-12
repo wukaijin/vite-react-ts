@@ -1,14 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-11 12:20:22
+ * @LastEditTime: 2023-01-12 22:35:58
  * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
 import { memo, startTransition, useCallback, useState } from 'react'
 import { useRequest } from 'ahooks'
 import clsx from 'clsx'
-import { Play } from '@icon-park/react'
+import { PauseOne, Play } from '@icon-park/react'
 import { connect, ConnectedProps } from 'react-redux'
 import { queryLyric, queryNewSongs, querySrc } from '@/api/music'
 import { QueryNewSongReturnData } from '@/interface/music'
@@ -21,6 +21,7 @@ import Loading from '@/components/base/Loading'
 
 const connector = connect(
   (state: RootState) => ({
+    playing: state.music.playing,
     current: state.music.current
   }),
   { updateCurrentSong, togglePlaying }
@@ -32,11 +33,16 @@ type ItemProps = WithReduxProps & {
 const NewSongItem = connector(
   ({
     song,
+    playing,
     updateCurrentSong: updateCS,
-    // togglePlaying: toggleP,
+    togglePlaying: toggleP,
     current: CurrentPS
   }: ItemProps) => {
     const play = useCallback(async () => {
+      if (playing && CurrentPS.id === song.id) {
+        toggleP()
+        return
+      }
       const url = await querySrc(`${song.id}`)
       updateCS({
         name: song.name,
@@ -64,13 +70,21 @@ const NewSongItem = connector(
               imageProps={{ className: 'rounded-t-xl' }}
             />
             <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center bg-gray-700/20 backdrop-blur-sm opacity-0 hover:opacity-100">
-              <Play
-                theme="filled"
-                className="text-[5rem] sm:text-[3rem] lg:text-[4rem] rounded-full opacity-80 play-pulse"
-              />
+              {(!playing || CurrentPS.id !== song.id) && (
+                <Play
+                  theme="filled"
+                  className="text-[5rem] sm:text-[3rem] lg:text-[4rem] rounded-full opacity-80 play-pulse"
+                />
+              )}
+              {playing && CurrentPS.id === song.id && (
+                <PauseOne
+                  theme="filled"
+                  className="text-[5rem] sm:text-[3rem] lg:text-[4rem] rounded-full opacity-80"
+                />
+              )}
             </div>
           </div>
-          <div className={clsx('p-2', { 'bg-wave': CurrentPS.id === song.id })}>
+          <div className={clsx('p-2', { 'bg-wave': CurrentPS.id === song.id && playing })}>
             <div className="text-sm text-gray-700 mb-1 truncate">{song.name}</div>
             <div className="text-xs text-gray-500 truncate mb-1">
               <span>{song.song.artists.map(a => a.name).join(', ')}</span>

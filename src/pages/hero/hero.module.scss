@@ -74,10 +74,11 @@
   align-items: center;
   background: var(--gradient-bg);
   clip-path: circle(0% at calc(100% - 2rem) 2rem);
-  transition: clip-path 500ms;
+  transition: clip-path 1200ms;
   // font-size: clamp(1rem, 2vw, 4rem);
   &.is-open {
-    clip-path: circle(200% at calc(100% - 2rem) 2rem);
+    clip-path: circle(160% at calc(100% - 2rem) 2rem);
+    transition: clip-path 800ms;
   }
 }
 .menu-button {
