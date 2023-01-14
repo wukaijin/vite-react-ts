@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-11 13:00:34
- * @LastEditTime: 2023-01-12 22:09:33
+ * @LastEditTime: 2023-01-12 23:18:32
  * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
  * @Description:
  */
@@ -22,6 +22,8 @@ const headingCharsLength = headingChars.length
 
 const HelloPage = (props: Props) => {
   const [open, { toggle }] = useToggle()
+  const [firstIn, { toggle: toggleFirst }] = useToggle(true)
+  const [animateDone, { toggle: toggleAnimateDone }] = useToggle(false)
   const [springs, apis] = useSprings(headingCharsLength, i => ({
     from: { opacity: 0, y: 120 }
   }))
@@ -62,6 +64,7 @@ const HelloPage = (props: Props) => {
       delay: headingCharsLength * 100 + 4000,
       onResolve() {
         window.addEventListener('mousemove', listener)
+        toggleAnimateDone()
       }
     })
     return () => window.removeEventListener('mousemove', listener)
@@ -91,15 +94,19 @@ const HelloPage = (props: Props) => {
       <Menu open={open} />
       <button
         className={clsx(
-          'btn btn-ghost  transition-all',
+          'peer btn btn-ghost hover:animate-none transition-all]',
           styled['menu-button'],
           {
-            'bg-black/60': open
+            'bg-black/60': open,
+            'animate-ping': firstIn && animateDone
           }
         )}
-        onClick={toggle}
+        onClick={() => {
+          if (firstIn) toggleFirst()
+          toggle()
+        }}
       >
-        {!open && <HamburgerButton theme="filled" className="font-base  text-2xl" />}
+        {!open && <HamburgerButton theme="filled" className="font-base text-2xl" />}
         {open && <Close theme="filled" className="font-base  text-2xl" />}
       </button>
     </div>

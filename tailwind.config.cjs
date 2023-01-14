@@ -1,17 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
- * @LastEditTime: 2023-01-06 15:25:08
+ * @LastEditTime: 2023-01-14 11:09:59
  * @FilePath: /vite-react-swc/tailwind.config.cjs
  * @Description:
  */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    'node_modules/daisyui/dist/**/*.js',
-    './src/**/*.{html,jsx,tsx}',
-    './index.html'
-  ],
+  content: ['node_modules/daisyui/dist/**/*.js', './src/**/*.{html,jsx,tsx}', './index.html'],
   daisyui: {
     styled: true,
     themes: true,
@@ -56,5 +52,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('daisyui')]
+  plugins: [require('@tailwindcss/line-clamp'), require('daisyui')]
 }
