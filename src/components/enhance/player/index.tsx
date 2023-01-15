@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-09 22:34:20
+ * @LastEditTime: 2023-01-15 13:50:09
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -123,6 +123,7 @@ export class Player extends Component<Props, State> {
       })
       .catch(err => {
         console.error('play error: ', err)
+        eventemitter.once(EVENT_KEYS.MUSIC_PLAYER_CAN_PLAY, () => this.play())
       })
   }
   pause() {

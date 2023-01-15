@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-12 15:23:17
+ * @LastEditTime: 2023-01-15 13:56:53
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
@@ -65,12 +65,12 @@ const MusicHeader = (props: Props) => {
         </div>
       </span>
       <span className="mx-2">
-        <NeuButton className="ml-2 " size="xs" onClick={() => toggleMusicPlayer()}>
+        <button className="btn btn-circle btn-ghost" onClick={() => toggleMusicPlayer()}>
           <Control
             theme="outline"
-            className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
+            className=" text-2xl cursor-pointer text-indigo-500"
           />
-        </NeuButton>
+        </button>
       </span>
     </div>
   )

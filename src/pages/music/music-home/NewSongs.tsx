@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-12 22:35:58
+ * @LastEditTime: 2023-01-15 13:53:12
  * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
@@ -40,7 +40,7 @@ const NewSongItem = connector(
   }: ItemProps) => {
     const play = useCallback(async () => {
       if (playing && CurrentPS.id === song.id) {
-        toggleP()
+        toggleP(false)
         return
       }
       const url = await querySrc(`${song.id}`)
@@ -59,7 +59,7 @@ const NewSongItem = connector(
       startTransition(() => {
         eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
       })
-    }, [])
+    }, [playing, CurrentPS])
     return (
       <div className="rounded-xl overflow-hidden backdrop-blur relative bg-white bg-opacity-20 bound-scale">
         <div className="">
