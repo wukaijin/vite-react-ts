@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-09 22:03:26
+ * @LastEditTime: 2023-01-14 21:38:35
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
@@ -26,7 +26,7 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
   const [keyWord, setKeyWord] = useState<string>('')
   const [id, setId] = useState<string>('')
   const [data, setData] = useState<QueryListData[]>([])
-  const [show, setShow] = useState(false)
+  const [visible, setVisibility] = useState(false)
   // const
   useMount(() => {
     eventemitter.on
@@ -39,7 +39,7 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
           <button className="btn btn-primary" onClick={loginAnonymous}>
             匿名登录
           </button>
-          <button className="btn btn-primary" onClick={() => setShow(!show)}>
+          <button className="btn btn-primary" onClick={() => setVisibility(!visible)}>
             toggle Popup
           </button>
         </div>
@@ -100,13 +100,13 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
         </div>
       </div>
       <Popup
-        show={show}
+        visible={visible}
         from={isMobile ? 'bottom' : 'right'}
         className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
       >
         <Player
           from={isMobile ? 'bottom' : 'right'}
-          togglePlayer={() => setShow(!show)}
+          togglePlayer={() => setVisibility(!visible)}
         />
       </Popup>
     </div>

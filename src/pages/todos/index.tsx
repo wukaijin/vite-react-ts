@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2023-01-08 02:47:31
+ * @LastEditTime: 2023-01-14 21:39:06
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
@@ -34,7 +34,7 @@ export const STATE_MAPPING = ['All', 'Pending', 'Done'] as const
 
 const Todos: React.FC<{}> = props => {
   const navigate = useNavigate()
-  const [show, setShow] = useState(false)
+  const [visible, setVisibility] = useState(false)
   const [todos, setTodos] = useState<Todo[]>([])
   const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
   const filteredTodos = useMemo(
@@ -69,7 +69,7 @@ const Todos: React.FC<{}> = props => {
             size="sm"
             className="glass mr-3"
             onClick={() => {
-              setShow(true)
+              setVisibility(true)
             }}
           >
             <PlusIcon className="w-6 h-6 text-white" />
@@ -140,10 +140,10 @@ const Todos: React.FC<{}> = props => {
         </div>
       </div>
       <AddActionModel
-        show={show}
-        onClose={() => setShow(false)}
+        visible={visible}
+        onClose={() => setVisibility(false)}
         onConfirm={(text: string) => {
-          setShow(false)
+          setVisibility(false)
           setTodos(ts => ([{
             id: getUniqueId(),
             text: text || '',

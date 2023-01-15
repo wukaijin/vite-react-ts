@@ -49,7 +49,7 @@ const BlogLayout = (props: Props) => {
         </div>
       </div>
       <div className={clsx('pt-14')}>{props.children}</div>
-      <Modal show={modalShow}>
+      <Modal visible={modalShow}>
         <h3 className="font-bold text-lg">You should signIn please!</h3>
         <p className="py-4 ">
           <span className="line-through">

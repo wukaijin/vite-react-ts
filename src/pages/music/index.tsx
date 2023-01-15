@@ -32,7 +32,7 @@ const MusicPage = ({
   const query = useCallback(async () => {
     navigate(`search?keyWord=${keyWord}`)
   }, [keyWord])
-  const show = useMemo(() => showPlayer, [showPlayer])
+  const visible = useMemo(() => showPlayer, [showPlayer])
   return (
     <div className="music-page bg-spectrum-light-reverse pb-8" style={style}>
       <MusicHeader
@@ -42,7 +42,7 @@ const MusicPage = ({
       />
       <Outlet context={{ setTopStyle: setStyle }} />
       <Popup
-        show={show}
+        visible={visible}
         from={isMobile ? 'bottom' : 'right'}
         className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
       >

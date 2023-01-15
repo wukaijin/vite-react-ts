@@ -10,7 +10,7 @@ import Button from '@/components/base/Button'
 import Modal from '@/components/base/Modal'
 
 type Props = {
-  show: boolean
+  visible: boolean
   onConfirm: (text: string) => void
   onClose: () => void
 }
@@ -19,9 +19,9 @@ const AddActionModel: FC<Props> = props => {
   const [text, setText] = useState<string>('')
   useEffect(() => {
     setText('')
-  }, [props.show])
+  }, [props.visible])
   return (
-    <Modal show={props.show}>
+    <Modal visible={props.visible}>
       <div className="text-xl mb-4">Todo</div>
       <div className="mb-4">
         <input

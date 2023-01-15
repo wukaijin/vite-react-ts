@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 23:08:47
- * @LastEditTime: 2023-01-02 22:33:56
- * @FilePath: /vite-react-swc/src/components/enhance/Modal.tsx
+ * @LastEditTime: 2023-01-14 22:18:27
+ * @FilePath: /vite-react-swc/src/components/base/Modal.tsx
  * @Description:
  */
-import { HTMLAttributes, PropsWithChildren, useEffect, useRef } from 'react'
+import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
@@ -13,7 +13,7 @@ import clsx from 'clsx'
 type Props = PropsWithChildren<
   HTMLAttributes<HTMLDivElement> & {
     dataTheme?: string
-    show: boolean
+    visible: boolean
     onClickBackdrop?: () => void
   }
 >
@@ -21,7 +21,8 @@ type Props = PropsWithChildren<
 const MODAL_DOM: Element = document.querySelector('#modal')!
 
 function Modal(props: Props) {
-  const { show, children, onClickBackdrop, dataTheme, className, ...res } = props
+  const { visible, children, onClickBackdrop, dataTheme, className, ...res } = props
+  const [actVisible, setActVisibility] = useState(false)
   const el = useRef<HTMLDivElement>()
   useEffect(() => {
     el.current = document.createElement('div')
@@ -33,26 +34,27 @@ function Modal(props: Props) {
   }, [])
   useEffect(() => {
     if (el.current) {
-      if (show === true) {
+      if (visible === true) {
         MODAL_DOM.appendChild(el.current!)
       } else {
         setTimeout(() => {
           if (el.current && MODAL_DOM.contains(el.current)) {
             MODAL_DOM.removeChild(el.current)
           }
-        }, 100)
+        }, 500)
       }
     }
-  }, [show])
+    setActVisibility(visible)
+  }, [visible])
   if (!el.current) return null
 
   const containerClasses = clsx('modal', {
-    'modal-open': show
+    'modal-open': actVisible
   })
   return createPortal(
     <div
       aria-label="Modal"
-      aria-hidden={!show}
+      aria-hidden={!visible}
       data-theme={dataTheme}
       className={containerClasses}
       onClick={e => {

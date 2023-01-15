@@ -28,8 +28,8 @@ const PlayButton = (props: Props) => {
   return (
     <div className={clsx('neu-play-button', btnSize, className)}>
       <span className={clsx('neu-play-icon', iconSize, TT)}>
-        <Pause className={clsx('pause', { show: playing })} theme="filled" onClick={onChange} />
-        <PlayOne className={clsx('play', { show: !playing })} theme="filled" onClick={onChange} />
+        <Pause className={clsx('pause', { visible: playing })} theme="filled" onClick={onChange} />
+        <PlayOne className={clsx('play', { visible: !playing })} theme="filled" onClick={onChange} />
       </span>
       <span className={clsx('neu-play-back-1', iconSize, { paused: !playing })} />
       <span className={clsx('neu-play-back-2', iconSize, { paused: !playing })} />
