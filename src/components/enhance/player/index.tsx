@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-15 13:50:09
+ * @LastEditTime: 2023-01-15 14:44:28
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -13,7 +13,7 @@ import { NeuPlayButton, NeuPanel, NeuButton, NeuSlider } from '@/components/neum
 import MusicPlayer from './MusicPlayer'
 import LyricPanel from './LyricPanel'
 import { musicDurationToString, parseLyric, parseMusicTime } from '@/utils'
-import { Song, togglePlaying } from '@/store/music'
+import { togglePlayer, togglePlaying } from '@/store/music'
 import eventemitter from '@/utils/eventemitter'
 import { EVENT_KEYS } from '@/const'
 import { RootState } from '@/store'
@@ -21,7 +21,6 @@ import { RootState } from '@/store'
 // const PXDY = './pxdy.mp3'
 type Props = WithReduxProps & {
   from: 'bottom' | 'right'
-  togglePlayer: () => void
 }
 
 type State = {
@@ -160,7 +159,7 @@ export class Player extends Component<Props, State> {
   }
   render() {
     const { playing, musicSrc, duration, currentTime, currentLycIndex, lyricObject } = this.state
-    const { from, togglePlayer, current } = this.props
+    const { from, togglePlayer: toggleP, current } = this.props
     return (
       <div className="w-[100vw] h-[100vh] sm:h-auto sm:w-[400px] text-gray-400">
         <NeuPanel className="p-6 h-[100%] sm:pr-2 sm:rounded-r-none flex flex-col shadow-none">
@@ -172,7 +171,7 @@ export class Player extends Component<Props, State> {
                   'rotate-90': from === 'right',
                   'rotate-180': from === 'bottom'
                 })}
-                onClick={togglePlayer}
+                onClick={() => toggleP()}
               />
             </NeuButton>
             <NeuButton size="xs">
@@ -237,7 +236,7 @@ const connector = connect(
     current: state.music.current,
     playing: state.music.playing
   }),
-  { togglePlaying }
+  { togglePlaying, togglePlayer }
 )
 type WithReduxProps = ConnectedProps<typeof connector>
 export default connector(Player)

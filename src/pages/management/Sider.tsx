@@ -1,30 +1,64 @@
-import { useNavigate } from 'react-router-dom'
-
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 15:41:37
- * @LastEditTime: 2023-01-14 16:12:23
+ * @LastEditTime: 2023-01-15 22:00:59
  * @FilePath: /vite-react-swc/src/pages/management/Sider.tsx
  * @Description:
  */
-type Props = {}
+import clsx from 'clsx'
+import { NavLink } from 'react-router-dom'
+
+type Props = {
+  visible: boolean
+}
 const Sider = (props: Props) => {
-  const navigate = useNavigate()
+  const { visible } = props
   return (
-    <div className="basis-[240px]">
-      <div className="fixed w-[240px] h-[calc(100vh-4rem)] top-[4rem] pb-4 bg-base-100 border-r">
-        <ul className="menu bg-base-100 w-full p-2 rounded-box">
+    <div
+      className={clsx(
+        {
+          'basis-[240px]': visible,
+          'basis-[0px]': !visible
+        },
+        'transition-all'
+      )}
+    >
+      <div
+        className={clsx(
+          'fixed  h-[calc(100vh-4rem)] top-[4rem] pb-4 bg-base-100 border-r transition-all overflow-hidden',
+          {
+            'w-[240px]': visible,
+            'w-[0px]': !visible
+          }
+        )}
+      >
+        <ul className="menu menu-compact bg-base-100 w-full p-2 rounded-box">
           <li className="menu-title">
             <span>Blog</span>
           </li>
-          <li onClick={() => navigate('/management/blog/modules')}>
-            <span>Modules</span>
+          <li>
+            <NavLink
+              to="/management/blog/categories"
+              className={({ isActive }) => (isActive ? 'active' : undefined)}
+            >
+              Categories
+            </NavLink>
           </li>
-          <li onClick={() => navigate('/management/blog/tags')}>
-            <span>Tags</span>
+          <li>
+            <NavLink
+              to="/management/blog/tags"
+              className={({ isActive }) => (isActive ? 'active' : undefined)}
+            >
+              Tags
+            </NavLink>
           </li>
-          <li onClick={() => navigate('/management/blog/articles')}>
-            <span>Articles</span>
+          <li>
+            <NavLink
+              to="/management/blog/articles"
+              className={({ isActive }) => (isActive ? 'active  ' : undefined)}
+            >
+              Articles
+            </NavLink>
           </li>
           <li className="menu-title">
             <span>Music</span>

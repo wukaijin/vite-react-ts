@@ -1,12 +1,16 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-14 14:39:50
+ * @LastEditTime: 2023-01-16 13:56:21
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
- * @Description: 
+ * @Description:
  */
+
+import { useNavigate } from 'react-router-dom'
+
 type Props = {}
 const ArticleCard = (props: Props) => {
+  const navigate = useNavigate()
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-400/20 backdrop-blur-md">
       <figure>
@@ -17,7 +21,10 @@ const ArticleCard = (props: Props) => {
         />
       </figure>
       <div className="flex-1 p-4 overflow-hidden">
-        <h2 className="card-title text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1">
+        <h2
+          className="card-title text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1"
+          onClick={() => navigate('/blog/article')}
+        >
           [千库] 海量编程素材免费下载-,高质精品素材网站
         </h2>
         <p className="my-2 hover:opacity-80 cursor-pointer">JavaScript</p>

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-11 15:13:10
+ * @LastEditTime: 2023-01-15 16:30:15
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -32,6 +32,7 @@ module.exports = {
     semi: 0,
     'comma-dangle': 0,
     'no-undef': 0,
+    'no-shadow': 0,
     'arrow-parens': 0,
     'arrow-body-style': 0,
     'function-paren-newline': 0,
@@ -58,6 +59,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-types': 0,
+    "@typescript-eslint/no-shadow": ["error"],
     'import/no-unresolved': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
@@ -73,6 +75,7 @@ module.exports = {
     'react/destructuring-assignment': 0,
     'react/no-unused-class-component-methods': 0,
     'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/control-has-associated-label': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0

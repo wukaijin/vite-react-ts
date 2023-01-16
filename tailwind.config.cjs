@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
- * @LastEditTime: 2023-01-14 11:09:59
+ * @LastEditTime: 2023-01-15 21:41:22
  * @FilePath: /vite-react-swc/tailwind.config.cjs
  * @Description:
  */
@@ -20,11 +20,13 @@ module.exports = {
     themes: [
       {
         myTheme: {
-          primary: '#608ffc',
-          'primary-focus': '#5084fc',
+          // primary: '#608ffc',
+          // 'primary-focus': '#5084fc',
+          primary: '#A370F0',
+          'primary-focus': '#9370F0',
           'primary-content': '#ffffff',
-          secondary: '#A370F0',
-          'secondary-focus': '#9370F0',
+          secondary: '#608ffc',
+          'secondary-focus': '#5084fc',
           'secondary-content': '#ffffff',
           accent: '#37cdbe',
           'accent-focus': '#2aa79b',
