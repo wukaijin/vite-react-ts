@@ -1,19 +1,21 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:03:37
- * @LastEditTime: 2023-01-16 13:44:17
+ * @LastEditTime: 2023-01-18 01:57:21
  * @FilePath: /vite-react-swc/src/pages/management/blog/categories/index.tsx
  * @Description:
  */
 import { useMemo, useState } from 'react'
-import { useReactive, useToggle } from 'ahooks'
+import { useReactive, useRequest, useToggle } from 'ahooks'
+import RSelect from 'react-select'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
 import { Category } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import Modal from '@/components/base/Modal'
 import useModal from '@/hooks/useModal'
-import { MOCK_CATEGORIES } from '../mock'
+import { CategoryApi } from '@/api/blog'
+import Select from '@/components/base/Select'
 
 type Type = 'Add' | 'Edit'
 
@@ -21,30 +23,65 @@ type Props = {}
 
 const BlogCategories = (props: Props) => {
   const [visible, { toggle }] = useToggle()
-  const [categories, setCategories] = useState(MOCK_CATEGORIES)
   const [type, setType] = useState<Type>('Add')
   const { jsx: ConfirmModal, open: openModal } = useModal()
-  const formFields = useReactive({
+  const formFields = useReactive<Category>({
+    id: '',
     text: '',
     defaultPoster: '',
-    belongs: 0
+    belongs: null
+  })
+  const { data: categories = [], run: fetchCategories } = useRequest(CategoryApi.findAll)
+  const { runAsync: reqAdd, loading: adding } = useRequest(CategoryApi.add, {
+    manual: true
+  })
+  const { runAsync: reqEdit, loading: editing } = useRequest(CategoryApi.edit, {
+    manual: true
+  })
+  const { runAsync: reqDelete } = useRequest(CategoryApi.delete, {
+    manual: true
   })
   const options = useMemo(() => categories.filter(m => !m.belongs), [categories])
 
   const add = () => {
     formFields.text = ''
-    formFields.belongs = 0
+    formFields.id = ''
+    formFields.belongs = null
+    formFields.defaultPoster = ''
     setType('Add')
     toggle()
   }
   const edit = (item: Category) => {
     console.log(item)
     formFields.text = item.text
-    formFields.belongs = item.belongs!
+    formFields.id = item.id
+    formFields.defaultPoster = item.defaultPoster
+    formFields.belongs = item.belongs || null
     setType('Edit')
     toggle()
   }
-
+  const handleFormAction = () => {
+    if (type === 'Add') {
+      const params: Partial<Category> = { ...formFields }
+      delete params.id
+      if (!params.belongs) {
+        params.belongs = null
+      }
+      reqAdd(params).then(res => {
+        toggle()
+        fetchCategories()
+      })
+    } else {
+      const params: Partial<Category> = { ...formFields }
+      if (!params.belongs) {
+        params.belongs = null
+      }
+      reqEdit(formFields.id, params).then(res => {
+        toggle()
+        fetchCategories()
+      })
+    }
+  }
   return (
     <div>
       <Breadcrumbs>
@@ -84,8 +121,9 @@ const BlogCategories = (props: Props) => {
                     onClick={() => {
                       openModal({
                         content: 'Delete it?',
-                        onConfirm() {
-                          console.log(123)
+                        async onConfirm() {
+                          await reqDelete(category.id)
+                          fetchCategories()
                         }
                       })
                     }}
@@ -126,12 +164,27 @@ const BlogCategories = (props: Props) => {
             </div>
             <div className="flex items-center justify-center">
               <label className="w-20 basis-20">Belongs:</label>
-              <select className="select select-primary flex-1">
-                <option selected={formFields.belongs === 0} />
+              {/* <select className="select select-primary flex-1">
+                <option selected={formFields.belongs === ''} />
                 {options.map(o => (
                   <option selected={o.id === formFields.belongs}>{o.text}</option>
                 ))}
-              </select>
+              </select> */}
+              {/* <Select
+                className="select-primary flex-1"
+                value={formFields.belongs}
+                options={options.map(o => ({ value: o.id, label: o.text }))}
+                onChange={id => (formFields.belongs = id as string)}
+              /> */}
+              <RSelect
+                className="flex-1"
+                isClearable
+                value={options.find(e => e.id === formFields.belongs)}
+                onChange={c => (formFields.belongs = c?.id || '')}
+                options={options}
+                getOptionLabel={(c: Category) => c.text}
+                getOptionValue={(c: Category) => c.id}
+              />
             </div>
           </form>
         </div>
@@ -139,7 +192,7 @@ const BlogCategories = (props: Props) => {
           <button className="btn btn-ghost" onClick={toggle}>
             Cancel
           </button>
-          <button className="btn btn-secondary" onClick={toggle}>
+          <button className="btn btn-secondary" onClick={handleFormAction}>
             Confirm
           </button>
         </div>

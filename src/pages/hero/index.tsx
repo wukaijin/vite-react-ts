@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-11 13:00:34
- * @LastEditTime: 2023-01-12 23:18:32
+ * @LastEditTime: 2023-01-16 14:36:37
  * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
  * @Description:
  */
@@ -93,14 +93,10 @@ const HelloPage = (props: Props) => {
       </div>
       <Menu open={open} />
       <button
-        className={clsx(
-          'peer btn btn-ghost hover:animate-none transition-all]',
-          styled['menu-button'],
-          {
-            'bg-black/60': open,
-            'animate-ping': firstIn && animateDone
-          }
-        )}
+        className={clsx('btn btn-ghost hover:animate-none transition-all]', styled['menu-button'], {
+          'bg-black/60': open,
+          'animate-ping': firstIn && animateDone
+        })}
         onClick={() => {
           if (firstIn) toggleFirst()
           toggle()

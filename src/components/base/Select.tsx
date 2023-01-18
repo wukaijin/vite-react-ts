@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 22:51:45
- * @LastEditTime: 2023-01-16 00:47:56
+ * @LastEditTime: 2023-01-18 00:28:49
  * @FilePath: /vite-react-swc/src/components/base/Select.tsx
  * @Description:
  */
@@ -28,10 +28,13 @@ const Select = (props: Props) => {
   const spanSize = useSize(spanRef)
   useClickAway(() => {
     setLeft()
-  }, spanRef)
+  }, menuRef)
 
   useLayoutEffect(() => {
     setWidth(spanSize?.width || 0)
+    document.addEventListener('click', (e) => {
+      console.log(e)
+    }, true)
   }, [spanSize])
 
   const { options, onChange, className = '', value = '' } = props
@@ -66,7 +69,7 @@ const Select = (props: Props) => {
       <ul
         ref={menuRef}
         className={clsx(
-          'menu rounded-box bg-base-100 p-2 absolute -bottom-2 overflow-auto flex-nowrap',
+          'menu rounded-box bg-base-100 p-2 absolute z-[1000] -bottom-2 overflow-auto flex-nowrap',
           ...menuClassName,
           {
             hidden: !visible,

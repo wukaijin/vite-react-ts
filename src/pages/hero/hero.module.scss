@@ -73,12 +73,14 @@
   pointer-events: all;
   align-items: center;
   background: var(--gradient-bg);
-  clip-path: circle(0% at calc(100% - 2rem) 2rem);
-  transition: clip-path 1200ms;
+  clip-path: circle(0% at calc(90% - 2rem) calc(10% + 2rem));
+  transition: clip-path 1000ms;
+  // transition-timing-function: ease-in;
   // font-size: clamp(1rem, 2vw, 4rem);
   &.is-open {
-    clip-path: circle(160% at calc(100% - 2rem) 2rem);
-    transition: clip-path 800ms;
+    clip-path: circle(160% at calc(90% - 2rem) calc(10% + 2rem));
+    transition: clip-path 1000ms;
+    // transition-timing-function: ease-out;
   }
 }
 .menu-button {

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 21:54:20
- * @LastEditTime: 2023-01-14 14:36:26
+ * @LastEditTime: 2023-01-16 15:30:04
  * @FilePath: /vite-react-swc/src/pages/blog/mock.ts
  * @Description:
  */
@@ -45,7 +45,7 @@ These features **do not work by default**.
 | Feature    | Support              |
 | ---------: | :------------------- |
 | CommonMark | 100%                 |
-| GFM        | 100% w/  |
+| GFM        | 100% w/              |
 
 ~~strikethrough~~
 

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 23:08:47
- * @LastEditTime: 2023-01-14 22:18:27
+ * @LastEditTime: 2023-01-18 00:31:56
  * @FilePath: /vite-react-swc/src/components/base/Modal.tsx
  * @Description:
  */
@@ -65,6 +65,9 @@ function Modal(props: Props) {
             onClickBackdrop()
           }
         }
+        // if (onClickBackdrop) {
+        //   onClickBackdrop()
+        // }
       }}
     >
       <div {...res} data-theme={dataTheme} className={twMerge('modal-box', className)}>

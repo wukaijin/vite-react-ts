@@ -1,21 +1,21 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:04:18
- * @LastEditTime: 2023-01-15 21:44:21
+ * @LastEditTime: 2023-01-17 17:19:32
  * @FilePath: /vite-react-swc/src/pages/management/blog/tags/index.tsx
  * @Description:
  */
 
 import clsx from 'clsx'
 import { useState } from 'react'
-import { useReactive, useToggle } from 'ahooks'
+import { useReactive, useRequest, useToggle } from 'ahooks'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
 import { Tag } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import Modal from '@/components/base/Modal'
 import useModal from '@/hooks/useModal'
-import { MOCK_TAGS } from '../mock'
+import { TagApi } from '@/api/blog'
 
 type Type = 'Add' | 'Edit'
 
@@ -32,25 +32,52 @@ const colorSquare = (color: string) => {
 type Props = {}
 const BlogTags = (props: Props) => {
   const [visible, { toggle }] = useToggle()
-  const [tags, setTags] = useState(MOCK_TAGS)
+
   const [type, setType] = useState<Type>('Add')
   const { jsx: ConfirmModal, open: openModal } = useModal()
   const formFields = useReactive({
+    id: '',
     text: '',
     color: ''
   })
+  const { data: tags = [], run: fetchTags } = useRequest(TagApi.findAll)
+  const { runAsync: reqAdd, loading: adding } = useRequest(TagApi.add, {
+    manual: true
+  })
+  const { runAsync: reqEdit, loading: editing } = useRequest(TagApi.edit, {
+    manual: true
+  })
+  const { runAsync: reqDelete } = useRequest(TagApi.delete, {
+    manual: true
+  })
   const add = () => {
+    formFields.id = ''
     formFields.text = ''
     formFields.color = ''
     setType('Add')
     toggle()
   }
   const edit = (item: Tag) => {
-    console.log(item)
+    formFields.id = item.id
     formFields.text = item.text
     formFields.color = item.color
     setType('Edit')
     toggle()
+  }
+  const handleFormAction = () => {
+    if (type === 'Add') {
+      const params: Partial<Tag> = { ...formFields }
+      delete params.id
+      reqAdd(params).then(res => {
+        toggle()
+        fetchTags()
+      })
+    } else {
+      reqEdit(formFields.id, formFields).then(res => {
+        toggle()
+        fetchTags()
+      })
+    }
   }
 
   return (
@@ -74,38 +101,40 @@ const BlogTags = (props: Props) => {
           <span />
         </Table.Head>
         <Table.Body>
-          {tags.map(tag => {
-            return (
-              <Table.Row key={tag.id}>
-                <span>{tag.id}</span>
-                <span>{tag.text}</span>
-                <span className="inline-flex items-center justify-center">
-                  <span>{colorSquare(tag.color)}</span>
-                  <span>{tag.color}</span>
-                </span>
-                <span>
-                  <button className="btn btn-xs btn-primary mr-1" onClick={() => edit(tag)}>
-                    <Edit className="text-md mr-1" />
-                    <span>Edit</span>
-                  </button>
-                  <button
-                    className="btn btn-xs btn-error"
-                    onClick={() => {
-                      openModal({
-                        content: 'Delete it?',
-                        onConfirm() {
-                          console.log(123)
-                        }
-                      })
-                    }}
-                  >
-                    <Delete className="text-md mr-1" />
-                    <span>Delete</span>
-                  </button>
-                </span>
-              </Table.Row>
-            )
-          })}
+          {tags &&
+            tags.map(tag => {
+              return (
+                <Table.Row key={tag.id}>
+                  <span>{tag.id}</span>
+                  <span>{tag.text}</span>
+                  <span className="inline-flex items-center justify-center">
+                    <span>{colorSquare(tag.color)}</span>
+                    <span>{tag.color}</span>
+                  </span>
+                  <span>
+                    <button className="btn btn-xs btn-primary mr-1" onClick={() => edit(tag)}>
+                      <Edit className="text-md mr-1" />
+                      <span>Edit</span>
+                    </button>
+                    <button
+                      className="btn btn-xs btn-error"
+                      onClick={() => {
+                        openModal({
+                          content: 'Delete it?',
+                          async onConfirm() {
+                            await reqDelete(tag.id)
+                            fetchTags()
+                          }
+                        })
+                      }}
+                    >
+                      <Delete className="text-md mr-1" />
+                      <span>Delete</span>
+                    </button>
+                  </span>
+                </Table.Row>
+              )
+            })}
         </Table.Body>
       </Table>
       {ConfirmModal}
@@ -136,10 +165,20 @@ const BlogTags = (props: Props) => {
           </form>
         </div>
         <div className="modal-action">
-          <button className="btn btn-ghost" onClick={toggle}>
+          <button
+            className={clsx('btn btn-ghost', {
+              loading: adding || editing
+            })}
+            onClick={toggle}
+          >
             Cancel
           </button>
-          <button className="btn btn-primary" onClick={toggle}>
+          <button
+            className={clsx('btn btn-primary', {
+              loading: adding || editing
+            })}
+            onClick={handleFormAction}
+          >
             Confirm
           </button>
         </div>

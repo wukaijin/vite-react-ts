@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 14:21:15
- * @LastEditTime: 2023-01-14 14:56:48
+ * @LastEditTime: 2023-01-16 14:43:23
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
@@ -9,8 +9,7 @@ import styled from '../blog.module.scss'
 
 const menus = [
   {
-    content: 'Resent',
-    
+    content: 'Recent'
   },
   {
     content: 'Frontend',
