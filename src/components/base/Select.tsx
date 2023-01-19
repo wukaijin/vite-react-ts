@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 22:51:45
- * @LastEditTime: 2023-01-18 00:28:49
+ * @LastEditTime: 2023-01-19 23:35:00
  * @FilePath: /vite-react-swc/src/components/base/Select.tsx
  * @Description:
  */
@@ -33,7 +33,6 @@ const Select = (props: Props) => {
   useLayoutEffect(() => {
     setWidth(spanSize?.width || 0)
     document.addEventListener('click', (e) => {
-      console.log(e)
     }, true)
   }, [spanSize])
 

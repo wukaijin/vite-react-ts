@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-16 13:52:24
+ * @LastEditTime: 2023-01-19 14:27:47
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -19,6 +19,7 @@ import { withSuspense } from './utils'
 const Hero = withSuspense(lazy(() => import('@/pages/hero')))
 const Blog = withSuspense(lazy(() => import('@/pages/blog')))
 const BlogArticle = withSuspense(lazy(() => import('@/pages/blog/article')))
+const BlogCategory = withSuspense(lazy(() => import('@/pages/blog/category')))
 const MusicPage = withSuspense(lazy(() => import('@/pages/music')))
 const MusicHome = withSuspense(lazy(() => import('@/pages/music/music-home')))
 const MusicSearch = withSuspense(lazy(() => import('@/pages/music/music-search')))
@@ -54,6 +55,10 @@ const config: RouteObject[] = [
         path: 'article',
         element: BlogArticle
       },
+      {
+        path: 'category/:id',
+        element: BlogCategory
+      }
     ]
   },
   {

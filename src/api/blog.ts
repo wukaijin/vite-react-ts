@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-17 13:38:04
- * @LastEditTime: 2023-01-17 17:06:50
+ * @LastEditTime: 2023-01-19 15:16:38
  * @FilePath: /vite-react-swc/src/api/blog.ts
  * @Description:
  */
@@ -15,6 +15,9 @@ type WithWrapping<T> = T & Wrapping
 export const TagApi = {
   findAll() {
     return request.get<WithWrapping<Tag[]>>(`${BLOG_PREFIX}tag`).then(res => res.data)
+  },
+  findOne(id: Tag['id']) {
+    return request.get<WithWrapping<Tag>>(`${BLOG_PREFIX}tag/${id}`).then(res => res.data)
   },
   add(data: Partial<Tag>) {
     return request.post<WithWrapping<Tag>>(`${BLOG_PREFIX}tag`, data)
@@ -30,6 +33,9 @@ export const TagApi = {
 export const CategoryApi = {
   findAll() {
     return request.get<WithWrapping<Category[]>>(`${BLOG_PREFIX}category`).then(res => res.data)
+  },
+  findOne(id: Tag['id']) {
+    return request.get<WithWrapping<Category>>(`${BLOG_PREFIX}category/${id}`).then(res => res.data)
   },
   add(data: Partial<Category>) {
     return request.post<WithWrapping<Category>>(`${BLOG_PREFIX}category`, data)

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 17:19:32
- * @LastEditTime: 2023-01-14 21:37:20
+ * @LastEditTime: 2023-01-19 23:35:03
  * @FilePath: /vite-react-swc/src/components/base/popup/index.tsx
  * @Description:
  */
@@ -39,7 +39,6 @@ const CLASS_MAPPING: Record<From, { pop: string; show: string; hidden: string }>
 const Popup = memo((props: Props) => {
   const { children, visible, from = 'top', className, ...resProps } = props
   const { show, hidden, pop } = CLASS_MAPPING[from]
-  console.log('popups', visible)
   return (
     <div
       className={clsx(

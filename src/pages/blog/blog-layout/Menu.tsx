@@ -1,63 +1,40 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 14:21:15
- * @LastEditTime: 2023-01-16 14:43:23
+ * @LastEditTime: 2023-01-19 23:33:57
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
+import { useEffect } from 'react'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from '@/store'
 import styled from '../blog.module.scss'
+import { asyncFetchCategories } from '@/store/blog'
 
-const menus = [
-  {
-    content: 'Recent'
+const connector = connect(
+  (state: RootState) => {
+    const { categories, serializedCategories } = state.blog
+    return {
+      categories,
+      serializedCategories
+    }
   },
-  {
-    content: 'Frontend',
-    sub: [
-      {
-        content: 'CSS'
-      },
-      {
-        content: 'JavaScript'
-      }
-    ]
-  },
-  {
-    content: 'Backend',
-    sub: [
-      {
-        content: 'Database'
-      },
-      {
-        content: 'Server'
-      }
-    ]
-  },
-  {
-    content: 'OP',
-    sub: [
-      {
-        content: 'Shell'
-      },
-      {
-        content: 'Docker'
-      }
-    ]
-  },
-  {
-    content: 'Chore'
-  }
-]
-type Props = {}
-function Menu({}: Props) {
+  { fetchData: asyncFetchCategories }
+)
+
+type Props = ConnectedProps<typeof connector>
+function Menu(props: Props) {
+  useEffect(() => {
+    props.fetchData()
+  }, [])
   return (
     <ul className="menu menu-horizontal px-1">
-      {menus.map((item, index) => {
+      {props.serializedCategories.map((item, index) => {
         return (
-          <li key={index} className="">
+          <li key={item.id} className="">
             <span className="hover:text-white/50 active:bg-white/10">
-              {item.content}
-              {item.sub && item.sub.length && (
+              {item.text}
+              {item.children && !!item.children.length && (
                 <svg
                   className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -69,14 +46,12 @@ function Menu({}: Props) {
                 </svg>
               )}
             </span>
-            {item.sub && item.sub.length && (
+            {item.children && !!item.children.length && (
               <ul className="p-2">
-                {item.sub.map((subItem, i) => {
+                {item.children.map(subItem => {
                   return (
-                    <li key={i} className={styled['bg-escape']}>
-                      <span className="hover:text-white/50 active:bg-white/10">
-                        {subItem.content}
-                      </span>
+                    <li key={subItem.id} className={styled['bg-escape']}>
+                      <span className="hover:text-white/50 active:bg-white/10">{subItem.text}</span>
                     </li>
                   )
                 })}
@@ -88,4 +63,5 @@ function Menu({}: Props) {
     </ul>
   )
 }
-export default Menu
+
+export default connector(Menu)

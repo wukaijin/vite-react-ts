@@ -1,13 +1,15 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-15 13:56:53
+ * @LastEditTime: 2023-01-19 11:49:46
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
 import { Control, Search } from '@icon-park/react'
 import { NeuButton } from '@/components/neumorphism'
-import logo from '@/assets/logo.png'
+// import logo from '@/assets/logo.png'
+
+const logo = '/static-api/logo/transformer-256.png'
 
 type Props = {
   setKeyWord: (str: string) => void

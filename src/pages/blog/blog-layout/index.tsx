@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-14 15:22:20
+ * @LastEditTime: 2023-01-18 16:16:41
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { useToggle } from 'ahooks'
 import { Setting } from '@icon-park/react'
 import { HTMLAttributes } from 'react'
-import Logo from '@/components/shared/logo'
+import Logo from '@/components/shared/Logo'
 import styled from '../blog.module.scss'
 import Menu from './Menu'
 import Modal from '@/components/base/Modal'
@@ -19,7 +19,9 @@ type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
   const [modalShow, { toggle }] = useToggle()
   return (
-    <div className={clsx('min-h-screen bg-white')}>
+    <div
+      className={clsx('min-h-screen bg-white font-blog')}
+    >
       <div className={clsx(styled['bg-escape'], 'w-full fixed top-0 h-14 z-10')}>
         <div className="flex h-full items-center justify-between px-8">
           <div className="flex h-full items-center text-sm">

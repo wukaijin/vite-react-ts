@@ -56,12 +56,14 @@
     background-blend-mode: screen;
   }
   .bg-spectrum-light {
-    background: linear-gradient(#f87171, transparent), linear-gradient(to top left, #5eead4, transparent),
+    background: linear-gradient(#f87171, transparent),
+      linear-gradient(to top left, #5eead4, transparent),
       linear-gradient(to top right, #3b82f6, transparent);
     background-blend-mode: screen;
   }
   .bg-spectrum-light-reverse {
-    background: linear-gradient(#3b82f6, transparent), linear-gradient(to top left, #5eead4, transparent),
+    background: linear-gradient(#3b82f6, transparent),
+      linear-gradient(to top left, #5eead4, transparent),
       linear-gradient(to top right, #f87171, transparent);
     background-blend-mode: screen;
   }
@@ -81,4 +83,9 @@
       rgb(63, 241, 253) 100%
     );
   }
+}
+
+.font-blog {
+  font-family: 'Comic Sans MS', PingFangSC-Regular, 'Microsoft YaHei', SimHei, monospace, Times,
+    serif;
 }

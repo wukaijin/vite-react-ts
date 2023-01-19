@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-16 13:56:21
+ * @LastEditTime: 2023-01-18 22:41:34
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -12,7 +12,7 @@ type Props = {}
 const ArticleCard = (props: Props) => {
   const navigate = useNavigate()
   return (
-    <div className="flex rounded-xl shadow-xl bg-gray-400/20 backdrop-blur-md">
+    <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
       <figure>
         <img
           className="w-32 aspect-square rounded-l-xl"
@@ -28,12 +28,10 @@ const ArticleCard = (props: Props) => {
           [千库] 海量编程素材免费下载-,高质精品素材网站
         </h2>
         <p className="my-2 hover:opacity-80 cursor-pointer">JavaScript</p>
-        <p>
-          <div className="badge badge-primary mr-2 cursor-pointer hover:scale-110">
-            design pattern
-          </div>
+        <div>
+          <p className="badge badge-primary mr-2 cursor-pointer hover:scale-110">design pattern</p>
           <div className="badge badge-secondary cursor-pointer  hover:scale-110">TypeScript</div>
-        </p>
+        </div>
       </div>
     </div>
   )

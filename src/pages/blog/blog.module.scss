@@ -2,6 +2,12 @@
   background-image: url(../../assets/blog/blog-bg-1.jpg);
   background-size: contain;
 }
+.paint-bg {
+  background-image: url(/static-api/blog/painting-bg-m.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .bg-air {
   background: linear-gradient(to bottom, #d5dee7 0%, #e8ebf2 50%, #e2e7ed 100%),
     linear-gradient(

@@ -75,7 +75,6 @@ const PlaylistDetail = (props: Props) => {
         }
       })
       if (tableRef.current) {
-        console.log('tableRef.current')
         OverlayScrollbars(tableRef.current, {
           scrollbars: {
             visibility: 'hidden'

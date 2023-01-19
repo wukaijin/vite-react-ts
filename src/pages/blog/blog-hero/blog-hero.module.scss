@@ -1,0 +1,19 @@
+
+
+.info {
+  background: linear-gradient(120deg, rgba(0, 194, 255, 1) 0%, rgba(0, 86, 255, 1) 100%);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.button {
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(90deg, rgba(0, 194, 255, 1) 0%, rgba(0, 86, 255, 1) 100%);
+  padding: 0.5em 2em;
+  border-radius: 0.7em;
+
+  &:active {
+    box-shadow: inset 3px 3px 3px #0056ff, inset -3px -3px 3px #00c2ff;
+  }
+}

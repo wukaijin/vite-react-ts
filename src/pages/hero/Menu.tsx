@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { useSpring, useSprings, animated } from '@react-spring/web'
 import styled from './hero.module.scss'
-import Logo from '@/components/shared/logo'
+import Logo from '@/components/shared/Logo'
 
 type Props = {
   open: boolean

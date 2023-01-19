@@ -1,0 +1,38 @@
+
+.logo-eye {
+  --gradient-radius: 14px;
+  --eye-color: #008cff;
+  background: radial-gradient(var(--gradient-radius) var(--gradient-radius) at 50% 50%,var(--eye-color),transparent);
+  animation: eye-blink 16s ease-in-out infinite;
+}
+
+@keyframes eye-blink {
+  0% {
+    --eye-color: transparent;
+    opacity: 0.8;
+  }
+  20% {
+    --eye-color: #008cff;
+    opacity: 1;
+  }
+  30% {
+    --eye-color: transparent;
+    opacity: 0.8;
+  }
+  50% {
+    --eye-color: #ff8c00;
+    opacity: 1;
+  }
+  60% {
+    --eye-color: transparent;
+    opacity: 0.8;
+  }
+  80% {
+    --eye-color: #ff003c;
+    opacity: 1;
+  }
+  100% {
+    --eye-color: transparent;
+    opacity: 0.8;
+  }
+}

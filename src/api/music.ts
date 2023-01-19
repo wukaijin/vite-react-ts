@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 16:29:09
- * @LastEditTime: 2023-01-12 21:32:38
+ * @LastEditTime: 2023-01-19 23:34:56
  * @FilePath: /vite-react-swc/src/api/music.ts
  * @Description:
  */
@@ -74,7 +74,6 @@ export async function findBall() {
   return request
     .get<null, WithCode<{ playlists: PlaylistItem[] }>>('/music-api/homepage/dragon/ball')
     .then(response => {
-      console.log(response)
       return response
     })
 }

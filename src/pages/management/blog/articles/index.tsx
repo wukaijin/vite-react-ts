@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:05:08
- * @LastEditTime: 2023-01-16 13:47:37
+ * @LastEditTime: 2023-01-19 23:37:16
  * @FilePath: /vite-react-swc/src/pages/management/blog/articles/index.tsx
  * @Description:
  */
@@ -28,7 +28,7 @@ const BlogArticles = (props: Props) => {
   const formFields = useReactive<Partial<Article>>({
     title: '',
     tags: [],
-    category: 0,
+    category: '',
     state: 1,
     content: ''
   })
@@ -37,7 +37,7 @@ const BlogArticles = (props: Props) => {
   const add = () => {
     formFields.title = ''
     formFields.tags = []
-    formFields.category = 0
+    formFields.category = ''
     setType('Add')
     toggle()
   }
@@ -51,7 +51,7 @@ const BlogArticles = (props: Props) => {
     setType('Edit')
     toggle()
   }
-  const getTags = (tags: number[]) => {
+  const getTags = (tags: string[]) => {
     return tags.map(t => tagsOptions.find(o => o.id === t)).filter(e => !!e) as Tag[]
   }
   return (
@@ -120,9 +120,7 @@ const BlogArticles = (props: Props) => {
                     onClick={() => {
                       openModal({
                         content: 'Delete it?',
-                        onConfirm() {
-                          console.log(123)
-                        }
+                        onConfirm() {}
                       })
                     }}
                   >

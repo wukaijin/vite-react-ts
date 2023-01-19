@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:03:37
- * @LastEditTime: 2023-01-18 01:57:21
+ * @LastEditTime: 2023-01-19 21:13:36
  * @FilePath: /vite-react-swc/src/pages/management/blog/categories/index.tsx
  * @Description:
  */
@@ -109,7 +109,7 @@ const BlogCategories = (props: Props) => {
                 <span>{category.id}</span>
                 <span>{category.text}</span>
                 <span className="inline-flex items-center justify-center">
-                  <span>{(options.find(o => o.id === category.belongs) || {}).text}</span>
+                  <span>{(options.find(o => o.id === category.belongs?.id) || {}).text}</span>
                 </span>
                 <span>
                   <button className="btn btn-xs btn-primary mr-1" onClick={() => edit(category)}>
@@ -164,23 +164,11 @@ const BlogCategories = (props: Props) => {
             </div>
             <div className="flex items-center justify-center">
               <label className="w-20 basis-20">Belongs:</label>
-              {/* <select className="select select-primary flex-1">
-                <option selected={formFields.belongs === ''} />
-                {options.map(o => (
-                  <option selected={o.id === formFields.belongs}>{o.text}</option>
-                ))}
-              </select> */}
-              {/* <Select
-                className="select-primary flex-1"
-                value={formFields.belongs}
-                options={options.map(o => ({ value: o.id, label: o.text }))}
-                onChange={id => (formFields.belongs = id as string)}
-              /> */}
               <RSelect
                 className="flex-1"
                 isClearable
-                value={options.find(e => e.id === formFields.belongs)}
-                onChange={c => (formFields.belongs = c?.id || '')}
+                value={options.find(e => e.id === formFields.belongs?.id)}
+                onChange={c => (formFields.belongs = c || null)}
                 options={options}
                 getOptionLabel={(c: Category) => c.text}
                 getOptionValue={(c: Category) => c.id}
