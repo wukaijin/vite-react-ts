@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 17:05:00
- * @LastEditTime: 2023-01-19 23:38:27
+ * @LastEditTime: 2023-01-20 14:49:05
  * @FilePath: /vite-react-swc/src/interface/blog.ts
  * @Description:
  */
@@ -19,7 +19,9 @@ export interface Tag {
 
 export interface Category {
   id: string
-  text: string
+  text: string,
+  order: number,
+  description: string
   belongs: Category | null,
   defaultPoster: string
 }
@@ -27,9 +29,15 @@ export interface Category {
 export interface Article {
   id: string
   title: string
-  tags: string[]
-  category: string,
+  tags: Tag[]
+  category: Category,
   state: ArticleState,
   content: string,
+  description: string,
   poster?: string
+}
+
+export type SubmitArticle = Omit<Article, 'tags' | 'category'> & {
+  tags: string[]
+  category: string
 }

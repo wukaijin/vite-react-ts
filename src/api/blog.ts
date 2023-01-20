@@ -1,15 +1,15 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-17 13:38:04
- * @LastEditTime: 2023-01-19 15:16:38
+ * @LastEditTime: 2023-01-20 14:50:02
  * @FilePath: /vite-react-swc/src/api/blog.ts
  * @Description:
  */
-import { Category, Tag } from '@/interface/blog'
+import { Article, Category, SubmitArticle, Tag } from '@/interface/blog'
 import request from '@/utils/request'
 
 const BLOG_PREFIX = '/nest-api/blog/'
-type Wrapping = { code: number, message: string, success: boolean }
+type Wrapping = { code: number; message: string; success: boolean }
 type WithWrapping<T> = T & Wrapping
 
 export const TagApi = {
@@ -47,7 +47,27 @@ export const CategoryApi = {
     return request.delete<WithWrapping<Category>>(`${BLOG_PREFIX}category/${id}`)
   }
 }
+
+
+export const ArticleApi = {
+  findAll() {
+    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article`).then(res => res.data)
+  },
+  findOne(id: Article['id']) {
+    return request.get<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`).then(res => res.data)
+  },
+  add(data: Partial<SubmitArticle>) {
+    return request.post<WithWrapping<Article>>(`${BLOG_PREFIX}article`, data)
+  },
+  edit(id: Article['id'], data: Partial<SubmitArticle>) {
+    return request.patch<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`, data)
+  },
+  delete(id: Article['id']) {
+    return request.delete<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`)
+  }
+}
 export default {
   TagApi,
-  CategoryApi
+  CategoryApi,
+  ArticleApi
 }

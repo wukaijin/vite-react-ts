@@ -1,59 +1,44 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:05:08
- * @LastEditTime: 2023-01-19 23:37:16
+ * @LastEditTime: 2023-01-20 15:19:37
  * @FilePath: /vite-react-swc/src/pages/management/blog/articles/index.tsx
  * @Description:
  */
-import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useReactive, useToggle } from 'ahooks'
+import { connect, ConnectedProps } from 'react-redux'
+import { useMount, useRequest } from 'ahooks'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
-import { Article, ArticleState, Tag } from '@/interface/blog'
+import { ArticleState } from '@/interface/blog'
 import Table from '@/components/enhance/table'
-import Modal from '@/components/base/Modal'
 import useModal from '@/hooks/useModal'
-import { MOCK_ARTICLES, MOCK_TAGS, MOCK_CATEGORIES } from '../mock'
+import { ArticleApi } from '@/api/blog'
+import { RootState } from '@/store'
+import { asyncFetchCategories } from '@/store/blog'
 
-type Type = 'Add' | 'Edit'
+const connector = connect(
+  (state: RootState) => {
+    const { categories, tags } = state.blog
+    return {
+      categories
+    }
+  },
+  { asyncFetchCategories }
+)
 
-type Props = {}
+type Props = ConnectedProps<typeof connector>
+
 const BlogArticles = (props: Props) => {
+  const { categories } = props
   const navigator = useNavigate()
-  const [visible, { toggle }] = useToggle()
-  const [articles, setArticles] = useState(MOCK_ARTICLES)
-  const [type, setType] = useState<Type>('Add')
-  const { jsx: ConfirmModal, open: openModal } = useModal()
-  const formFields = useReactive<Partial<Article>>({
-    title: '',
-    tags: [],
-    category: '',
-    state: 1,
-    content: ''
+  const { data: articles = [], run: fetchArticles } = useRequest(ArticleApi.findAll)
+  const { run: deleteArticle } = useRequest(ArticleApi.delete, {
+    manual: true,
+    onSuccess: fetchArticles
   })
-  const categoryOptions = useMemo(() => MOCK_CATEGORIES.filter(m => m.belongs), [])
-  const tagsOptions = useMemo(() => MOCK_TAGS, [])
-  const add = () => {
-    formFields.title = ''
-    formFields.tags = []
-    formFields.category = ''
-    setType('Add')
-    toggle()
-  }
-  const edit = (item: Article) => {
-    Object.assign(formFields, item)
-    // formFields.title = item.title
-    // formFields.tags = item.tags
-    // formFields.category = item.category!
-    // formFields.state = item.state
-    // formFields.content = item.content
-    setType('Edit')
-    toggle()
-  }
-  const getTags = (tags: string[]) => {
-    return tags.map(t => tagsOptions.find(o => o.id === t)).filter(e => !!e) as Tag[]
-  }
+  const { jsx: ConfirmModal, open: openModal } = useModal()
+  useMount(props.asyncFetchCategories)
   return (
     <div>
       <Breadcrumbs>
@@ -85,33 +70,39 @@ const BlogArticles = (props: Props) => {
               <Table.Row key={article.id}>
                 <span>{article.id}</span>
                 <span>{article.title}</span>
-                <span>{(categoryOptions.find(m => m.id === article.category) || {}).text}</span>
+                <span>{(categories.find(m => m.id === article.category.id) || {}).text}</span>
                 <span className="inline-flex items-center justify-center">
                   <span>
-                    {getTags(article.tags).map(t => (
-                      <span
-                        key={t.id}
-                        className="badge badge-sm mr-1 last:mr-0"
-                        style={{
-                          borderColor: t.color,
-                          background: t.color,
-                          color: 'white'
-                        }}
-                      >
-                        {t.text}
-                      </span>
-                    ))}
+                    {article.tags &&
+                      article.tags.length &&
+                      article.tags.map(t => (
+                        <span
+                          key={t.id}
+                          className="badge badge-sm mr-1 last:mr-0"
+                          style={{
+                            borderColor: t.color,
+                            background: t.color,
+                            color: 'white'
+                          }}
+                        >
+                          {t.text}
+                        </span>
+                      ))}
                   </span>
                 </span>
                 <span>
                   <input
                     type="checkbox"
                     className="toggle toggle-success toggle-sm"
+                    onChange={() => {}}
                     checked={article.state === ArticleState.PUBLISHED}
                   />
                 </span>
                 <span>
-                  <button className="btn btn-xs btn-primary mr-1" onClick={() => edit(article)}>
+                  <button
+                    className="btn btn-xs btn-primary mr-1"
+                    onClick={() => navigator(`edit/${article.id}`, { relative: 'path' })}
+                  >
                     <Edit className="text-md mr-1" />
                     <span>Edit</span>
                   </button>
@@ -120,7 +111,9 @@ const BlogArticles = (props: Props) => {
                     onClick={() => {
                       openModal({
                         content: 'Delete it?',
-                        onConfirm() {}
+                        onConfirm() {
+                          deleteArticle(article.id)
+                        }
                       })
                     }}
                   >
@@ -134,41 +127,7 @@ const BlogArticles = (props: Props) => {
         </Table.Body>
       </Table>
       {ConfirmModal}
-      <Modal visible={visible}>
-        <h3 className="font-bold text-lg">{type} Article</h3>
-        <div className="py-4 ">
-          <form action="">
-            <div className="flex items-center justify-center mb-4">
-              <label className="w-20 basis-20">Title:</label>
-              <input
-                className="input input-secondary flex-1"
-                value={formFields.title}
-                onChange={e => (formFields.title = e.target.value)}
-                name="title"
-                type="text"
-              />
-            </div>
-            <div className="flex items-center justify-center">
-              <label className="w-20 basis-20">Tags:</label>
-              {/* <select className="select select-secondary flex-1">
-                <option selected={formFields.belongs === 0} />
-                {options.map(o => (
-                  <option selected={o.id === formFields.belongs}>{o.text}</option>
-                ))}
-              </select> */}
-            </div>
-          </form>
-        </div>
-        <div className="modal-action">
-          <button className="btn btn-ghost" onClick={toggle}>
-            Cancel
-          </button>
-          <button className="btn btn-secondary" onClick={toggle}>
-            Confirm
-          </button>
-        </div>
-      </Modal>
     </div>
   )
 }
-export default BlogArticles
+export default connector(BlogArticles)

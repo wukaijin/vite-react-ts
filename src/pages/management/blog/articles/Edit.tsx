@@ -1,12 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 21:08:12
- * @LastEditTime: 2023-01-20 14:50:38
- * @FilePath: /vite-react-swc/src/pages/management/blog/articles/Add.tsx
+ * @LastEditTime: 2023-01-20 15:14:02
+ * @FilePath: /vite-react-swc/src/pages/management/blog/articles/Edit.tsx
  * @Description:
  */
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useRequest } from 'ahooks'
+import { useEffect, useState } from 'react'
 import { FileEditingOne, FolderOpen } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
 import ArticlesForm from './ArticlesForm'
@@ -14,7 +15,8 @@ import { ArticleApi } from '@/api/blog'
 import { SubmitArticle } from '@/interface/blog'
 
 type Props = {}
-const AddArticle = (props: Props) => {
+const EditArticle = (props: Props) => {
+  const params = useParams()
   const navigator = useNavigate()
   const [formFields, setFormFields] = useState<Partial<SubmitArticle>>({
     title: '',
@@ -25,12 +27,30 @@ const AddArticle = (props: Props) => {
     poster: '',
     description: ''
   })
-  // const getTags = (tags: number[]) => {
-  //   return tags.map(t => tagsOptions.find(o => o.id === t)).filter(e => !!e) as Tag[]
-  // }
+  const { data: article, run: findArticle } = useRequest(ArticleApi.findOne, {
+    manual: true,
+    onSuccess(d) {
+      setFormFields({
+        id: d.id,
+        title: d.title,
+        tags: d.tags.map(t => t.id),
+        category: d.category?.id || '',
+        state: d.state,
+        content: d.content,
+        poster: d.poster,
+        description: d.description
+      })
+    }
+  })
+  useEffect(() => {
+    if (params.id) {
+      findArticle(params.id)
+    }
+  }, [params])
   const onSubmit = () => {
-    ArticleApi.add(formFields).then(() => {
-      navigator('..', { relative: 'path' })
+    if (!params.id) return
+    ArticleApi.edit(params.id, formFields).then(() => {
+      navigator('../..', { relative: 'path' })
     })
   }
   return (
@@ -56,4 +76,4 @@ const AddArticle = (props: Props) => {
     </div>
   )
 }
-export default AddArticle
+export default EditArticle

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:04:18
- * @LastEditTime: 2023-01-17 17:19:32
+ * @LastEditTime: 2023-01-20 02:05:43
  * @FilePath: /vite-react-swc/src/pages/management/blog/tags/index.tsx
  * @Description:
  */
@@ -53,7 +53,7 @@ const BlogTags = (props: Props) => {
   const add = () => {
     formFields.id = ''
     formFields.text = ''
-    formFields.color = ''
+    formFields.color = '#000000'
     setType('Add')
     toggle()
   }

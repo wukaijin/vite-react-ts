@@ -1,58 +1,78 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 22:02:59
- * @LastEditTime: 2023-01-16 13:46:44
+ * @LastEditTime: 2023-01-20 14:50:21
  * @FilePath: /vite-react-swc/src/pages/management/blog/articles/ArticlesForm.tsx
  * @Description:
  */
 import { useMemo } from 'react'
-import { Article, ArticleState } from '@/interface/blog'
-import { MOCK_CATEGORIES, MOCK_TAGS } from '../mock'
+import { connect, ConnectedProps } from 'react-redux'
+import { useMount } from 'ahooks'
+import { ArticleState, SubmitArticle } from '@/interface/blog'
 import Select from '@/components/base/Select'
 import MultiSelect from '@/components/base/MultiSelect'
+import { asyncFetchCategories, asyncFetchTags } from '@/store/blog'
+import { RootState } from '@/store'
 
-type Props = {
-  data: Partial<Article>
+const connector = connect(
+  (state: RootState) => {
+    const { categories, tags } = state.blog
+    return {
+      categories,
+      tags
+    }
+  },
+  { asyncFetchCategories, asyncFetchTags }
+)
+
+type Props = ConnectedProps<typeof connector> & {
+  data: Partial<SubmitArticle>
+  onChange: (d: Partial<SubmitArticle>) => void
 }
+
 const ArticlesForm = (props: Props) => {
-  const { data } = props
-  const categoryOptions = useMemo(() => MOCK_CATEGORIES.filter(m => m.belongs), [])
-  const tagsOptions = useMemo(() => MOCK_TAGS, [])
+  const { data, onChange, categories, tags, asyncFetchCategories: fc, asyncFetchTags: ft } = props
+  useMount(() => {
+    fc()
+    ft()
+  })
+  const categoryOptions = useMemo(() => {
+    const result = categories.filter(c => c.belongs)
+    const cd = categories.filter(c => !c.belongs)
+    cd.forEach(c => {
+      if (result.find(r => r.belongs?.id === c.id)) return
+      result.unshift(c)
+    })
+    return result
+  }, [categories])
+  console.log(categoryOptions)
   return (
     <form className="">
       <div className="flex items-center justify-start mb-4">
-        <label className="w-20 basis-20 text-right mr-2">Text:</label>
+        <label className="w-20 basis-20 text-right mr-2">Title:</label>
         <input
           className="input input-primary flex-1 max-w-xs"
           value={data.title}
-          onChange={e => (data.title = e.target.value)}
+          onChange={e => onChange({ title: e.target.value })}
           name="text"
           type="text"
         />
       </div>
       <div className="flex items-center justify-start mb-4">
         <label className="w-20 basis-20 text-right mr-2">Category:</label>
-        {/* <select className="select select-primary flex-1 max-w-xs">
-          <option selected={data.category === 0} />
-          {categoryOptions.map(o => (
-            <option selected={o.id === data.category}>{o.text}</option>
-          ))}
-        </select> */}
         <Select
           className="select-primary flex-1 max-w-xs"
           options={categoryOptions.map(c => ({ value: c.id, label: c.text }))}
           value={data.category}
-          onChange={id => {
-            data.category = id as number
-          }}
+          onChange={id => onChange({ category: id as string })}
         />
       </div>
       <div className="flex items-center justify-start mb-4">
-        <label className="w-20 basis-20 text-right mr-2">Text:</label>
+        <label className="w-20 basis-20 text-right mr-2">Poster:</label>
         <input
           className="input input-primary flex-1 max-w-xs"
           value={data.poster}
-          onChange={e => (data.poster = e.target.value)}
+          onChange={e => onChange({ poster: e.target.value })}
           name="text"
           type="text"
         />
@@ -61,18 +81,19 @@ const ArticlesForm = (props: Props) => {
         <label className="w-20 basis-20 text-right mr-2">Tags:</label>
         <MultiSelect
           className="select-primary flex-1 max-w-xs"
-          options={tagsOptions.map(c => ({ value: c.id, label: c.text }))}
+          options={tags.map(c => ({ value: c.id, label: c.text }))}
           value={data.tags as React.Key[]}
-          onChange={ids => {
-            data.tags = ids as number[] | undefined
-          }}
+          onChange={ids => onChange({ tags: ids as string[] })}
         />
-        {/* <select className="select select-primary flex-1 max-w-xs">
-          <option selected={data.tags?.length === 0} />
-          {tagsOptions.map(o => (
-            <option selected={data.tags?.indexOf(o.id) !== -1}>{o.text}</option>
-          ))}
-        </select> */}
+      </div>
+      <div className="flex items-center justify-start mb-4">
+        <label className="w-20 basis-20 text-right mr-2">Description:</label>
+        <textarea
+          className="textarea textarea-primary resize"
+          name="description"
+          value={data.description}
+          onChange={e => onChange({ description: e.target.value })}
+        />
       </div>
       <div className="flex items-center justify-start mb-4">
         <label className="w-20 basis-20 text-right mr-2">State:</label>
@@ -81,7 +102,9 @@ const ArticlesForm = (props: Props) => {
           className="toggle toggle-primary toggle-md max-w-xs"
           checked={data.state === ArticleState.PUBLISHED}
           onChange={e => {
-            data.state = e.target.checked ? ArticleState.PUBLISHED : ArticleState.UN_PUBLISHED
+            onChange({
+              state: e.target.checked ? ArticleState.PUBLISHED : ArticleState.UN_PUBLISHED
+            })
           }}
         />
       </div>
@@ -90,12 +113,10 @@ const ArticlesForm = (props: Props) => {
         <textarea
           className="textarea textarea-primary resize"
           value={data.content}
-          onChange={e => {
-            data.content = e.target.value
-          }}
+          onChange={e => onChange({ content: e.target.value })}
         />
       </div>
     </form>
   )
 }
-export default ArticlesForm
+export default connector(ArticlesForm)

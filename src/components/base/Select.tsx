@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 22:51:45
- * @LastEditTime: 2023-01-19 23:35:00
+ * @LastEditTime: 2023-01-20 03:15:12
  * @FilePath: /vite-react-swc/src/components/base/Select.tsx
  * @Description:
  */
@@ -28,12 +28,10 @@ const Select = (props: Props) => {
   const spanSize = useSize(spanRef)
   useClickAway(() => {
     setLeft()
-  }, menuRef)
+  }, spanRef)
 
   useLayoutEffect(() => {
     setWidth(spanSize?.width || 0)
-    document.addEventListener('click', (e) => {
-    }, true)
   }, [spanSize])
 
   const { options, onChange, className = '', value = '' } = props

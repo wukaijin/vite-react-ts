@@ -1,20 +1,21 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 21:14:21
- * @LastEditTime: 2023-01-19 23:35:31
+ * @LastEditTime: 2023-01-20 02:43:05
  * @FilePath: /vite-react-swc/src/store/blog.ts
  * @Description:
  */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 // import type { PayloadAction } from '@reduxjs/toolkit'
-import { Category } from '@/interface/blog'
-import { CategoryApi } from '@/api/blog'
+import { Category, Tag } from '@/interface/blog'
+import { CategoryApi, TagApi } from '@/api/blog'
 
 type serializedCategory = Category & {
   children?: Category[]
 }
 export type State = {
   categories: Category[]
+  tags: Tag[]
   serializedCategories: serializedCategory[]
 }
 
@@ -35,6 +36,7 @@ function serialize(categories: Category[]): serializedCategory[] {
 
 const initialState: State = {
   categories: [],
+  tags: [],
   serializedCategories: []
 }
 
@@ -50,16 +52,29 @@ export const asyncFetchCategories = createAsyncThunk<Category[]>(
     }
   }
 )
+export const asyncFetchTags = createAsyncThunk<Tag[]>('blog/asyncFetchTags', async () => {
+  try {
+    const response = await TagApi.findAll()
+    if (response && response.length) return response
+    return []
+  } catch (error) {
+    return []
+  }
+})
 
 const blog = createSlice({
   name: 'blog',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(asyncFetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload
-      state.serializedCategories = serialize(action.payload)
-    })
+    builder
+      .addCase(asyncFetchCategories.fulfilled, (state, action) => {
+        state.categories = action.payload
+        state.serializedCategories = serialize(action.payload)
+      })
+      .addCase(asyncFetchTags.fulfilled, (state, action) => {
+        state.tags = action.payload
+      })
   }
 })
 export default blog.reducer
