@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-17 13:38:04
- * @LastEditTime: 2023-01-20 14:50:02
+ * @LastEditTime: 2023-01-20 15:57:04
  * @FilePath: /vite-react-swc/src/api/blog.ts
  * @Description:
  */
@@ -48,10 +48,12 @@ export const CategoryApi = {
   }
 }
 
-
 export const ArticleApi = {
   findAll() {
     return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article`).then(res => res.data)
+  },
+  findByCategoryId(id: string) {
+    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/findByCategoryId/${id}`).then(res => res.data)
   },
   findOne(id: Article['id']) {
     return request.get<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`).then(res => res.data)

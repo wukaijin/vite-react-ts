@@ -1,36 +1,57 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-18 22:41:34
+ * @LastEditTime: 2023-01-20 17:28:57
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
 
 import { useNavigate } from 'react-router-dom'
+import { Article } from '@/interface/blog'
+import articles from '../management/blog/articles'
 
-type Props = {}
+type Props = {
+  data: Article
+}
 const ArticleCard = (props: Props) => {
+  const { data } = props
   const navigate = useNavigate()
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
       <figure>
         <img
           className="w-32 aspect-square rounded-l-xl"
-          src="https://placeimg.com/200/200/arch"
+          src={data.poster || 'https://placeimg.com/200/200/arch'}
           alt=""
         />
       </figure>
-      <div className="flex-1 p-4 overflow-hidden">
+      <div className="flex-1 px-4 pt-4 overflow-hidden">
         <h2
-          className="card-title text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1"
-          onClick={() => navigate('/blog/article')}
+          className="card-title mb-1 text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1"
+          onClick={() => navigate(`/blog/article/${data.id}`)}
         >
-          [千库] 海量编程素材免费下载-,高质精品素材网站
+          {data.title}
         </h2>
-        <p className="my-2 hover:opacity-80 cursor-pointer">JavaScript</p>
-        <div>
-          <p className="badge badge-primary mr-2 cursor-pointer hover:scale-110">design pattern</p>
-          <div className="badge badge-secondary cursor-pointer  hover:scale-110">TypeScript</div>
+        <div className="text-sm mb-1 line-clamp-2 text-gray-800/70">{data.description}</div>
+        <div className="">
+          <p
+            className="inline-block hover:opacity-80 cursor-pointer mr-4"
+            onClick={() => navigate(`/blog/category/${data.category.id}`)}
+          >
+            {data.category.text}
+          </p>
+          {data.tags.map(tag => (
+            <div
+              key={tag.id}
+              className="badge cursor-pointer hover:scale-110 mr-2"
+              style={{
+                backgroundColor: tag.color,
+                color: 'white'
+              }}
+            >
+              {tag.text}
+            </div>
+          ))}
         </div>
       </div>
     </div>

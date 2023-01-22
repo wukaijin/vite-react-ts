@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 14:21:15
- * @LastEditTime: 2023-01-20 00:30:31
+ * @LastEditTime: 2023-01-20 15:44:16
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
@@ -29,7 +29,7 @@ function Menu(props: Props) {
   const navigate = useNavigate()
   const linkTo = useCallback(
     (item: Category) => () => {
-      navigate(`../${item.id}`, { relative: 'path' })
+      navigate(`/blog/category/${item.id}`)
     },
     [navigate]
   )

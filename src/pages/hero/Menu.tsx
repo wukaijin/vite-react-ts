@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-12 15:00:33
- * @LastEditTime: 2023-01-13 01:48:03
+ * @LastEditTime: 2023-01-22 13:12:44
  * @FilePath: /vite-react-swc/src/pages/hero/Menu.tsx
  * @Description: 
  */
@@ -32,10 +32,7 @@ const HeroMenu = (props: Props) => {
           <Link to="/music/home">❤ Music</Link>
         </li>
         <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/introduction">???</Link>
+          <Link to="/blog">Blog</Link>
         </li>
       </ul>
     </div>

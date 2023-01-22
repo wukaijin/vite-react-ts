@@ -1,8 +1,8 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 16:23:36
- * @LastEditTime: 2023-01-13 22:00:31
- * @FilePath: /vite-react-swc/src/pages/blog/md-reader/index.tsx
+ * @LastEditTime: 2023-01-20 17:06:54
+ * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
 import ReactMarkdown, { Components } from 'react-markdown'
@@ -16,7 +16,15 @@ const componentsConfig: Components = {
   code({ node, inline, className, children, ...props }) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
-      <SyntaxHighlighter style={atomDark as any} language={match[1]} PreTag="div" {...props}>
+      <SyntaxHighlighter
+        // lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
+        wrapLongLines
+        showLineNumbers
+        style={atomDark as any}
+        language={match[1]}
+        PreTag="div"
+        {...props}
+      >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (

@@ -1,18 +1,37 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-13 23:43:20
+ * @LastEditTime: 2023-01-21 01:54:00
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
- * @Description: 
+ * @Description:
  */
+import { useEffect, useState } from 'react'
 import { HamburgerButton } from '@icon-park/react'
-import { text } from '../mock'
+import { useRequest } from 'ahooks'
+import { useParams } from 'react-router-dom'
+import { ArticleApi } from '@/api/blog'
 import MdReader from './MdReader'
+import generateDirectory from '@/utils/generateDirectory'
+import Directory from './Directory'
 
 type Props = {}
 function Article({}: Props) {
+  const [visible, setVisibility] = useState(false)
+  const params = useParams()
+  const { data, run } = useRequest(ArticleApi.findOne, {
+    manual: true,
+    onSuccess(d) {
+      generateDirectory(d.content)
+    }
+  })
+  useEffect(() => {
+    if (params.id) {
+      run(params.id)
+    }
+  }, [params])
+
   return (
-    <div className="container m-auto bg-red flex relative">
+    <div className="container m-auto flex relative">
       <div className="flex-1">
         <div className="px-4 py-8">
           <div className="border rounded-md pb-8 relative">
@@ -21,12 +40,14 @@ function Article({}: Props) {
                 <HamburgerButton
                   className="align-text-bottom hover:scale-110 hover:opacity-70 cursor-pointer"
                   size="16"
+                  onClick={() => setVisibility(_v => !_v)}
                 />
               </span>
-              <span className="font-semibold">男子煮羊肉爆炸高压锅击穿屋顶</span>
+              <span className="font-semibold">{data?.title}</span>
+              <Directory visible={visible} setVisibility={setVisibility} content={data?.content} />
             </div>
             <div className="px-4 py-4">
-              <MdReader>{text}</MdReader>
+              <MdReader>{data?.content}</MdReader>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-19 14:27:47
+ * @LastEditTime: 2023-01-20 16:47:11
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -52,7 +52,7 @@ const config: RouteObject[] = [
     element: Blog,
     children: [
       {
-        path: 'article',
+        path: 'article/:id',
         element: BlogArticle
       },
       {

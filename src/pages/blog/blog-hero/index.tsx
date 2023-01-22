@@ -1,14 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-01-19 14:31:55
+ * @LastEditTime: 2023-01-20 15:26:22
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
 import clsx from 'clsx'
 import { useLayoutEffect } from 'react'
 import { useSpring, animated } from '@react-spring/web'
-import ArticleCard from '../ArticleCard'
+import ResentPosts from './ResentPost'
 import useImage from '@/hooks/useImage'
 import Loading from '@/components/base/Loading'
 import styled from './blog-hero.module.scss'
@@ -131,20 +131,7 @@ function BlogHero({}: Props) {
           ...resentStyles
         }}
       >
-        <header className="py-16 sm:text-center ">
-          <span className="mb-4 text-3xl sm:text-4xl tracking-tight font-extrabold">
-            Recent posts
-          </span>
-        </header>
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 px-4">
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-        </div>
+        <ResentPosts />
       </animated.div>
     </div>
   )
