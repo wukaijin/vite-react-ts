@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
- * @LastEditTime: 2023-01-24 16:03:49
+ * @LastEditTime: 2023-01-24 23:35:10
  * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
  * @Description:
  */
@@ -86,6 +86,7 @@ const BlogCategory = (props: Props) => {
           y: 0
         }
       })
+      setTags([])
     },
     onError() {
       setHasError(true)
@@ -194,13 +195,14 @@ const BlogCategory = (props: Props) => {
                         isClearable
                         isMulti
                         classNames={{
-                          control: () => 'bg-transparent rounded-xl border-red'
+                          control: () => 'bg-transparent rounded-xl'
                         }}
                         styles={{
                           control: _styled => ({
                             ..._styled,
                             background: 'transparent',
-                            borderRadius: 8
+                            borderRadius: 8,
+                            border: '1px solid #a2a2a1'
                           })
                         }}
                         options={tagOptions}

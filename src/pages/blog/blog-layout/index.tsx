@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-23 22:12:39
+ * @LastEditTime: 2023-01-24 16:11:58
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -15,6 +15,7 @@ import Logo from '@/components/shared/Logo'
 import styled from '../blog.module.scss'
 import Menu from './Menu'
 import Modal from '@/components/base/Modal'
+import Search from './Search'
 
 type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
@@ -28,14 +29,7 @@ const BlogLayout = (props: Props) => {
         <div className="flex h-full items-center justify-between px-8">
           <div className="flex h-full items-center text-sm">
             <Logo className="h-8 w-8 inline-block mr-4 cursor-pointer" onClick={() => navigate('/blog')} />
-            <input
-              type="text"
-              className={clsx(
-                'input input-ghost input-sm transition-all',
-                'text-white/50 border border-white/40 w-[12rem] focus:w-[25vw] placeholder:text-white/50'
-              )}
-              placeholder="Search"
-            />
+            <Search />
             <div className="text-white">
               <Menu />
             </div>

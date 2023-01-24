@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-24 15:26:32
+ * @LastEditTime: 2023-01-24 23:47:20
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react'
 import { HamburgerButton } from '@icon-park/react'
 import { useClickAway, useRequest } from 'ahooks'
 import { useParams } from 'react-router-dom'
+import clsx from 'clsx'
 import { useSpring, animated } from '@react-spring/web'
 import { ArticleApi } from '@/api/blog'
 import MdReader from './MdReader'
@@ -17,6 +18,7 @@ import Directory from './Directory'
 import ArticleHeader from './ArticleHeader'
 import OtherCategory from '../OtherCategory'
 import Related from './Related'
+import styled from '../blog.module.scss'
 
 type Props = {}
 function Article({}: Props) {
@@ -77,17 +79,13 @@ function Article({}: Props) {
           params.id && fetchArticle(params.id)
         }
       })
-      // setTimeout(() => {
-        
-      // }, 500)
     }
   }, [params])
   useClickAway(() => {
     visible && setVisibility(false)
-    console.log(1)
   }, menuRef)
   return (
-    <div className="container m-auto flex relative">
+    <div className={clsx('container m-auto flex relative bg-fixed bg-cover', styled['paint-bg'])}>
       <div className="flex-1">
         <div className="px-4 py-8">
           <animated.div style={headerStyle}>
