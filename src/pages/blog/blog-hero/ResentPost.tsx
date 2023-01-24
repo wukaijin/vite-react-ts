@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-20 15:25:07
- * @LastEditTime: 2023-01-20 15:30:55
+ * @LastEditTime: 2023-01-24 14:59:37
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/ResentPost.tsx
  * @Description:
  */
@@ -19,7 +19,7 @@ function ResentPost({}: Props) {
           Recent posts
         </span>
       </header>
-      <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 px-4 pb-8">
         {data.map((article) => (
           <ArticleCard key={article.id} data={article} />
         ))}

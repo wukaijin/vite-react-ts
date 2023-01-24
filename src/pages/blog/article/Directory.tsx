@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-21 01:09:45
- * @LastEditTime: 2023-01-21 01:55:55
+ * @LastEditTime: 2023-01-22 23:32:07
  * @FilePath: /vite-react-swc/src/pages/blog/article/Directory.tsx
  * @Description:
  */
@@ -30,9 +30,12 @@ function Directory(props: Props) {
   }, [content])
   return (
     <ul
-      className={clsx('absolute top-12 left-0 border rounded-xl bg-white/95 text-gray-600 p-4 text-left', {
-        hidden: !visible
-      })}
+      className={clsx(
+        'absolute top-12 left-0 border rounded-xl bg-white/95 text-gray-600 p-4 text-left',
+        {
+          hidden: !visible
+        }
+      )}
     >
       {directory.map(d => {
         return (

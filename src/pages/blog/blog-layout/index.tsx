@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-18 16:16:41
+ * @LastEditTime: 2023-01-23 22:12:39
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -9,6 +9,7 @@
 import clsx from 'clsx'
 import { useToggle } from 'ahooks'
 import { Setting } from '@icon-park/react'
+import { useNavigate } from 'react-router-dom'
 import { HTMLAttributes } from 'react'
 import Logo from '@/components/shared/Logo'
 import styled from '../blog.module.scss'
@@ -18,6 +19,7 @@ import Modal from '@/components/base/Modal'
 type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
   const [modalShow, { toggle }] = useToggle()
+  const navigate = useNavigate()
   return (
     <div
       className={clsx('min-h-screen bg-white font-blog')}
@@ -25,7 +27,7 @@ const BlogLayout = (props: Props) => {
       <div className={clsx(styled['bg-escape'], 'w-full fixed top-0 h-14 z-10')}>
         <div className="flex h-full items-center justify-between px-8">
           <div className="flex h-full items-center text-sm">
-            <Logo className="h-8 w-8 inline-block mr-4" />
+            <Logo className="h-8 w-8 inline-block mr-4 cursor-pointer" onClick={() => navigate('/blog')} />
             <input
               type="text"
               className={clsx(

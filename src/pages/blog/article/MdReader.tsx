@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 16:23:36
- * @LastEditTime: 2023-01-20 17:06:54
+ * @LastEditTime: 2023-01-22 23:11:17
  * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
@@ -10,7 +10,7 @@ import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import './markdown.scss'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, memo } from 'react'
 
 const componentsConfig: Components = {
   code({ node, inline, className, children, ...props }) {
@@ -36,12 +36,12 @@ const componentsConfig: Components = {
 }
 type Props = HTMLAttributes<HTMLDivElement>
 const plugins = [remarkGfm]
-const MdReader = (props: Props) => {
+const MdReader = memo((props: Props) => {
   return (
     // div
     <ReactMarkdown className="markdown-body" remarkPlugins={plugins} components={componentsConfig}>
       {props.children as string}
     </ReactMarkdown>
   )
-}
+})
 export default MdReader

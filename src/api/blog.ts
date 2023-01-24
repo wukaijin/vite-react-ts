@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-17 13:38:04
- * @LastEditTime: 2023-01-20 15:57:04
+ * @LastEditTime: 2023-01-23 23:09:00
  * @FilePath: /vite-react-swc/src/api/blog.ts
  * @Description:
  */
@@ -57,6 +57,9 @@ export const ArticleApi = {
   },
   findOne(id: Article['id']) {
     return request.get<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`).then(res => res.data)
+  },
+  findRelativeById(id: Article['id']) {
+    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/relative/${id}`).then(res => res.data)
   },
   add(data: Partial<SubmitArticle>) {
     return request.post<WithWrapping<Article>>(`${BLOG_PREFIX}article`, data)

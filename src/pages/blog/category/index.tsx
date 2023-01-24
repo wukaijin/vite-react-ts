@@ -1,44 +1,45 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
- * @LastEditTime: 2023-01-22 14:23:14
+ * @LastEditTime: 2023-01-24 16:03:49
  * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
  * @Description:
  */
 import { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMount, useRequest } from 'ahooks'
+import { useRequest } from 'ahooks'
 import ReactSelect from 'react-select'
 import clsx from 'clsx'
+import { useSpring, animated } from '@react-spring/web'
 import { ArticleApi, CategoryApi } from '@/api/blog'
 import sharedStyled from '../blog.module.scss'
 import ArticleCard from '../ArticleCard'
 import { Article, Tag } from '@/interface/blog'
-import OtherCategory from './OtherCategory'
-
-// const tagOptions: Partial<Tag>[] = [
-//   {
-//     text: 'Vue',
-//     id: '123',
-//     color: '#346700'
-//   },
-//   {
-//     text: 'Angular',
-//     id: '122',
-//     color: '#ff0098'
-//   },
-//   {
-//     text: 'React',
-//     id: '142',
-//     color: '#0067ff'
-//   }
-// ]
+import OtherCategory from '../OtherCategory'
 
 type Props = {}
 const BlogCategory = (props: Props) => {
   const [hasError, setHasError] = useState<boolean>(false)
   const [tags, setTags] = useState<Tag[]>()
   const params = useParams<string>()
+  const [mainStyle, mainApi] = useSpring(() => ({
+    from: {
+      opacity: 0,
+      x: -300
+    }
+  }))
+  const [listStyle, listApi] = useSpring(() => ({
+    from: {
+      opacity: 0,
+      y: 300
+    }
+  }))
+  const [siderStyle, siderApi] = useSpring(() => ({
+    from: {
+      opacity: 0,
+      x: 300
+    }
+  }))
   const [style, setStyle] = useState<CSSProperties>({})
   const {
     data: categoryDTO,
@@ -52,6 +53,18 @@ const BlogCategory = (props: Props) => {
         return
       }
       setStyle({ backgroundImage: `url(${d.defaultPoster})` })
+      mainApi.start({
+        to: {
+          opacity: 1,
+          x: 0
+        }
+      })
+      siderApi.start({
+        to: {
+          opacity: 1,
+          x: 0
+        }
+      })
     },
     onError() {
       setHasError(true)
@@ -67,6 +80,12 @@ const BlogCategory = (props: Props) => {
       if (!d) {
         setHasError(true)
       }
+      listApi.start({
+        to: {
+          opacity: 1,
+          y: 0
+        }
+      })
     },
     onError() {
       setHasError(true)
@@ -94,8 +113,30 @@ const BlogCategory = (props: Props) => {
 
   useEffect(() => {
     if (params.id) {
-      fetchCategory(params.id)
-      fetchArticles(params.id)
+      mainApi.start({
+        to: {
+          opacity: 0,
+          x: -300
+        }
+      })
+      siderApi.start({
+        to: {
+          opacity: 0,
+          x: 300
+        }
+      })
+      listApi.start({
+        to: {
+          opacity: 0,
+          y: 300
+        },
+        onResolve() {
+          if (params.id) {
+            fetchCategory(params.id)
+            fetchArticles(params.id)
+          }
+        }
+      })
     }
   }, [params])
   return (
@@ -111,24 +152,27 @@ const BlogCategory = (props: Props) => {
           <div className="flex-1">
             {hasError && <div>error</div>}
             {categoryDTO && (
-              <div className="text-center mt-12 mb-8">
+              <animated.div className="text-center mt-12 mb-8" style={mainStyle}>
                 <div className="inline-flex items-center pb-4 text-3xl sm:text-4xl tracking-tight font-extrabold">
                   <img className="h-16 rounded-full mr-4" src={categoryDTO.defaultPoster} alt="" />
                   <span className="">{categoryDTO.text}</span>
                 </div>
                 <div className="text-left indent-8 px-4">{categoryDTO.description}</div>
-              </div>
+              </animated.div>
             )}
-            <div className="grid grid-cols-1 xl:grid-cols-2  gap-4 px-4">
+            <animated.div className="grid grid-cols-1 xl:grid-cols-2  gap-4 px-4" style={listStyle}>
               {filteredArticles.map(a => (
                 <ArticleCard key={a.id} data={a} />
               ))}
-            </div>
+            </animated.div>
           </div>
           <div className="w-[300px]">
             {categoryDTO && (
               <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
-                <div className="rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm mb-4">
+                <animated.div
+                  className="rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm mb-4"
+                  style={siderStyle}
+                >
                   <div className="py-4 px-4">
                     <div>
                       {categoryDTO.belongs && (
@@ -168,7 +212,7 @@ const BlogCategory = (props: Props) => {
                     </div>
                     <OtherCategory />
                   </div>
-                </div>
+                </animated.div>
               </div>
             )}
           </div>

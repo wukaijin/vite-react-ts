@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-20 17:28:57
+ * @LastEditTime: 2023-01-23 01:00:04
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -18,21 +18,27 @@ const ArticleCard = (props: Props) => {
   const navigate = useNavigate()
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
-      <figure>
+      {/* <figure>
         <img
           className="w-32 aspect-square rounded-l-xl"
           src={data.poster || 'https://placeimg.com/200/200/arch'}
           alt=""
         />
-      </figure>
-      <div className="flex-1 px-4 pt-4 overflow-hidden">
+      </figure> */}
+      <div
+        className="w-32 rounded-l-xl bg-cover"
+        style={{
+          backgroundImage: `url(${data.poster})`
+        }}
+      />
+      <div className="flex-1 px-4 py-3 overflow-hidden">
         <h2
           className="card-title mb-1 text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1"
           onClick={() => navigate(`/blog/article/${data.id}`)}
         >
           {data.title}
         </h2>
-        <div className="text-sm mb-1 line-clamp-2 text-gray-800/70">{data.description}</div>
+        <div className="h-10 text-sm mb-2 line-clamp-2 text-gray-800/70">{data.description}</div>
         <div className="">
           <p
             className="inline-block hover:opacity-80 cursor-pointer mr-4"
@@ -43,7 +49,7 @@ const ArticleCard = (props: Props) => {
           {data.tags.map(tag => (
             <div
               key={tag.id}
-              className="badge cursor-pointer hover:scale-110 mr-2"
+              className="badge cursor-pointer hover:scale-110 mr-2 border-none"
               style={{
                 backgroundColor: tag.color,
                 color: 'white'

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-20 23:07:15
- * @LastEditTime: 2023-01-21 01:07:30
+ * @LastEditTime: 2023-01-23 00:50:21
  * @FilePath: /vite-react-swc/src/utils/generateDirectory.ts
  * @Description:
  */
@@ -33,6 +33,7 @@ function generateDirectory(text: string, level = 3): Title[] {
       result = getMatchers(matchers, text.length)
       records.push(result)
     } else {
+      if (!records[currentLevel - 2]) break
       records[currentLevel - 2].forEach((currentSection, currentSectionIndex) => {
         const startIndex = currentSection.index
         const nextSection = records[currentLevel - 2][currentSectionIndex + 1]

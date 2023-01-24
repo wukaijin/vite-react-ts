@@ -29,8 +29,25 @@
   background-blend-mode: normal, multiply;
 }
 .bg-deepFocus {
-  background-image: linear-gradient(-180deg, #EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
+  background-image: linear-gradient(-180deg, #ebebeb 0%, #dcdddf 48%, #c4c5c7 99%);
 }
 .logo {
   filter: brightness(0);
+}
+
+.category-guide {
+  @apply flex items-center py-1 cursor-pointer text-sky-700/80 ;
+  .poster {
+    @apply w-6 h-6 rounded-full opacity-70 mr-1;
+  }
+  &.active {
+    @apply bg-white/10;
+  }
+  &:hover {
+    @apply text-sky-700/50;
+    .poster {
+      opacity: 1;
+      scale: 1.1;
+    }
+  }
 }
