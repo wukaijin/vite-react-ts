@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-24 23:47:20
+ * @LastEditTime: 2023-01-25 22:16:17
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -19,6 +19,8 @@ import ArticleHeader from './ArticleHeader'
 import OtherCategory from '../OtherCategory'
 import Related from './Related'
 import styled from '../blog.module.scss'
+import Loading from '@/components/base/Loading'
+import NotFound from '@/pages/not-found'
 
 type Props = {}
 function Article({}: Props) {
@@ -36,7 +38,6 @@ function Article({}: Props) {
       y: 300
     }
   }))
-
   const params = useParams()
   const {
     data,
@@ -45,7 +46,7 @@ function Article({}: Props) {
   } = useRequest(ArticleApi.findOne, {
     manual: true,
     onSuccess(d) {
-      generateDirectory(d.content)
+      d && generateDirectory(d.content)
       headerApi.start({
         to: {
           opacity: 1,
@@ -62,14 +63,12 @@ function Article({}: Props) {
   })
   useEffect(() => {
     if (params.id) {
-      // window.scrollTo(0, 0)
       headerApi.start({
         to: {
           opacity: 0,
           x: -300
         }
       })
-      headerApi.resume()
       contentApi.start({
         to: {
           opacity: 0,
@@ -84,6 +83,20 @@ function Article({}: Props) {
   useClickAway(() => {
     visible && setVisibility(false)
   }, menuRef)
+  if (loading) {
+    return (
+      <div className="fixed top-0 left-0 bottom-0 right-0">
+        <Loading.Nest />
+      </div>
+    )
+  }
+  if (!loading && !data) {
+    return (
+      <div className="fixed top-0 left-0 bottom-0 right-0">
+        <NotFound />
+      </div>
+    )
+  }
   return (
     <div className={clsx('container m-auto flex relative bg-fixed bg-cover', styled['paint-bg'])}>
       <div className="flex-1">

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-30 11:24:57
- * @LastEditTime: 2023-01-12 22:39:18
+ * @LastEditTime: 2023-01-25 15:23:26
  * @FilePath: /vite-react-swc/src/pages/Wait.tsx
  * @Description:
  */
@@ -12,9 +12,10 @@ import Loading from '@/components/base/Loading'
 function Wait() {
   const navigate = useNavigate()
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       navigate('/hero')
-    }, 4000)
+    }, 3000)
+    return () => clearTimeout(timer)
   }, [])
   return (
     <div className="bg-g-purple w-screen h-screen flex justify-center items-center">

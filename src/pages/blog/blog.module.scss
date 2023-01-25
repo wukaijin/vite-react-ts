@@ -36,15 +36,15 @@
 }
 
 .category-guide {
-  @apply flex items-center py-1 cursor-pointer text-sky-700/80 ;
+  @apply flex items-center py-1 cursor-pointer;
   .poster {
     @apply w-6 h-6 rounded-full opacity-70 mr-1;
   }
   &.active {
-    @apply bg-white/10;
+    // @apply opacity-70;
   }
   &:hover {
-    @apply text-sky-700/50;
+    @apply underline;
     .poster {
       opacity: 1;
       scale: 1.1;

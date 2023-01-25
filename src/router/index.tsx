@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-22 22:27:13
+ * @LastEditTime: 2023-01-25 14:11:33
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -15,6 +15,7 @@ import Wait from '@/pages/Wait'
 import Introduction from '@/pages/introduction'
 import Test from '@/pages/test'
 import { withSuspense } from './utils'
+import NotFound from '@/pages/not-found'
 
 const Hero = withSuspense(lazy(() => import('@/pages/hero')))
 const Blog = withSuspense(lazy(() => import('@/pages/blog')))
@@ -87,6 +88,10 @@ const config: RouteObject[] = [
   {
     path: '/test',
     element: <Test />
-  }
+  },
+  {
+    path: '*',
+    element: <NotFound />
+  },
 ]
 export default createBrowserRouter(config)

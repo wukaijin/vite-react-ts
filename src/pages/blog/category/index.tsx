@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
- * @LastEditTime: 2023-01-24 23:35:10
+ * @LastEditTime: 2023-01-25 22:05:52
  * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
  * @Description:
  */
@@ -16,6 +16,8 @@ import sharedStyled from '../blog.module.scss'
 import ArticleCard from '../ArticleCard'
 import { Article, Tag } from '@/interface/blog'
 import OtherCategory from '../OtherCategory'
+import Loading from '@/components/base/Loading'
+import NoData from '@/components/shared/NoData'
 
 type Props = {}
 const BlogCategory = (props: Props) => {
@@ -52,7 +54,7 @@ const BlogCategory = (props: Props) => {
         setHasError(true)
         return
       }
-      setStyle({ backgroundImage: `url(${d.defaultPoster})` })
+      setStyle({ backgroundImage: `url(${d.defaultPoster || 'http://placeimg.com/640/480/tech'})` })
       mainApi.start({
         to: {
           opacity: 1,
@@ -148,10 +150,14 @@ const BlogCategory = (props: Props) => {
       )}
       style={style}
     >
-      <div className={clsx('h-full min-h-[calc(100vh-56px)] bg-white/70')}>
+      <div className={clsx('h-full min-h-[calc(100vh-56px)] bg-white/80')}>
         <div className="container m-auto bg-red flex relative">
           <div className="flex-1">
-            {hasError && <div>error</div>}
+            {hasError && (
+              <div className="fixed top-0 left-0 bottom-0 right-0">
+                <Loading.Nest />
+              </div>
+            )}
             {categoryDTO && (
               <animated.div className="text-center mt-12 mb-8" style={mainStyle}>
                 <div className="inline-flex items-center pb-4 text-3xl sm:text-4xl tracking-tight font-extrabold">
@@ -161,10 +167,18 @@ const BlogCategory = (props: Props) => {
                 <div className="text-left indent-8 px-4">{categoryDTO.description}</div>
               </animated.div>
             )}
-            <animated.div className="grid grid-cols-1 xl:grid-cols-2  gap-4 px-4" style={listStyle}>
-              {filteredArticles.map(a => (
-                <ArticleCard key={a.id} data={a} />
-              ))}
+
+            <animated.div style={listStyle}>
+              {!filteredArticles.length && !loadingArticles && (
+                <div className="flex items-center text-primary" style={{}}>
+                  <NoData className="w-3/5 bg-white/80 rounded-xl" />
+                </div>
+              )}
+              <div className="grid grid-cols-1 xl:grid-cols-2  gap-4 px-4">
+                {filteredArticles.map(a => (
+                  <ArticleCard key={a.id} data={a} />
+                ))}
+              </div>
             </animated.div>
           </div>
           <div className="w-[300px]">

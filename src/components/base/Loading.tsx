@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-29 21:21:40
- * @LastEditTime: 2022-12-29 22:23:47
+ * @LastEditTime: 2023-01-25 15:24:03
  * @FilePath: /vite-react-swc/src/components/base/Loading.tsx
  * @Description:
  */
@@ -32,6 +32,7 @@
   }
 }
 */
+import clsx from 'clsx'
 import styles from './loading.module.scss'
 
 interface IProps {
@@ -71,7 +72,29 @@ function Dot() {
   )
 }
 
+const CELLS = Array(6).fill('r1').concat(Array(12).fill('r2')).concat(Array(19).fill('r3'))
+
+function Nest() {
+  return (
+    <div className={styles.socket}>
+      <div className={clsx(styles.gel, styles['center-gel'])}>
+        <div className={clsx(styles['hex-brick'], styles.h1)} />
+        <div className={clsx(styles['hex-brick'], styles.h2)} />
+        <div className={clsx(styles['hex-brick'], styles.h3)} />
+      </div>
+      {CELLS.map((e, i) => (
+        <div key={`c${i + 1}`} className={clsx(styles.gel, styles[`c${i + 1}`], styles[`${e}`])}>
+          <div className={clsx(styles['hex-brick'], styles.h1)} />
+          <div className={clsx(styles['hex-brick'], styles.h2)} />
+          <div className={clsx(styles['hex-brick'], styles.h3)} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default {
   Circle,
-  Dot
+  Dot,
+  Nest
 }
