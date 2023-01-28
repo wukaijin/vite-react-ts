@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-24 16:11:58
+ * @LastEditTime: 2023-01-29 06:04:39
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -54,7 +54,7 @@ const BlogLayout = (props: Props) => {
             The management module is private and requires signIn.
           </span>
         </p>
-        <p className="py-4">Update: Only apply on Dev Env.</p>
+        <p className="py-4">CMS deploy on other site.</p>
         <div className="modal-action">
           <button className="btn btn-ghost" onClick={toggle}>
             Cancel
