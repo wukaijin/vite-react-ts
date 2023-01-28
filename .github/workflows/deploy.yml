@@ -21,10 +21,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16
+    - name: Cache
+      id: cache-dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          **/node_modules
+        key: ${{hashFiles('**/pnpm-lock.yaml')}}
+
     # 步骤名称
-    - name: npm install
-      # 步骤执行指令
-      run: npm install
+    - name: Installing Dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: |
+        npm i pnpm -g
+        pnpm install
+
     - name: npm run build
       run: npm run build
     # 命名这个任务为发布Deploy
