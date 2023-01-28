@@ -10,7 +10,8 @@ jobs:
   build:
     # 运行环境
     runs-on: ubuntu-latest
-    environment: production
+    environment:
+      name: production
     # 步骤
     steps:
     # 使用别人的action
