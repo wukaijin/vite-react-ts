@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2023-01-18 21:47:40
+ * @LastEditTime: 2023-01-28 23:59:51
  * @FilePath: /vite-react-swc/vite.config.ts
  * @Description:
  */
@@ -30,7 +30,8 @@ export default defineConfig({
         // rewrite: path => path.replace(/^\/music-api/, '')
       },
       '/nest-api': {
-        target: 'http://localhost:3001',
+        target: 'http://106.55.147.116',
+        // target: 'http://localhost:3001',
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/music-api/, '')
       },

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 16:23:36
- * @LastEditTime: 2023-01-22 23:11:17
+ * @LastEditTime: 2023-01-29 00:19:03
  * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
@@ -23,6 +23,7 @@ const componentsConfig: Components = {
         style={atomDark as any}
         language={match[1]}
         PreTag="div"
+        customStyle={{ margin: 0 }}
         {...props}
       >
         {String(children).replace(/\n$/, '')}

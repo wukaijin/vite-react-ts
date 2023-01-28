@@ -7,7 +7,6 @@
  */
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { useSpring, useSprings, animated } from '@react-spring/web'
 import styled from './hero.module.scss'
 import Logo from '@/components/shared/Logo'
 
@@ -25,9 +24,9 @@ const HeroMenu = (props: Props) => {
     >
       <Logo colorDeg={80} className="absolute top-6 left-6 w-8 h-8" />
       <ul className="menu bg-white/10 backdrop-blur-sm text-secondary-content w-56 rounded-box">
-        <li>
+        {/* <li>
           <Link to="/todos">TodoList</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/music/home">❤ Music</Link>
         </li>

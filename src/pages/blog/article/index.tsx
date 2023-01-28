@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-26 00:23:07
+ * @LastEditTime: 2023-01-29 00:21:24
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -100,37 +100,43 @@ function Article({}: Props) {
     )
   }
   return (
-    <div className={clsx('container m-auto flex relative bg-fixed bg-cover', styled['paint-bg'])}>
-      <div className="flex-1">
-        <div className="px-4 py-8">
-          <animated.div style={headerStyle}>
-            <ArticleHeader data={data} />
-          </animated.div>
-          <animated.div className="border rounded-md pb-8 relative" style={contentStyle}>
-            <div
-              ref={menuRef}
-              className="text-sm rounded-t-md h-12 px-4 flex text-center items-center justify-start border-b sticky top-[3.5rem] bg-white/40 backdrop-blur-md"
-            >
-              <span className="mr-2">
-                <HamburgerButton
-                  className="align-text-bottom hover:scale-110 hover:opacity-70 cursor-pointer"
-                  size="16"
-                  onClick={() => setVisibility(_v => !_v)}
+    <div className={clsx('bg-fixed bg-cover', styled['paint-bg'])}>
+      <div className={clsx('container m-auto flex relative ')}>
+        <div className="flex-1">
+          <div className="px-4 py-8">
+            <animated.div style={headerStyle}>
+              <ArticleHeader data={data} />
+            </animated.div>
+            <animated.div className="border rounded-md pb-8 relative" style={contentStyle}>
+              <div
+                ref={menuRef}
+                className="text-sm rounded-t-md h-12 px-4 flex text-center items-center justify-start border-b sticky top-[3.5rem] bg-white/40 backdrop-blur-md"
+              >
+                <span className="mr-2">
+                  <HamburgerButton
+                    className="align-text-bottom hover:scale-110 hover:opacity-70 cursor-pointer"
+                    size="16"
+                    onClick={() => setVisibility(_v => !_v)}
+                  />
+                </span>
+                <span className="font-semibold">{data?.title}</span>
+                <Directory
+                  visible={visible}
+                  setVisibility={setVisibility}
+                  content={data?.content}
                 />
-              </span>
-              <span className="font-semibold">{data?.title}</span>
-              <Directory visible={visible} setVisibility={setVisibility} content={data?.content} />
-            </div>
-            <div className="px-4 py-4">
-              <MdReader>{data?.content}</MdReader>
-            </div>
-          </animated.div>
+              </div>
+              <div className="px-4 py-4">
+                <MdReader>{data?.content}</MdReader>
+              </div>
+            </animated.div>
+          </div>
         </div>
-      </div>
-      <div className="w-[300px]">
-        <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
-          <OtherCategory title="Category" />
-          <Related articleId={params.id || ''} />
+        <div className="w-[300px]">
+          <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
+            <OtherCategory title="Category" />
+            <Related articleId={params.id || ''} />
+          </div>
         </div>
       </div>
     </div>

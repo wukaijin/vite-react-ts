@@ -1,13 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-19 11:49:46
+ * @LastEditTime: 2023-01-28 13:39:26
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
 import { Control, Search } from '@icon-park/react'
-import { NeuButton } from '@/components/neumorphism'
-// import logo from '@/assets/logo.png'
 
 const logo = '/static-api/logo/transformer-256.png'
 
@@ -24,28 +22,6 @@ const MusicHeader = (props: Props) => {
         <img className="" src={logo} alt="" />
       </span>
       <span className="flex-1 flex text-center justify-center">
-        {/* <NeuInput
-          size="xs"
-          style={{ width: '100%', maxWidth: '24rem', marginRight: '0.5rem' }}
-          className="active:bg-[var(--neu-greyLight-1)] overflow-hidden"
-          inputStyle={{ color: 'var(--neu-primary)' }}
-          icon={<Search />}
-          value={keyWord}
-          onChange={e => setKeyWord(e.target.value)}
-          onKeyUp={async e => {
-            if (e.code === 'Enter' || e.code === 'Search') {
-              query()
-            }
-          }}
-          placeholder="Search name/artist/album"
-        >
-          <NeuButton size="xs" onClick={() => query()}>
-            <Search
-              theme="outline"
-              className=" text-slate-400 cursor-pointer hover:text-indigo-500 hover:scale-110"
-            />
-          </NeuButton>
-        </NeuInput> */}
         <div className="input-group" style={{ width: '100%', maxWidth: '24rem' }}>
           <input
             type="text"

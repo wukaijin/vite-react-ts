@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:56:19
- * @LastEditTime: 2023-01-14 21:38:35
+ * @LastEditTime: 2023-01-28 10:51:45
  * @FilePath: /vite-react-swc/src/pages/test/index.tsx
  * @Description:
  */
@@ -90,7 +90,7 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
                 artiest: item.artists[0].name,
                 url,
                 name: item.name,
-                album: item.album.name,
+                album: item.album.name
               })
               // startTransition(() => {
               //   eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
@@ -104,10 +104,7 @@ function Test({ current, updateCurrentSong: updateCS }: Props) {
         from={isMobile ? 'bottom' : 'right'}
         className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
       >
-        <Player
-          from={isMobile ? 'bottom' : 'right'}
-          togglePlayer={() => setVisibility(!visible)}
-        />
+        <Player from={isMobile ? 'bottom' : 'right'} />
       </Popup>
     </div>
   )
