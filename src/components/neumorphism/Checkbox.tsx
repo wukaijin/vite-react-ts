@@ -1,13 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 00:46:23
- * @LastEditTime: 2023-01-02 12:26:32
+ * @LastEditTime: 2023-01-29 01:49:15
  * @FilePath: /vite-react-swc/src/components/neumorphism/Checkbox.tsx
  * @Description:
  */
 import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
-// import { CheckIcon } from '@heroicons/react/20/solid'
 import { CheckSmall } from '@icon-park/react'
 
 const SIZES = ['sm', 'md', 'lg'] as const

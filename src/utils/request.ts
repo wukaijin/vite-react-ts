@@ -1,11 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-03 21:49:15
- * @LastEditTime: 2023-01-04 16:47:11
+ * @LastEditTime: 2023-01-29 02:06:09
  * @FilePath: /vite-react-swc/src/utils/request.ts
  * @Description:
  */
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 // import { ref, reactive, watch } from 'vue'
 
 // create an axios request
@@ -23,7 +23,7 @@ const request: AxiosInstance = axios.create({
 
 // request interceptor
 request.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config) => {
     if (config.url === undefined) {
       config.url = ''
     }
