@@ -10,6 +10,7 @@ jobs:
   build:
     # 运行环境
     runs-on: ubuntu-latest
+    environment: production
     # 步骤
     steps:
     # 使用别人的action
@@ -33,9 +34,9 @@ jobs:
         WELCOME: "ssh scp ssh pipelines"
         LASTSSH: "Doing something after copying"
       with:
-        host: ${{ secrets.production.SERVER_HOST }}
-        user: ${{ secrets.production.USER_NAME }}
-        pass: ${{ secrets.production.USER_PASS }}
+        host: ${{ secrets.SERVER_HOST }}
+        user: ${{ secrets.USER_NAME }}
+        pass: ${{ secrets.USER_PASS }}
         connect_timeout: 10s
         local: './dist/*'
         remote: /usr/local/web/portal-web
