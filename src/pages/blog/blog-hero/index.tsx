@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-01-20 15:26:22
+ * @LastEditTime: 2023-01-26 00:29:04
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
@@ -110,7 +110,7 @@ function BlogHero({}: Props) {
                   <p className="text-2xl text-left">Hello, this is Carlos. </p>
                   <p>
                     This blog records some personal experience in learning programming, and the
-                    articles would be write with Markdown syntax. It is more about running records
+                    articles would be write with Markdown syntax. It is more about notes
                     or snippets than tutorials.
                   </p>
                   <p>Thanks for visit!</p>

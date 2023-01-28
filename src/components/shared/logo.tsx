@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-12 15:05:51
- * @LastEditTime: 2023-01-19 13:51:44
+ * @LastEditTime: 2023-01-26 11:15:14
  * @FilePath: /vite-react-swc/src/components/shared/logo.tsx
  * @Description:
  */
@@ -23,7 +23,6 @@ type Props = HTMLAttributes<HTMLImageElement> & {
 const Logo = memo((props: Props) => {
   const imgRef = useRef<HTMLImageElement>(null)
   const [gradientRadius, setGradientRadius] = useState<string>('14px')
-  const [gradientColor, setGradientColor] = useState<string>('#008cff')
   const imgSize = useSize(imgRef)
   useMount(() => {
     if (imgSize) {

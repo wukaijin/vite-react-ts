@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-25 22:16:17
+ * @LastEditTime: 2023-01-26 00:23:07
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -25,6 +25,7 @@ import NotFound from '@/pages/not-found'
 type Props = {}
 function Article({}: Props) {
   const [visible, setVisibility] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const [headerStyle, headerApi] = useSpring(() => ({
     from: {
@@ -59,6 +60,7 @@ function Article({}: Props) {
           y: 0
         }
       })
+      setHasError(!d)
     }
   })
   useEffect(() => {
@@ -90,7 +92,7 @@ function Article({}: Props) {
       </div>
     )
   }
-  if (!loading && !data) {
+  if (!loading && hasError) {
     return (
       <div className="fixed top-0 left-0 bottom-0 right-0">
         <NotFound />
