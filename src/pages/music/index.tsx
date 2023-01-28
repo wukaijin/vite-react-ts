@@ -2,7 +2,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-12 22:20:11
+ * @LastEditTime: 2023-01-28 10:50:52
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
@@ -46,7 +46,7 @@ const MusicPage = ({
         from={isMobile ? 'bottom' : 'right'}
         className={isMobile ? 'right-0' : 'top-1/2 -translate-y-1/2'}
       >
-        <Player from={isMobile ? 'bottom' : 'right'} togglePlayer={() => toggleMusicPlayer()} />
+        <Player from={isMobile ? 'bottom' : 'right'} />
       </Popup>
     </div>
   )
