@@ -13,8 +13,10 @@ jobs:
     # 步骤
     steps:
     # 使用别人的action
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: Copy codes
+      uses: actions/checkout@v3
+    - name: Setup Node
+      uses: actions/setup-node@v3
         with:
           node-version: "16.x"
     # 步骤名称
