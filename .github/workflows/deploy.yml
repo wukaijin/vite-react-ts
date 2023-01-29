@@ -47,3 +47,4 @@ jobs:
         password: ${{ secrets.USER_PASS }}
         source: "./dist"
         target: "/usr/local/web/portal"
+        rm: true
