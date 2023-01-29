@@ -45,6 +45,7 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.USER_NAME }}
         password: ${{ secrets.USER_PASS }}
-        source: "./dist/*"
+        source: "./dist/"
         target: "/usr/local/web/portal"
+        strip_components: 2
         rm: true
