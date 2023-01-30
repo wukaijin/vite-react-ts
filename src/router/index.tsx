@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-28 13:53:19
- * @LastEditTime: 2023-01-29 15:50:36
+ * @LastEditTime: 2023-01-30 13:47:02
  * @FilePath: /vite-react-swc/src/router/index.tsx
  * @Description:
  */
@@ -10,13 +10,12 @@ import { createBrowserRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import ManageRoute from './manage'
 import Home from '@/pages/home'
-import Test from '@/pages/test'
 import { withSuspense } from './utils'
 import NotFound from '@/pages/not-found'
 
 const Todos = withSuspense(lazy(() => import('@/pages/todos')))
 const Introduction = withSuspense(lazy(() => import('@/pages/introduction')))
-const Wait = withSuspense(lazy(() => import('@/pages/Wait')))
+// const Wait = withSuspense(lazy(() => import('@/pages/Wait')))
 
 const Hero = withSuspense(lazy(() => import('@/pages/hero')))
 const Blog = withSuspense(lazy(() => import('@/pages/blog')))
@@ -31,7 +30,8 @@ const PlaylistDetail = withSuspense(lazy(() => import('@/pages/music/playlist-de
 const config: RouteObject[] = [
   {
     path: '/',
-    element: Wait
+    element: Hero
+    // element: Wait
   },
   ManageRoute,
   {
@@ -85,10 +85,6 @@ const config: RouteObject[] = [
         element: PlaylistDetail
       }
     ]
-  },
-  {
-    path: '/test',
-    element: <Test />
   },
   {
     path: '*',

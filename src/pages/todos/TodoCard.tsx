@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-01 00:54:13
- * @LastEditTime: 2023-01-08 01:26:12
+ * @LastEditTime: 2023-01-29 16:53:51
  * @FilePath: /vite-react-swc/src/pages/todos/TodoCard.tsx
  * @Description:
  */
-import { forwardRef, RefObject } from 'react'
-import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/outline'
+import { forwardRef } from 'react'
+import { DeleteFour } from '@icon-park/react'
 import clsx from 'clsx'
 import styles from './todos.module.scss'
 import Button from '@/components/base/Button'
@@ -48,9 +48,9 @@ const TodoCard = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
         shape="circle"
         size="sm"
         onClick={onRemove}
-        className="opacity-80 hover:opacity-100 hover:scale-110"
+        className="opacity-80 hover:opacity-100 hover:scale-110 "
       >
-        <ArchiveBoxXMarkIcon className="h-4 w-4" />
+        <DeleteFour theme="filled" size={24} className="h-4 w-4 text-center items-center flex" />
       </Button>
     </div>
   )

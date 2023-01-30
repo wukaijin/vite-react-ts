@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-01-26 00:29:04
+ * @LastEditTime: 2023-01-29 17:35:56
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
@@ -37,7 +37,7 @@ function BlogHero({}: Props) {
   const { done: mountainBgDone } = useImage(MOUNTAIN_BG)
 
   useLayoutEffect(() => {
-    if (!cardImageDone || !mountainBgDone) return
+    if (!cardImageDone) return
     const baseDelay = 300
     personApi.start({
       to: { opacity: 1, x: 0 },

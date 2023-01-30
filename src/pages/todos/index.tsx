@@ -1,13 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 16:40:48
- * @LastEditTime: 2023-01-14 21:39:06
+ * @LastEditTime: 2023-01-29 16:57:00
  * @FilePath: /vite-react-swc/src/pages/todos/index.tsx
  * @Description:
  * @reference: https://react-redux.js.org/using-react-redux/usage-with-typescript
  */
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { Plus } from '@icon-park/react'
 import clsx from 'clsx'
 import { createRef, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -67,12 +67,12 @@ const Todos: React.FC<{}> = props => {
           <Button
             shape="circle"
             size="sm"
-            className="glass mr-3"
+            className="glass mr-3 flex items-center text-center"
             onClick={() => {
               setVisibility(true)
             }}
           >
-            <PlusIcon className="w-6 h-6 text-white" />
+            <Plus size={24} className="w-6 h-6 text-white" />
           </Button>
           <Button
             size="sm"

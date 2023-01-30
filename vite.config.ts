@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2023-01-28 23:59:51
+ * @LastEditTime: 2023-01-29 17:33:24
  * @FilePath: /vite-react-swc/vite.config.ts
  * @Description:
  */
@@ -15,6 +15,21 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, '/src')
+    }
+  },
+  build: {
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.toString().split('node_modules/.pnpm/')[1].split('/')[0].toString().startsWith('refractor')) {
+              return 'refractor'
+            }
+          }
+          return undefined
+        }
+      }
     }
   },
   server: {
