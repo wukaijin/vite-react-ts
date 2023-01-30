@@ -1,11 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-28 13:39:26
+ * @LastEditTime: 2023-01-30 17:23:33
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
 import { Control, Search } from '@icon-park/react'
+import { useNavigate } from 'react-router-dom'
 
 const logo = '/static-api/logo/transformer-256.png'
 
@@ -16,10 +17,11 @@ type Props = {
 }
 const MusicHeader = (props: Props) => {
   const { setKeyWord, query, toggleMusicPlayer } = props
+  const navigate = useNavigate()
   return (
     <div className="music-header flex">
       <span className="music-logo">
-        <img className="" src={logo} alt="" />
+        <img className="" src={logo} alt="" onClick={() => navigate('/music/home')} />
       </span>
       <span className="flex-1 flex text-center justify-center">
         <div className="input-group" style={{ width: '100%', maxWidth: '24rem' }}>
@@ -44,10 +46,7 @@ const MusicHeader = (props: Props) => {
       </span>
       <span className="mx-2">
         <button className="btn btn-circle btn-ghost" onClick={() => toggleMusicPlayer()}>
-          <Control
-            theme="outline"
-            className=" text-2xl cursor-pointer text-indigo-500"
-          />
+          <Control theme="outline" className=" text-2xl cursor-pointer text-indigo-500" />
         </button>
       </span>
     </div>

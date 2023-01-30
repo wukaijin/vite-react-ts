@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-12 15:40:11
- * @LastEditTime: 2023-01-30 14:08:53
+ * @LastEditTime: 2023-01-30 16:36:02
  * @FilePath: /vite-react-swc/src/components/shared/withLicense.tsx
  * @Description:
  */
@@ -18,7 +18,7 @@ function withLicense<T extends {}>(MainComp: ComponentType<T>) {
         <MainComp {...mainProps} />
         <div
           className={clsx(
-            'px-16 py-4 bg-gray-800 text-gray-400 text-sm flex items-center justify-center'
+            'p-4 bg-gray-800 text-gray-400 text-sm flex items-center justify-center'
           )}
         >
           <div className="flex items-center justify-center">

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-30 13:51:08
+ * @LastEditTime: 2023-01-30 16:37:12
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -27,7 +27,7 @@ const BlogLayout = (props: Props) => {
       className={clsx('min-h-screen bg-white font-blog')}
     >
       <div className={clsx(styled['bg-escape'], 'w-full fixed top-0 h-14 z-10')}>
-        <div className="flex h-full items-center justify-between px-8">
+        <div className="flex h-full items-center justify-between px-4">
           <div className="flex h-full items-center text-sm">
             <Logo className="h-8 w-8 inline-block mr-4 cursor-pointer" onClick={() => navigate('/blog')} />
             <Search />

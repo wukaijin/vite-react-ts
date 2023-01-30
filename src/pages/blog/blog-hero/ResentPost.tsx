@@ -14,7 +14,7 @@ function ResentPost({}: Props) {
   const { data = [] } = useRequest(ArticleApi.findAll)
   return (
     <>
-      <header className="py-16 sm:text-center ">
+      <header className="py-16 text-center ">
         <span className="mb-4 text-3xl sm:text-4xl tracking-tight font-extrabold">
           Recent posts
         </span>

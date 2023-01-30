@@ -102,7 +102,7 @@ function Article({}: Props) {
   return (
     <div className={clsx('bg-fixed bg-cover', styled['paint-bg'])}>
       <div className={clsx('container m-auto flex relative ')}>
-        <div className="flex-1">
+        <div className="flex-1 max-w-full">
           <div className="px-4 py-8">
             <animated.div style={headerStyle}>
               <ArticleHeader data={data} />

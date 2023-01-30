@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 16:23:36
- * @LastEditTime: 2023-01-29 00:19:03
+ * @LastEditTime: 2023-01-30 16:39:18
  * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
@@ -17,13 +17,12 @@ const componentsConfig: Components = {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
       <SyntaxHighlighter
-        // lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
-        wrapLongLines
+        // wrapLongLines
         showLineNumbers
         style={atomDark as any}
         language={match[1]}
         PreTag="div"
-        customStyle={{ margin: 0 }}
+        customStyle={{ margin: 0, overflowY: 'auto' }}
         {...props}
       >
         {String(children).replace(/\n$/, '')}

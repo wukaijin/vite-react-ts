@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-23 01:00:04
+ * @LastEditTime: 2023-01-30 15:13:06
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -28,7 +28,7 @@ const ArticleCard = (props: Props) => {
       <div
         className="w-32 rounded-l-xl bg-cover"
         style={{
-          backgroundImage: `url(${data.poster})`
+          backgroundImage: `url(${data.poster || data.category?.defaultPoster})`
         }}
       />
       <div className="flex-1 px-4 py-3 overflow-hidden">

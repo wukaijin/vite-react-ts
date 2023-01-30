@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-04 22:17:37
- * @LastEditTime: 2023-01-15 14:44:28
+ * @LastEditTime: 2023-01-30 17:39:32
  * @FilePath: /vite-react-swc/src/components/enhance/player/index.tsx
  * @Description:
  */
@@ -54,7 +54,7 @@ export class Player extends Component<Props, State> {
     const newState = {
       playing
     }
-    
+
     if (playing !== state.playing) {
       if (playing) {
         eventemitter.emit(EVENT_KEYS.MUSIC_PLAYER_STATE_TO_PLAY)
@@ -162,7 +162,10 @@ export class Player extends Component<Props, State> {
     const { from, togglePlayer: toggleP, current } = this.props
     return (
       <div className="w-[100vw] h-[100vh] sm:h-auto sm:w-[400px] text-gray-400">
-        <NeuPanel className="p-6 h-[100%] sm:pr-2 sm:rounded-r-none flex flex-col shadow-none">
+        <div
+          className="p-6 h-[100%] sm:pr-2 rounded-none sm:rounded-l-xl flex flex-col"
+          style={{ boxShadow: 'none', backgroundColor: 'var(--neu-greyLight-1)' }}
+        >
           <div className="h-12 flex justify-between">
             <NeuButton size="xs" className="aspect-square">
               <FoldUpOne
@@ -222,7 +225,7 @@ export class Player extends Component<Props, State> {
               </NeuButton>
             </div>
           </NeuPanel>
-        </NeuPanel>
+        </div>
         <audio ref={this.audioRef} src={musicSrc}>
           <track kind="captions" src={musicSrc} />
         </audio>

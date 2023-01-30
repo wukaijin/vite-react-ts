@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-08 15:02:53
- * @LastEditTime: 2023-01-09 23:07:11
+ * @LastEditTime: 2023-01-30 17:49:44
  * @FilePath: /vite-react-swc/src/pages/music/music-home/recommend-playlist/PlaylistCard.tsx
  * @Description:
  */
@@ -23,17 +23,17 @@ const PlaylistCard = (props: Props) => {
     return d.length > limit ? `${d.slice(1, limit - 2)}...` : d
   }, [data.description])
   return (
-    <div className="contain inline-block relative rounded-t-xl cursor-pointer">
+    <div
+      className="contain inline-block relative rounded-t-xl cursor-pointer"
+      onClick={() => navigate(`/music/playlist-detail?id=${data.id}`)}
+    >
       <div className="flip aspect-square">
         <div className="front">
           <div className="">
             <img className="rounded-t-xl" src={data.coverImgUrl} alt="" />
           </div>
         </div>
-        <div
-          className="back h-full bg-white/20 rounded-t-xl p-2 overflow-auto"
-          onClick={() => navigate(`/music/playlist-detail?id=${data.id}`)}
-        >
+        <div className="back h-full bg-white/20 rounded-t-xl p-2 overflow-auto">
           <span className="text-xs text-ellipsis leading-none break-all">{desc}</span>
         </div>
       </div>

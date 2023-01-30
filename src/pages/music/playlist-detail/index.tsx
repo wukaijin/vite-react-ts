@@ -63,6 +63,7 @@ const PlaylistDetail = (props: Props) => {
   })
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const id = searches.get('id')
     if (id) run(Number(id))
   }, [searches])
@@ -89,7 +90,7 @@ const PlaylistDetail = (props: Props) => {
   if (loading || !data) return null
   return (
     <div>
-      <div className="w-[100vw] sm:min-w-[1080px] sm:h-[calc(100vh-3.5rem)] sm:container mx-auto py-8">
+      <div className="w-[100vw] sm:min-w-[1080px] sm:h-[calc(100vh-3.5rem)] sm:container mx-auto pt-8">
         <div className="box-border playlist-card backdrop-blur-md sm:max-h-[calc(100vh-7.5rem)] p-8">
           <div className="grid grid-cols-4 gap-8 ">
             <div className=" col-span-1 flex flex-col sm:max-h-[calc(100vh-11.5rem)]">

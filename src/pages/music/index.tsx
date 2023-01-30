@@ -2,7 +2,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-30 13:54:07
+ * @LastEditTime: 2023-01-30 17:45:49
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
@@ -35,7 +35,7 @@ const MusicPage = ({
   }, [keyWord])
   const visible = useMemo(() => showPlayer, [showPlayer])
   return (
-    <div className="music-page bg-spectrum-light-reverse pb-8" style={style}>
+    <div className="music-page bg-spectrum-light-reverse sm:pb-8" style={style}>
       <MusicHeader setKeyWord={setKeyWord} query={query} toggleMusicPlayer={toggleMusicPlayer} />
       <Outlet context={{ setTopStyle: setStyle }} />
       <Popup
