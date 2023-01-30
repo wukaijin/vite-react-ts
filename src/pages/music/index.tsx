@@ -2,7 +2,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-06 13:30:17
- * @LastEditTime: 2023-01-28 13:39:14
+ * @LastEditTime: 2023-01-30 13:54:07
  * @FilePath: /vite-react-swc/src/pages/music/index.tsx
  * @Description:
  */
@@ -16,6 +16,7 @@ import Popup from '@/components/base/popup'
 import Player from '@/components/enhance/player'
 import { RootState } from '@/store'
 import MusicHeader from './MusicHeader'
+import withLicense from '@/components/shared/withLicense'
 
 const isMobile = document.documentElement.offsetWidth < 500
 
@@ -62,4 +63,4 @@ const mapDispatchToProps = {
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PropsFromRedux = ConnectedProps<typeof connector>
-export default connector(MusicPage)
+export default withLicense(connector(MusicPage))

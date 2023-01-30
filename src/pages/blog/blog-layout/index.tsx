@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-29 06:04:39
+ * @LastEditTime: 2023-01-30 13:51:08
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -16,6 +16,7 @@ import styled from '../blog.module.scss'
 import Menu from './Menu'
 import Modal from '@/components/base/Modal'
 import Search from './Search'
+import withLicense from '@/components/shared/withLicense'
 
 type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
@@ -68,4 +69,4 @@ const BlogLayout = (props: Props) => {
   )
 }
 
-export default BlogLayout
+export default withLicense(BlogLayout)
