@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-29 00:21:24
+ * @LastEditTime: 2023-01-31 17:47:47
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -21,6 +21,7 @@ import Related from './Related'
 import styled from '../blog.module.scss'
 import Loading from '@/components/base/Loading'
 import NotFound from '@/pages/not-found'
+import { isMobile } from '@/const'
 
 type Props = {}
 function Article({}: Props) {
@@ -103,7 +104,12 @@ function Article({}: Props) {
     <div className={clsx('bg-fixed bg-cover', styled['paint-bg'])}>
       <div className={clsx('container m-auto flex relative ')}>
         <div className="flex-1 max-w-full">
-          <div className="px-4 py-8">
+          <div
+            className={clsx({
+              'px-4 py-8': !isMobile,
+              'py-4': isMobile
+            })}
+          >
             <animated.div style={headerStyle}>
               <ArticleHeader data={data} />
             </animated.div>
@@ -132,12 +138,14 @@ function Article({}: Props) {
             </animated.div>
           </div>
         </div>
-        <div className="w-[300px]">
-          <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
-            <OtherCategory title="Category" />
-            <Related articleId={params.id || ''} />
+        {!isMobile && (
+          <div className="w-[300px]">
+            <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
+              <OtherCategory title="Category" />
+              <Related articleId={params.id || ''} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

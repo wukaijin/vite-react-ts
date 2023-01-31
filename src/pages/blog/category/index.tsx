@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
- * @LastEditTime: 2023-01-25 22:05:52
+ * @LastEditTime: 2023-01-31 21:11:12
  * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
  * @Description:
  */
@@ -18,6 +18,7 @@ import { Article, Tag } from '@/interface/blog'
 import OtherCategory from '../OtherCategory'
 import Loading from '@/components/base/Loading'
 import NoData from '@/components/shared/NoData'
+import { isMobile } from '@/const'
 
 type Props = {}
 const BlogCategory = (props: Props) => {
@@ -115,6 +116,7 @@ const BlogCategory = (props: Props) => {
   }, [tags, articles])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (params.id) {
       mainApi.start({
         to: {
@@ -146,11 +148,11 @@ const BlogCategory = (props: Props) => {
     <div
       className={clsx(
         sharedStyled['paint-bg'],
-        ' bg-fixed bg-no-repeat bo-cover min-h-[calc(100vh-56px)]'
+        ' bg-fixed bg-no-repeat bo-cover min-h-[calc(100vh-49px)]'
       )}
       style={style}
     >
-      <div className={clsx('h-full min-h-[calc(100vh-56px)] bg-white/80')}>
+      <div className={clsx('h-full min-h-[calc(100vh-49px)] bg-white/80')}>
         <div className="container m-auto bg-red flex relative">
           <div className="flex-1">
             {hasError && (
@@ -181,57 +183,59 @@ const BlogCategory = (props: Props) => {
               </div>
             </animated.div>
           </div>
-          <div className="w-[300px]">
-            {categoryDTO && (
-              <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
-                <animated.div
-                  className="rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm mb-4"
-                  style={siderStyle}
-                >
-                  <div className="py-4 px-4">
-                    <div>
-                      {categoryDTO.belongs && (
-                        <span>
-                          <span>{categoryDTO.belongs.text}</span>
-                          <span className="mx-2">{'>'}</span>
-                        </span>
-                      )}
-                      <img
-                        className="inline-block h-8 mr-2 rounded-full"
-                        src={categoryDTO.defaultPoster}
-                        alt=""
-                      />
-                      <span>{categoryDTO.text}</span>
+          {!isMobile && (
+            <div className="w-[300px]">
+              {categoryDTO && (
+                <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
+                  <animated.div
+                    className="rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm mb-4"
+                    style={siderStyle}
+                  >
+                    <div className="py-4 px-4">
+                      <div>
+                        {categoryDTO.belongs && (
+                          <span>
+                            <span>{categoryDTO.belongs.text}</span>
+                            <span className="mx-2">{'>'}</span>
+                          </span>
+                        )}
+                        <img
+                          className="inline-block h-8 mr-2 rounded-full"
+                          src={categoryDTO.defaultPoster}
+                          alt=""
+                        />
+                        <span>{categoryDTO.text}</span>
+                      </div>
+                      <div className="pt-4">
+                        <ReactSelect
+                          placeholder="Select Tags"
+                          isClearable
+                          isMulti
+                          classNames={{
+                            control: () => 'bg-transparent rounded-xl'
+                          }}
+                          styles={{
+                            control: _styled => ({
+                              ..._styled,
+                              background: 'transparent',
+                              borderRadius: 8,
+                              border: '1px solid #a2a2a1'
+                            })
+                          }}
+                          options={tagOptions}
+                          getOptionValue={o => o?.id || ''}
+                          getOptionLabel={o => o?.text || ''}
+                          value={tags}
+                          onChange={_tags => setTags([..._tags])}
+                        />
+                      </div>
+                      <OtherCategory />
                     </div>
-                    <div className="pt-4">
-                      <ReactSelect
-                        placeholder="Select Tags"
-                        isClearable
-                        isMulti
-                        classNames={{
-                          control: () => 'bg-transparent rounded-xl'
-                        }}
-                        styles={{
-                          control: _styled => ({
-                            ..._styled,
-                            background: 'transparent',
-                            borderRadius: 8,
-                            border: '1px solid #a2a2a1'
-                          })
-                        }}
-                        options={tagOptions}
-                        getOptionValue={o => o?.id || ''}
-                        getOptionLabel={o => o?.text || ''}
-                        value={tags}
-                        onChange={_tags => setTags([..._tags])}
-                      />
-                    </div>
-                    <OtherCategory />
-                  </div>
-                </animated.div>
-              </div>
-            )}
-          </div>
+                  </animated.div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,14 +1,13 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-30 15:13:06
+ * @LastEditTime: 2023-01-31 21:17:50
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
 
 import { useNavigate } from 'react-router-dom'
 import { Article } from '@/interface/blog'
-import articles from '../management/blog/articles'
 
 type Props = {
   data: Article
@@ -16,6 +15,7 @@ type Props = {
 const ArticleCard = (props: Props) => {
   const { data } = props
   const navigate = useNavigate()
+  const toArticle = () => navigate(`/blog/category/${data.category.id}`)
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
       {/* <figure>
@@ -30,6 +30,7 @@ const ArticleCard = (props: Props) => {
         style={{
           backgroundImage: `url(${data.poster || data.category?.defaultPoster})`
         }}
+        onClick={toArticle}
       />
       <div className="flex-1 px-4 py-3 overflow-hidden">
         <h2
@@ -42,7 +43,7 @@ const ArticleCard = (props: Props) => {
         <div className="">
           <p
             className="inline-block hover:opacity-80 cursor-pointer mr-4"
-            onClick={() => navigate(`/blog/category/${data.category.id}`)}
+            onClick={toArticle}
           >
             {data.category.text}
           </p>

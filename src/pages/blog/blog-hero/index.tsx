@@ -1,18 +1,19 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-01-29 17:35:56
+ * @LastEditTime: 2023-01-31 21:11:31
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
 import clsx from 'clsx'
-import { useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import ResentPosts from './ResentPost'
 import useImage from '@/hooks/useImage'
 import Loading from '@/components/base/Loading'
 import styled from './blog-hero.module.scss'
 import sharedStyled from '../blog.module.scss'
+import { isMobile } from '@/const'
 
 const CARD_IMAGE = '/static-api/blog/undraw_augmented_reality.svg'
 const CLOUD_BG = '/static-api/blog/cloud.png'
@@ -61,8 +62,12 @@ function BlogHero({}: Props) {
     })
   }, [cardImageDone, mountainBgDone])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
-    <div className={clsx(sharedStyled['paint-bg'], ' bg-fixed min-h-[calc(100vh-56px)]')}>
+    <div className={clsx(sharedStyled['paint-bg'], ' bg-fixed min-h-[calc(100vh-49px)]')}>
       {(!cardImageDone || !mountainBgDone) && (
         <div className="fixed mt-32 mx-auto text-center w-full">
           <Loading.Circle />
@@ -75,7 +80,11 @@ function BlogHero({}: Props) {
             backgroundImage: `url(${CLOUD_BG})`
           }}
         >
-          <div className="w-full sm:max-w-[960px] m-auto pt-12">
+          <div
+            className={clsx('w-full sm:max-w-[960px] m-auto ', {
+              'pt-16': !isMobile
+            })}
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2">
               <div className="text-right">
                 <div className="pr-12">
@@ -110,13 +119,18 @@ function BlogHero({}: Props) {
                   <p className="text-2xl text-left">Hello, this is Carlos. </p>
                   <p>
                     This blog records some personal experience in learning programming, and the
-                    articles would be write with Markdown syntax. It is more about notes
-                    or snippets than tutorials.
+                    articles would be write with Markdown syntax. It is more about notes or snippets
+                    than tutorials.
                   </p>
                   <p>Thanks for visit!</p>
                 </animated.div>
               </div>
-              <div className="pt-12">
+              <div
+                className={clsx({
+                  'pt-12': !isMobile,
+                  'pt-2': isMobile
+                })}
+              >
                 <animated.div style={{ ...imageStyles }}>
                   <img src={CARD_IMAGE} alt="" />
                 </animated.div>

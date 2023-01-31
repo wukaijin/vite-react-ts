@@ -2,7 +2,7 @@
   @apply min-h-screen;
 }
 .music-header {
-  @apply sticky top-0 z-10 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg rounded-2xl;
+  @apply sticky top-0 z-10 h-14 flex justify-between items-center px-2 backdrop-blur-sm shadow-lg;
 }
 .music-logo {
   @apply mx-2 inline-flex items-center justify-center aspect-square rounded-full h-8 w-8;

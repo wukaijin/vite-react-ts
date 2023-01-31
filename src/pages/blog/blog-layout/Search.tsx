@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-24 16:11:27
- * @LastEditTime: 2023-01-24 17:17:07
+ * @LastEditTime: 2023-01-31 17:37:23
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Search.tsx
  * @Description:
  */
@@ -10,6 +10,7 @@ import { useClickAway, useDebounceFn, useKeyPress, useRequest } from 'ahooks'
 import clsx from 'clsx'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { ArticleApi } from '@/api/blog'
+import { isMobile } from '@/const'
 
 type Props = {}
 const Search = (props: Props) => {
@@ -70,12 +71,21 @@ const Search = (props: Props) => {
     }
   })
   return (
-    <div ref={searchRef} className="relative">
+    <div
+      ref={searchRef}
+      className={clsx('relative', {
+        'flex-1': isMobile
+      })}
+    >
       <input
         type="text"
         className={clsx(
-          'input input-ghost input-sm transition-all',
-          'text-white/50 border border-white/40 w-[12rem] focus:w-[25vw] placeholder:text-white/50'
+          'input input-ghost  transition-all',
+          'text-white/50 border border-white/40 placeholder:text-white/50',
+          {
+            'input-sm w-[12rem] sm:focus:w-[25vw]': !isMobile,
+            'h-[2.4rem] w-full': isMobile
+          }
         )}
         placeholder="Search"
         value={keyword}
@@ -88,7 +98,7 @@ const Search = (props: Props) => {
       />
       <ul
         className={clsx(
-          'absolute top-9 bg-white rounded-lg w-[25vw] border overflow-hidden text-slate-700/90',
+          'absolute top-9 sm:left-0 -left-16 bg-white rounded-lg sm:w-[25vw] w-[100vw] border overflow-hidden text-slate-700/90',
           {
             hidden: !visible || !list || !list.length
           }
@@ -99,7 +109,7 @@ const Search = (props: Props) => {
           list.map(article => (
             <li
               key={article.id}
-              className={clsx('leading-6 cursor-pointer  px-2 py-1', {
+              className={clsx('leading-6 cursor-pointer  text-xl sm:text-base px-2 py-2 sm:py-1', {
                 'bg-sky-700 text-white hover:text-white': activeId === article.id,
                 'hover:text-slate-700/60': activeId !== article.id
               })}

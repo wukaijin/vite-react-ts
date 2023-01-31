@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-30 16:37:12
+ * @LastEditTime: 2023-01-31 17:34:47
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -17,26 +17,30 @@ import Menu from './Menu'
 import Modal from '@/components/base/Modal'
 import Search from './Search'
 import withLicense from '@/components/shared/withLicense'
+import { isMobile } from '@/const'
 
 type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
   const [modalShow, { toggle }] = useToggle()
   const navigate = useNavigate()
   return (
-    <div
-      className={clsx('min-h-screen bg-white font-blog')}
-    >
+    <div className={clsx('min-h-screen bg-white font-blog')}>
       <div className={clsx(styled['bg-escape'], 'w-full fixed top-0 h-14 z-10')}>
         <div className="flex h-full items-center justify-between px-4">
-          <div className="flex h-full items-center text-sm">
-            <Logo className="h-8 w-8 inline-block mr-4 cursor-pointer" onClick={() => navigate('/blog')} />
+          <div className="flex flex-1 h-full items-center text-sm">
+            <Logo
+              className="h-8 w-8 inline-block mr-4 cursor-pointer"
+              onClick={() => navigate('/blog')}
+            />
             <Search />
-            <div className="text-white">
-              <Menu />
-            </div>
+            {!isMobile && (
+              <div className="text-white">
+                <Menu />
+              </div>
+            )}
           </div>
           <div className="flex">
-            <div>
+            <div className="pl-2">
               <button className="btn btn-ghost btn-circle hover:bg-white/10" onClick={toggle}>
                 <div className="indicator text-white">
                   <Setting size="20" />

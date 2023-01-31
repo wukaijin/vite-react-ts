@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
- * @LastEditTime: 2023-01-24 14:31:34
+ * @LastEditTime: 2023-01-31 21:11:36
  * @FilePath: /vite-react-swc/src/pages/blog/tag/index.tsx
  * @Description:
  */
@@ -41,10 +41,10 @@ const BlogTag = (props: Props) => {
     <div
       className={clsx(
         sharedStyled['paint-bg'],
-        ' bg-fixed bg-no-repeat bo-cover min-h-[calc(100vh-56px)]'
+        ' bg-fixed bg-no-repeat bo-cover min-h-[calc(100vh-49px)]'
       )}
     >
-      <div className={clsx('h-full min-h-[calc(100vh-56px)] bg-white/70')}>
+      <div className={clsx('h-full min-h-[calc(100vh-49px)] bg-white/70')}>
         <div className="container m-auto bg-red flex relative">
           <div className="flex-1">{hasError && <div>error</div>}</div>
           <div className="w-[300px]">213</div>

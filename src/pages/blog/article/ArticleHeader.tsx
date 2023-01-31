@@ -1,21 +1,28 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-22 23:36:34
- * @LastEditTime: 2023-01-24 15:06:48
+ * @LastEditTime: 2023-01-31 17:46:57
  * @FilePath: /vite-react-swc/src/pages/blog/article/ArticleHeader.tsx
  * @Description:
  */
 import { useNavigate } from 'react-router-dom'
+import clsx from 'clsx'
 import { Article } from '@/interface/blog'
+import { isMobile } from '@/const'
 
 type Props = {
   data?: Article
 }
 function ArticleHeader({ data }: Props) {
   const navigate = useNavigate()
+
   if (!data) return null
   return (
-    <div>
+    <div
+      className={clsx({
+        'px-4': isMobile
+      })}
+    >
       <div className="flex items-center justify-start pb-4">
         {data.category.belongs && (
           <span className="text-xl opacity-70 mr-2">{data.category.belongs?.text}</span>
@@ -49,8 +56,17 @@ function ArticleHeader({ data }: Props) {
           ))}
       </div>
       <h1 className="text-4xl leading-loose py-4">{data.title}</h1>
-      <div>
-        <img src={data.poster} alt="" />
+      <div className="text-center pb-8">
+        {data.poster && (
+          <img
+            className={clsx({
+              'w-48 inline-block': data.poster.endsWith('.svg'),
+              'max-h-[40vh] inline-block': !data.poster.endsWith('.svg')
+            })}
+            src={data.poster}
+            alt="poster"
+          />
+        )}
       </div>
     </div>
   )
