@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 12:49:28
- * @LastEditTime: 2023-01-31 17:34:47
+ * @LastEditTime: 2023-02-01 10:35:23
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/index.tsx
  * @Description:
  */
@@ -23,6 +23,10 @@ type Props = HTMLAttributes<HTMLDivElement>
 const BlogLayout = (props: Props) => {
   const [modalShow, { toggle }] = useToggle()
   const navigate = useNavigate()
+  const toCMS = () => {
+    window.open('http://cms.wukaijin.com')
+    toggle()
+  }
   return (
     <div className={clsx('min-h-screen bg-white font-blog')}>
       <div className={clsx(styled['bg-escape'], 'w-full fixed top-0 h-14 z-10')}>
@@ -64,7 +68,7 @@ const BlogLayout = (props: Props) => {
           <button className="btn btn-ghost" onClick={toggle}>
             Cancel
           </button>
-          <button className="btn btn-secondary" onClick={toggle}>
+          <button className="btn btn-secondary" onClick={toCMS}>
             SignIn
           </button>
         </div>
