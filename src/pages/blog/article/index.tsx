@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-01-31 17:47:47
+ * @LastEditTime: 2023-02-04 01:53:50
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -32,13 +32,19 @@ function Article({}: Props) {
     from: {
       opacity: 0,
       x: -300
-    }
+    },
+    config: {
+      duration: 1000
+    },
   }))
   const [contentStyle, contentApi] = useSpring(() => ({
     from: {
       opacity: 0,
       y: 300
-    }
+    },
+    config: {
+      duration: 1000
+    },
   }))
   const params = useParams()
   const {
@@ -86,13 +92,11 @@ function Article({}: Props) {
   useClickAway(() => {
     visible && setVisibility(false)
   }, menuRef)
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 bottom-0 right-0">
-        <Loading.Nest />
-      </div>
-    )
-  }
+  // if (loading) {
+  //   return (
+
+  //   )
+  // }
   if (!loading && hasError) {
     return (
       <div className="fixed top-0 left-0 bottom-0 right-0">
@@ -102,6 +106,11 @@ function Article({}: Props) {
   }
   return (
     <div className={clsx('bg-fixed bg-cover', styled['paint-bg'])}>
+      {loading && (
+        <div className="fixed top-0 left-0 bottom-0 right-0">
+          <Loading.Nest />
+        </div>
+      )}
       <div className={clsx('container m-auto flex relative ')}>
         <div className="flex-1 max-w-full">
           <div

@@ -1,12 +1,12 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-24 14:14:58
- * @LastEditTime: 2023-01-24 15:29:19
+ * @LastEditTime: 2023-02-04 01:52:57
  * @FilePath: /vite-react-swc/src/pages/blog/article/Related.tsx
  * @Description:
  */
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSpring, animated } from '@react-spring/web'
 import { useRequest } from 'ahooks'
 import { ArticleApi } from '@/api/blog'
@@ -17,10 +17,14 @@ type Props = {
 
 function Related({ articleId }: Props) {
   const navigate = useNavigate()
+  const params = useParams()
   const [style, listApi] = useSpring(() => ({
     from: {
       opacity: 0,
       x: 300
+    },
+    config: {
+      duration: 1000
     }
     // delay: 300
   }))
@@ -31,24 +35,25 @@ function Related({ articleId }: Props) {
         to: {
           opacity: 1,
           x: 0
-        }
+        },
+        
       })
     }
   })
 
   useEffect(() => {
-    if (articleId) {
+    if (params.id) {
       listApi.start({
         to: {
           opacity: 0,
           x: 300
         },
         onResolve() {
-          run(articleId)
+          run(params.id!)
         }
       })
     }
-  }, [articleId])
+  }, [params])
   return (
     <animated.div style={style}>
       <h2 className="pb-2">Related:</h2>

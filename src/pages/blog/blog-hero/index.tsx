@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-01-31 21:11:31
+ * @LastEditTime: 2023-02-04 00:34:13
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
@@ -23,6 +23,9 @@ type Props = {}
 function BlogHero({}: Props) {
   const [personStyles, personApi] = useSpring(() => ({
     from: { opacity: 0, x: -300 }
+  }))
+  const [bgStyles, bgApi] = useSpring(() => ({
+    from: { opacity: 0, y: 300 }
   }))
   const [textStyles, textApi] = useSpring(() => ({
     from: { opacity: 0, y: 300 }
@@ -60,14 +63,30 @@ function BlogHero({}: Props) {
       delay: baseDelay + 1000,
       config: { duration: 500 }
     })
-  }, [cardImageDone, mountainBgDone])
+  }, [cardImageDone])
 
+  useLayoutEffect(() => {
+    bgApi.start({
+      to: { opacity: 1, y: 0 },
+      config: { duration: 6000 }
+    })
+  }, [mountainBgDone])
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
-    <div className={clsx(sharedStyled['paint-bg'], ' bg-fixed min-h-[calc(100vh-49px)]')}>
+    <div
+      className={clsx('min-h-[calc(100vh-49px)]', {
+        // [sharedStyled['paint-bg']]: mountainBgDone
+      })}
+    >
+      <animated.div
+        className={clsx('fixed w-full min-h-[calc(100vh-49px)]', {
+          [sharedStyled['paint-bg']]: mountainBgDone
+        })}
+        style={bgStyles}
+      />
       {(!cardImageDone || !mountainBgDone) && (
         <div className="fixed mt-32 mx-auto text-center w-full">
           <Loading.Circle />
