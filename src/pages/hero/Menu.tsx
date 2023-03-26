@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-12 15:00:33
- * @LastEditTime: 2023-01-30 16:27:36
+ * @LastEditTime: 2023-03-26 09:03:00
  * @FilePath: /vite-react-swc/src/pages/hero/Menu.tsx
  * @Description:
  */
@@ -25,7 +25,7 @@ const HeroMenu = (props: Props) => {
       <Logo colorDeg={80} className="absolute top-6 left-6 w-8 h-8" />
       <ul className="font-blog text-5xl leading-tight text-secondary-content rounded-box text-left align-bottom pb-24">
         <li>
-          <Link to="/music/home">
+          <Link to="/music/home" target="_blank">
             <div className={clsx(styled['menu-item'])}>
               <span className={clsx(styled['menu-item-a'])}>Music</span>
               <span className={clsx(styled['menu-item-b'], 'text-sky-400')}>Music</span>
@@ -33,7 +33,7 @@ const HeroMenu = (props: Props) => {
           </Link>
         </li>
         <li>
-          <Link to="/blog">
+          <Link to="/blog" target="_blank">
             <div className={clsx(styled['menu-item'])}>
               <span className={clsx(styled['menu-item-a'])}>Blog</span>
               <span className={clsx(styled['menu-item-b'], 'text-orange-400')}>Blog</span>
