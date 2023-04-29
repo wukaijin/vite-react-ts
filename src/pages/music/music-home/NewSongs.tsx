@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:37:36
- * @LastEditTime: 2023-01-15 13:53:12
+ * @LastEditTime: 2023-04-27 17:11:12
  * @FilePath: /vite-react-swc/src/pages/music/music-home/NewSongs.tsx
  * @Description:
  */
@@ -85,8 +85,8 @@ const NewSongItem = connector(
             </div>
           </div>
           <div className={clsx('p-2', { 'bg-wave': CurrentPS.id === song.id && playing })}>
-            <div className="text-sm text-gray-700 mb-1 truncate">{song.name}</div>
-            <div className="text-xs text-gray-500 truncate mb-1">
+            <div className="text-base text-gray-700 mb-1 truncate">{song.name}</div>
+            <div className="text-sm text-gray-500 truncate mb-1">
               <span>{song.song.artists.map(a => a.name).join(', ')}</span>
               {song.song.album.name !== song.name && <span> - {song.song.album.name}</span>}
             </div>
@@ -103,7 +103,7 @@ const NewSongs = memo<Props>(props => {
   const { data = [], loading } = useRequest(queryNewSongs)
   return (
     <div className="px-4 xs:px-0 m-auto">
-      <div className="text-xl font-medium leading-14 ">New & trending songs</div>
+      <div className="text-2xl font-medium leading-14 ">New & trending songs</div>
       {loading && (
         <div className="flex justify-center text-center items-center  py-16">
           <Loading.Circle />

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 15:38:57
- * @LastEditTime: 2023-01-07 15:31:59
+ * @LastEditTime: 2023-04-27 17:09:13
  * @FilePath: /vite-react-swc/src/components/neumorphism/Input.tsx
  * @Description:
  */
@@ -11,9 +11,9 @@ import { CSSProperties, HTMLAttributes } from 'react'
 const SIZES = ['xs', 'sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
 const SizeMapping: Record<Size, [string, string, string, string, string, string]> = {
-  xs: ['w-40', 'h-10 text-sm', 'rounded-lg', 'px-2', 'pl-10 pr-2', 'pl-1 w-10'],
-  sm: ['w-48', 'h-12 text-sm', 'rounded-lg', 'px-2', 'pl-10 pr-2', 'pl-1 w-10'],
-  md: ['w-56', 'h-14 text-base', 'rounded-xl', 'px-4', 'pl-12 pr-4', 'pl-1 w-12'],
+  xs: ['w-40', 'h-10 text-base', 'rounded-lg', 'px-2', 'pl-10 pr-2', 'pl-1 w-10'],
+  sm: ['w-48', 'h-12 text-base', 'rounded-lg', 'px-2', 'pl-10 pr-2', 'pl-1 w-10'],
+  md: ['w-56', 'h-14 text-lg', 'rounded-xl', 'px-4', 'pl-12 pr-4', 'pl-1 w-12'],
   lg: ['w-64', 'h-16 text-lg', 'rounded-2xl', 'px-6', 'pl-12 pr-6', 'pl-2 w-12']
 }
 type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {

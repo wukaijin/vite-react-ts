@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:37:20
- * @LastEditTime: 2023-01-15 21:55:20
+ * @LastEditTime: 2023-04-27 17:09:48
  * @FilePath: /vite-react-swc/src/pages/management/components/Breadcrumbs.tsx
  * @Description:
  */
@@ -33,7 +33,7 @@ export const BreadcrumbsItem = (props: ItemProps) => {
 type Props = HTMLAttributes<HTMLSpanElement>
 const Breadcrumbs = (props: Props) => {
   return (
-    <div className="text-sm breadcrumbs">
+    <div className="text-base breadcrumbs">
       <ul>{props.children}</ul>
     </div>
   )

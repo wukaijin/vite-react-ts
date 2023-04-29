@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-02 16:55:31
- * @LastEditTime: 2023-01-03 14:10:07
+ * @LastEditTime: 2023-04-27 17:09:25
  * @FilePath: /vite-react-swc/src/components/neumorphism/Tabs.tsx
  * @Description:
  */
@@ -11,8 +11,8 @@ import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
 const SIZES = ['sm', 'md', 'lg'] as const
 type Size = typeof SIZES[number]
 const SizeMapping: Record<Size, [string, string, string, string, [number, string]]> = {
-  sm: ['h-10', 'px-4', 'text-sm', 'rounded-lg', [10, 'rounded-md']],
-  md: ['h-12', 'px-6', 'text-base', 'rounded-xl', [10, 'rounded-md']],
+  sm: ['h-10', 'px-4', 'text-base', 'rounded-lg', [10, 'rounded-md']],
+  md: ['h-12', 'px-6', 'text-lg', 'rounded-xl', [10, 'rounded-md']],
   lg: ['h-14', 'px-8', 'text-lg', 'rounded-2xl', [12, 'rounded-lg']]
 }
 type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {

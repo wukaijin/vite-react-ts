@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-08 15:02:53
- * @LastEditTime: 2023-01-30 17:49:44
+ * @LastEditTime: 2023-04-27 17:10:06
  * @FilePath: /vite-react-swc/src/pages/music/music-home/recommend-playlist/PlaylistCard.tsx
  * @Description:
  */
@@ -38,7 +38,7 @@ const PlaylistCard = (props: Props) => {
         </div>
       </div>
       <div className="h-16 bg-white/20 rounded-b-xl p-2">
-        <span className="text-sm text-gray-700 leading-1">{data.name}</span>
+        <span className="text-base text-gray-700 leading-1">{data.name}</span>
       </div>
     </div>
   )

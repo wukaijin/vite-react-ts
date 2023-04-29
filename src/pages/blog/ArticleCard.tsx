@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-01-31 21:17:50
+ * @LastEditTime: 2023-04-27 17:12:24
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -39,7 +39,7 @@ const ArticleCard = (props: Props) => {
         >
           {data.title}
         </h2>
-        <div className="h-10 text-sm mb-2 line-clamp-2 text-gray-800/70">{data.description}</div>
+        <div className="h-12 mb-2 line-clamp-2 text-gray-800/70">{data.description}</div>
         <div className="">
           <p
             className="inline-block hover:opacity-80 cursor-pointer mr-4"

@@ -9,7 +9,7 @@ import Loading from '@/components/base/Loading'
 /*
  * @Author: Carlos
  * @Date: 2023-01-08 14:00:03
- * @LastEditTime: 2023-01-30 17:28:32
+ * @LastEditTime: 2023-04-27 17:11:31
  * @FilePath: /vite-react-swc/src/pages/music/music-home/recommend-playlist/index.tsx
  * @Description:
  */
@@ -28,7 +28,7 @@ const RecommendPlaylist = memo<Props>(props => {
   )
   return (
     <div className="px-4 xs:px-0">
-      <div className="text-xl font-medium leading-14 ">Recommend Playlist</div>
+      <div className="text-2xl font-medium leading-14 ">Recommend Playlist</div>
       <PlaylistTags active={currentTag} handleTagClick={handleTagClick} />
       {/* {loading && (
         <div className="flex justify-center text-center items-center py-16">
