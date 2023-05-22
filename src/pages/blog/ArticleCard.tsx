@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-04-27 17:12:24
+ * @LastEditTime: 2023-05-22 22:16:08
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -15,36 +15,29 @@ type Props = {
 const ArticleCard = (props: Props) => {
   const { data } = props
   const navigate = useNavigate()
-  const toArticle = () => navigate(`/blog/category/${data.category.id}`)
+  const toCategory = () => navigate(`/blog/category/${data.category.id}`)
+  const toArticle = () => navigate(`/blog/article/${data.id}`)
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
-      {/* <figure>
-        <img
-          className="w-32 aspect-square rounded-l-xl"
-          src={data.poster || 'https://placeimg.com/200/200/arch'}
-          alt=""
-        />
-      </figure> */}
       <div
-        className="w-32 rounded-l-xl bg-cover"
+        className="w-32 rounded-l-xl bg-cover cursor-pointer"
         style={{
           backgroundImage: `url(${data.poster || data.category?.defaultPoster})`
         }}
-        onClick={toArticle}
+        onClick={toCategory}
       />
       <div className="flex-1 px-4 py-3 overflow-hidden">
         <h2
           className="card-title mb-1 text-base hover:opacity-80 cursor-pointer text-ellipsis overflow-hidden line-clamp-1"
-          onClick={() => navigate(`/blog/article/${data.id}`)}
+          onClick={toArticle}
         >
           {data.title}
         </h2>
-        <div className="h-12 mb-2 line-clamp-2 text-gray-800/70">{data.description}</div>
+        <div className="h-12 mb-2 line-clamp-2 text-gray-800/70 cursor-pointer" onClick={toArticle}>
+          {data.description}
+        </div>
         <div className="">
-          <p
-            className="inline-block hover:opacity-80 cursor-pointer mr-4"
-            onClick={toArticle}
-          >
+          <p className="inline-block hover:opacity-80 cursor-pointer mr-4" onClick={toCategory}>
             {data.category.text}
           </p>
           {data.tags.map(tag => (

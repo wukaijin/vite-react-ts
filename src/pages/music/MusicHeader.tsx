@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-07 16:09:57
- * @LastEditTime: 2023-01-30 17:23:33
+ * @LastEditTime: 2023-05-22 13:58:00
  * @FilePath: /vite-react-swc/src/pages/music/MusicHeader.tsx
  * @Description:
  */
@@ -20,7 +20,7 @@ const MusicHeader = (props: Props) => {
   const navigate = useNavigate()
   return (
     <div className="music-header flex">
-      <span className="music-logo">
+      <span className="music-logo cursor-pointer">
         <img className="" src={logo} alt="" onClick={() => navigate('/music/home')} />
       </span>
       <span className="flex-1 flex text-center justify-center">

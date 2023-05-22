@@ -1,13 +1,14 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-16 14:11:09
- * @LastEditTime: 2023-02-04 00:34:13
+ * @LastEditTime: 2023-05-22 22:36:01
  * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/index.tsx
  * @Description:
  */
 import clsx from 'clsx'
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useSpring, animated } from '@react-spring/web'
+import { OverlayPanel } from 'primereact/overlaypanel'
 import ResentPosts from './ResentPost'
 import useImage from '@/hooks/useImage'
 import Loading from '@/components/base/Loading'
@@ -21,6 +22,7 @@ const MOUNTAIN_BG = '/static-api/blog/painting-bg-m.png'
 
 type Props = {}
 function BlogHero({}: Props) {
+  const op = useRef<OverlayPanel>(null)
   const [personStyles, personApi] = useSpring(() => ({
     from: { opacity: 0, x: -300 }
   }))
@@ -126,11 +128,17 @@ function BlogHero({}: Props) {
                         <p className="font-bold text-xl">Carlos Woo</p>
                         <p className="font-bold text-sm">Web Dev</p>
                       </div>
+
                       <button
                         className={clsx(styled.button, 'mt-3 color-white px-4 py-1 rounded-xl')}
+                        onClick={e => op.current!.toggle(e)}
                       >
                         Contact
                       </button>
+                      <OverlayPanel ref={op}>
+                        <div>WeChat: tabe1991</div>
+                        <div>Email: kaijinwooo@gmail.com</div>
+                      </OverlayPanel>
                     </div>
                   </animated.div>
                 </div>
