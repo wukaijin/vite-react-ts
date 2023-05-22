@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-01-15 16:30:15
+ * @LastEditTime: 2023-05-10 15:48:03
  * @FilePath: /vite-react-swc/.eslintrc.cjs
  * @Description:
  */
@@ -53,6 +53,7 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-empty-pattern': 0,
     'no-confusing-arrow': 0,
+    "import/no-extraneous-dependencies": 0,
     'lines-between-class-members': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/no-empty-function': 0,

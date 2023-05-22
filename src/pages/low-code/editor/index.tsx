@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-04-26 16:19:18
- * @LastEditTime: 2023-04-27 17:51:03
+ * @LastEditTime: 2023-05-22 13:51:17
  * @FilePath: /vite-react-swc/src/pages/low-code/editor/index.tsx
  * @Description: null
  */
@@ -22,11 +22,10 @@ const EditorLeftSider = () => {
   return (
     <Sider className="w-[200px] shadow-lg">
       <div>left sidebar</div>
-      <div>left 中文金家浩</div>
       <div>
-        <Button label="huifu" />
-        <Button>huifu</Button>
-        <Button size="small">huifu</Button>
+        <Button label="test" />
+        <Button>test</Button>
+        <Button size="small">test</Button>
       </div>
     </Sider>
   )

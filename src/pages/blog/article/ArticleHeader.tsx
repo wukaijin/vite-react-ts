@@ -1,18 +1,22 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-22 23:36:34
- * @LastEditTime: 2023-01-31 17:46:57
+ * @LastEditTime: 2023-05-22 13:42:59
  * @FilePath: /vite-react-swc/src/pages/blog/article/ArticleHeader.tsx
  * @Description:
  */
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
+import dayjs from 'dayjs'
 import { Article } from '@/interface/blog'
 import { isMobile } from '@/const'
 
 type Props = {
   data?: Article
 }
+
+const formatTime = (timeString: string) => dayjs(timeString).format('YYYY-MM-DD HH:mm')
+
 function ArticleHeader({ data }: Props) {
   const navigate = useNavigate()
 
@@ -56,6 +60,16 @@ function ArticleHeader({ data }: Props) {
           ))}
       </div>
       <h1 className="text-4xl leading-loose py-4">{data.title}</h1>
+      <div className="flex justify-between px-2 text-medium text-gray-500">
+        <div>
+          <span>Create At: </span>
+          <span>{formatTime(data.createAt)}</span>
+        </div>
+        <div>
+          <span>Update At: </span>
+          <span>{formatTime(data.updateAt)}</span>
+        </div>
+      </div>
       <div className="text-center pb-8">
         {data.poster && (
           <img

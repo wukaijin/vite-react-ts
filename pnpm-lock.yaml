@@ -25,6 +25,9 @@ dependencies:
   daisyui:
     specifier: ^2.51.6
     version: 2.51.6(autoprefixer@10.4.14)(postcss@8.4.23)(ts-node@10.9.1)
+  dayjs:
+    specifier: ^1.11.7
+    version: 1.11.7
   eventemitter3:
     specifier: ^5.0.0
     version: 5.0.0

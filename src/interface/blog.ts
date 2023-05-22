@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 17:05:00
- * @LastEditTime: 2023-01-20 14:49:05
+ * @LastEditTime: 2023-05-22 13:34:53
  * @FilePath: /vite-react-swc/src/interface/blog.ts
  * @Description:
  */
@@ -34,7 +34,9 @@ export interface Article {
   state: ArticleState,
   content: string,
   description: string,
-  poster?: string
+  poster?: string,
+  updateAt: string
+  createAt: string
 }
 
 export type SubmitArticle = Omit<Article, 'tags' | 'category'> & {

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2023-04-26 17:08:52
+ * @LastEditTime: 2023-05-10 15:35:23
  * @FilePath: /vite-react-swc/vite.config.ts
  * @Description:
  */

@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 23:39:23
- * @LastEditTime: 2023-02-04 01:53:50
+ * @LastEditTime: 2023-05-22 13:50:15
  * @FilePath: /vite-react-swc/src/pages/blog/article/index.tsx
  * @Description:
  */
@@ -22,6 +22,7 @@ import styled from '../blog.module.scss'
 import Loading from '@/components/base/Loading'
 import NotFound from '@/pages/not-found'
 import { isMobile } from '@/const'
+import useTop from '@/hooks/useTop'
 
 type Props = {}
 function Article({}: Props) {
@@ -35,7 +36,7 @@ function Article({}: Props) {
     },
     config: {
       duration: 1000
-    },
+    }
   }))
   const [contentStyle, contentApi] = useSpring(() => ({
     from: {
@@ -44,8 +45,9 @@ function Article({}: Props) {
     },
     config: {
       duration: 1000
-    },
+    }
   }))
+  useTop()
   const params = useParams()
   const {
     data,
@@ -112,7 +114,7 @@ function Article({}: Props) {
         </div>
       )}
       <div className={clsx('container m-auto flex relative ')}>
-        <div className="flex-1 max-w-full">
+        <div className="flex-1 sm:max-w-[calc(100vw-300px)]">
           <div
             className={clsx({
               'px-4 py-8': !isMobile,
