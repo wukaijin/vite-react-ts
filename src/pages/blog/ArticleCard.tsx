@@ -1,7 +1,7 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
- * @LastEditTime: 2023-05-22 22:16:08
+ * @LastEditTime: 2023-08-22 23:49:18
  * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
@@ -20,7 +20,7 @@ const ArticleCard = (props: Props) => {
   return (
     <div className="flex rounded-xl shadow-xl bg-gray-100/30 backdrop-blur-sm">
       <div
-        className="w-32 rounded-l-xl bg-cover cursor-pointer"
+        className="w-32 rounded-l-xl bg-cover bg-no-repeat bg-center cursor-pointer"
         style={{
           backgroundImage: `url(${data.poster || data.category?.defaultPoster})`
         }}
