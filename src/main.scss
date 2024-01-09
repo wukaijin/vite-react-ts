@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './styles/common.scss';
+
 :root {
   color: #213547;
   font-size: 14px;

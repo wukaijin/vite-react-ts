@@ -1,8 +1,8 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-27 15:28:22
- * @LastEditTime: 2023-05-10 15:35:23
- * @FilePath: /vite-react-swc/vite.config.ts
+ * @LastEditTime: 2024-01-09 16:24:42
+ * @FilePath: /vite-react-ts/vite.config.ts
  * @Description:
  */
 import { defineConfig } from 'vite'
@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, '/src')
+      '@': resolve(__dirname, 'src')
     }
   },
   build: {
@@ -23,7 +23,14 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.toString().split('node_modules/.pnpm/')[1].split('/')[0].toString().startsWith('refractor')) {
+            if (
+              id
+                .toString()
+                .split('node_modules/.pnpm/')[1]
+                .split('/')[0]
+                .toString()
+                .startsWith('refractor')
+            ) {
               return 'refractor'
             }
           }
@@ -36,20 +43,20 @@ export default defineConfig({
     proxy: {
       '/music-api': {
         target: 'http://106.55.147.116',
-        changeOrigin: true,
+        changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')
       },
       '/static-api': {
         target: 'http://106.55.147.116',
-        changeOrigin: true,
+        changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')
       },
       '/nest-api': {
         target: 'http://106.55.147.116',
         // target: 'http://localhost:3001',
-        changeOrigin: true,
+        changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')
-      },
+      }
     }
   }
 })

@@ -1,8 +1,8 @@
 /*
  * @Author: Carlos
  * @Date: 2022-12-31 14:09:48
- * @LastEditTime: 2023-05-10 15:48:03
- * @FilePath: /vite-react-swc/.eslintrc.cjs
+ * @LastEditTime: 2024-01-09 16:23:20
+ * @FilePath: /vite-react-ts/.eslintrc.cjs
  * @Description:
  */
 module.exports = {
@@ -30,6 +30,7 @@ module.exports = {
   },
   rules: {
     semi: 0,
+    'linebreak-style': 0,
     'comma-dangle': 0,
     'no-undef': 0,
     'no-shadow': 0,

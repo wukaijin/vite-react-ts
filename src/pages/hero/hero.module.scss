@@ -2,13 +2,15 @@
 .hero-root {
   --hero-primary: turquoise;
   --gradient-bg: linear-gradient(45deg, #40e0d0, #9932cc, #ff1493, orange);
+  background-color: black;
+  height: 100vh;
 }
 .hero-wrapper {
   position: relative;
   height: 100vh;
   font-family: 'Montserrat', sans-serif monospace;
   letter-spacing: 0.03em;
-  font-size: clamp(2.0rem, 5.4vw, 7rem);
+  font-size: clamp(2rem, 5.4vw, 7rem);
   background-color: rgba(9, 14, 23, 1);
   color: #ffffff;
   @apply flex justify-center items-center text-center;
@@ -103,7 +105,6 @@
     transform: rotateX(0) translateX(0);
     transform-origin: bottom;
     transition: all 0.3s;
-    
   }
   .menu-item-b {
     position: absolute;
