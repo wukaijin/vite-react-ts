@@ -14,38 +14,38 @@ jobs:
       name: production
     # 步骤
     steps:
-    # 使用别人的action
-    - name: Copy codes
-      uses: actions/checkout@v3
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    - name: Cache
-      id: cache-dependencies
-      uses: actions/cache@v3
-      with:
-        path: |
-          **/node_modules
-        key: ${{hashFiles('**/pnpm-lock.yaml')}}
+      # 使用别人的action
+      - name: Copy codes
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Cache
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{hashFiles('**/pnpm-lock.yaml')}}
 
-    # 步骤名称
-    - name: Installing Dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
-      run: |
-        npm i pnpm -g
-        pnpm install
+      # 步骤名称
+      - name: Installing Dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: |
+          npm i pnpm -g
+          pnpm install
 
-    - name: npm run build
-      run: npm run build
-    # 命名这个任务为发布 Deploy
-    - name: 📂 Sync files (Deploy)
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.USER_NAME }}
-        password: ${{ secrets.USER_PASS }}
-        source: "./dist/"
-        target: "/usr/local/web/portal"
-        strip_components: 2
-        rm: true
+      - name: npm run build
+        run: npm run build
+      # 命名这个任务为发布 Deploy
+      - name: 📂 Sync files (Deploy)
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.USER_NAME }}
+          password: ${{ secrets.USER_PASS }}
+          source: './dist/'
+          target: '/data/web/portal'
+          strip_components: 2
+          rm: true
