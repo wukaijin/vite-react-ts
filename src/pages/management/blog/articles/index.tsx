@@ -38,7 +38,9 @@ const BlogArticles = (props: Props) => {
     onSuccess: fetchArticles
   })
   const { jsx: ConfirmModal, open: openModal } = useModal()
-  useMount(props.asyncFetchCategories)
+  useMount(() => {
+    props.asyncFetchCategories()
+  })
   return (
     <div>
       <Breadcrumbs>
