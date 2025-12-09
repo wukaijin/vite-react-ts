@@ -145,9 +145,9 @@ function BlogHero({}: Props) {
                 <animated.div className="text-left text-xl px-4" style={{ ...textStyles }}>
                   <p className="text-2xl text-left">Hello, this is Carlos. </p>
                   <p>
-                    This blog records some personal experience in learning programming, and the
-                    articles would be write with Markdown syntax. It is more about notes or snippets
-                    than tutorials.
+                    This blog records some personal experiences in learning programming, and the
+                    articles are written in Markdown syntax. It is more about notes or snippets than
+                    tutorials. Thanks for visiting!
                   </p>
                   <p>Thanks for visit!</p>
                 </animated.div>
