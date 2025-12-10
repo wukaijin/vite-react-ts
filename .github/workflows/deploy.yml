@@ -46,6 +46,6 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.USER_PASS }}
           source: './dist/'
-          target: '/data/web/portal'
+          target: '/data/web/sites/wukaijin.com/index'
           strip_components: 2
           rm: true
