@@ -1,9 +1,8 @@
 @import '@icon-park/react/styles/index.css';
+@import './styles/common.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@use './styles/common.scss';
 
 :root {
   color: #213547;
