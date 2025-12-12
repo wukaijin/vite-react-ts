@@ -23,30 +23,34 @@ const MODAL_DOM: Element = document.querySelector('#modal')!
 function Modal(props: Props) {
   const { visible, children, onClickBackdrop, dataTheme, className, ...res } = props
   const [actVisible, setActVisibility] = useState(false)
-  const el = useRef<HTMLDivElement>()
+  const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null)
+
   useEffect(() => {
-    el.current = document.createElement('div')
+    const element = document.createElement('div')
+    setContainerEl(element)
     return () => {
-      if (el.current && MODAL_DOM.contains(el.current)) {
-        MODAL_DOM.removeChild(el.current)
+      if (MODAL_DOM.contains(element)) {
+        MODAL_DOM.removeChild(element)
       }
     }
   }, [])
+
   useEffect(() => {
-    if (el.current) {
+    if (containerEl) {
       if (visible === true) {
-        MODAL_DOM.appendChild(el.current!)
+        MODAL_DOM.appendChild(containerEl)
       } else {
         setTimeout(() => {
-          if (el.current && MODAL_DOM.contains(el.current)) {
-            MODAL_DOM.removeChild(el.current)
+          if (containerEl && MODAL_DOM.contains(containerEl)) {
+            MODAL_DOM.removeChild(containerEl)
           }
         }, 500)
       }
     }
     setActVisibility(visible)
-  }, [visible])
-  if (!el.current) return null
+  }, [visible, containerEl])
+
+  if (!containerEl) return null
 
   const containerClasses = clsx('modal', {
     'modal-open': actVisible
@@ -65,16 +69,13 @@ function Modal(props: Props) {
             onClickBackdrop()
           }
         }
-        // if (onClickBackdrop) {
-        //   onClickBackdrop()
-        // }
       }}
     >
       <div {...res} data-theme={dataTheme} className={twMerge('modal-box', className)}>
         {children}
       </div>
     </div>,
-    el.current
+    containerEl
   )
 }
 

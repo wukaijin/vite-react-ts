@@ -36,7 +36,7 @@ const Todos: React.FC<{}> = props => {
   const navigate = useNavigate()
   const [visible, setVisibility] = useState(false)
   const [todos, setTodos] = useState<Todo[]>([])
-  const [active, setActive] = useState<typeof STATE_MAPPING[number]>('All')
+  const [active, setActive] = useState<(typeof STATE_MAPPING)[number]>('All')
   const filteredTodos = useMemo(
     () =>
       todos.filter(todo => {
@@ -110,11 +110,13 @@ const Todos: React.FC<{}> = props => {
                 }}
               >
                 <TodoCard
-                  ref={r => (todo.ref.current = r)}
+                  ref={r => {
+                    todo.ref.current = r
+                  }}
                   key={todo.id}
                   todo={todo}
                   onRemove={() => {
-                    setTodos((ts) => {
+                    setTodos(ts => {
                       return ts.filter(e => {
                         if (e.id === todo.id) {
                           return false
@@ -124,7 +126,7 @@ const Todos: React.FC<{}> = props => {
                     })
                   }}
                   onChange={() => {
-                    setTodos((ts) => {
+                    setTodos(ts => {
                       return ts.map(e => {
                         if (e.id === todo.id) {
                           return { ...e, completed: !todo.completed }
@@ -144,12 +146,15 @@ const Todos: React.FC<{}> = props => {
         onClose={() => setVisibility(false)}
         onConfirm={(text: string) => {
           setVisibility(false)
-          setTodos(ts => ([{
-            id: getUniqueId(),
-            text: text || '',
-            completed: false,
-            ref: createRef()
-          }, ...ts]))
+          setTodos(ts => [
+            {
+              id: getUniqueId(),
+              text: text || '',
+              completed: false,
+              ref: createRef()
+            },
+            ...ts
+          ])
         }}
       />
     </div>

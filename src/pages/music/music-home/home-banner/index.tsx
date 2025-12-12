@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/pages/music/music-home/home-banner/index.tsx
  * @Description:
  */
-import { memo, useRef, useState } from 'react'
+import { memo, useState } from 'react'
 import { useMount } from 'ahooks'
 import { BannerInfo } from '@/interface/music'
 import './index.scss'
@@ -14,14 +14,14 @@ import ImageFallback from '@/components/enhance/ImageFallback'
 
 type Props = {}
 const HomeBanner = memo<Props>(() => {
-  const wrapperRef = useRef<HTMLDivElement | null>()
+  const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null)
   const [banners, setBanners] = useState<BannerInfo[]>([])
   const [padding, setPadding] = useState('0px')
   const [translateZ, setTranslateZ] = useState('0px')
 
   useMount(async () => {
-    if (wrapperRef.current) {
-      const width = wrapperRef.current.offsetWidth
+    if (wrapperEl) {
+      const width = wrapperEl.offsetWidth
       setPadding(`${width / 180 - 0.5}rem 0 ${width / 140 - 0.5}rem`)
       setTranslateZ(`${width / 28}rem`)
     }
@@ -29,11 +29,7 @@ const HomeBanner = memo<Props>(() => {
     setBanners(bas)
   })
   return (
-    <div
-      ref={ref => (wrapperRef.current = ref)}
-      className="carousel-3d-wrapper"
-      style={{ padding }}
-    >
+    <div ref={setWrapperEl} className="carousel-3d-wrapper" style={{ padding }}>
       <div className="carousel-3d-content">
         {banners.length &&
           banners.slice(0, 6).map((b, index) => {

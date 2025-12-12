@@ -3,14 +3,14 @@
  * @Date: 2023-01-09 13:29:25
  * @LastEditTime: 2023-01-09 13:37:06
  * @FilePath: /vite-react-swc/src/components/enhance/ImageFallback.tsx
- * @Description: 
+ * @Description:
  */
 import { useMount } from 'ahooks'
-import { HTMLAttributes, useState } from 'react'
+import { HTMLAttributes, useState, ReactNode } from 'react'
 
 type Props = {
   src: string
-  placeholder: JSX.Element
+  placeholder: ReactNode
   imageProps?: HTMLAttributes<HTMLImageElement>
 }
 

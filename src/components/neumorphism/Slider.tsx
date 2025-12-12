@@ -9,7 +9,7 @@ import clsx from 'clsx'
 import { HTMLAttributes, Component, createRef, RefObject } from 'react'
 
 const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = (typeof SIZES)[number]
 const SizeMapping: Record<Size, [string, string, string]> = {
   sm: ['h-3 w-3', 'h-1', 'h-6 rounded text-sm top-6'],
   md: ['h-3 w-3', 'h-2', 'h-7 rounded-md text-base top-7'],
@@ -27,8 +27,8 @@ type State = {
   active: boolean
   btnLeft: number
   percent: number
-  boxRef: RefObject<HTMLDivElement>
-  btnRef: RefObject<HTMLDivElement>
+  boxRef: RefObject<HTMLDivElement | null>
+  btnRef: RefObject<HTMLDivElement | null>
   // restWidth: number
 }
 

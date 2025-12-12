@@ -33,7 +33,7 @@ type State = {
   lyric: string
 }
 export class Player extends Component<Props, State> {
-  audioRef: RefObject<HTMLAudioElement>
+  audioRef: RefObject<HTMLAudioElement | null>
   player: MusicPlayer | null = null
   constructor(props: Props) {
     super(props)
@@ -46,7 +46,7 @@ export class Player extends Component<Props, State> {
       lyricObject: null,
       lyric: ''
     }
-    this.audioRef = createRef<HTMLAudioElement>()
+    this.audioRef = createRef()
   }
   static getDerivedStateFromProps(props: Props, state: State) {
     const { playing } = props

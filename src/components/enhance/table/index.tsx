@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/components/enhance/table/index.tsx
  * @Description:
  */
-import React from 'react'
+import React, { ReactNode } from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import TableRow from './TableRow'
@@ -24,7 +24,7 @@ const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
 )
 export type TableFooterProps = React.TableHTMLAttributes<HTMLTableSectionElement> &
   IComponentBaseProps & {
-    children?: React.ReactElement[]
+    children?: ReactNode[]
   }
 
 const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(

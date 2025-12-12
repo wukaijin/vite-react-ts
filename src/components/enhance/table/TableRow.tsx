@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/components/enhance/table/TableRow.tsx
  * @Description:
  */
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -13,13 +13,13 @@ import { IComponentBaseProps } from '@/declare'
 
 export type TableRowProps = React.TableHTMLAttributes<HTMLTableRowElement> &
   IComponentBaseProps & {
-    children?: ReactElement[]
+    children?: ReactNode[]
     active?: boolean
     hover?: boolean
   }
 
 const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
-  ({ children, active, hover, className, ...props }, ref): JSX.Element => {
+  ({ children, active, hover, className, ...props }, ref): ReactElement => {
     const classes = twMerge(
       className,
       clsx({

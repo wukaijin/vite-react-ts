@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/components/enhance/player/LyricPanel.tsx
  * @Description:
  */
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { NeuPanel } from '@/components/neumorphism'
 import { parseLyric } from '@/utils'
@@ -16,22 +16,19 @@ type Props = {
 }
 const LyricPanel = (props: Props) => {
   const { active, lyric } = props
-  const dom = useRef<HTMLDivElement | null>()
+  const [dom, setDom] = useState<HTMLDivElement | null>(null)
   const [offset, setOffset] = useState(0)
 
   useEffect(() => {
-    if (dom.current) {
-      const halfItemNum = Math.round(dom.current.offsetHeight / 2 / 16 / 2) // px to rem
+    if (dom) {
+      const halfItemNum = Math.round(dom.offsetHeight / 2 / 16 / 2) // px to rem
       setOffset(2 * (active <= halfItemNum ? 0 : active - halfItemNum))
     }
-  }, [active, setOffset, dom.current])
+  }, [active, setOffset, dom])
 
   return (
     <NeuPanel className="p-4 inset">
-      <div
-        ref={ref => (dom.current = ref)}
-        className="h-[calc(100vh-23rem)]  sm:h-60 overflow-hidden"
-      >
+      <div ref={setDom} className="h-[calc(100vh-23rem)]  sm:h-60 overflow-hidden">
         <div
           className="transition-transform duration-500"
           style={{ transform: `translateY(-${offset}rem)` }}

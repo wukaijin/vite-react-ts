@@ -13,7 +13,7 @@ import './markdown.scss'
 import { HTMLAttributes, memo } from 'react'
 
 const componentsConfig: Components = {
-  code({ node, inline, className, children, ...props }) {
+  code({ node, className, children, ...props }) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
       <SyntaxHighlighter

@@ -9,7 +9,7 @@ import clsx from 'clsx'
 import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
 
 const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = (typeof SIZES)[number]
 const SizeMapping: Record<Size, [string, string, string, string, [number, string]]> = {
   sm: ['h-10', 'px-4', 'text-base', 'rounded-lg', [10, 'rounded-md']],
   md: ['h-12', 'px-6', 'text-lg', 'rounded-xl', [10, 'rounded-md']],
@@ -70,7 +70,9 @@ function Tabs(props: Props) {
     <div className={clsx('neu-tabs', { flex: block }, height, fontSize, borderRadius, className)}>
       {items.map((tab, index) => (
         <div
-          ref={ref => (tabsRef.current[index] = ref)}
+          ref={ref => {
+            tabsRef.current[index] = ref
+          }}
           key={tab.value}
           className={clsx('neu-tab', height, itemPaddingX, {
             'flex-1': block,
