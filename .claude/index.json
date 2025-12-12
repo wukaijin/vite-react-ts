@@ -1,0 +1,297 @@
+{
+  "timestamp": "2025-12-12T23:57:58.000Z",
+  "projectName": "vite-react-ts",
+  "projectPath": "/usr/local/code/github/vite-react-ts",
+  "scanStrategy": "adaptive-medium",
+  "modules": [
+    {
+      "name": "root",
+      "path": "/usr/local/code/github/vite-react-ts",
+      "type": "root",
+      "language": "TypeScript",
+      "documentation": "CLAUDE.md",
+      "entryPoints": ["src/main.tsx", "src/App.tsx", "index.html"],
+      "configFiles": [
+        "vite.config.ts",
+        "tsconfig.json",
+        "package.json",
+        ".eslintrc.cjs",
+        ".prettierrc.json",
+        "tailwind.config.cjs",
+        "postcss.config.cjs",
+        "commitlint.config.cjs"
+      ],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasConfig": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 75
+      }
+    },
+    {
+      "name": "api",
+      "path": "/usr/local/code/github/vite-react-ts/src/api",
+      "type": "module",
+      "language": "TypeScript",
+      "documentation": "src/api/CLAUDE.md",
+      "entryPoints": ["music.ts", "blog.ts"],
+      "interfaces": [
+        "src/interface/music.ts",
+        "src/interface/blog.ts"
+      ],
+      "dependencies": ["axios", "src/utils/request.ts"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 60
+      }
+    },
+    {
+      "name": "store",
+      "path": "/usr/local/code/github/vite-react-ts/src/store",
+      "type": "module",
+      "language": "TypeScript",
+      "documentation": "src/store/CLAUDE.md",
+      "entryPoints": ["index.ts"],
+      "slices": ["todos.ts", "music.ts", "blog.ts"],
+      "dependencies": ["@reduxjs/toolkit", "react-redux"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 70
+      }
+    },
+    {
+      "name": "router",
+      "path": "/usr/local/code/github/vite-react-ts/src/router",
+      "type": "module",
+      "language": "TypeScript",
+      "documentation": "src/router/CLAUDE.md",
+      "entryPoints": ["index.tsx"],
+      "subRoutes": ["manage.tsx", "low.tsx"],
+      "utilities": ["utils.tsx"],
+      "dependencies": ["react-router-dom"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasConfig": true,
+        "hasTests": false,
+        "percentage": 70
+      }
+    },
+    {
+      "name": "components",
+      "path": "/usr/local/code/github/vite-react-ts/src/components",
+      "type": "module",
+      "language": "TypeScript",
+      "documentation": "src/components/CLAUDE.md",
+      "subModules": [
+        "base/",
+        "neumorphism/",
+        "enhance/",
+        "shared/"
+      ],
+      "componentCount": 30,
+      "dependencies": ["react", "react-transition-group", "clsx", "overlayscrollbars"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 65
+      }
+    },
+    {
+      "name": "blog",
+      "path": "/usr/local/code/github/vite-react-ts/src/pages/blog",
+      "type": "page-module",
+      "language": "TypeScript",
+      "documentation": "src/pages/blog/CLAUDE.md",
+      "entryPoints": ["index.tsx"],
+      "subPages": [
+        "article/index.tsx",
+        "category/index.tsx",
+        "tag/index.tsx"
+      ],
+      "components": [
+        "ArticleCard.tsx",
+        "OtherCategory.tsx",
+        "blog-layout/Menu.tsx",
+        "blog-layout/Search.tsx",
+        "article/MdReader.tsx",
+        "article/Directory.tsx",
+        "article/Related.tsx",
+        "article/ArticleHeader.tsx"
+      ],
+      "dependencies": ["react-markdown", "remark-gfm", "react-syntax-highlighter"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 70
+      }
+    },
+    {
+      "name": "music",
+      "path": "/usr/local/code/github/vite-react-ts/src/pages/music",
+      "type": "page-module",
+      "language": "TypeScript",
+      "documentation": "src/pages/music/CLAUDE.md",
+      "entryPoints": ["index.tsx"],
+      "subPages": [
+        "music-home/index.tsx",
+        "music-search/index.tsx",
+        "playlist-detail/index.tsx"
+      ],
+      "components": [
+        "MusicHeader.tsx",
+        "List.tsx",
+        "music-home/NewSongs.tsx",
+        "music-home/home-banner/index.tsx",
+        "music-home/recommend-playlist/index.tsx",
+        "music-home/recommend-playlist/PlaylistCard.tsx",
+        "music-home/recommend-playlist/PlaylistTags.tsx"
+      ],
+      "utilities": ["util.ts"],
+      "dependencies": ["src/api/music", "src/store/music", "src/components/enhance/player"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 70
+      }
+    },
+    {
+      "name": "todos",
+      "path": "/usr/local/code/github/vite-react-ts/src/pages/todos",
+      "type": "page-module",
+      "language": "TypeScript",
+      "documentation": "src/pages/todos/CLAUDE.md",
+      "entryPoints": ["index.tsx"],
+      "components": [
+        "TodoCard.tsx",
+        "AddActionModel.tsx",
+        "FilterTabs.tsx"
+      ],
+      "dependencies": ["src/store/todos", "react-transition-group"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 70
+      }
+    },
+    {
+      "name": "management",
+      "path": "/usr/local/code/github/vite-react-ts/src/pages/management",
+      "type": "page-module",
+      "language": "TypeScript",
+      "documentation": "src/pages/management/CLAUDE.md",
+      "entryPoints": ["index.tsx"],
+      "components": [
+        "Sider.tsx",
+        "components/Breadcrumbs.tsx",
+        "blog/articles/index.tsx",
+        "blog/articles/Add.tsx",
+        "blog/articles/Edit.tsx",
+        "blog/articles/ArticlesForm.tsx",
+        "blog/categories/index.tsx",
+        "blog/tags/index.tsx"
+      ],
+      "dependencies": ["primereact", "react-select", "src/api/blog"],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": true,
+        "hasTests": false,
+        "percentage": 65
+      }
+    },
+    {
+      "name": "low-code",
+      "path": "/usr/local/code/github/vite-react-ts/src/pages/low-code",
+      "type": "page-module",
+      "language": "TypeScript",
+      "documentation": "src/pages/low-code/CLAUDE.md",
+      "entryPoints": ["index.tsx", "editor/index.tsx"],
+      "status": "in-development",
+      "dependencies": [],
+      "testDirectory": null,
+      "coverage": {
+        "hasEntry": true,
+        "hasInterface": false,
+        "hasTests": false,
+        "percentage": 30
+      }
+    }
+  ],
+  "statistics": {
+    "totalFiles": 150,
+    "scannedFiles": 105,
+    "coveragePercentage": 70,
+    "ignoredPatterns": [
+      "node_modules/**",
+      ".git/**",
+      "dist/**",
+      "build/**",
+      ".github/**",
+      "*.lock",
+      "*.log",
+      "*.bin",
+      "*.pdf",
+      "*.png",
+      "*.jpg",
+      "*.jpeg",
+      "*.gif",
+      "*.mp4",
+      "*.zip",
+      "*.tar",
+      "*.gz"
+    ],
+    "ignoredFileCount": 45
+  },
+  "gaps": [
+    {
+      "module": "all",
+      "item": "测试文件",
+      "description": "项目暂无单元测试或集成测试",
+      "recommendation": "建议集成 Vitest 或 Jest，为核心业务逻辑添加测试覆盖"
+    },
+    {
+      "module": "store",
+      "item": "Ref 字段序列化",
+      "description": "Todos slice 中存储了 React Ref（非序列化）",
+      "recommendation": "移除 ref 字段，使用 React Context 或组件内部管理"
+    },
+    {
+      "module": "low-code",
+      "item": "功能实现",
+      "description": "Low-code 模块功能尚不完整",
+      "recommendation": "明确需求后补充核心编辑器功能"
+    },
+    {
+      "module": "api",
+      "item": "错误处理",
+      "description": "API 层缺少统一的错误处理与重试机制",
+      "recommendation": "在拦截器中添加全局错误提示与重试逻辑"
+    }
+  ],
+  "nextSteps": [
+    "补充测试文件（优先为 store 与 api 模块添加单元测试）",
+    "完善 Low-code 模块功能与文档",
+    "优化 Redux 状态结构（移除 ref 字段）",
+    "考虑集成 Storybook 用于组件文档化",
+    "添加 E2E 测试（Cypress 或 Playwright）"
+  ],
+  "truncated": false,
+  "completionReason": "All key modules scanned successfully"
+}
