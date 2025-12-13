@@ -12,16 +12,10 @@ import clsx from 'clsx'
 import { TagApi } from '@/api/blog'
 import sharedStyled from '../blog.module.scss'
 
-type Props = {}
-const BlogTag = (props: Props) => {
-  const [hasError, setHasError] = useState<boolean>(false)
-  const [selectedTag, setSelectedTag] = useState<string>('')
+const BlogTag = () => {
+  const [, setHasError] = useState<boolean>(false)
   const params = useParams<string>()
-  const {
-    data: tags,
-    loading: loadingTag,
-    runAsync: fetchTags
-  } = useRequest(TagApi.findAll, {
+  const { runAsync: fetchTags } = useRequest(TagApi.findAll, {
     manual: true,
     onSuccess(d) {
       if (!d) {
@@ -33,9 +27,6 @@ const BlogTag = (props: Props) => {
 
   useEffect(() => {
     fetchTags()
-    if (params.id) {
-      setSelectedTag(params.id)
-    }
   }, [params])
   return (
     <div
@@ -46,7 +37,7 @@ const BlogTag = (props: Props) => {
     >
       <div className={clsx('h-full min-h-[calc(100vh-49px)] bg-white/70')}>
         <div className="container m-auto bg-red flex relative">
-          <div className="flex-1">{hasError && <div>error</div>}</div>
+          <div className="flex-1"></div>
           <div className="w-[300px]">213</div>
         </div>
       </div>

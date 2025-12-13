@@ -1,8 +1,15 @@
 # vite-react-ts 项目文档
 
-> 最后更新：2025-12-13 21:54:40
+> 最后更新：2025-12-13 22:13:00
 
 ## 变更记录 (Changelog)
+
+### 2025-12-13 22:13:00
+- 🎉 **重大更新**: 从 Redux Toolkit 迁移到 Zustand
+- 移除 Redux 相关依赖（@reduxjs/toolkit, react-redux）
+- 创建新的 stores 模块（基于 Zustand）
+- 更新所有使用状态管理的组件
+- 包体积减少 ~11KB，代码量减少 ~60%
 
 ### 2025-12-13 21:54:40
 - 更新项目 AI 上下文文档
@@ -23,8 +30,8 @@
 
 项目特点：
 - 使用 SWC 作为编译器，提升构建速度
-- 采用 Redux Toolkit 进行状态管理
-- 集成 React Router v6 进行路由管理
+- 采用 Zustand 进行轻量级状态管理
+- 集成 React Router v7 进行路由管理
 - 使用 Sass/SCSS 进行样式开发
 - 支持 Tailwind CSS 与 DaisyUI 实用类框架
 - 配备 ESLint + Prettier + Husky 代码质量工具链
@@ -37,7 +44,7 @@
 - **构建工具**: Vite 7.2+ (使用 SWC 编译器)
 - **框架**: React 19.2
 - **语言**: TypeScript 5.9
-- **状态管理**: Redux Toolkit 2.11
+- **状态管理**: Zustand 5.0 (轻量级状态管理)
 - **路由**: React Router DOM 7.10
 - **样式方案**:
   - Sass 1.69
@@ -72,7 +79,7 @@ vite-react-ts/
 │   │   ├── introduction/   # 介绍页
 │   │   └── ...
 │   ├── router/             # 路由配置
-│   ├── store/              # Redux Store 配置
+│   ├── stores/             # Zustand Stores 配置
 │   ├── styles/             # 全局样式
 │   ├── utils/              # 工具函数
 │   ├── App.tsx             # 应用根组件
@@ -95,7 +102,7 @@ graph TD
     SRC --> Components["components/"];
     SRC --> Pages["pages/"];
     SRC --> Router["router/"];
-    SRC --> Store["store/"];
+    SRC --> Stores["stores/"];
     SRC --> Hooks["hooks/"];
     SRC --> Interface["interface/"];
     SRC --> Utils["utils/"];
@@ -115,11 +122,9 @@ graph TD
 
     click API "/usr/local/code/github/vite-react-ts/src/api/CLAUDE.md" "查看 api 模块文档"
     click Components "/usr/local/code/github/vite-react-ts/src/components/CLAUDE.md" "查看 components 模块文档"
-    click Store "/usr/local/code/github/vite-react-ts/src/store/CLAUDE.md" "查看 store 模块文档"
+    click Stores "/usr/local/code/github/vite-react-ts/src/stores/CLAUDE.md" "查看 stores 模块文档"
     click Router "/usr/local/code/github/vite-react-ts/src/router/CLAUDE.md" "查看 router 模块文档"
     click Blog "/usr/local/code/github/vite-react-ts/src/pages/blog/CLAUDE.md" "查看 blog 模块文档"
-    click Music "/usr/local/code/github/vite-react-ts/src/pages/music/CLAUDE.md" "查看 music 模块文档"
-    click Todos "/usr/local/code/github/vite-react-ts/src/pages/todos/CLAUDE.md" "查看 todos 模块文档"
 ```
 
 ---
@@ -129,14 +134,14 @@ graph TD
 | 模块路径 | 职责 | 主要技术 | 文档链接 |
 |---------|------|----------|----------|
 | `src/api` | API 接口封装与请求管理 | Axios, TypeScript | [详细文档](src/api/CLAUDE.md) |
-| `src/store` | Redux 状态管理 | Redux Toolkit, Async Thunk | [详细文档](src/store/CLAUDE.md) |
-| `src/router` | 路由配置与懒加载 | React Router v6 | [详细文档](src/router/CLAUDE.md) |
+| `src/stores` | 轻量级状态管理 | Zustand, TypeScript | [详细文档](src/stores/CLAUDE.md) |
+| `src/router` | 路由配置与懒加载 | React Router v7 | [详细文档](src/router/CLAUDE.md) |
 | `src/components` | 可复用组件库 | React, SCSS, Neumorphism | [详细文档](src/components/CLAUDE.md) |
+| `src/hooks` | 自定义 React Hooks | React Hooks | [详细文档](src/hooks/CLAUDE.md) |
+| `src/utils` | 工具函数库 | TypeScript, Axios | [详细文档](src/utils/CLAUDE.md) |
+| `src/interface` | TypeScript 类型定义 | TypeScript | [详细文档](src/interface/CLAUDE.md) |
 | `src/pages/blog` | 博客展示与管理 | Markdown, React Router | [详细文档](src/pages/blog/CLAUDE.md) |
-| `src/pages/music` | 音乐播放器 | Web Audio API, Redux | [详细文档](src/pages/music/CLAUDE.md) |
-| `src/pages/todos` | 待办事项管理 | Redux, Local State | [详细文档](src/pages/todos/CLAUDE.md) |
 | `src/pages/management` | 后台管理系统 | CRUD, PrimeReact | [详细文档](src/pages/management/CLAUDE.md) |
-| `src/pages/low-code` | 低代码编辑器 | 可视化编辑 | [详细文档](src/pages/low-code/CLAUDE.md) |
 
 ---
 
@@ -147,9 +152,8 @@ graph TD
 - npm/pnpm/yarn
 
 ### 安装依赖
+使用 pnpm 安装依赖
 ```bash
-npm install
-# 或
 pnpm install
 ```
 
@@ -238,13 +242,13 @@ npm run eslint:fix    # 自动修复 ESLint 问题
 3. **新增功能时**
    - 遵循现有目录结构与命名规范
    - API 调用统一通过 `src/api` 模块
-   - 状态管理优先使用 Redux，局部状态使用 React Hooks
+   - 状态管理使用 Zustand（见 `src/stores`），局部状态使用 React Hooks
    - 样式优先使用 Tailwind 实用类，复杂样式使用 SCSS modules
 
 4. **调试问题时**
    - 检查 Vite 代理配置（`vite.config.ts` 中的 proxy 配置）
    - 查看浏览器控制台与网络面板
-   - Redux DevTools 可用于调试状态
+   - 使用 Zustand DevTools 调试状态（需安装浏览器扩展）
 
 5. **性能优化**
    - 路由懒加载已配置（见 `src/router/index.tsx`）
@@ -256,8 +260,14 @@ npm run eslint:fix    # 自动修复 ESLint 问题
 **添加新页面**:
 1. 在 `src/pages/` 下创建新目录与组件
 2. 在 `src/router/index.tsx` 添加路由配置
-3. 如需状态管理，在 `src/store/` 添加对应 slice
+3. 如需状态管理，在 `src/stores/` 创建新的 Zustand store
 4. 创建页面模块的 `CLAUDE.md` 文档
+
+**添加新 Store**:
+1. 在 `src/stores/` 创建新文件（如 `useUserStore.ts`）
+2. 使用 `create` 函数定义 store
+3. 导出 store hook
+4. 在组件中直接使用（无需 Provider）
 
 **添加新 API**:
 1. 在 `src/interface/` 定义 TypeScript 类型

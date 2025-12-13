@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/utils/request.ts
  * @Description:
  */
-import axios, { AxiosInstance } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 // import { ref, reactive, watch } from 'vue'
 
 // create an axios request
@@ -23,7 +23,7 @@ const request: AxiosInstance = axios.create({
 
 // request interceptor
 request.interceptors.request.use(
-  (config) => {
+  config => {
     if (config.url === undefined) {
       config.url = ''
     }

@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/api/blog.ts
  * @Description:
  */
-import { Article, Category, SubmitArticle, Tag } from '@/interface/blog'
+import type { Article, Category, SubmitArticle, Tag } from '@/interface/blog'
 import request from '@/utils/request'
 
 const BLOG_PREFIX = '/nest-api/blog/'
@@ -53,16 +53,22 @@ export const ArticleApi = {
     return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article`).then(res => res.data)
   },
   findByCategoryId(id: string) {
-    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/findByCategoryId/${id}`).then(res => res.data)
+    return request
+      .get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/findByCategoryId/${id}`)
+      .then(res => res.data)
   },
   findOne(id: Article['id']) {
     return request.get<WithWrapping<Article>>(`${BLOG_PREFIX}article/${id}`).then(res => res.data)
   },
   searchByKeyword(keyword: string) {
-    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/search/${keyword}`).then(res => res.data)
+    return request
+      .get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/search/${keyword}`)
+      .then(res => res.data)
   },
   findRelativeById(id: Article['id']) {
-    return request.get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/relative/${id}`).then(res => res.data)
+    return request
+      .get<WithWrapping<Article[]>>(`${BLOG_PREFIX}article/relative/${id}`)
+      .then(res => res.data)
   },
   add(data: Partial<SubmitArticle>) {
     return request.post<WithWrapping<Article>>(`${BLOG_PREFIX}article`, data)

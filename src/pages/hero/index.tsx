@@ -18,32 +18,41 @@ import withLicense from '@/components/shared/withLicense'
 const headingChars: string[] = Array.from('Welcome to my website!')
 const headingCharsLength = headingChars.length
 
-const HelloPage = () => {
+const Hello = () => {
   const [open, { toggle }] = useToggle()
   const [firstIn, { toggle: toggleFirst }] = useToggle(true)
   const [animateDone, { toggle: toggleAnimateDone }] = useToggle(false)
   const [springs, apis] = useSprings(headingCharsLength, () => ({
     from: { opacity: 0, y: 120 }
   }))
-  const [maskStyles, maskApi] = useSpring(() => ({
-    '--x': '70%',
-    '--y': '50%',
-    '--mask-size-1': '0',
-    '--mask-size-2': '0',
-    '--mask-size-3': '0'
-  }))
+  const [maskStyles, maskApi] = useSpring(
+    {
+      from: {
+        '--x': '70%',
+        '--y': '50%',
+        '--mask-size-1': '0%',
+        '--mask-size-2': '0%',
+        '--mask-size-3': '0%'
+      }
+    },
+    []
+  )
   useLayoutEffect(() => {
     const listener = throttle((e: MouseEvent) => {
+      console.log(e)
       const { clientX, clientY } = e
       const x = Math.round((clientX / window.innerWidth) * 100)
       const y = Math.round((clientY / window.innerHeight) * 100)
       maskApi.start({
         to: {
           '--x': `${x}%`,
-          '--y': `${y}%`
+          '--y': `${y}%`,
+          '--mask-size-1': '16%',
+          '--mask-size-2': '28%',
+          '--mask-size-3': '28.1%'
         }
       })
-    }, 200)
+    }, 100)
     apis.start(i => ({
       to: { opacity: 1, y: 0 },
       delay: i * 100 + 2000
@@ -59,7 +68,7 @@ const HelloPage = () => {
         '--mask-size-2': '28%',
         '--mask-size-3': '28.1%'
       },
-      delay: headingCharsLength * 100 + 4000,
+      delay: headingCharsLength * 100 + 3600,
       onResolve() {
         window.addEventListener('mousemove', listener)
         toggleAnimateDone()
@@ -106,4 +115,5 @@ const HelloPage = () => {
     </div>
   )
 }
-export default withLicense(HelloPage)
+const HeroPage = withLicense(Hello)
+export default HeroPage

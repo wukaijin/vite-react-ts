@@ -19,10 +19,10 @@ export interface Tag {
 
 export interface Category {
   id: string
-  text: string,
-  order: number,
+  text: string
+  order: number
   description: string
-  belongs: Category | null,
+  belongs: Category | null
   defaultPoster: string
 }
 
@@ -30,11 +30,11 @@ export interface Article {
   id: string
   title: string
   tags: Tag[]
-  category: Category,
-  state: ArticleState,
-  content: string,
-  description: string,
-  poster?: string,
+  category: Category
+  state: ArticleState
+  content: string
+  description: string
+  poster?: string
   updateAt: string
   createAt: string
 }

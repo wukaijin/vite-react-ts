@@ -1,27 +1,25 @@
-import { useCallback } from 'react'
-import { connect, type ConnectedProps } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import clsx from 'clsx'
-import type { RootState } from '@/store'
-import type { Category } from '@/interface/blog'
-import styled from './blog.module.scss'
 /*
  * @Author: Carlos
  * @Date: 2023-01-19 22:44:02
- * @LastEditTime: 2023-01-23 00:37:03
+ * @LastEditTime: 2025-12-13 22:13:00
  * @FilePath: /vite-react-swc/src/pages/blog/OtherCategory.tsx
  * @Description:
  */
-const connector = connect(
-  (state: RootState) => ({ serializedCategories: state.blog.serializedCategories }),
-  null
-)
-type Props = ConnectedProps<typeof connector> & {
+import { useCallback } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import clsx from 'clsx'
+import { useBlogStore } from '@/stores/useBlogStore'
+import type { Category } from '@/interface/blog'
+import styled from './blog.module.scss'
+
+type Props = {
   title?: string
 }
+
 function OtherCategory(props: Props) {
   const params = useParams()
   const navigate = useNavigate()
+  const { serializedCategories } = useBlogStore()
 
   const linkTo = useCallback(
     (item: Category) => () => {
@@ -37,7 +35,7 @@ function OtherCategory(props: Props) {
         <span>{props.title || 'Other Category'}:</span>
       </div>
       <ul className="">
-        {props.serializedCategories.map(item => {
+        {serializedCategories.map(item => {
           return (
             <li key={item.id} className="pl-2">
               {item.children && !!item.children.length ? (
@@ -86,4 +84,4 @@ function OtherCategory(props: Props) {
   )
 }
 
-export default connector(OtherCategory)
+export default OtherCategory

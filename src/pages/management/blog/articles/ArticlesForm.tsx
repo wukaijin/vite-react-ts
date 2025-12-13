@@ -1,41 +1,31 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-15 22:02:59
- * @LastEditTime: 2023-01-20 14:50:21
+ * @LastEditTime: 2025-12-13 22:13:00
  * @FilePath: /vite-react-swc/src/pages/management/blog/articles/ArticlesForm.tsx
  * @Description:
  */
 import { useMemo } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
 import { useMount } from 'ahooks'
 import { ArticleState, SubmitArticle } from '@/interface/blog'
 import Select from '@/components/base/Select'
 import MultiSelect from '@/components/base/MultiSelect'
-import { asyncFetchCategories, asyncFetchTags } from '@/store/blog'
-import { RootState } from '@/store'
+import { useBlogStore } from '@/stores/useBlogStore'
 
-const connector = connect(
-  (state: RootState) => {
-    const { categories, tags } = state.blog
-    return {
-      categories,
-      tags
-    }
-  },
-  { asyncFetchCategories, asyncFetchTags }
-)
-
-type Props = ConnectedProps<typeof connector> & {
+type Props = {
   data: Partial<SubmitArticle>
   onChange: (d: Partial<SubmitArticle>) => void
 }
 
 const ArticlesForm = (props: Props) => {
-  const { data, onChange, categories, tags, asyncFetchCategories: fc, asyncFetchTags: ft } = props
+  const { data, onChange } = props
+  const { categories, tags, fetchCategories, fetchTags } = useBlogStore()
+
   useMount(() => {
-    fc()
-    ft()
+    fetchCategories()
+    fetchTags()
   })
+
   const categoryOptions = useMemo(() => {
     const result = categories.filter(c => c.belongs)
     const cd = categories.filter(c => !c.belongs)
@@ -45,7 +35,9 @@ const ArticlesForm = (props: Props) => {
     })
     return result
   }, [categories])
+
   console.log(categoryOptions)
+
   return (
     <form className="">
       <div className="flex items-center justify-start mb-4">
@@ -119,4 +111,5 @@ const ArticlesForm = (props: Props) => {
     </form>
   )
 }
-export default connector(ArticlesForm)
+
+export default ArticlesForm

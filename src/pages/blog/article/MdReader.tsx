@@ -43,9 +43,11 @@ const plugins = [remarkGfm]
 const MdReader = memo((props: Props) => {
   return (
     // div
-    <ReactMarkdown remarkPlugins={plugins} components={componentsConfig}>
-      {props.children as string}
-    </ReactMarkdown>
+    <div className="markdown-body">
+      <ReactMarkdown remarkPlugins={plugins} components={componentsConfig}>
+        {props.children as string}
+      </ReactMarkdown>
+    </div>
   )
 })
 export default MdReader

@@ -8,7 +8,7 @@
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
-import { Article } from '@/interface/blog'
+import type { Article } from '@/interface/blog'
 import { isMobile } from '@/const'
 
 type Props = {

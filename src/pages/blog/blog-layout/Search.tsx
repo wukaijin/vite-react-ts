@@ -25,6 +25,7 @@ const Search = () => {
   const deferKeyword = useDeferredValue(keyword)
   const { run: debounceSearch } = useDebounceFn(search)
   useEffect(() => {
+    if (!deferKeyword) return
     debounceSearch(deferKeyword)
   }, [deferKeyword, debounceSearch])
 

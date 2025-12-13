@@ -1,44 +1,34 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-13 14:21:15
- * @LastEditTime: 2023-01-20 15:44:16
+ * @LastEditTime: 2025-12-13 22:13:00
  * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
 import { useCallback, useEffect } from 'react'
-import { connect, type ConnectedProps } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import type { RootState } from '@/store'
 import styled from '../blog.module.scss'
-import { asyncFetchCategories } from '@/store/blog'
+import { useBlogStore } from '@/stores/useBlogStore'
 import type { Category } from '@/interface/blog'
 
-const connector = connect(
-  (state: RootState) => {
-    const { categories, serializedCategories } = state.blog
-    return {
-      categories,
-      serializedCategories
-    }
-  },
-  { fetchData: asyncFetchCategories }
-)
-
-type Props = ConnectedProps<typeof connector>
-function Menu(props: Props) {
+function Menu() {
   const navigate = useNavigate()
+  const { serializedCategories, fetchCategories } = useBlogStore()
+
   const linkTo = useCallback(
     (item: Category) => () => {
       navigate(`/blog/category/${item.id}`)
     },
     [navigate]
   )
+
   useEffect(() => {
-    props.fetchData()
-  }, [])
+    fetchCategories()
+  }, [fetchCategories])
+
   return (
     <ul className="menu menu-horizontal px-1">
-      {props.serializedCategories.map(item => {
+      {serializedCategories.map(item => {
         return (
           <li key={item.id} className="">
             <span
@@ -79,4 +69,4 @@ function Menu(props: Props) {
   )
 }
 
-export default connector(Menu)
+export default Menu

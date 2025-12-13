@@ -65,5 +65,5 @@ const config: RouteObject[] = [
   }
 ]
 
-const router = createBrowserRouter(config)
-export default router
+const Router = createBrowserRouter(config)
+export default Router

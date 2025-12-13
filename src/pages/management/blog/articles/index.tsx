@@ -1,12 +1,11 @@
 /*
  * @Author: Carlos
  * @Date: 2023-01-14 16:05:08
- * @LastEditTime: 2023-01-20 15:19:37
+ * @LastEditTime: 2025-12-13 22:13:00
  * @FilePath: /vite-react-swc/src/pages/management/blog/articles/index.tsx
  * @Description:
  */
 import { useNavigate } from 'react-router-dom'
-import { connect, type ConnectedProps } from 'react-redux'
 import { useMount, useRequest } from 'ahooks'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
@@ -14,23 +13,10 @@ import { ArticleState } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import useModal from '@/hooks/useModal'
 import { ArticleApi } from '@/api/blog'
-import type { RootState } from '@/store'
-import { asyncFetchCategories } from '@/store/blog'
+import { useBlogStore } from '@/stores/useBlogStore'
 
-const connector = connect(
-  (state: RootState) => {
-    const { categories } = state.blog
-    return {
-      categories
-    }
-  },
-  { asyncFetchCategories }
-)
-
-type Props = ConnectedProps<typeof connector>
-
-const BlogArticles = (props: Props) => {
-  const { categories } = props
+const BlogArticles = () => {
+  const { categories, fetchCategories } = useBlogStore()
   const navigator = useNavigate()
   const { data: articles = [], run: fetchArticles } = useRequest(ArticleApi.findAll)
   const { run: deleteArticle } = useRequest(ArticleApi.delete, {
@@ -38,9 +24,11 @@ const BlogArticles = (props: Props) => {
     onSuccess: fetchArticles
   })
   const { jsx: ConfirmModal, open: openModal } = useModal()
+
   useMount(() => {
-    props.asyncFetchCategories()
+    fetchCategories()
   })
+
   return (
     <div>
       <Breadcrumbs>
@@ -133,5 +121,4 @@ const BlogArticles = (props: Props) => {
   )
 }
 
-const connectedBlogArticles = connector(BlogArticles)
-export default connectedBlogArticles
+export default BlogArticles

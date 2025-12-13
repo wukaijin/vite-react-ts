@@ -37,31 +37,21 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 ## 对外接口
 
-### Redux Hooks (`index.ts`)
+### 自定义 Hooks 导出 (`index.ts`)
 
-**useAppDispatch**:
-- 类型安全的 `useDispatch` Hook
-- 返回类型为 `AppDispatch`，支持 TypeScript 类型推断
+**当前状态**: 该文件用于统一导出自定义 Hooks（如需要）
 
-**useAppSelector**:
-- 类型安全的 `useSelector` Hook
-- 自动推断 `RootState` 类型
-
-**使用示例**:
+**使用方式**:
 ```typescript
-import { useAppDispatch, useAppSelector } from '@/hooks'
+// 在 index.ts 中导出
+export { default as useModal } from './useModal'
+export { default as useTop } from './useTop'
 
-function MyComponent() {
-  const dispatch = useAppDispatch()
-  const todos = useAppSelector(state => state.todos)
-
-  const handleAdd = () => {
-    dispatch(todoAdded({ id: '1', text: '新任务', completed: false }))
-  }
-
-  return <div>{/* ... */}</div>
-}
+// 在组件中使用
+import { useModal, useTop } from '@/hooks'
 ```
+
+**注意**: 项目已从 Redux 迁移到 Zustand，不再需要 `useAppDispatch` 和 `useAppSelector`。状态管理直接使用 Zustand store hooks（如 `useBlogStore`）。
 
 ---
 
@@ -197,9 +187,9 @@ function Avatar({ src }) {
 
 ### 依赖项
 - `react` 19.2 - React Hooks 基础
-- `react-redux` 9.2 - Redux Hooks
-- `@/store` - Redux Store 类型定义
 - `@/components/base/Modal` - 模态框组件（用于 `useModal`）
+
+**注意**: 项目已移除 Redux 相关依赖，状态管理使用 Zustand。
 
 ### 设计原则
 - **单一职责**: 每个 Hook 专注一个功能
@@ -221,10 +211,13 @@ interface ConfirmParams {
 }
 ```
 
-### Redux Hooks 类型
+### 状态管理
+项目使用 Zustand 进行状态管理，无需额外的 hooks 封装。直接使用 store hooks：
+
 ```typescript
-type AppDispatch = typeof store.dispatch
-type RootState = ReturnType<typeof store.getState>
+import { useBlogStore } from '@/stores/useBlogStore'
+
+const { categories, fetchCategories } = useBlogStore()
 ```
 
 ---
@@ -237,14 +230,24 @@ type RootState = ReturnType<typeof store.getState>
 - 使用 `@testing-library/react-hooks` 测试自定义 Hooks
 - 测试 `useModal` 的打开/关闭逻辑
 - 测试 `useTop` 的滚动行为
-- 测试 Redux Hooks 的类型推断
+- 测试 `useImage` 的加载状态管理
 
 ---
 
 ## 常见问题 (FAQ)
 
-### Q1: 为什么要使用 useAppDispatch 和 useAppSelector？
-**A**: 这两个 Hook 提供了类型安全的 Redux 操作，避免手动标注类型。推荐在整个应用中使用它们替代原生的 `useDispatch` 和 `useSelector`。
+### Q1: 如何使用状态管理？
+**A**: 项目已从 Redux 迁移到 Zustand。直接使用 Zustand store hooks（如 `useBlogStore`），无需额外的 hooks 封装。
+
+示例：
+```typescript
+import { useBlogStore } from '@/stores/useBlogStore'
+
+function MyComponent() {
+  const { categories, fetchCategories } = useBlogStore()
+  // 使用状态和方法
+}
+```
 
 ### Q2: useModal 的 jsx 为什么要用 useMemo？
 **A**: 使用 `useMemo` 可以避免每次组件重渲染时都创建新的 JSX 元素，提升性能。只有当依赖项（visible, content, title 等）变化时才重新创建。
