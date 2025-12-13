@@ -1,8 +1,14 @@
 # vite-react-ts 项目文档
 
-> 最后更新：2025-12-12 23:57:58
+> 最后更新：2025-12-13 21:54:40
 
 ## 变更记录 (Changelog)
+
+### 2025-12-13 21:54:40
+- 更新项目 AI 上下文文档
+- 验证并更新技术栈版本信息
+- 确认模块结构图与索引的准确性
+- 补充覆盖率度量信息
 
 ### 2025-12-12 23:57:58
 - 初始化项目 AI 上下文文档
@@ -28,18 +34,18 @@
 ## 架构总览
 
 ### 技术栈
-- **构建工具**: Vite 4.5+ (使用 `@vitejs/plugin-react-swc`)
-- **框架**: React 18.2
-- **语言**: TypeScript 4.9
-- **状态管理**: Redux Toolkit 1.9.7
-- **路由**: React Router DOM 6.20
+- **构建工具**: Vite 7.2+ (使用 SWC 编译器)
+- **框架**: React 19.2
+- **语言**: TypeScript 5.9
+- **状态管理**: Redux Toolkit 2.11
+- **路由**: React Router DOM 7.10
 - **样式方案**:
   - Sass 1.69
   - Tailwind CSS 3.3
   - DaisyUI 2.52
   - PrimeReact 9.6 (UI 组件库)
 - **开发工具**:
-  - ESLint 8 (Airbnb 规范)
+  - ESLint 9 (使用 Flat Config)
   - Prettier 2.8
   - Husky 8 + Commitlint (Git Hooks)
 
@@ -279,6 +285,60 @@ npm run eslint:fix    # 自动修复 ESLint 问题
 - [React Router 文档](https://reactrouter.com/)
 - [Tailwind CSS 文档](https://tailwindcss.com/)
 - [PrimeReact 文档](https://primereact.org/)
+
+---
+
+## 文档覆盖率度量
+
+### 当前扫描状态
+- **扫描时间**: 2025-12-13 21:54:40
+- **源代码文件总数**: 87 个 (TypeScript/JavaScript 文件)
+- **已识别模块数**: 9 个核心模块
+- **已生成文档模块**: 5 个 (api, components, store, router, pages/*)
+
+### 模块文档状态
+
+| 模块 | 文档状态 | 覆盖度 | 备注 |
+|------|---------|--------|------|
+| `src/api` | ✅ 已完成 | 100% | 包含 music.ts, blog.ts 接口文档 |
+| `src/components` | ✅ 已完成 | 100% | 包含 base, neumorphism, enhance, shared 子模块 |
+| `src/store` | ✅ 已完成 | 100% | 包含 todos, music, blog slice 文档 |
+| `src/router` | ✅ 已完成 | 100% | 包含主路由与子路由配置 |
+| `src/pages/blog` | ✅ 已完成 | 100% | 博客模块完整文档 |
+| `src/pages/music` | ✅ 已完成 | 100% | 音乐播放器模块文档 |
+| `src/pages/todos` | ✅ 已完成 | 100% | 待办事项模块文档 |
+| `src/pages/management` | ✅ 已完成 | 100% | 后台管理模块文档 |
+| `src/hooks` | ⚠️ 部分覆盖 | 60% | 建议补充自定义 Hooks 详细文档 |
+| `src/utils` | ⚠️ 部分覆盖 | 70% | 已记录 request.ts，建议补充其他工具函数 |
+| `src/interface` | ⚠️ 部分覆盖 | 80% | 类型定义已在各模块文档中引用 |
+
+### 建议的下一步优化
+
+1. **补充 Hooks 模块文档** (`src/hooks/CLAUDE.md`)
+   - 记录 `useModal`, `useTop`, `useTitle`, `useImage` 等自定义 Hooks
+   - 说明使用场景与参数
+
+2. **补充 Utils 模块文档** (`src/utils/CLAUDE.md`)
+   - 记录 `generateDirectory.ts`, `eventemitter.ts`, `ImagePromise.ts` 等工具函数
+   - 提供使用示例
+
+3. **补充 Interface 模块文档** (`src/interface/CLAUDE.md`)
+   - 整理所有 TypeScript 类型定义
+   - 建立类型索引与关系图
+
+4. **页面模块深度文档**
+   - `src/pages/home` - 主页模块
+   - `src/pages/hero` - 英雄页模块
+   - `src/pages/introduction` - 介绍页模块
+   - `src/pages/not-found` - 404 页面模块
+
+### 文档质量指标
+- ✅ **Mermaid 结构图**: 已生成
+- ✅ **模块导航面包屑**: 已为所有子模块添加
+- ✅ **接口文档**: 完整记录
+- ✅ **依赖关系**: 清晰标注
+- ✅ **使用示例**: 提供代码示例
+- ✅ **常见问题**: FAQ 章节完善
 
 ---
 
