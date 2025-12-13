@@ -8,13 +8,11 @@
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
-import LowCodeRoute from './low'
 import ManageRoute from './manage'
 import Home from '@/pages/home'
 import { withSuspense } from './utils'
 import NotFound from '@/pages/not-found'
 
-const Todos = withSuspense(lazy(() => import('@/pages/todos')))
 const Introduction = withSuspense(lazy(() => import('@/pages/introduction')))
 // const Wait = withSuspense(lazy(() => import('@/pages/Wait')))
 
@@ -23,10 +21,6 @@ const Blog = withSuspense(lazy(() => import('@/pages/blog')))
 const BlogArticle = withSuspense(lazy(() => import('@/pages/blog/article')))
 const BlogCategory = withSuspense(lazy(() => import('@/pages/blog/category')))
 const BlogTag = withSuspense(lazy(() => import('@/pages/blog/tag')))
-const MusicPage = withSuspense(lazy(() => import('@/pages/music')))
-const MusicHome = withSuspense(lazy(() => import('@/pages/music/music-home')))
-const MusicSearch = withSuspense(lazy(() => import('@/pages/music/music-search')))
-const PlaylistDetail = withSuspense(lazy(() => import('@/pages/music/playlist-detail')))
 
 const config: RouteObject[] = [
   {
@@ -35,7 +29,6 @@ const config: RouteObject[] = [
     // element: Wait
   },
   ManageRoute,
-  LowCodeRoute,
   {
     path: '/introduction',
     element: Introduction
@@ -43,10 +36,6 @@ const config: RouteObject[] = [
   {
     path: '/home',
     element: <Home />
-  },
-  {
-    path: '/todos',
-    element: Todos
   },
   {
     path: '/hero',
@@ -71,26 +60,10 @@ const config: RouteObject[] = [
     ]
   },
   {
-    path: '/music',
-    element: MusicPage,
-    children: [
-      {
-        path: 'home',
-        element: MusicHome
-      },
-      {
-        path: 'search',
-        element: MusicSearch
-      },
-      {
-        path: 'playlist-detail',
-        element: PlaylistDetail
-      }
-    ]
-  },
-  {
     path: '*',
     element: <NotFound />
-  },
+  }
 ]
-export default createBrowserRouter(config)
+
+const router = createBrowserRouter(config)
+export default router

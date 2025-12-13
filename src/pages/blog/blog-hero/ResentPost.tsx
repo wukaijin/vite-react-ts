@@ -10,9 +10,7 @@ import clsx from 'clsx'
 import { ArticleApi } from '@/api/blog'
 import ArticleCard from '../ArticleCard'
 import { isMobile } from '@/const'
-
-type Props = {}
-function ResentPost({}: Props) {
+function ResentPost() {
   const { data = [] } = useRequest(ArticleApi.findAll)
   return (
     <>

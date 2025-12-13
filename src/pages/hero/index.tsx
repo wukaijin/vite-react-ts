@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
  * @Description:
  */
-import { CSSProperties, useLayoutEffect } from 'react'
+import { type CSSProperties, useLayoutEffect } from 'react'
 import { Close, HamburgerButton } from '@icon-park/react'
 import { useToggle } from 'ahooks'
 import clsx from 'clsx'
@@ -15,16 +15,14 @@ import { throttle } from '@/utils'
 import Menu from './Menu'
 import withLicense from '@/components/shared/withLicense'
 
-type Props = {}
-
 const headingChars: string[] = Array.from('Welcome to my website!')
 const headingCharsLength = headingChars.length
 
-const HelloPage = (props: Props) => {
+const HelloPage = () => {
   const [open, { toggle }] = useToggle()
   const [firstIn, { toggle: toggleFirst }] = useToggle(true)
   const [animateDone, { toggle: toggleAnimateDone }] = useToggle(false)
-  const [springs, apis] = useSprings(headingCharsLength, i => ({
+  const [springs, apis] = useSprings(headingCharsLength, () => ({
     from: { opacity: 0, y: 120 }
   }))
   const [maskStyles, maskApi] = useSpring(() => ({

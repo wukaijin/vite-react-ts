@@ -16,7 +16,7 @@ function Wait() {
       navigate('/hero')
     }, 3000)
     return () => clearTimeout(timer)
-  }, [])
+  }, [navigate])
   return (
     <div className="bg-g-purple w-screen h-screen flex justify-center items-center">
       <Loading.Dot />

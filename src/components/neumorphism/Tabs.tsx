@@ -6,10 +6,9 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
+import { type HTMLAttributes, useLayoutEffect, useRef, useState } from 'react'
 
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = (typeof SIZES)[number]
+type Size = 'sm' | 'md' | 'lg'
 const SizeMapping: Record<Size, [string, string, string, string, [number, string]]> = {
   sm: ['h-10', 'px-4', 'text-base', 'rounded-lg', [10, 'rounded-md']],
   md: ['h-12', 'px-6', 'text-lg', 'rounded-xl', [10, 'rounded-md']],
@@ -32,7 +31,6 @@ export type TabsItem = {
   label?: string | number
   render?: React.ReactNode
 }
-// const tabs = ['Apple', 'Banana', 'Watermelon']
 function Tabs(props: Props) {
   const [shadowStyle, setShadowStyle] = useState<ShadowStyle>({
     offsetLeft: 0,
@@ -59,11 +57,13 @@ function Tabs(props: Props) {
         resizeShadow(currentActiveTab)
       }, 500)
     }
-  }, [size])
+  }, [size, items, value])
   useLayoutEffect(() => {
     const currentActiveTab = items.findIndex(e => e.value === value)
     if (currentActiveTab !== -1) {
-      resizeShadow(currentActiveTab)
+      setTimeout(() => {
+        resizeShadow(currentActiveTab)
+      })
     }
   }, [value])
   return (

@@ -5,7 +5,7 @@
  * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
  * @Description:
  */
-import { CSSProperties, useEffect, useMemo, useState } from 'react'
+import { type CSSProperties, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRequest } from 'ahooks'
 import ReactSelect from 'react-select'
@@ -14,14 +14,13 @@ import { useSpring, animated } from '@react-spring/web'
 import { ArticleApi, CategoryApi } from '@/api/blog'
 import sharedStyled from '../blog.module.scss'
 import ArticleCard from '../ArticleCard'
-import { Article, Tag } from '@/interface/blog'
+import type { Article, Tag } from '@/interface/blog'
 import OtherCategory from '../OtherCategory'
 import Loading from '@/components/base/Loading'
 import NoData from '@/components/shared/NoData'
 import { isMobile } from '@/const'
 
-type Props = {}
-const BlogCategory = (props: Props) => {
+const BlogCategory = () => {
   const [hasError, setHasError] = useState<boolean>(false)
   const [tags, setTags] = useState<Tag[]>()
   const params = useParams<string>()
@@ -44,11 +43,7 @@ const BlogCategory = (props: Props) => {
     }
   }))
   const [style, setStyle] = useState<CSSProperties>({})
-  const {
-    data: categoryDTO,
-    loading: loadingTag,
-    runAsync: fetchCategory
-  } = useRequest(CategoryApi.findOne, {
+  const { data: categoryDTO, runAsync: fetchCategory } = useRequest(CategoryApi.findOne, {
     manual: true,
     onSuccess(d) {
       if (!d) {
@@ -99,10 +94,11 @@ const BlogCategory = (props: Props) => {
   const tagOptions = useMemo(() => {
     if (!articles || !articles.length) return []
     return (articles as Article[]).reduce((acc: Tag[], article: Article) => {
-      article.tags &&
+      if (article.tags) {
         article.tags.forEach(_tag => {
           if (!acc.find(t => t.id === _tag.id)) acc.push(_tag)
         })
+      }
       return acc
     }, [])
   }, [articles])

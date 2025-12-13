@@ -6,13 +6,12 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 
 type Color = 'primary' | 'secondary'
 type Shape = 'square' | 'circle'
 
-const SIZES = ['xs', 'sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = 'xs' | 'sm' |  'md' | 'lg'
 const SizeMapping: Record<Size, [string, string, string, string, string]> = {
   xs: ['h-8', 'rounded-lg', 'px-4', 'font-normal text-xs', 'text-xs'],
   sm: ['h-10', 'rounded-lg', 'px-4', 'font-normal text-sm', 'text-sm'],

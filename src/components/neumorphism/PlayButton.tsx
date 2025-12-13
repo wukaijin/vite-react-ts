@@ -8,10 +8,9 @@
 
 import { PlayOne, Pause } from '@icon-park/react'
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = 'sm' | 'md' | 'lg'
 type Props = HTMLAttributes<HTMLDivElement> & {
   size?: Size
   playing?: boolean
@@ -29,7 +28,11 @@ const PlayButton = (props: Props) => {
     <div className={clsx('neu-play-button', btnSize, className)}>
       <span className={clsx('neu-play-icon', iconSize, TT)}>
         <Pause className={clsx('pause', { visible: playing })} theme="filled" onClick={onChange} />
-        <PlayOne className={clsx('play', { visible: !playing })} theme="filled" onClick={onChange} />
+        <PlayOne
+          className={clsx('play', { visible: !playing })}
+          theme="filled"
+          onClick={onChange}
+        />
       </span>
       <span className={clsx('neu-play-back-1', iconSize, { paused: !playing })} />
       <span className={clsx('neu-play-back-2', iconSize, { paused: !playing })} />

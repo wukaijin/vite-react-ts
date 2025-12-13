@@ -42,17 +42,17 @@ export default defineConfig({
   server: {
     proxy: {
       '/music-api': {
-        target: 'http://106.55.147.116',
+        target: 'https://www.wukaijin.com',
         changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')
       },
       '/static-api': {
-        target: 'http://106.55.147.116',
+        target: 'https://www.wukaijin.com',
         changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')
       },
       '/nest-api': {
-        target: 'http://106.55.147.116',
+        target: 'https://www.wukaijin.com',
         // target: 'http://localhost:3001',
         changeOrigin: true
         // rewrite: path => path.replace(/^\/music-api/, '')

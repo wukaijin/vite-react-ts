@@ -11,10 +11,9 @@ import { FileEditingOne, FolderOpen } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
 import ArticlesForm from './ArticlesForm'
 import { ArticleApi } from '@/api/blog'
-import { SubmitArticle } from '@/interface/blog'
+import type { SubmitArticle } from '@/interface/blog'
 
-type Props = {}
-const AddArticle = (props: Props) => {
+const AddArticle = () => {
   const navigator = useNavigate()
   const [formFields, setFormFields] = useState<Partial<SubmitArticle>>({
     title: '',

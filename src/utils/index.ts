@@ -7,10 +7,10 @@
  */
 export const getUniqueId: () => string = () => Math.random().toString(36).substring(2, 10)
 
-export function throttle<T extends Function>(func: T, wait: number) {
+export function throttle<T extends (...args: any[]) => any>(func: T, wait: number) {
   let timer = 0
   let lastDate = 0
-  return function (this: ThisType<T>, ...args: any) {
+  return function (this: ThisType<T>, ...args: Parameters<T>) {
     if (timer) {
       clearTimeout(timer)
       timer = 0

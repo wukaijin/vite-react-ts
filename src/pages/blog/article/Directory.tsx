@@ -21,7 +21,9 @@ function Directory(props: Props) {
     const target = [
       ...document.querySelector('.markdown-body')!.querySelectorAll(`h${level}`)
     ].find(ele => ele.textContent === text)
-    target && target?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
     setVisibility(false)
   }
   const directory = useMemo(() => {

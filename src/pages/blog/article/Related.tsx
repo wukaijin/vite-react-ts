@@ -11,11 +11,7 @@ import { useSpring, animated } from '@react-spring/web'
 import { useRequest } from 'ahooks'
 import { ArticleApi } from '@/api/blog'
 
-type Props = {
-  articleId: string
-}
-
-function Related({ articleId }: Props) {
+function Related() {
   const navigate = useNavigate()
   const params = useParams()
   const [style, listApi] = useSpring(() => ({
@@ -35,8 +31,7 @@ function Related({ articleId }: Props) {
         to: {
           opacity: 1,
           x: 0
-        },
-        
+        }
       })
     }
   })
@@ -53,7 +48,7 @@ function Related({ articleId }: Props) {
         }
       })
     }
-  }, [params])
+  }, [params, listApi, run])
   return (
     <animated.div style={style}>
       <h2 className="pb-2">Related:</h2>

@@ -6,12 +6,12 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { ComponentType } from 'react'
+import type { ComponentType } from 'react'
 import Logo from './Logo'
 
 // type Props = HTMLAttributes<HTMLDivElement>
 
-function withLicense<T extends {}>(MainComp: ComponentType<T>) {
+function withLicense<T extends { className?: string }>(MainComp: ComponentType<T>) {
   return (mainProps: T) => {
     return (
       <>

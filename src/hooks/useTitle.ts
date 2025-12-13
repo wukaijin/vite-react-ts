@@ -10,5 +10,5 @@ import { useEffect } from 'react'
 export default function useTitle(title: string) {
   useEffect(() => {
     window.document.title = title
-  }, [])
+  }, [title])
 }

@@ -7,7 +7,7 @@
  */
 import { MusicOne, Videocamera, ConfusedFace, Kungfu } from '@icon-park/react'
 import clsx from 'clsx'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { type ChangeEvent, useCallback, useState } from 'react'
 import {
   NeuPanel,
   NeuSwitch,
@@ -21,11 +21,8 @@ import {
 } from '@/components/neumorphism'
 import PersonCard from './PersonCard'
 
-type Props = unknown
-
 // todo: Radio.Group
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = 'sm' | 'md' | 'lg'
 
 const sizeMapping = [
   {
@@ -64,7 +61,7 @@ const tabsMapping = [
     )
   }
 ]
-export default function Introduction(props: Props) {
+export default function Introduction() {
   const [switchChecked, setSwitchChecked] = useState(true)
   const [checkboxChecked, setCheckboxChecked] = useState(true)
   const [radioChecked, setRadioChecked] = useState(true)
@@ -79,7 +76,7 @@ export default function Introduction(props: Props) {
     (s: ChangeEvent<HTMLInputElement>) => {
       setInputValue(s.target.value)
     },
-    [inputValue]
+    [setInputValue]
   )
   return (
     <div className={clsx('bg-[#E4EBF5] min-h-screen pb-8')}>

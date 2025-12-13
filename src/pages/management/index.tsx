@@ -10,8 +10,7 @@ import { useToggle } from 'ahooks'
 import { Outlet } from 'react-router-dom'
 import Sider from './Sider'
 
-type Props = {}
-const Management = (props: Props) => {
+const Management = () => {
   const [siderVisible, { toggle }] = useToggle(true)
   return (
     <div className="bg-slate-100 min-h-screen">

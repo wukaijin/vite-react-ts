@@ -10,15 +10,12 @@ import BlogLayout from './blog-layout'
 import BlogHero from './blog-hero'
 import useTitle from '@/hooks/useTitle'
 
-type Props = {}
-const BlogPage = (props: Props) => {
+const BlogPage = () => {
   const location = useLocation()
   useTitle('Carlos Blog')
   return (
     <BlogLayout>
-      {location.pathname === '/blog' && (
-        <BlogHero />
-      )}
+      {location.pathname === '/blog' && <BlogHero />}
       <Outlet />
     </BlogLayout>
   )

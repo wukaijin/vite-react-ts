@@ -12,10 +12,9 @@ import { FileEditingOne, FolderOpen } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
 import ArticlesForm from './ArticlesForm'
 import { ArticleApi } from '@/api/blog'
-import { SubmitArticle } from '@/interface/blog'
+import type { SubmitArticle } from '@/interface/blog'
 
-type Props = {}
-const EditArticle = (props: Props) => {
+const EditArticle = () => {
   const params = useParams()
   const navigator = useNavigate()
   const [formFields, setFormFields] = useState<Partial<SubmitArticle>>({
@@ -27,7 +26,7 @@ const EditArticle = (props: Props) => {
     poster: '',
     description: ''
   })
-  const { data: article, run: findArticle } = useRequest(ArticleApi.findOne, {
+  const { run: findArticle } = useRequest(ArticleApi.findOne, {
     manual: true,
     onSuccess(d) {
       setFormFields({
@@ -46,7 +45,7 @@ const EditArticle = (props: Props) => {
     if (params.id) {
       findArticle(params.id)
     }
-  }, [params])
+  }, [params, findArticle])
   const onSubmit = () => {
     if (!params.id) return
     ArticleApi.edit(params.id, formFields).then(() => {

@@ -7,7 +7,7 @@
  */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 // import type { PayloadAction } from '@reduxjs/toolkit'
-import { Category, Tag } from '@/interface/blog'
+import type { Category, Tag } from '@/interface/blog'
 import { CategoryApi, TagApi } from '@/api/blog'
 
 type serializedCategory = Category & {
@@ -48,6 +48,7 @@ export const asyncFetchCategories = createAsyncThunk<Category[]>(
       if (response && response.length) return response
       return []
     } catch (error) {
+      console.error(error)
       return []
     }
   }
@@ -58,6 +59,7 @@ export const asyncFetchTags = createAsyncThunk<Tag[]>('blog/asyncFetchTags', asy
     if (response && response.length) return response
     return []
   } catch (error) {
+    console.error(error)
     return []
   }
 })

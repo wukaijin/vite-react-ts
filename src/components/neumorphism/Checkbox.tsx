@@ -6,11 +6,10 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 import { CheckSmall } from '@icon-park/react'
 
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = 'sm' | 'md' | 'lg'
 const SizeMapping: Record<Size, [number, string, string]> = {
   sm: [20, 'w-6 h-6', 'rounded-md'],
   md: [28, 'w-8 h-8', 'rounded-lg'],

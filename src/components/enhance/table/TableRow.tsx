@@ -5,11 +5,12 @@
  * @FilePath: /vite-react-swc/src/components/enhance/table/TableRow.tsx
  * @Description:
  */
-import React, { ReactElement, ReactNode } from 'react'
+import React from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-import { IComponentBaseProps } from '@/declare'
+import { type IComponentBaseProps } from '@/declare'
 
 export type TableRowProps = React.TableHTMLAttributes<HTMLTableRowElement> &
   IComponentBaseProps & {

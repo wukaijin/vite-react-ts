@@ -7,14 +7,10 @@
  * @Reference: https://redux-toolkit.js.org/tutorials/typescript
  */
 import { configureStore } from '@reduxjs/toolkit'
-import todos from './todos'
-import music from './music'
 import blog from './blog'
 
 const store = configureStore({
   reducer: {
-    todos,
-    music,
     blog
   }
 })

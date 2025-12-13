@@ -24,8 +24,7 @@ import NotFound from '@/pages/not-found'
 import { isMobile } from '@/const'
 import useTop from '@/hooks/useTop'
 
-type Props = {}
-function Article({}: Props) {
+function Article() {
   const [visible, setVisibility] = useState(false)
   const [hasError, setHasError] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -56,7 +55,9 @@ function Article({}: Props) {
   } = useRequest(ArticleApi.findOne, {
     manual: true,
     onSuccess(d) {
-      d && generateDirectory(d.content)
+      if (d) {
+        generateDirectory(d.content)
+      }
       headerApi.start({
         to: {
           opacity: 1,
@@ -86,13 +87,17 @@ function Article({}: Props) {
           y: 300
         },
         onResolve() {
-          params.id && fetchArticle(params.id)
+          if (params.id) {
+            fetchArticle(params.id)
+          }
         }
       })
     }
-  }, [params])
+  }, [params, contentApi, fetchArticle, headerApi])
   useClickAway(() => {
-    visible && setVisibility(false)
+    if (visible) {
+      setVisibility(false)
+    }
   }, menuRef)
   // if (loading) {
   //   return (

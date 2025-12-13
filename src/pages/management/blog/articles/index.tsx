@@ -6,7 +6,7 @@
  * @Description:
  */
 import { useNavigate } from 'react-router-dom'
-import { connect, ConnectedProps } from 'react-redux'
+import { connect, type ConnectedProps } from 'react-redux'
 import { useMount, useRequest } from 'ahooks'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
@@ -14,12 +14,12 @@ import { ArticleState } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import useModal from '@/hooks/useModal'
 import { ArticleApi } from '@/api/blog'
-import { RootState } from '@/store'
+import type { RootState } from '@/store'
 import { asyncFetchCategories } from '@/store/blog'
 
 const connector = connect(
   (state: RootState) => {
-    const { categories, tags } = state.blog
+    const { categories } = state.blog
     return {
       categories
     }
@@ -132,4 +132,6 @@ const BlogArticles = (props: Props) => {
     </div>
   )
 }
-export default connector(BlogArticles)
+
+const connectedBlogArticles = connector(BlogArticles)
+export default connectedBlogArticles

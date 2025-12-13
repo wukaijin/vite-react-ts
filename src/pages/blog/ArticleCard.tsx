@@ -7,7 +7,7 @@
  */
 
 import { useNavigate } from 'react-router-dom'
-import { Article } from '@/interface/blog'
+import { type Article } from '@/interface/blog'
 
 type Props = {
   data: Article

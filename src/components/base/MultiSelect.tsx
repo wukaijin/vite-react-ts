@@ -8,7 +8,7 @@
 import { Check } from '@icon-park/react'
 import { useClickAway, useSize, useToggle } from 'ahooks'
 import clsx from 'clsx'
-import { HTMLAttributes, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { type HTMLAttributes, useMemo, useRef } from 'react'
 
 type Option = {
   value: React.Key
@@ -25,23 +25,18 @@ const MultiSelect = (props: Props) => {
   const selectRef = useRef<HTMLInputElement>(null)
   const menuRef = useRef<HTMLUListElement>(null)
   const [visible, { setLeft, setRight }] = useToggle(false)
-  const [width, setWidth] = useState(0)
   const spanSize = useSize(spanRef)
   useClickAway(() => {
     setLeft()
   }, spanRef)
-
-  useLayoutEffect(() => {
-    setWidth(spanSize?.width || 0)
-  }, [spanSize])
 
   const { options, onChange, className = '', value = [] } = props
   const classNames = useMemo(
     () => className.split(' ').filter(e => !!e.replace(/\s+/g, '')),
     [className]
   )
-  const inputClassName = useMemo(() => classNames.filter(c => c.startsWith('select-')), [className])
-  const spanClassName = useMemo(() => classNames.filter(c => !c.startsWith('select-')), [className])
+  const inputClassName = classNames.filter(c => c.startsWith('select-'))
+  const spanClassName = classNames.filter(c => !c.startsWith('select-'))
   const menuClassName = useMemo(
     () => inputClassName.map(c => !c.replace('select', 'menu')),
     [inputClassName]
@@ -86,7 +81,7 @@ const MultiSelect = (props: Props) => {
             'translate-y-full': visible
           }
         )}
-        style={{ width, maxHeight: 200 }}
+        style={{ width: spanSize?.width || 0, maxHeight: 200 }}
       >
         {options.map(o => (
           <li key={o.value} onClick={() => handleClick(o)}>

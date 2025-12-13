@@ -6,10 +6,9 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = typeof SIZES[number]
+type Size = 'sm' | 'md' | 'lg'
 const SizeMapping: Record<Size, [string]> = {
   sm: ['w-6 h-6'],
   md: ['w-8 h-8'],

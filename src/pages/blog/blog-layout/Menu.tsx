@@ -6,12 +6,12 @@
  * @Description:
  */
 import { useCallback, useEffect } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
+import { connect, type ConnectedProps } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from '@/store'
+import type { RootState } from '@/store'
 import styled from '../blog.module.scss'
 import { asyncFetchCategories } from '@/store/blog'
-import { Category } from '@/interface/blog'
+import type { Category } from '@/interface/blog'
 
 const connector = connect(
   (state: RootState) => {

@@ -12,8 +12,7 @@ import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { ArticleApi } from '@/api/blog'
 import { isMobile } from '@/const'
 
-type Props = {}
-const Search = (props: Props) => {
+const Search = () => {
   const searchRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState<boolean>(false)
   const [activeId, setActiveId] = useState<string>('')
@@ -27,7 +26,7 @@ const Search = (props: Props) => {
   const { run: debounceSearch } = useDebounceFn(search)
   useEffect(() => {
     debounceSearch(deferKeyword)
-  }, [deferKeyword])
+  }, [deferKeyword, debounceSearch])
 
   useKeyPress('uparrow', e => {
     if (!visible) return

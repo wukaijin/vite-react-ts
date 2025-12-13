@@ -5,21 +5,29 @@
  * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
-import ReactMarkdown, { Components } from 'react-markdown'
+import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import './markdown.scss'
-import { HTMLAttributes, memo } from 'react'
+import { type HTMLAttributes, memo } from 'react'
 
 const componentsConfig: Components = {
-  code({ node, className, children, ...props }) {
+  code({ className, children, ...props }) {
     const match = /language-(\w+)/.exec(className || '')
-    return !inline && match ? (
+    if (!match) {
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    }
+    return (
       <SyntaxHighlighter
         // wrapLongLines
-        showLineNumbers
-        style={atomDark as any}
+        showLineNumbers={true}
+        // @ts-expect-error 组件 style 和 JSX style 类型检测冲突
+        style={atomDark}
         language={match[1]}
         PreTag="div"
         customStyle={{ margin: 0, overflowY: 'auto' }}
@@ -27,10 +35,6 @@ const componentsConfig: Components = {
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
-    ) : (
-      <code className={className} {...props}>
-        {children}
-      </code>
     )
   }
 }
@@ -39,7 +43,7 @@ const plugins = [remarkGfm]
 const MdReader = memo((props: Props) => {
   return (
     // div
-    <ReactMarkdown className="markdown-body" remarkPlugins={plugins} components={componentsConfig}>
+    <ReactMarkdown remarkPlugins={plugins} components={componentsConfig}>
       {props.children as string}
     </ReactMarkdown>
   )

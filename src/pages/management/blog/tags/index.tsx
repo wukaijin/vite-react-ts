@@ -8,10 +8,10 @@
 
 import clsx from 'clsx'
 import { useState } from 'react'
-import { useReactive, useRequest, useToggle } from 'ahooks'
+import { useRequest, useToggle } from 'ahooks'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
-import { Tag } from '@/interface/blog'
+import type { Tag } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import Modal from '@/components/base/Modal'
 import useModal from '@/hooks/useModal'
@@ -29,13 +29,13 @@ const colorSquare = (color: string) => {
   }
   return <label className={ColorSquareClassNames} style={{ backgroundColor: color }} />
 }
-type Props = {}
-const BlogTags = (props: Props) => {
+
+const BlogTags = () => {
   const [visible, { toggle }] = useToggle()
 
   const [type, setType] = useState<Type>('Add')
   const { jsx: ConfirmModal, open: openModal } = useModal()
-  const formFields = useReactive({
+  const [formFields, setFormFields] = useState({
     id: '',
     text: '',
     color: ''
@@ -51,16 +51,20 @@ const BlogTags = (props: Props) => {
     manual: true
   })
   const add = () => {
-    formFields.id = ''
-    formFields.text = ''
-    formFields.color = '#000000'
+    setFormFields({
+      id: '',
+      text: '',
+      color: '#000000'
+    })
     setType('Add')
     toggle()
   }
   const edit = (item: Tag) => {
-    formFields.id = item.id
-    formFields.text = item.text
-    formFields.color = item.color
+    setFormFields({
+      id: item.id,
+      text: item.text,
+      color: item.color
+    })
     setType('Edit')
     toggle()
   }
@@ -68,12 +72,12 @@ const BlogTags = (props: Props) => {
     if (type === 'Add') {
       const params: Partial<Tag> = { ...formFields }
       delete params.id
-      reqAdd(params).then(res => {
+      reqAdd(params).then(() => {
         toggle()
         fetchTags()
       })
     } else {
-      reqEdit(formFields.id, formFields).then(res => {
+      reqEdit(formFields.id, formFields).then(() => {
         toggle()
         fetchTags()
       })
@@ -147,7 +151,7 @@ const BlogTags = (props: Props) => {
               <input
                 className="input w-full"
                 value={formFields.text}
-                onChange={e => (formFields.text = e.target.value)}
+                onChange={e => setFormFields({ ...formFields, text: e.target.value })}
                 name="text"
                 type="text"
               />
@@ -157,7 +161,7 @@ const BlogTags = (props: Props) => {
               <input
                 className=" input w-full"
                 value={formFields.color}
-                onChange={e => (formFields.color = e.target.value)}
+                onChange={e => setFormFields({ ...formFields, color: e.target.value })}
                 name="color"
                 type="color"
               />

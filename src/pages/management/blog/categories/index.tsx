@@ -6,11 +6,11 @@
  * @Description:
  */
 import { useMemo, useState } from 'react'
-import { useReactive, useRequest, useToggle } from 'ahooks'
+import { useRequest, useToggle } from 'ahooks'
 import RSelect from 'react-select'
 import { Delete, Edit, FileEditingOne, FolderOpen, Plus } from '@icon-park/react'
 import Breadcrumbs, { BreadcrumbsItem } from '../../components/Breadcrumbs'
-import { Category } from '@/interface/blog'
+import type { Category } from '@/interface/blog'
 import Table from '@/components/enhance/table'
 import Modal from '@/components/base/Modal'
 import useModal from '@/hooks/useModal'
@@ -18,13 +18,11 @@ import { CategoryApi } from '@/api/blog'
 
 type Type = 'Add' | 'Edit'
 
-type Props = {}
-
-const BlogCategories = (props: Props) => {
+const BlogCategories = () => {
   const [visible, { toggle }] = useToggle()
   const [type, setType] = useState<Type>('Add')
   const { jsx: ConfirmModal, open: openModal } = useModal()
-  const formFields = useReactive<Category>({
+  const [formFields, setFormFields] = useState<Category>({
     id: '',
     text: '',
     description: '',
@@ -33,10 +31,10 @@ const BlogCategories = (props: Props) => {
     belongs: null
   })
   const { data: categories = [], run: fetchCategories } = useRequest(CategoryApi.findAll)
-  const { runAsync: reqAdd, loading: adding } = useRequest(CategoryApi.add, {
+  const { runAsync: reqAdd } = useRequest(CategoryApi.add, {
     manual: true
   })
-  const { runAsync: reqEdit, loading: editing } = useRequest(CategoryApi.edit, {
+  const { runAsync: reqEdit } = useRequest(CategoryApi.edit, {
     manual: true
   })
   const { runAsync: reqDelete } = useRequest(CategoryApi.delete, {
@@ -45,23 +43,27 @@ const BlogCategories = (props: Props) => {
   const options = useMemo(() => categories.filter(m => !m.belongs), [categories])
 
   const add = () => {
-    formFields.text = ''
-    formFields.id = ''
-    formFields.belongs = null
-    formFields.order = 0
-    formFields.defaultPoster = ''
-    formFields.description = ''
+    setFormFields({
+      id: '',
+      text: '',
+      description: '',
+      order: 0,
+      defaultPoster: '',
+      belongs: null
+    })
+
     setType('Add')
     toggle()
   }
   const edit = (item: Category) => {
-    console.log(item)
-    formFields.text = item.text
-    formFields.id = item.id
-    formFields.order = item.order
-    formFields.defaultPoster = item.defaultPoster
-    formFields.belongs = item.belongs || null
-    formFields.description = item.description
+    setFormFields({
+      text: item.text,
+      description: item.description,
+      order: item.order,
+      defaultPoster: item.defaultPoster,
+      belongs: item.belongs || null,
+      id: item.id
+    })
     setType('Edit')
     toggle()
   }
@@ -72,7 +74,7 @@ const BlogCategories = (props: Props) => {
         belongs: formFields.belongs ? formFields.belongs.id : null
       }
       delete params.id
-      reqAdd(params as Category).then(res => {
+      reqAdd(params as Category).then(() => {
         toggle()
         fetchCategories()
       })
@@ -81,7 +83,7 @@ const BlogCategories = (props: Props) => {
         ...formFields,
         belongs: formFields.belongs ? formFields.belongs.id : null
       }
-      reqEdit(formFields.id, params as Category).then(res => {
+      reqEdit(formFields.id, params as Category).then(() => {
         toggle()
         fetchCategories()
       })
@@ -154,7 +156,7 @@ const BlogCategories = (props: Props) => {
               <input
                 className="input input-primary flex-1"
                 value={formFields.text}
-                onChange={e => (formFields.text = e.target.value)}
+                onChange={e => setFormFields({ ...formFields, text: e.target.value })}
                 name="text"
                 type="text"
               />
@@ -164,7 +166,7 @@ const BlogCategories = (props: Props) => {
               <input
                 className="input input-primary flex-1"
                 value={formFields.defaultPoster}
-                onChange={e => (formFields.defaultPoster = e.target.value)}
+                onChange={e => setFormFields({ ...formFields, defaultPoster: e.target.value })}
                 name="text"
                 type="text"
               />
@@ -174,7 +176,7 @@ const BlogCategories = (props: Props) => {
               <input
                 className="input input-primary flex-1"
                 value={formFields.order}
-                onChange={e => (formFields.order = Number(e.target.value))}
+                onChange={e => setFormFields({ ...formFields, order: Number(e.target.value) })}
                 name="order"
                 type="number"
               />
@@ -185,7 +187,7 @@ const BlogCategories = (props: Props) => {
                 className="flex-1"
                 isClearable
                 value={options.find(e => e.id === formFields.belongs?.id)}
-                onChange={c => (formFields.belongs = c || null)}
+                onChange={c => setFormFields({ ...formFields, belongs: c || null })}
                 options={options}
                 getOptionLabel={(c: Category) => c.text}
                 getOptionValue={(c: Category) => c.id}
@@ -197,7 +199,7 @@ const BlogCategories = (props: Props) => {
                 className="textarea textarea-primary resize flex-1"
                 value={formFields.description}
                 onChange={e => {
-                  formFields.description = e.target.value
+                  setFormFields({ ...formFields, description: e.target.value })
                 }}
               />
             </div>

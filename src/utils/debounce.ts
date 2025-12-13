@@ -6,10 +6,10 @@
  * @Description: debounce
  */
 
-function debounce<T extends Function>(func: T, duration?: number) {
+function debounce<T extends (...args: any[]) => any>(func: T, duration?: number) {
   duration = duration || 500
-  let timer: NodeJS.Timeout | null
-  return function (this: ThisType<T>, ...args: any[]) {
+  let timer: number | null
+  return function (this: ThisType<T>, ...args: Parameters<T>) {
     if (timer) {
       clearTimeout(timer)
       timer = null

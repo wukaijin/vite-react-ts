@@ -6,7 +6,7 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 import styles from './pc.module.scss'
 
 type Props = HTMLAttributes<HTMLDivElement>

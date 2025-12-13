@@ -8,9 +8,7 @@
 
 import { useNavigate } from 'react-router-dom'
 
-type Props = {}
-
-const NotFound = (props: Props) => {
+const NotFound = () => {
   const navigate = useNavigate()
   return (
     <div className="h-screen w-screen flex justify-center items-center flex-col">

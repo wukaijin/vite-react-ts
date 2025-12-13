@@ -5,7 +5,8 @@
  * @FilePath: /vite-react-swc/src/components/base/Modal.tsx
  * @Description:
  */
-import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
+import type { HTMLAttributes, PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
@@ -23,34 +24,38 @@ const MODAL_DOM: Element = document.querySelector('#modal')!
 function Modal(props: Props) {
   const { visible, children, onClickBackdrop, dataTheme, className, ...res } = props
   const [actVisible, setActVisibility] = useState(false)
-  const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null)
+  const [prevVisible, setPrevVisible] = useState(visible)
 
-  useEffect(() => {
-    const element = document.createElement('div')
-    setContainerEl(element)
-    return () => {
-      if (MODAL_DOM.contains(element)) {
-        MODAL_DOM.removeChild(element)
-      }
-    }
-  }, [])
+  // 使用 useState 的惰性初始化：初始化函数只在首次渲染时执行一次
+  const [containerEl] = useState(() => document.createElement('div'))
 
-  useEffect(() => {
-    if (containerEl) {
-      if (visible === true) {
-        MODAL_DOM.appendChild(containerEl)
-      } else {
-        setTimeout(() => {
-          if (containerEl && MODAL_DOM.contains(containerEl)) {
-            MODAL_DOM.removeChild(containerEl)
-          }
-        }, 500)
-      }
-    }
+  // 在渲染期间检测 visible 变化并同步状态（React 推荐模式）
+  if (visible !== prevVisible) {
     setActVisibility(visible)
-  }, [visible, containerEl])
+    setPrevVisible(visible)
+  }
 
-  if (!containerEl) return null
+  // 清理函数：组件卸载时移除容器
+  useLayoutEffect(() => {
+    return () => {
+      if (MODAL_DOM.contains(containerEl)) {
+        MODAL_DOM.removeChild(containerEl)
+      }
+    }
+  }, [containerEl])
+
+  useLayoutEffect(() => {
+    // Effect 只负责 DOM 操作
+    if (visible === true) {
+      MODAL_DOM.appendChild(containerEl)
+    } else {
+      setTimeout(() => {
+        if (containerEl && MODAL_DOM.contains(containerEl)) {
+          MODAL_DOM.removeChild(containerEl)
+        }
+      }, 500)
+    }
+  }, [visible, containerEl])
 
   const containerClasses = clsx('modal', {
     'modal-open': actVisible

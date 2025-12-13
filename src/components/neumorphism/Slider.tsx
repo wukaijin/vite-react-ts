@@ -6,10 +6,10 @@
  * @Description:
  */
 import clsx from 'clsx'
-import { HTMLAttributes, Component, createRef, RefObject } from 'react'
+import { Component, createRef } from 'react'
+import type { HTMLAttributes, RefObject } from 'react'
 
-const SIZES = ['sm', 'md', 'lg'] as const
-type Size = (typeof SIZES)[number]
+type Size = 'sm' | 'md' | 'lg'
 const SizeMapping: Record<Size, [string, string, string]> = {
   sm: ['h-3 w-3', 'h-1', 'h-6 rounded text-sm top-6'],
   md: ['h-3 w-3', 'h-2', 'h-7 rounded-md text-base top-7'],
@@ -54,7 +54,6 @@ class Slider extends Component<Props, State> {
     return null
   }
   componentDidMount(): void {
-    // eslint-disable-next-line react/no-access-state-in-setstate
     const box = this.state.boxRef.current
     const btn = this.state.btnRef.current
     if (!box || !btn) return

@@ -10,7 +10,6 @@ import { Content } from '@/components/base/layout'
 import Panel from '@/components/base/panel'
 import { HOME_HEADER_HEIGHT, HOME_FOOTER_HEIGHT } from '@/const'
 
-type Props = unknown
 function NavigateList() {
   return (
     <ul className="py-8 px-6 bg-[#F4F6FB] bg-opacity-30 rounded-[12px] marker:text-sky-400 list-disc pl-5 space-y-3 text-slate-800">
@@ -30,7 +29,7 @@ function NavigateList() {
   )
 }
 
-function HomeContent(props: Props) {
+function HomeContent() {
   return (
     <Content
       style={{

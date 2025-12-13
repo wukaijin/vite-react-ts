@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 
 type Props = HTMLAttributes<HTMLDivElement>
 function Panel(props: Props) {

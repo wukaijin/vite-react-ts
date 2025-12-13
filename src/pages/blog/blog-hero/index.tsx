@@ -20,8 +20,7 @@ const CARD_IMAGE = '/static-api/blog/undraw_augmented_reality.svg'
 const CLOUD_BG = '/static-api/blog/cloud.png'
 const MOUNTAIN_BG = '/static-api/blog/painting-bg-m.png'
 
-type Props = {}
-function BlogHero({}: Props) {
+function BlogHero() {
   const op = useRef<OverlayPanel>(null)
   const [personStyles, personApi] = useSpring(() => ({
     from: { opacity: 0, x: -300 }

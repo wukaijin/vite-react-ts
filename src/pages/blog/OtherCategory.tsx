@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
+import { connect, type ConnectedProps } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import clsx from 'clsx'
-import { RootState } from '@/store'
-import { Category } from '@/interface/blog'
+import type { RootState } from '@/store'
+import type { Category } from '@/interface/blog'
 import styled from './blog.module.scss'
 /*
  * @Author: Carlos
@@ -37,7 +37,7 @@ function OtherCategory(props: Props) {
         <span>{props.title || 'Other Category'}:</span>
       </div>
       <ul className="">
-        {props.serializedCategories.map((item, index) => {
+        {props.serializedCategories.map(item => {
           return (
             <li key={item.id} className="pl-2">
               {item.children && !!item.children.length ? (
