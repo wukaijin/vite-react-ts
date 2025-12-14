@@ -24,7 +24,7 @@ const BlogLayout = (props: Props) => {
   const [modalShow, { toggle }] = useToggle()
   const navigate = useNavigate()
   const toCMS = () => {
-    window.open('http://cms.wukaijin.com')
+    window.open('https://cms.wukaijin.com')
     toggle()
   }
   return (
@@ -56,7 +56,7 @@ const BlogLayout = (props: Props) => {
         </div>
       </div>
       <div className={clsx('pt-14')}>{props.children}</div>
-      <Modal visible={modalShow}>
+      <Modal visible={modalShow} className="text-white">
         <h3 className="font-bold text-lg">You should signIn please!</h3>
         <p className="py-4 ">
           <span className="line-through">

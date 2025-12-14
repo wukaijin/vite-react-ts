@@ -2,14 +2,7 @@
    全局样式入口文件
    ============================================ */
 
-/* 第三方库样式 */
-@import '@icon-park/react/styles/index.css';
-@import './styles/common.scss';
-
-/* Tailwind CSS 基础层 */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@use './styles/common.scss';
 
 /* ============================================
    根元素配置
@@ -29,94 +22,91 @@
 /* ============================================
    Tailwind 工具类扩展
    ============================================ */
-@layer utilities {
-  /* 必填项标记 */
-  .required {
-    @apply after:content-['*'] after:ml-0.5 after:text-red-500;
-  }
+/* 必填项标记 */
+.required::after {
+  content: '*';
+  margin-left: 0.125rem;
+  color: rgb(239 68 68);
 }
 
 /* ============================================
-   Tailwind 组件类扩展
+   自定义组件类
    ============================================ */
-@layer components {
-  /* --- 基础渐变背景 --- */
-  .bg-g-purple {
-    @apply bg-gradient-to-r from-purple-500 to-indigo-500;
-  }
+/* --- 基础渐变背景 --- */
+.bg-g-purple {
+  background-image: linear-gradient(to right, rgb(168 85 247), rgb(99 102 241));
+}
 
-  .bg-g-fuchsia {
-    @apply bg-gradient-to-r from-fuchsia-500 to-purple-600;
-  }
+.bg-g-fuchsia {
+  background-image: linear-gradient(to right, rgb(217 70 239), rgb(147 51 234));
+}
 
-  .bg-g-indigo {
-    @apply bg-gradient-to-r from-sky-400 to-indigo-500;
-  }
+.bg-g-indigo {
+  background-image: linear-gradient(to right, rgb(56 189 248), rgb(99 102 241));
+}
 
-  .bg-g-blue {
-    @apply bg-gradient-to-r from-sky-400 to-blue-600;
-  }
+.bg-g-blue {
+  background-image: linear-gradient(to right, rgb(56 189 248), rgb(37 99 235));
+}
 
-  .bg-g-amber {
-    @apply bg-gradient-to-r from-amber-300 to-orange-500;
-  }
+.bg-g-amber {
+  background-image: linear-gradient(to right, rgb(252 211 77), rgb(249 115 22));
+}
 
-  .bg-g-orange {
-    @apply bg-gradient-to-r from-orange-400 to-pink-600;
-  }
+.bg-g-orange {
+  background-image: linear-gradient(to right, rgb(251 146 60), rgb(219 39 119));
+}
 
-  .bg-g-green {
-    @apply bg-gradient-to-r from-green-400 to-cyan-500;
-  }
+.bg-g-green {
+  background-image: linear-gradient(to right, rgb(74 222 128), rgb(34 211 238));
+}
 
-  .bg-g-cyan {
-    @apply bg-gradient-to-r from-teal-400 to-cyan-400;
-  }
+.bg-g-cyan {
+  background-image: linear-gradient(to right, rgb(45 212 191), rgb(34 211 238));
+}
 
-  .bg-g-rose {
-    @apply bg-gradient-to-r from-pink-500 to-rose-500;
-  }
+.bg-g-rose {
+  background-image: linear-gradient(to right, rgb(236 72 153), rgb(244 63 94));
+}
 
-  /* --- 光谱渐变背景 --- */
-  .bg-spectrum-full {
-    background: linear-gradient(red, transparent),
-      linear-gradient(to top left, lime, transparent),
-      linear-gradient(to top right, blue, transparent);
-    background-blend-mode: screen;
-  }
+/* --- 光谱渐变背景 --- */
+.bg-spectrum-full {
+  background: linear-gradient(red, transparent), linear-gradient(to top left, lime, transparent),
+    linear-gradient(to top right, blue, transparent);
+  background-blend-mode: screen;
+}
 
-  .bg-spectrum-light {
-    background: linear-gradient(#f87171, transparent),
-      linear-gradient(to top left, #5eead4, transparent),
-      linear-gradient(to top right, #3b82f6, transparent);
-    background-blend-mode: screen;
-  }
+.bg-spectrum-light {
+  background: linear-gradient(#f87171, transparent),
+    linear-gradient(to top left, #5eead4, transparent),
+    linear-gradient(to top right, #3b82f6, transparent);
+  background-blend-mode: screen;
+}
 
-  .bg-spectrum-light-reverse {
-    background: linear-gradient(#3b82f6, transparent),
-      linear-gradient(to top left, #5eead4, transparent),
-      linear-gradient(to top right, #f87171, transparent);
-    background-blend-mode: screen;
-  }
+.bg-spectrum-light-reverse {
+  background: linear-gradient(#3b82f6, transparent),
+    linear-gradient(to top left, #5eead4, transparent),
+    linear-gradient(to top right, #f87171, transparent);
+  background-blend-mode: screen;
+}
 
-  /* --- 自定义渐变背景 --- */
-  .g-normal {
-    background: linear-gradient(
-      141deg,
-      rgba(191, 102, 255, 1) 0%,
-      rgba(98, 72, 255, 1) 50%,
-      rgba(0, 221, 235, 1) 100%
-    );
-  }
+/* --- 自定义渐变背景 --- */
+.g-normal {
+  background: linear-gradient(
+    141deg,
+    rgba(191, 102, 255, 1) 0%,
+    rgba(98, 72, 255, 1) 50%,
+    rgba(0, 221, 235, 1) 100%
+  );
+}
 
-  .g-light {
-    background: linear-gradient(
-      141deg,
-      rgb(200, 124, 255) 0%,
-      rgb(116, 92, 252) 50%,
-      rgb(63, 241, 253) 100%
-    );
-  }
+.g-light {
+  background: linear-gradient(
+    141deg,
+    rgb(200, 124, 255) 0%,
+    rgb(116, 92, 252) 50%,
+    rgb(63, 241, 253) 100%
+  );
 }
 
 /* ============================================
@@ -131,5 +121,5 @@
 /* Montserrat 字体 */
 @font-face {
   font-family: 'Montserrat';
-  src: url('@assets/font/Montserrat-Regular.ttf') format('truetype');
+  src: url('/Montserrat-Regular.ttf') format('truetype');
 }

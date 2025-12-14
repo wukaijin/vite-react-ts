@@ -12,7 +12,10 @@
   font-size: clamp(2rem, 5.4vw, 7rem);
   background-color: rgba(9, 14, 23, 1);
   color: #ffffff;
-  @apply flex justify-center items-center text-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .hero {
   min-height: 100vh;

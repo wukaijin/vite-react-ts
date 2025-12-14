@@ -9,7 +9,7 @@ import { create } from 'zustand'
 import type { Category, Tag } from '@/interface/blog'
 import { CategoryApi, TagApi } from '@/api/blog'
 
-type SerializedCategory = Category & {
+export type SerializedCategory = Category & {
   children?: Category[]
 }
 

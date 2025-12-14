@@ -37,10 +37,7 @@
       "language": "TypeScript",
       "documentation": "src/api/CLAUDE.md",
       "entryPoints": ["music.ts", "blog.ts"],
-      "interfaces": [
-        "src/interface/music.ts",
-        "src/interface/blog.ts"
-      ],
+      "interfaces": ["src/interface/music.ts", "src/interface/blog.ts"],
       "dependencies": ["axios", "src/utils/request.ts"],
       "testDirectory": null,
       "coverage": {
@@ -91,12 +88,7 @@
       "type": "module",
       "language": "TypeScript",
       "documentation": "src/components/CLAUDE.md",
-      "subModules": [
-        "base/",
-        "neumorphism/",
-        "enhance/",
-        "shared/"
-      ],
+      "subModules": ["base/", "neumorphism/", "enhance/", "shared/"],
       "componentCount": 30,
       "dependencies": ["react", "react-transition-group", "clsx", "overlayscrollbars"],
       "testDirectory": null,
@@ -114,11 +106,7 @@
       "language": "TypeScript",
       "documentation": "src/pages/blog/CLAUDE.md",
       "entryPoints": ["index.tsx"],
-      "subPages": [
-        "article/index.tsx",
-        "category/index.tsx",
-        "tag/index.tsx"
-      ],
+      "subPages": ["article/index.tsx", "category/index.tsx", "tag/index.tsx"],
       "components": [
         "ArticleCard.tsx",
         "OtherCategory.tsx",
@@ -145,11 +133,7 @@
       "language": "TypeScript",
       "documentation": "src/pages/music/CLAUDE.md",
       "entryPoints": ["index.tsx"],
-      "subPages": [
-        "music-home/index.tsx",
-        "music-search/index.tsx",
-        "playlist-detail/index.tsx"
-      ],
+      "subPages": ["music-home/index.tsx", "music-search/index.tsx", "playlist-detail/index.tsx"],
       "components": [
         "MusicHeader.tsx",
         "List.tsx",
@@ -176,11 +160,7 @@
       "language": "TypeScript",
       "documentation": "src/pages/todos/CLAUDE.md",
       "entryPoints": ["index.tsx"],
-      "components": [
-        "TodoCard.tsx",
-        "AddActionModel.tsx",
-        "FilterTabs.tsx"
-      ],
+      "components": ["TodoCard.tsx", "AddActionModel.tsx", "FilterTabs.tsx"],
       "dependencies": ["src/store/todos", "react-transition-group"],
       "testDirectory": null,
       "coverage": {

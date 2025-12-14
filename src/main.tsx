@@ -9,11 +9,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 // 全局样式
+import './addon.css'
 import './main.scss'
-import 'overlayscrollbars/overlayscrollbars.css'
-
-// PrimeReact 主题与核心样式
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
-import 'primereact/resources/primereact.min.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />)

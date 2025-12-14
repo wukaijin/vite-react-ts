@@ -7,7 +7,7 @@
  */
 import { useMemo } from 'react'
 import { useMount } from 'ahooks'
-import { ArticleState, SubmitArticle } from '@/interface/blog'
+import { ArticleState, type SubmitArticle } from '@/interface/blog'
 import Select from '@/components/base/Select'
 import MultiSelect from '@/components/base/MultiSelect'
 import { useBlogStore } from '@/stores/useBlogStore'

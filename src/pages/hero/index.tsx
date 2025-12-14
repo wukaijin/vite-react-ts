@@ -100,7 +100,7 @@ const Hello = () => {
       </div>
       <Menu open={open} />
       <button
-        className={clsx('btn btn-ghost hover:animate-none transition-all]', styled['menu-button'], {
+        className={clsx('btn btn-ghost hover:animate-none transition-all', styled['menu-button'], {
           'bg-black/60': open,
           'animate-ping': firstIn && animateDone
         })}

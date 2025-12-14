@@ -9,7 +9,7 @@ import React, { type ReactNode } from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import TableRow from './TableRow'
-import { type IComponentBaseProps } from '@/declare'
+import { type IComponentBaseProps } from '@/declare.d'
 
 export type TableBodyProps = React.TableHTMLAttributes<HTMLTableSectionElement>
 
@@ -65,7 +65,7 @@ export type TableProps = React.TableHTMLAttributes<HTMLTableElement> &
   }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
-  ({ children, compact, zebra, dataTheme, className, ...props }, ref): JSX.Element => {
+  ({ children, compact, zebra, dataTheme, className, ...props }, ref): ReactNode => {
     const classes = twMerge(
       'table',
       className,

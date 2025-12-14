@@ -1,0 +1,12 @@
+@import 'overlayscrollbars/overlayscrollbars.css';
+@import 'primereact/resources/themes/lara-light-indigo/theme.css';
+@import 'primereact/resources/primereact.min.css';
+
+/* 第三方库样式 */
+@use '@icon-park/react/styles/index.css';
+
+/* Tailwind CSS v4 */
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: dracula --default;
+}

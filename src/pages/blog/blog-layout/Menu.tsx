@@ -5,11 +5,14 @@
  * @FilePath: /vite-react-ts/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from '../blog.module.scss'
-import { useBlogStore } from '@/stores/useBlogStore'
+import { useBlogStore, type SerializedCategory } from '@/stores/useBlogStore'
 import type { Category } from '@/interface/blog'
+import { classNames } from 'primereact/utils'
+
+const checkHasChildren = (item: SerializedCategory) => item.children && !!item.children.length
 
 function Menu() {
   const navigate = useNavigate()
@@ -22,45 +25,55 @@ function Menu() {
     [navigate]
   )
 
+  const [openId, setOpenId] = useState<string>('')
+
+  const onSummaryClick = useCallback(
+    ($event: React.MouseEvent<HTMLDetailsElement>, item: Category) => {
+      $event.stopPropagation()
+      $event.preventDefault()
+      setOpenId(openId === item.id ? '' : item.id)
+    },
+    [openId, setOpenId]
+  )
+
   useEffect(() => {
     fetchCategories()
   }, [fetchCategories])
 
   return (
-    <ul className="menu menu-horizontal px-1">
+    <ul className="dark menu menu-horizontal rounded-box px-1">
       {serializedCategories.map(item => {
+        const hasChildren = checkHasChildren(item)
         return (
-          <li key={item.id} className="">
-            <span
-              className="hover:text-white/50 active:bg-white/10"
-              onClick={() => {
-                if (item.children && !!item.children.length) return
-                linkTo(item)()
-              }}
-            >
-              {item.text}
-              {item.children && !!item.children.length && (
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              )}
-            </span>
-            {item.children && !!item.children.length && (
-              <ul className="p-2">
-                {item.children.map(subItem => {
-                  return (
-                    <li key={subItem.id} className={styled['bg-escape']} onClick={linkTo(subItem)}>
-                      <span className="hover:text-white/50 active:bg-white/10">{subItem.text}</span>
-                    </li>
-                  )
-                })}
-              </ul>
+          <li key={item.id} className="mr-4">
+            {!hasChildren ? (
+              <span
+                className="hover:text-white/50 active:bg-white/10"
+                onClick={() => {
+                  linkTo(item)()
+                }}
+              >
+                {item.text}
+              </span>
+            ) : (
+              <details open={openId === item.id} onClick={e => onSummaryClick(e, item)}>
+                <summary>{item.text}</summary>
+                <ul className="p-2 rounded-box">
+                  {item.children!.map(subItem => {
+                    return (
+                      <li
+                        key={subItem.id}
+                        className={classNames(styled['bg-escape'], 'rounded-box')}
+                        onClick={linkTo(subItem)}
+                      >
+                        <span className="hover:text-white/50 active:bg-white/10">
+                          {subItem.text}
+                        </span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </details>
             )}
           </li>
         )

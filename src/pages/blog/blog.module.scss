@@ -1,5 +1,5 @@
 .bg-index {
-  background-image: url(../../assets/blog/blog-bg-1.jpg);
+  background-image: url('../../assets/blog/blog-bg-1.jpg');
   background-size: contain;
 }
 .paint-bg {
@@ -36,15 +36,22 @@
 }
 
 .category-guide {
-  @apply flex items-center py-1 cursor-pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  cursor: pointer;
   .poster {
-    @apply w-6 h-6 rounded-full opacity-70 mr-1;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    opacity: 0.7;
+    margin-right: 4px;
   }
-  &.active {
-    // @apply opacity-70;
-  }
+  // &.active {
+  // @apply opacity-70;
+  // }
   &:hover {
-    @apply underline;
+    text-decoration: underline;
     .poster {
       opacity: 1;
       scale: 1.1;
