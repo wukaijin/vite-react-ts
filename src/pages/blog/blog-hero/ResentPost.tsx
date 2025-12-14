@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-20 15:25:07
  * @LastEditTime: 2023-01-31 17:51:51
- * @FilePath: /vite-react-swc/src/pages/blog/blog-hero/ResentPost.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/blog-hero/ResentPost.tsx
  * @Description:
  */
 import { useRequest } from 'ahooks'

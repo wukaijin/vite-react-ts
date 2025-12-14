@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 16:37:20
  * @LastEditTime: 2023-04-27 17:09:48
- * @FilePath: /vite-react-swc/src/pages/management/components/Breadcrumbs.tsx
+ * @FilePath: /vite-react-ts/src/pages/management/components/Breadcrumbs.tsx
  * @Description:
  */
 import clsx from 'clsx'

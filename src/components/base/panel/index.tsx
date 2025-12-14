@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-30 16:21:26
  * @LastEditTime: 2023-01-04 16:11:46
- * @FilePath: /vite-react-swc/src/components/base/panel/index.tsx
+ * @FilePath: /vite-react-ts/src/components/base/panel/index.tsx
  * @Description:
  */
 

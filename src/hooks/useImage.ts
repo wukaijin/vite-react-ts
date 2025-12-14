@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-18 21:57:16
  * @LastEditTime: 2023-01-18 22:04:45
- * @FilePath: /vite-react-swc/src/hooks/useImage.ts
+ * @FilePath: /vite-react-ts/src/hooks/useImage.ts
  * @Description:
  */
 import { useEffect, useState } from 'react'

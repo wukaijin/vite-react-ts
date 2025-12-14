@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-01 15:49:01
  * @LastEditTime: 2023-01-18 14:04:44
- * @FilePath: /vite-react-swc/src/pages/introduction/PersonCard.tsx
+ * @FilePath: /vite-react-ts/src/pages/introduction/PersonCard.tsx
  * @Description:
  */
 import clsx from 'clsx'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-03 22:59:23
  * @LastEditTime: 2023-01-03 23:04:47
- * @FilePath: /vite-react-swc/src/components/enhance/table/TableRow.tsx
+ * @FilePath: /vite-react-ts/src/components/enhance/table/TableRow.tsx
  * @Description:
  */
 import React from 'react'

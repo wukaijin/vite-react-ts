@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-03 21:49:15
  * @LastEditTime: 2023-01-29 02:06:09
- * @FilePath: /vite-react-swc/src/utils/request.ts
+ * @FilePath: /vite-react-ts/src/utils/request.ts
  * @Description:
  */
 import axios, { type AxiosInstance } from 'axios'

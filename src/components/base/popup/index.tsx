@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-04 17:19:32
  * @LastEditTime: 2023-01-19 23:35:03
- * @FilePath: /vite-react-swc/src/components/base/popup/index.tsx
+ * @FilePath: /vite-react-ts/src/components/base/popup/index.tsx
  * @Description:
  */
 import { HTMLAttributes, memo } from 'react'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-13 14:21:15
  * @LastEditTime: 2025-12-13 22:13:00
- * @FilePath: /vite-react-swc/src/pages/blog/blog-layout/Menu.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/blog-layout/Menu.tsx
  * @Description:
  */
 import { useCallback, useEffect } from 'react'

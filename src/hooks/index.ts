@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-27 17:25:30
  * @LastEditTime: 2025-12-13 22:13:00
- * @FilePath: /vite-react-swc/src/hooks/index.ts
+ * @FilePath: /vite-react-ts/src/hooks/index.ts
  * @Description: Custom hooks exports
  */
 

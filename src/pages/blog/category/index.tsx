@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
  * @LastEditTime: 2023-01-31 21:11:12
- * @FilePath: /vite-react-swc/src/pages/blog/category/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/category/index.tsx
  * @Description:
  */
 import { type CSSProperties, useEffect, useMemo, useState } from 'react'

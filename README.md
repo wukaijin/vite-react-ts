@@ -1,3 +1,3 @@
 # vite-react-ts
-vite + react + swc + typescript.  
+vite + react + typescript.  
 exercise some newly features

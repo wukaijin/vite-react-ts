@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-28 14:08:00
  * @LastEditTime: 2022-12-31 14:24:38
- * @FilePath: /vite-react-swc/src/pages/home/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/home/index.tsx
  * @Description:
  */
 import Layout from '@/components/base/layout'

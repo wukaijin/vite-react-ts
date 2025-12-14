@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-02 14:18:23
  * @LastEditTime: 2023-01-06 23:42:08
- * @FilePath: /vite-react-swc/src/components/neumorphism/Button.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Button.tsx
  * @Description:
  */
 import clsx from 'clsx'
@@ -11,7 +11,7 @@ import { type HTMLAttributes } from 'react'
 type Color = 'primary' | 'secondary'
 type Shape = 'square' | 'circle'
 
-type Size = 'xs' | 'sm' |  'md' | 'lg'
+type Size = 'xs' | 'sm' | 'md' | 'lg'
 const SizeMapping: Record<Size, [string, string, string, string, string]> = {
   xs: ['h-8', 'rounded-lg', 'px-4', 'font-normal text-xs', 'text-xs'],
   sm: ['h-10', 'rounded-lg', 'px-4', 'font-normal text-sm', 'text-sm'],

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-02 15:38:57
  * @LastEditTime: 2023-04-27 17:09:13
- * @FilePath: /vite-react-swc/src/components/neumorphism/Input.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Input.tsx
  * @Description:
  */
 import clsx from 'clsx'

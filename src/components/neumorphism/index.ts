@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-01 23:09:10
  * @LastEditTime: 2023-01-04 14:43:31
- * @FilePath: /vite-react-swc/src/components/neumorphism/index.ts
+ * @FilePath: /vite-react-ts/src/components/neumorphism/index.ts
  * @Description:
  */
 import './neu.scss'

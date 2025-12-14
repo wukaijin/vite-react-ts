@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-12 15:00:33
  * @LastEditTime: 2023-03-26 09:03:00
- * @FilePath: /vite-react-swc/src/pages/hero/Menu.tsx
+ * @FilePath: /vite-react-ts/src/pages/hero/Menu.tsx
  * @Description:
  */
 import { Link } from 'react-router-dom'

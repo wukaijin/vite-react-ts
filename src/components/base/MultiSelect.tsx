@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-16 13:15:12
  * @LastEditTime: 2023-01-16 13:40:00
- * @FilePath: /vite-react-swc/src/components/base/MultiSelect.tsx
+ * @FilePath: /vite-react-ts/src/components/base/MultiSelect.tsx
  * @Description:
  */
 import { Check } from '@icon-park/react'

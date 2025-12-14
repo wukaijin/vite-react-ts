@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-09 13:29:25
  * @LastEditTime: 2023-01-09 13:37:06
- * @FilePath: /vite-react-swc/src/components/enhance/ImageFallback.tsx
+ * @FilePath: /vite-react-ts/src/components/enhance/ImageFallback.tsx
  * @Description:
  */
 import { useMount } from 'ahooks'

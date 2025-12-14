@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-04 12:48:59
  * @LastEditTime: 2023-01-05 15:27:13
- * @FilePath: /vite-react-swc/src/components/neumorphism/PlayButton.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/PlayButton.tsx
  * @Description:
  */
 

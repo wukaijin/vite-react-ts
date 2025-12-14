@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-03 22:54:22
  * @LastEditTime: 2023-01-03 23:43:56
- * @FilePath: /vite-react-swc/src/components/enhance/table/index.tsx
+ * @FilePath: /vite-react-ts/src/components/enhance/table/index.tsx
  * @Description:
  */
 import React, { type ReactNode } from 'react'

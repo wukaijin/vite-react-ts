@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 14:39:16
  * @LastEditTime: 2023-08-22 23:49:18
- * @FilePath: /vite-react-swc/src/pages/blog/ArticleCard.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/ArticleCard.tsx
  * @Description:
  */
 

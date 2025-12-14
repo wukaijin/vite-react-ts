@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-17 13:38:04
  * @LastEditTime: 2023-01-24 16:29:44
- * @FilePath: /vite-react-swc/src/api/blog.ts
+ * @FilePath: /vite-react-ts/src/api/blog.ts
  * @Description:
  */
 import type { Article, Category, SubmitArticle, Tag } from '@/interface/blog'

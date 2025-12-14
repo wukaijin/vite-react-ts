@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-12 15:05:51
  * @LastEditTime: 2023-01-29 02:10:08
- * @FilePath: /vite-react-swc/src/components/shared/logo.tsx
+ * @FilePath: /vite-react-ts/src/components/shared/logo.tsx
  * @Description:
  */
 import { useMount, useSize } from 'ahooks'

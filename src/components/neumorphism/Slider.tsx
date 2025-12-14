@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-03 01:17:01
  * @LastEditTime: 2023-01-06 00:05:05
- * @FilePath: /vite-react-swc/src/components/neumorphism/Slider.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Slider.tsx
  * @Description:
  */
 import clsx from 'clsx'

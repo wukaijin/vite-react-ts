@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-02-16 16:15:16
  * @LastEditTime: 2023-02-16 16:33:17
- * @FilePath: /vite-react-swc/src/utils/debounce.ts
+ * @FilePath: /vite-react-ts/src/utils/debounce.ts
  * @Description: debounce
  */
 

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-15 21:08:12
  * @LastEditTime: 2023-01-20 14:50:38
- * @FilePath: /vite-react-swc/src/pages/management/blog/articles/Add.tsx
+ * @FilePath: /vite-react-ts/src/pages/management/blog/articles/Add.tsx
  * @Description:
  */
 import { useNavigate } from 'react-router-dom'

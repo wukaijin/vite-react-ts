@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-01 23:10:47
  * @LastEditTime: 2023-01-02 22:21:46
- * @FilePath: /vite-react-swc/src/components/neumorphism/Panel.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Panel.tsx
  * @Description:
  */
 import clsx from 'clsx'

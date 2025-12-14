@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 15:59:27
  * @LastEditTime: 2023-01-20 14:53:41
- * @FilePath: /vite-react-swc/src/router/manage.tsx
+ * @FilePath: /vite-react-ts/src/router/manage.tsx
  * @Description:
  */
 import { lazy } from 'react'

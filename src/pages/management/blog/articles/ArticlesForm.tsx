@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-15 22:02:59
  * @LastEditTime: 2025-12-13 22:13:00
- * @FilePath: /vite-react-swc/src/pages/management/blog/articles/ArticlesForm.tsx
+ * @FilePath: /vite-react-ts/src/pages/management/blog/articles/ArticlesForm.tsx
  * @Description:
  */
 import { useMemo } from 'react'

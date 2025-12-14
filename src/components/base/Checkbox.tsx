@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-29 22:28:00
  * @LastEditTime: 2022-12-29 22:38:09
- * @FilePath: /vite-react-swc/src/components/base/Checkbox.tsx
+ * @FilePath: /vite-react-ts/src/components/base/Checkbox.tsx
  * @Description:
  */
 import { InputHTMLAttributes } from 'react'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-19 14:26:08
  * @LastEditTime: 2023-01-31 21:11:36
- * @FilePath: /vite-react-swc/src/pages/blog/tag/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/tag/index.tsx
  * @Description:
  */
 import { useEffect, useState } from 'react'

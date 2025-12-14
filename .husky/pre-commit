@@ -2,7 +2,7 @@
  # @Author: Carlos
  # @Date: 2022-12-31 14:41:24
  # @LastEditTime: 2022-12-31 14:41:53
- # @FilePath: /vite-react-swc/.husky/pre-commit
+ # @FilePath: /vite-react-ts/.husky/pre-commit
  # @Description: 
 ### 
 #!/usr/bin/env sh

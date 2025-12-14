@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-15 22:51:45
  * @LastEditTime: 2023-01-20 03:15:12
- * @FilePath: /vite-react-swc/src/components/base/Select.tsx
+ * @FilePath: /vite-react-ts/src/components/base/Select.tsx
  * @Description:
  */
 import { useClickAway, useSize, useToggle } from 'ahooks'

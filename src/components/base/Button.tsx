@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-29 17:31:26
  * @LastEditTime: 2023-01-02 22:34:25
- * @FilePath: /vite-react-swc/src/components/base/Button.tsx
+ * @FilePath: /vite-react-ts/src/components/base/Button.tsx
  * @Description:
  */
 import { ButtonHTMLAttributes } from 'react'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-21 01:09:45
  * @LastEditTime: 2023-01-22 23:32:07
- * @FilePath: /vite-react-swc/src/pages/blog/article/Directory.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/article/Directory.tsx
  * @Description:
  */
 import clsx from 'clsx'

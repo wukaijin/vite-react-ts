@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-29 21:21:40
  * @LastEditTime: 2023-01-25 15:24:03
- * @FilePath: /vite-react-swc/src/components/base/Loading.tsx
+ * @FilePath: /vite-react-ts/src/components/base/Loading.tsx
  * @Description:
  */
 

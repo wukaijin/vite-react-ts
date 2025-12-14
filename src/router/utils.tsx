@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 16:09:13
  * @LastEditTime: 2023-01-31 17:59:41
- * @FilePath: /vite-react-swc/src/router/utils.tsx
+ * @FilePath: /vite-react-ts/src/router/utils.tsx
  * @Description:
  */
 import { lazy, Suspense } from 'react'

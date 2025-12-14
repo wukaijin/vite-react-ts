@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-13 16:23:36
  * @LastEditTime: 2023-01-30 16:39:18
- * @FilePath: /vite-react-swc/src/pages/blog/article/MdReader.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/article/MdReader.tsx
  * @Description:
  */
 import ReactMarkdown, { type Components } from 'react-markdown'

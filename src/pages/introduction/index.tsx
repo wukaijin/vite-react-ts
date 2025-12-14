@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-01 15:03:21
  * @LastEditTime: 2023-01-04 23:26:32
- * @FilePath: /vite-react-swc/src/pages/introduction/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/introduction/index.tsx
  * @Description:
  */
 import { MusicOne, Videocamera, ConfusedFace, Kungfu } from '@icon-park/react'

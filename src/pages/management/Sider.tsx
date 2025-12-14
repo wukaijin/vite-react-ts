@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 15:41:37
  * @LastEditTime: 2023-01-15 22:00:59
- * @FilePath: /vite-react-swc/src/pages/management/Sider.tsx
+ * @FilePath: /vite-react-ts/src/pages/management/Sider.tsx
  * @Description:
  */
 import clsx from 'clsx'

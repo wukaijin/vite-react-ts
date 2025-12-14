@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2025-12-13 22:13:00
  * @LastEditTime: 2025-12-13 22:13:00
- * @FilePath: /vite-react-swc/src/stores/useBlogStore.ts
+ * @FilePath: /vite-react-ts/src/stores/useBlogStore.ts
  * @Description: Blog store using Zustand
  */
 import { create } from 'zustand'
@@ -42,7 +42,7 @@ function serialize(categories: Category[]): SerializedCategory[] {
   return Object.values(result)
 }
 
-export const useBlogStore = create<BlogStore>((set) => ({
+export const useBlogStore = create<BlogStore>(set => ({
   categories: [],
   tags: [],
   serializedCategories: [],

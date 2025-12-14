@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-12 23:31:33
  * @LastEditTime: 2023-05-22 18:31:52
- * @FilePath: /vite-react-swc/src/pages/blog/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/blog/index.tsx
  * @Description:
  */
 import { Outlet, useLocation } from 'react-router-dom'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-01 23:49:30
  * @LastEditTime: 2023-01-02 01:30:37
- * @FilePath: /vite-react-swc/src/components/neumorphism/Switch.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Switch.tsx
  * @Description:
  */
 import clsx from 'clsx'

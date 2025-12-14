@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-28 16:22:14
  * @LastEditTime: 2023-01-15 21:41:22
- * @FilePath: /vite-react-swc/tailwind.config.cjs
+ * @FilePath: /vite-react-ts/tailwind.config.cjs
  * @Description:
  */
 /** @type {import('tailwindcss').Config} */

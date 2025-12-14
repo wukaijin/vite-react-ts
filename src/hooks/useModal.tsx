@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-30 17:28:56
  * @LastEditTime: 2023-01-15 00:54:06
- * @FilePath: /vite-react-swc/src/hooks/useModal.tsx
+ * @FilePath: /vite-react-ts/src/hooks/useModal.tsx
  * @Description:
  */
 import React, { useCallback, useState, useMemo } from 'react'

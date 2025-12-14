@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-30 14:41:24
  * @LastEditTime: 2023-01-09 17:06:27
- * @FilePath: /vite-react-swc/src/pages/home/content/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/home/content/index.tsx
  * @Description:
  */
 import { Link } from 'react-router-dom'

@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-29 23:48:41
  * @LastEditTime: 2022-12-30 00:26:56
- * @FilePath: /vite-react-swc/src/components/base/layout/index.tsx
+ * @FilePath: /vite-react-ts/src/components/base/layout/index.tsx
  * @Description:
  */
 import React, { CSSProperties, PropsWithChildren } from 'react'

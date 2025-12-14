@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-28 13:05:11
  * @LastEditTime: 2023-02-16 16:32:21
- * @FilePath: /vite-react-swc/src/utils/index.ts
+ * @FilePath: /vite-react-ts/src/utils/index.ts
  * @Description:
  */
 export const getUniqueId: () => string = () => Math.random().toString(36).substring(2, 10)

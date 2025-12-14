@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-30 14:36:19
  * @LastEditTime: 2023-01-19 11:44:10
- * @FilePath: /vite-react-swc/src/pages/home/header/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/home/header/index.tsx
  * @Description:
  */
 import { Header } from '@/components/base/layout'

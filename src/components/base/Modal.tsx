@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2022-12-30 23:08:47
  * @LastEditTime: 2023-01-18 00:31:56
- * @FilePath: /vite-react-swc/src/components/base/Modal.tsx
+ * @FilePath: /vite-react-ts/src/components/base/Modal.tsx
  * @Description:
  */
 import { useLayoutEffect, useState } from 'react'

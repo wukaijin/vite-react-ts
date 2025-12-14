@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-02 16:55:31
  * @LastEditTime: 2023-04-27 17:09:25
- * @FilePath: /vite-react-swc/src/components/neumorphism/Tabs.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Tabs.tsx
  * @Description:
  */
 import clsx from 'clsx'

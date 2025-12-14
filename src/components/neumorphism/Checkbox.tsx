@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-02 00:46:23
  * @LastEditTime: 2023-01-29 01:49:15
- * @FilePath: /vite-react-swc/src/components/neumorphism/Checkbox.tsx
+ * @FilePath: /vite-react-ts/src/components/neumorphism/Checkbox.tsx
  * @Description:
  */
 import clsx from 'clsx'

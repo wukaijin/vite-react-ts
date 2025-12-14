@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-11 13:00:34
  * @LastEditTime: 2023-01-16 14:36:37
- * @FilePath: /vite-react-swc/src/pages/hero/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/hero/index.tsx
  * @Description:
  */
 import { type CSSProperties, useLayoutEffect } from 'react'

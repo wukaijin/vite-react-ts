@@ -2,7 +2,7 @@
  * @Author: Carlos
  * @Date: 2023-01-14 16:03:37
  * @LastEditTime: 2023-01-20 00:40:46
- * @FilePath: /vite-react-swc/src/pages/management/blog/categories/index.tsx
+ * @FilePath: /vite-react-ts/src/pages/management/blog/categories/index.tsx
  * @Description:
  */
 import { useMemo, useState } from 'react'
