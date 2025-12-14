@@ -155,10 +155,10 @@ function Article() {
           </div>
         </div>
         {!isMobile && (
-          <div className="w-[300px]">
-            <div className="fixed w-[300px] h-[calc(100vh-3.5rem)] top-[3.5rem] py-8">
+          <div className="w-75">
+            <div className="fixed w-75 h-[calc(100vh-3.5rem)] top-14 py-8">
               <OtherCategory title="Category" />
-              <Related articleId={params.id || ''} />
+              <Related />
             </div>
           </div>
         )}
