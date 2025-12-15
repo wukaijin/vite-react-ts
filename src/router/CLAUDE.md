@@ -2,18 +2,19 @@
 
 [根目录](../../CLAUDE.md) > [src](../) > **router**
 
-> 最后更新：2025-12-12 23:57:58
+> 最后更新：2025-12-16 00:00:00
 
 ---
 
 ## 模块职责
 
-Router 模块负责应用的路由配置与导航管理，基于 React Router v6，提供：
+Router 模块负责应用的路由配置与导航管理，基于 React Router v7，提供：
 
 - 声明式路由配置
 - 懒加载与代码分割
-- 嵌套路由支持（博客、音乐模块）
+- 嵌套路由支持（博客模块）
 - 自定义 Suspense 包装器
+- 404 页面处理
 
 ---
 
@@ -22,7 +23,6 @@ Router 模块负责应用的路由配置与导航管理，基于 React Router v6
 **主要文件**:
 - `index.tsx` - 主路由配置入口
 - `manage.tsx` - 后台管理子路由
-- `low.tsx` - 低代码编辑器子路由
 - `utils.tsx` - 工具函数（withSuspense）
 
 **路由初始化**:
@@ -52,24 +52,18 @@ import router from './router'
 
 **路由结构**:
 
-| 路径 | 组件 | 说明 |
-|------|------|------|
-| `/` | Hero | 首页/英雄页 |
-| `/home` | Home | 主页 |
-| `/introduction` | Introduction | 介绍页 |
-| `/todos` | Todos | 待办事项 |
-| `/hero` | Hero | 英雄页（与根路径相同） |
-| `/blog` | Blog | 博客主页（嵌套路由） |
-| `/blog/article/:id` | BlogArticle | 文章详情 |
-| `/blog/category/:id` | BlogCategory | 分类文章列表 |
-| `/blog/tag/:id` | BlogTag | 标签文章列表 |
-| `/music` | MusicPage | 音乐主页（嵌套路由） |
-| `/music/home` | MusicHome | 音乐首页 |
-| `/music/search` | MusicSearch | 音乐搜索 |
-| `/music/playlist-detail` | PlaylistDetail | 歌单详情 |
-| `/manage/*` | ManageRoute | 后台管理（见 `manage.tsx`） |
-| `/low-code/*` | LowCodeRoute | 低代码编辑器（见 `low.tsx`） |
-| `*` | NotFound | 404 页面 |
+| 路径 | 组件 | 说明 | 懒加载 |
+|------|------|------|--------|
+| `/` | Hero | 首页/英雄页 | ✅ |
+| `/home` | Home | 主页 | ❌ |
+| `/introduction` | Introduction | 介绍页 | ✅ |
+| `/hero` | Hero | 英雄页（与根路径相同） | ✅ |
+| `/blog` | Blog | 博客主页（嵌套路由） | ✅ |
+| `/blog/article/:id` | BlogArticle | 文章详情 | ✅ |
+| `/blog/category/:id` | BlogCategory | 分类文章列表 | ✅ |
+| `/blog/tag/:id` | BlogTag | 标签文章列表 | ✅ |
+| `/manage/*` | ManageRoute | 后台管理（见 `manage.tsx`） | - |
+| `*` | NotFound | 404 页面 | ❌ |
 
 **嵌套路由示例**:
 ```typescript
@@ -97,7 +91,7 @@ export const withSuspense = (Comp: LazyExoticComponent<any>) => (
 
 **使用示例**:
 ```typescript
-const Todos = withSuspense(lazy(() => import('@/pages/todos')))
+const Hero = withSuspense(lazy(() => import('@/pages/hero')))
 const Blog = withSuspense(lazy(() => import('@/pages/blog')))
 ```
 
@@ -111,8 +105,8 @@ const Blog = withSuspense(lazy(() => import('@/pages/blog')))
 ## 关键依赖与配置
 
 ### 依赖项
-- `react-router-dom` 6.20.1 - 路由库
-- `react` 18.2 - Suspense 与 lazy 支持
+- `react-router-dom` 7.10.1 - 路由库
+- `react` 19.2 - Suspense 与 lazy 支持
 
 ### 路由模式
 使用 `createBrowserRouter`（基于 History API），需服务器配置支持 SPA fallback。
@@ -134,7 +128,7 @@ location / {
 
 ## 数据模型
 
-### 路由对象类型（React Router v6）
+### 路由对象类型（React Router v7）
 ```typescript
 type RouteObject = {
   path?: string
@@ -176,7 +170,7 @@ type RouteObject = {
 **A**: 需服务器配置 SPA fallback，将所有路径重定向到 `index.html`。Vite 开发服务器已自动处理。
 
 ### Q3: 如何实现路由守卫（权限控制）？
-**A**: React Router v6 建议使用高阶组件或在组件内部使用 `useEffect` 检查权限：
+**A**: React Router v7 建议使用高阶组件或在组件内部使用 `useEffect` 检查权限：
 ```typescript
 function ProtectedRoute({ children }) {
   const isAuth = useAuth()
@@ -221,24 +215,27 @@ import { useLocation } from 'react-router-dom'
 src/router/
 ├── index.tsx          # 主路由配置
 ├── manage.tsx         # 后台管理子路由
-├── low.tsx            # 低代码编辑器子路由
 └── utils.tsx          # withSuspense 工具函数
 
 src/pages/             # 路由对应的页面组件
-├── blog/
-├── music/
-├── todos/
-├── management/
-├── low-code/
-├── hero/
-├── introduction/
-├── home/
-└── not-found/
+├── blog/              # 博客模块（嵌套路由）
+├── management/        # 后台管理模块
+├── hero/              # 英雄页/首页
+├── introduction/      # 介绍页
+├── home/              # 主页
+└── not-found/         # 404 页面
 ```
 
 ---
 
 ## 变更记录 (Changelog)
+
+### 2025-12-16 00:00:00
+- 升级到 React Router v7.10.1
+- 移除已删除的路由（/todos、/music、/low-code）
+- 更新路由表，添加懒加载标识
+- 更新依赖项版本（React 19.2）
+- 精简文件清单，移除不存在的模块
 
 ### 2025-12-12 23:57:58
 - 初始化 Router 模块文档

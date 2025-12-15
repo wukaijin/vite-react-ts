@@ -2,7 +2,7 @@
 
 [根目录](../../CLAUDE.md) > [src](../) > **api**
 
-> 最后更新：2025-12-12 23:57:58
+> 最后更新：2025-12-16 00:00:00
 
 ---
 
@@ -12,16 +12,15 @@ API 模块负责封装所有与后端服务的 HTTP 通信，提供类型安全�
 
 - 统一的 Axios 实例配置（请求/响应拦截器）
 - 博客系统 API（文章、分类、标签的 CRUD）
-- 音乐服务 API（搜索、播放、歌词、推荐等）
 - TypeScript 类型定义集成
+- RESTful API 风格的接口设计
 
 ---
 
 ## 入口与启动
 
 **主要文件**:
-- `music.ts` - 音乐相关 API 接口
-- `blog.ts` - 博客相关 API 接口
+- `blog.ts` - 博客相关 API 接口（TagApi、CategoryApi、ArticleApi）
 - `../utils/request.ts` - Axios 实例与拦截器配置（实际位于 utils 目录）
 
 **API 基础配置**（在 `utils/request.ts`）:
@@ -35,23 +34,6 @@ const request: AxiosInstance = axios.create({
 ---
 
 ## 对外接口
-
-### 音乐 API (`music.ts`)
-
-**核心功能**:
-- `loginAnonymous()` - 匿名登录
-- `queryKeyWord<QueryData>(key: string)` - 搜索歌曲
-- `querySrc(id: string)` - 获取歌曲播放链接
-- `queryLyric(id: string)` - 获取歌词
-- `queryNewSongs()` - 查询最新歌曲
-- `queryPlaylistTags()` - 获取歌单标签
-- `queryTopPlaylist(tagName?: string)` - 获取热门歌单
-- `queryBanner()` - 查询 Banner 信息
-- `queryPlaylistDetail(id: number)` - 获取歌单详情
-
-**API 前缀**: `/music-api`（由 Vite 代理转发）
-
-**返回值包装**: 所有接口返回格式为 `{ code: number, ...data }`，在 API 层自动解包。
 
 ### 博客 API (`blog.ts`)
 
@@ -95,7 +77,6 @@ export const ArticleApi = {
 
 ### 依赖项
 - `axios` 1.6.2 - HTTP 客户端
-- `@/interface/music.ts` - 音乐相关类型定义
 - `@/interface/blog.ts` - 博客相关类型定义
 - `@/utils/request.ts` - 统一的 Axios 实例
 
@@ -121,44 +102,25 @@ response => {
 在 `vite.config.ts` 中：
 ```typescript
 proxy: {
-  '/music-api': {
-    target: 'http://106.55.147.116',
+  '/nest-api': {
+    target: 'https://www.wukaijin.com',
     changeOrigin: true
   },
-  '/nest-api': {
-    target: 'http://106.55.147.116',
+  '/static-api': {
+    target: 'https://www.wukaijin.com',
     changeOrigin: true
   }
 }
 ```
 
+**说明**:
+- `/nest-api` - 博客系统后端 API 代理
+- `/static-api` - 静态资源 API 代理
+- 开发环境下所有请求会自动转发到目标服务器
+
 ---
 
 ## 数据模型
-
-### 音乐相关类型（`interface/music.ts`）
-
-**核心类型**:
-- `QueryListData` - 搜索结果单曲信息
-- `QueryNewSongReturnData` - 新歌推荐数据
-- `PlaylistTag` - 歌单标签
-- `PlaylistItem` - 歌单列表项
-- `BannerInfo` - 轮播图信息
-- `PlaylistTrack` - 歌单曲目详情
-- `PlaylistDetailData` - 歌单详情（含曲目列表）
-
-**示例**:
-```typescript
-export interface QueryListData {
-  id: number
-  name: string
-  alias: string[]
-  artists: { name: string; id: number }[]
-  mvid: number
-  album: { name: string }
-  duration: number
-}
-```
 
 ### 博客相关类型（`interface/blog.ts`）
 
@@ -227,11 +189,9 @@ export interface Article {
 
 ```
 src/api/
-├── music.ts           # 音乐 API 接口
-└── blog.ts            # 博客 API 接口
+└── blog.ts            # 博客 API 接口（TagApi、CategoryApi、ArticleApi）
 
 src/interface/
-├── music.ts           # 音乐类型定义
 └── blog.ts            # 博客类型定义
 
 src/utils/
@@ -241,6 +201,12 @@ src/utils/
 ---
 
 ## 变更记录 (Changelog)
+
+### 2025-12-16 00:00:00
+- 移除音乐 API 相关内容（music.ts 已删除）
+- 更新 Vite 代理配置（目标服务器更新为 https://www.wukaijin.com）
+- 精简文档，聚焦博客 API 功能
+- 更新依赖项列表
 
 ### 2025-12-12 23:57:58
 - 初始化 API 模块文档
