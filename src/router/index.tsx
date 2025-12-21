@@ -21,6 +21,8 @@ const Blog = withSuspense(lazy(() => import('@/pages/blog')))
 const BlogArticle = withSuspense(lazy(() => import('@/pages/blog/article')))
 const BlogCategory = withSuspense(lazy(() => import('@/pages/blog/category')))
 const BlogTag = withSuspense(lazy(() => import('@/pages/blog/tag')))
+const Music = withSuspense(lazy(() => import('@/pages/music')))
+
 
 const config: RouteObject[] = [
   {
@@ -40,6 +42,10 @@ const config: RouteObject[] = [
   {
     path: '/hero',
     element: Hero
+  },
+  {
+    path: '/music',
+    element: Music
   },
   {
     path: '/blog',

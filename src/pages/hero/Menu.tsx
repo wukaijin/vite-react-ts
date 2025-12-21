@@ -25,7 +25,7 @@ const HeroMenu = (props: Props) => {
       <Logo colorDeg={80} className="absolute top-6 left-6 w-8 h-8" />
       <ul className="font-blog text-5xl leading-tight text-secondary-content rounded-box text-left align-bottom pb-24">
         <li>
-          <Link to="/music/home" target="_blank">
+          <Link to="/music" target="_blank">
             <div className={clsx(styled['menu-item'])}>
               <span className={clsx(styled['menu-item-a'])}>Music</span>
               <span className={clsx(styled['menu-item-b'], 'text-sky-400')}>Music</span>
