@@ -20,25 +20,25 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 1500,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (
-              id
-                .toString()
-                .split('node_modules/.pnpm/')[1]
-                .split('/')[0]
-                .toString()
-                .startsWith('refractor')
-            ) {
-              return 'refractor'
-            }
-          }
-          return undefined
-        }
-      }
-    }
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks(id) {
+    //       if (id.includes('node_modules')) {
+    //         if (
+    //           id
+    //             .toString()
+    //             .split('node_modules/.pnpm/')[1]
+    //             .split('/')[0]
+    //             .toString()
+    //             .startsWith('refractor')
+    //         ) {
+    //           return 'refractor'
+    //         }
+    //       }
+    //       return undefined
+    //     }
+    //   }
+    // }
   },
   server: {
     proxy: {
