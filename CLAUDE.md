@@ -1,6 +1,6 @@
 # vite-react-ts 项目文档
 
-> 最后更新：2025-12-16 00:00:00
+> 最后更新：2025-12-27 00:00:00
 
 ## 变更记录 (Changelog)
 
@@ -159,9 +159,9 @@ graph TD
 - npm/pnpm/yarn
 
 ### 安装依赖
-使用 pnpm 安装依赖
+使用 npm 安装依赖
 ```bash
-pnpm install
+npm install
 ```
 
 ### 开发模式

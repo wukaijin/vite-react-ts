@@ -27,14 +27,13 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: ${{hashFiles('**/pnpm-lock.yaml')}}
+          key: ${{hashFiles('**/package-lock.json')}}
 
       # 步骤名称
       - name: Installing Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          npm i pnpm -g
-          pnpm install
+          npm install
 
       - name: npm run build
         run: npm run build
